@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Monte seu PROMPT | IA Aplicada ao Trabalho · Yazaki</title>
+<meta name="description" content="Ferramenta de prática do Método PROMPT para analistas e assistentes: escolha o caso, preencha, gere e copie seu pedido para a IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D2260;
+  --navy-deep:#081543;
+  --indigo:#2A2F8F;
+  --purple:#6B3FDB;
+  --purple-ink:#4F28B8;
+  --purple-wash:#F0ECFD;
+  --purple-line:#D9CFFA;
+  --red:#D91E18;
+  --red-wash:#FDECEB;
+  --ink:#121A33;
+  --gray-700:#4A5270;
+  --gray-500:#7D86A0;
+  --gray-200:#E4E6F0;
+  --gray-100:#F1F2F8;
+  --page:#F6F5FC;
+  --white:#FFFFFF;
+  --yellow:#FFC42E;
+  --radius:16px;
+  --shadow-sm:0 1px 2px rgba(13,34,96,.06), 0 3px 10px rgba(13,34,96,.06);
+  --shadow-md:0 8px 28px rgba(13,34,96,.12);
+  --font:'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:76px;}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--page);line-height:1.5;padding-bottom:128px;}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.01em;}
+p{margin:0;}
+button{font-family:var(--font);cursor:pointer;}
+:focus-visible{outline:3px solid var(--purple);outline-offset:2px;border-radius:6px;}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;background:linear-gradient(120deg,var(--navy-deep) 0%,var(--navy) 55%,var(--indigo) 100%);color:#fff;overflow:hidden;}
+.hero::before{ /* corte diagonal vermelho — eco do traço da marca Yazaki */
+  content:"";position:absolute;right:-40px;top:-30px;width:260px;height:260px;
+  background:var(--red);clip-path:polygon(100% 0,100% 100%,18% 0);opacity:.95;pointer-events:none;
+}
+.hero::after{content:"";position:absolute;right:0;top:0;width:150px;height:150px;background:rgba(255,255,255,.14);clip-path:polygon(100% 0,100% 100%,0 0);pointer-events:none;}
+.hero-inner{max-width:1080px;margin:0 auto;padding:24px 20px 30px;position:relative;z-index:2;}
+.brandbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:22px;}
+.brand{font-weight:800;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;border-radius:6px;padding:5px 10px;}
+.brand.iel{background:#fff;color:var(--indigo);}
+.brand.yaz{background:#fff;color:#111;border-left:5px solid var(--red);}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#E3DAFF;border:1.5px solid rgba(227,218,255,.45);border-radius:999px;padding:5px 12px;}
+.hero h1{font-size:clamp(30px,7.4vw,46px);line-height:1.04;text-transform:uppercase;margin:16px 0 12px;max-width:15ch;}
+.hero h1 span{display:block;color:#B9A2FF;}
+.hero .lead{font-size:15.5px;color:#D6DCF2;max-width:54ch;font-weight:500;}
+.howto{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:24px;}
+.howto div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:10px 12px;font-size:12.5px;font-weight:600;color:#E9EDFA;}
+.howto b{display:block;font-size:11px;letter-spacing:.14em;color:#B9A2FF;margin-bottom:3px;}
+@media(max-width:640px){.howto{grid-template-columns:repeat(2,1fr);} .hero::before{width:170px;height:170px;right:-30px;} .hero::after{width:90px;height:90px;} .hero h1{max-width:12ch;}}
+
+/* ---------- RAIL ---------- */
+.rail{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.95);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--gray-200);box-shadow:0 2px 10px rgba(13,34,96,.05);}
+.rail-inner{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:10px;}
+.rail-letters{display:flex;gap:8px;flex:1;}
+.rail-letters button{flex:1;min-width:0;border:1.5px solid var(--gray-200);background:#fff;border-radius:10px;padding:7px 4px 6px;text-align:center;transition:.18s ease;}
+.rail-letters .rl{display:block;font-weight:800;font-size:17px;line-height:1;color:var(--gray-500);}
+.rail-letters .rn{display:block;font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-500);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rail-letters button.done{border-color:currentColor;}
+.rail-letters button.done .rl{color:inherit;}
+.rail-letters button.done .rn{color:var(--ink);}
+.rail-count{font-size:12px;font-weight:700;color:var(--gray-700);white-space:nowrap;}
+@media(max-width:640px){.rail-letters .rn{display:none;} .rail-inner{padding:8px 14px;} .rail-letters button{padding:8px 2px;}}
+
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:22px 20px 40px;}
+@media(max-width:640px){.wrap{padding:18px 14px 30px;}}
+.notice{display:flex;gap:12px;align-items:flex-start;background:#FFF8E5;border:1px solid #FBE3A2;border-left:5px solid var(--yellow);border-radius:12px;padding:13px 15px;margin-bottom:22px;}
+.notice .ic{font-size:17px;line-height:1.2;}
+.notice p{font-size:13.5px;color:#6B5312;font-weight:600;}
+.notice b{color:#4A3805;}
+.section-label{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:var(--purple-ink);display:flex;align-items:center;gap:10px;margin:26px 0 14px;}
+.section-label:first-of-type{margin-top:0;}
+.section-label::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--purple) 0%,rgba(107,63,219,0) 100%);}
+
+/* ---------- ESCOLHA DO CASO ---------- */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:860px){.cases{grid-template-columns:repeat(2,1fr);}}
+.case{
+  text-align:left;background:#fff;border:1.5px solid var(--gray-200);border-radius:14px;padding:13px 13px 12px;
+  box-shadow:var(--shadow-sm);transition:.16s ease;position:relative;
+}
+.case:hover{border-color:var(--purple-line);transform:translateY(-1px);}
+.case .cn{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:12.5px;font-weight:800;margin-bottom:8px;}
+.case .ct{display:block;font-size:14px;font-weight:800;color:var(--navy);line-height:1.2;}
+.case .cs{display:block;font-size:11.5px;font-weight:500;color:var(--gray-700);margin-top:4px;line-height:1.35;}
+.case[aria-pressed="true"]{border-color:var(--purple);background:var(--purple-wash);box-shadow:0 0 0 3px rgba(107,63,219,.16);}
+.case[aria-pressed="true"] .cn{background:var(--purple);}
+.case.free .cn{background:var(--red);}
+.casebox{margin-top:12px;background:#fff;border:1px solid var(--gray-200);border-radius:14px;box-shadow:var(--shadow-sm);overflow:hidden;}
+.casebox-head{background:linear-gradient(120deg,var(--navy),var(--indigo));color:#fff;padding:12px 16px;}
+.casebox-head b{display:block;font-size:15px;font-weight:800;}
+.casebox-head span{font-size:12.5px;color:#D6DCF2;font-weight:500;}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);}
+@media(max-width:700px){.flow{grid-template-columns:1fr 1fr;}}
+.flow div{padding:12px 14px;border-right:1px solid var(--gray-200);font-size:12.5px;font-weight:500;color:var(--gray-700);line-height:1.4;}
+.flow div:last-child{border-right:none;}
+@media(max-width:700px){.flow div:nth-child(2){border-right:none;} .flow div:nth-child(-n+2){border-bottom:1px solid var(--gray-200);}}
+.flow b{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple-ink);margin-bottom:3px;}
+.flow .care b{color:var(--red);}
+.casebox-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:11px 14px;border-top:1px solid var(--gray-200);background:var(--gray-100);}
+.casebox-foot p{font-size:12.5px;color:var(--gray-700);font-weight:500;flex:1;min-width:200px;}
+.warmup{margin-top:12px;background:var(--purple-wash);border:1px solid var(--purple-line);border-radius:14px;padding:13px 16px;}
+.warmup b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-ink);margin-bottom:6px;}
+.warmup ol{margin:0;padding-left:20px;font-size:13.5px;font-weight:600;color:var(--navy);}
+.warmup li{margin:2px 0;}
+
+/* ---------- CARDS ---------- */
+.card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden;border-top:3px solid var(--c);}
+.card-head{display:flex;gap:13px;align-items:flex-start;padding:16px 16px 0;}
+.badge{width:42px;height:42px;flex:none;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800;font-size:21px;line-height:1;}
+.card-head h2{font-size:16.5px;color:var(--navy);text-transform:uppercase;}
+.card-head .sub{font-size:13.5px;color:var(--gray-700);font-weight:500;margin-top:3px;}
+.card-body{padding:14px 16px 16px;}
+@media(max-width:640px){.card-head{padding:14px 13px 0;gap:11px;} .card-body{padding:12px 13px 14px;} .badge{width:38px;height:38px;font-size:19px;}}
+.field{margin-top:12px;}
+.field:first-child{margin-top:0;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+label .opt{font-weight:600;color:var(--gray-500);}
+input[type=text],textarea{width:100%;font-family:var(--font);font-size:16px;font-weight:500;color:var(--ink);background:var(--gray-100);border:1.5px solid var(--gray-200);border-radius:10px;padding:11px 13px;transition:.15s ease;}
+textarea{resize:vertical;min-height:88px;line-height:1.5;}
+textarea.big{min-height:150px;}
+input::placeholder,textarea::placeholder{color:#9CA5BE;font-weight:500;}
+input:focus,textarea:focus{background:#fff;border-color:var(--purple);box-shadow:0 0 0 3px rgba(107,63,219,.15);outline:none;}
+.missing input,.missing textarea{border-color:var(--red);background:var(--red-wash);}
+.hint{font-size:12px;color:var(--gray-500);font-weight:500;margin-top:5px;}
+.example{margin-top:9px;background:var(--purple-wash);border-radius:10px;padding:11px 13px;font-size:13px;color:var(--purple-ink);font-weight:500;line-height:1.45;}
+.example b{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px;}
+.ex-toggle{margin-top:9px;background:none;border:1.5px solid var(--gray-200);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;color:var(--purple-ink);}
+.ex-toggle:hover{border-color:var(--purple);background:var(--purple-wash);}
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{border:1.5px solid var(--gray-200);background:#fff;border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;color:var(--gray-700);transition:.15s ease;}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+.checks{display:grid;gap:8px;}
+.check{display:flex;gap:10px;align-items:flex-start;background:var(--gray-100);border-radius:10px;padding:10px 12px;cursor:pointer;margin:0;}
+.check input{width:19px;height:19px;flex:none;margin:1px 0 0;accent-color:var(--purple);}
+.check span{font-size:13.5px;font-weight:600;color:var(--gray-700);line-height:1.4;}
+.mini-btn{background:#fff;border:1.5px solid var(--purple-line);color:var(--purple-ink);font-size:12.5px;font-weight:700;padding:8px 13px;border-radius:999px;}
+.mini-btn:hover{background:var(--purple-wash);border-color:var(--purple);}
+
+/* ---------- RESULTADO ---------- */
+.result{background:var(--navy);color:#fff;border-radius:var(--radius);padding:18px;margin-top:8px;box-shadow:var(--shadow-md);}
+.result h2{font-size:16px;text-transform:uppercase;letter-spacing:.02em;}
+.result .rsub{font-size:13px;color:#BCC8EA;font-weight:500;margin-top:4px;}
+.warn{margin-top:12px;background:rgba(255,196,46,.14);border:1px solid rgba(255,196,46,.5);color:#FFE6A6;border-radius:10px;padding:10px 13px;font-size:13px;font-weight:600;}
+pre#saida{margin:14px 0 0;background:#fff;color:var(--ink);border-radius:10px;padding:15px;font-family:var(--font);font-size:14px;line-height:1.55;font-weight:500;white-space:pre-wrap;word-wrap:break-word;max-height:48vh;overflow:auto;}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px;}
+.btn{border:none;border-radius:10px;padding:13px 18px;font-size:14.5px;font-weight:700;display:inline-flex;align-items:center;gap:8px;transition:.15s ease;text-decoration:none;}
+.btn-primary{background:var(--purple);color:#fff;box-shadow:0 4px 14px rgba(107,63,219,.38);}
+.btn-primary:hover{background:var(--purple-ink);}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.3);}
+.btn-ghost:hover{background:rgba(255,255,255,.2);}
+.btn-line{background:transparent;color:var(--gray-700);border:1.5px solid var(--gray-200);}
+.btn-line:hover{border-color:var(--gray-500);}
+.hidden{display:none !important;}
+.tip{margin-top:12px;font-size:12.5px;color:#BCC8EA;font-weight:500;}
+.tip b{color:#fff;}
+
+.after{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:820px){.after{grid-template-columns:1fr;}}
+.panel{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:16px;}
+.panel h3{font-size:14px;color:var(--navy);text-transform:uppercase;letter-spacing:.02em;}
+.panel .psub{font-size:12.5px;color:var(--gray-700);font-weight:500;margin:3px 0 12px;}
+.qlist{display:grid;gap:8px;}
+.q{text-align:left;background:var(--gray-100);border:1.5px solid var(--gray-200);border-radius:10px;padding:10px 12px;font-size:13.5px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;gap:10px;align-items:center;}
+.q:hover{border-color:var(--purple);background:var(--purple-wash);}
+.q i{font-style:normal;font-size:11px;font-weight:700;color:var(--purple-ink);white-space:nowrap;}
+.final{display:none;margin-top:12px;background:#E9F7EE;border:1px solid #BFE5CB;color:#1F6B3A;border-radius:10px;padding:10px 13px;font-size:13px;font-weight:700;}
+.final.show{display:block;}
+
+.reminder{margin-top:22px;background:#fff;border:1px solid var(--gray-200);border-left:5px solid var(--red);border-radius:12px;padding:15px 17px;font-size:14px;font-weight:700;color:var(--navy);box-shadow:var(--shadow-sm);}
+.reminder small{display:block;font-size:12.5px;font-weight:500;color:var(--gray-700);margin-top:5px;}
+
+/* ---------- BARRA FIXA ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);border-top:1px solid var(--gray-200);box-shadow:0 -4px 20px rgba(13,34,96,.10);padding:11px 20px calc(11px + env(safe-area-inset-bottom));}
+.bar-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:14px;}
+.progress{flex:1;min-width:0;}
+.ptxt{font-size:12px;font-weight:700;color:var(--gray-700);margin-bottom:5px;}
+.track{height:7px;background:var(--gray-200);border-radius:99px;overflow:hidden;}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--purple),#9B7BFF);border-radius:99px;transition:width .3s ease;}
+.bar .btn{flex:none;}
+@media(max-width:640px){.bar{padding:10px 14px calc(10px + env(safe-area-inset-bottom));} .bar-inner{gap:10px;} .bar .btn{padding:13px 15px;font-size:14px;}}
+.alerta{display:none;margin-top:10px;background:var(--red-wash);border:1px solid #F5C2BE;color:#9B2019;border-radius:10px;padding:10px 13px;font-size:13px;font-weight:600;}
+.alerta.show{display:block;}
+.toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,16px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:99px;font-size:14px;font-weight:700;box-shadow:var(--shadow-md);opacity:0;pointer-events:none;transition:.25s ease;z-index:60;max-width:92vw;text-align:center;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+footer{max-width:1080px;margin:0 auto;padding:0 20px 20px;font-size:11.5px;color:var(--gray-500);font-weight:500;line-height:1.5;}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brandbar">
+      <span class="brand iel">IEL</span>
+      <span class="brand yaz">Yazaki</span>
+      <span class="pill">Curso In Company · Escola de Negócios IEL Pernambuco</span>
+    </div>
+    <div class="pill" style="border-color:rgba(255,255,255,.25);color:#fff">IA aplicada ao trabalho</div>
+    <h1>Monte seu <span>PROMPT</span></h1>
+    <p class="lead">Escolha um caso, preencha os seis elementos do método e copie o pedido pronto para a IA. Pense antes de pedir.</p>
+    <div class="howto">
+      <div><b>1 · Escolha</b>O caso da prática</div>
+      <div><b>2 · Preencha</b>Um campo por pergunta</div>
+      <div><b>3 · Copie</b>O texto sai montado</div>
+      <div><b>4 · Teste</b>Valide antes de usar</div>
+    </div>
+  </div>
+</header>
+
+<nav class="rail" aria-label="Progresso do método PROMPT">
+  <div class="rail-inner">
+    <div class="rail-letters" id="rail"></div>
+    <div class="rail-count"><span id="railCount">0</span>/6</div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div class="notice">
+    <span class="ic" aria-hidden="true">🔒</span>
+    <p><b>Regra de uso:</b> use ferramentas autorizadas pela organização. Não cole dados pessoais, confidenciais, industriais ou estratégicos. Se a informação não precisa estar no prompt, não coloque. Na prática, trabalhe com exemplos fictícios ou anonimizados.</p>
+  </div>
+
+  <h2 class="section-label">Passo 1 · Escolha o caso</h2>
+  <div class="cases" id="cases" role="group" aria-label="Casos da prática"></div>
+
+  <div class="casebox hidden" id="casebox">
+    <div class="casebox-head"><b id="cbTitle"></b><span id="cbTag"></span></div>
+    <div class="flow">
+      <div><b>Entrada</b><span id="cbIn"></span></div>
+      <div><b>Objetivo</b><span id="cbGoal"></span></div>
+      <div><b>Saída</b><span id="cbOut"></span></div>
+      <div class="care"><b>Cuidado</b><span id="cbCare"></span></div>
+    </div>
+    <div class="casebox-foot">
+      <p id="cbFoot">Quer ver como fica? Carregue um exemplo fictício e depois troque pelos seus dados.</p>
+      <button class="mini-btn" id="btnExemplo" type="button">Preencher com exemplo fictício</button>
+    </div>
+  </div>
+
+  <div class="warmup hidden" id="warmup">
+    <b>Antes do prompt, defina o problema</b>
+    <ol>
+      <li>O que faço hoje?</li>
+      <li>Onde está a dificuldade ou o retrabalho?</li>
+      <li>Como vou saber que a IA ajudou?</li>
+      <li>Qual resultado eu realmente preciso ao final?</li>
+    </ol>
+  </div>
+
+  <h2 class="section-label">Passo 2 · Preencha os seis elementos</h2>
+
+  <!-- P — PAPEL -->
+  <section class="card" id="card-1" style="--c:#2E6FE8">
+    <div class="card-head">
+      <div class="badge">P</div>
+      <div><h2>Papel</h2><p class="sub">Quem a IA deve ser nessa tarefa.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="field" data-req>
+        <label for="papel">Atue como…</label>
+        <input type="text" id="papel" data-count placeholder="ex.: assistente de organização de informações">
+      </div>
+      <div class="field" data-req>
+        <label for="finalidade">…para me ajudar a</label>
+        <input type="text" id="finalidade" data-count placeholder="ex.: entender o que precisa de atenção neste documento">
+      </div>
+      <button class="ex-toggle" type="button" data-ex="ex1">Ver exemplo</button>
+      <div class="example hidden" id="ex1"><b>Exemplo</b>Atue como analista de produtos e serviços para me apoiar na priorização das ações do próximo ciclo.</div>
+    </div>
+  </section>
+
+  <!-- R — REQUISIÇÃO -->
+  <section class="card" id="card-2" style="--c:#2FA24C">
+    <div class="card-head">
+      <div class="badge">R</div>
+      <div><h2>Requisição</h2><p class="sub">Qual tarefa ou problema ela deve resolver.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="field" data-req>
+        <label for="requisicao">Quero que você…</label>
+        <textarea id="requisicao" data-count placeholder="ex.: resuma o conteúdo e destaque os pontos mais importantes"></textarea>
+        <p class="hint">Use verbos concretos: analise, crie, resuma, compare, planeje, sugira. Evite “melhore isso”.</p>
+      </div>
+      <button class="ex-toggle" type="button" data-ex="ex2">Ver exemplo</button>
+      <div class="example hidden" id="ex2"><b>Exemplo</b>Compare os serviços apresentados e identifique forças, alertas, riscos e oportunidades.</div>
+    </div>
+  </section>
+
+  <!-- O — OBJETIVO -->
+  <section class="card" id="card-3" style="--c:#F0912A">
+    <div class="card-head">
+      <div class="badge">O</div>
+      <div><h2>Objetivo</h2><p class="sub">Qual resultado você espera alcançar.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="field" data-req>
+        <label for="objetivo">Essa resposta será usada para…</label>
+        <textarea id="objetivo" data-count placeholder="ex.: entender rapidamente o que precisa de atenção"></textarea>
+        <p class="hint">Diga onde, com quem ou para qual decisão o resultado vai servir.</p>
+      </div>
+      <button class="ex-toggle" type="button" data-ex="ex3">Ver exemplo</button>
+      <div class="example hidden" id="ex3"><b>Exemplo</b>A análise será utilizada em uma reunião de priorização com a equipe.</div>
+    </div>
+  </section>
+
+  <!-- M — MODELO -->
+  <section class="card" id="card-4" style="--c:#7B4FC2">
+    <div class="card-head">
+      <div class="badge">M</div>
+      <div><h2>Modelo</h2><p class="sub">Como você quer receber a resposta.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Formato da resposta</label>
+        <div class="chips" id="formatos" role="group" aria-label="Formato da resposta"></div>
+      </div>
+      <div class="field" data-req>
+        <label for="item1">O que precisa aparecer na resposta</label>
+        <input type="text" id="item1" data-count placeholder="ex.: resumo">
+      </div>
+      <div class="field">
+        <label for="item2">Segundo item <span class="opt">(opcional)</span></label>
+        <input type="text" id="item2" placeholder="ex.: pendências">
+      </div>
+      <div class="field">
+        <label for="item3">Terceiro item <span class="opt">(opcional)</span></label>
+        <input type="text" id="item3" placeholder="ex.: riscos">
+      </div>
+      <div class="field">
+        <label for="item4">Quarto item <span class="opt">(opcional)</span></label>
+        <input type="text" id="item4" placeholder="ex.: próximos passos">
+      </div>
+      <button class="ex-toggle" type="button" data-ex="ex4">Ver exemplo</button>
+      <div class="example hidden" id="ex4"><b>Exemplo</b>Apresente o resultado em uma tabela com: evidência, interpretação, risco e recomendação.</div>
+    </div>
+  </section>
+
+  <!-- P — PANORAMA -->
+  <section class="card" id="card-5" style="--c:#12A39A">
+    <div class="card-head">
+      <div class="badge">P</div>
+      <div><h2>Panorama</h2><p class="sub">Contexto, fatos, dados e restrições.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="field" data-req>
+        <label for="contexto">Considere este contexto</label>
+        <textarea id="contexto" data-count placeholder="ex.: relatório interno com mais de uma página, enviado por outra área, sem resumo"></textarea>
+        <p class="hint">Situação, público e o que você já sabe. Sem nomes reais nem dados sensíveis.</p>
+      </div>
+      <div class="field">
+        <label for="criterios">Use estes critérios <span class="opt">(opcional)</span></label>
+        <input type="text" id="criterios" placeholder="ex.: prazo, esforço, impacto">
+      </div>
+      <div class="field">
+        <label for="limites">Respeite estes limites <span class="opt">(opcional)</span></label>
+        <input type="text" id="limites" placeholder="ex.: não inventar dados; linguagem simples; resposta curta">
+      </div>
+      <div class="field">
+        <label for="material" id="lblMaterial">Material para a IA trabalhar <span class="opt">(cole aqui, com dados fictícios ou anonimizados)</span></label>
+        <textarea id="material" class="big" placeholder="Cole o texto, os dados, as anotações ou as opções que a IA vai analisar."></textarea>
+        <p class="hint">Se deixar vazio, lembre de colar o material na IA logo depois do prompt.</p>
+        <div id="baseBox" class="hidden" style="margin-top:9px"><button class="mini-btn" id="btnBase" type="button">Inserir a base fictícia do slide</button></div>
+      </div>
+      <button class="ex-toggle" type="button" data-ex="ex5">Ver exemplo</button>
+      <div class="example hidden" id="ex5"><b>Exemplo</b>Considere demanda, conversão, satisfação, prazo, esforço operacional e impacto institucional. Não invente informações que não foram fornecidas.</div>
+    </div>
+  </section>
+
+  <!-- T — TESTAR -->
+  <section class="card" id="card-6" style="--c:#D93A4E">
+    <div class="card-head">
+      <div class="badge">T</div>
+      <div><h2>Testar e transformar</h2><p class="sub">O que a IA deve conferir antes de concluir.</p></div>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Marque o que deve entrar no pedido</label>
+        <div class="checks" id="testes"></div>
+      </div>
+      <div class="field">
+        <label for="extra">Mais alguma condição? <span class="opt">(opcional)</span></label>
+        <input type="text" id="extra" placeholder="ex.: faça até 3 perguntas se faltar informação essencial">
+      </div>
+      <p class="hint" style="margin-top:10px">A letra T evita que o prompt vire apenas “copiar e colar resposta”.</p>
+    </div>
+  </section>
+
+  <div class="alerta" id="alerta" role="alert"></div>
+
+  <!-- RESULTADO -->
+  <section class="result hidden" id="resultado" tabindex="-1">
+    <h2>Seu prompt está pronto</h2>
+    <p class="rsub">Copie, cole na ferramenta autorizada e depois teste a resposta.</p>
+    <div class="warn hidden" id="warnMaterial">Você não colou o material. Cole o texto ou os dados na IA logo depois deste prompt.</div>
+    <pre id="saida"></pre>
+    <div class="actions">
+      <button class="btn btn-primary" id="btnCopiar" type="button">Copiar tudo</button>
+      <a class="btn btn-ghost" href="https://copilot.microsoft.com/" target="_blank" rel="noopener">Abrir o Copilot</a>
+      <a class="btn btn-ghost" href="https://gemini.google.com/" target="_blank" rel="noopener">Abrir o Gemini</a>
+      <button class="btn btn-ghost" id="btnEditar" type="button">Voltar e ajustar</button>
+    </div>
+    <p class="tip"><b>Dica:</b> quando fizer sentido, rode o mesmo prompt em duas ferramentas e compare as respostas. Critério final: ferramenta permitida + qualidade da resposta + revisão humana.</p>
+  </section>
+
+  <div class="after hidden" id="after">
+    <div class="panel">
+      <h3>Perguntas para testar a resposta</h3>
+      <p class="psub">Use quando a resposta parecer boa demais ou genérica demais. Toque para copiar e cole na conversa.</p>
+      <div class="qlist" id="qlist"></div>
+    </div>
+    <div class="panel">
+      <h3>Checklist antes de usar</h3>
+      <p class="psub">Antes de copiar, enviar ou apresentar, revise.</p>
+      <div class="checks" id="checklist"></div>
+      <div class="final" id="final">Conferido. Agora é com você: quem valida, interpreta e decide é você.</div>
+    </div>
+  </div>
+
+  <div class="reminder">
+    A IA organiza informações, levanta hipóteses e sugere alternativas.
+    <small>Quem valida, interpreta e decide continua sendo você.</small>
+  </div>
+
+  <div style="margin-top:14px">
+    <button class="btn btn-line" id="btnLimpar" type="button">Limpar tudo e recomeçar</button>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Gabriel Melo. Todos os direitos reservados. Material desenvolvido para fins educacionais no curso In Company “IA aplicada ao trabalho” (IEL Pernambuco · Yazaki). Os exemplos são fictícios e não representam dados reais da Yazaki.
+</footer>
+
+<div class="bar">
+  <div class="bar-inner">
+    <div class="progress">
+      <div class="ptxt"><span id="txtProg">0 de 6 elementos preenchidos</span></div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </div>
+    <button class="btn btn-primary" id="btnGerar" type="button">Gerar meu prompt</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Copiado!</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var $ = function(id){ return document.getElementById(id); };
+  var val = function(id){ var e = $(id); return e ? e.value.trim() : ""; };
+  var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
+
+  /* ================= DADOS ================= */
+
+  var LETRAS = [
+    {l:"P", n:"Papel",      c:"#2E6FE8", campos:["papel","finalidade"]},
+    {l:"R", n:"Requisição", c:"#2FA24C", campos:["requisicao"]},
+    {l:"O", n:"Objetivo",   c:"#F0912A", campos:["objetivo"]},
+    {l:"M", n:"Modelo",     c:"#7B4FC2", campos:["item1"]},
+    {l:"P", n:"Panorama",   c:"#12A39A", campos:["contexto"]},
+    {l:"T", n:"Testar",     c:"#D93A4E", campos:[]}
+  ];
+
+  var FORMATOS = ["tópicos","tabela","checklist","mensagem pronta","ata objetiva","plano de ação","comparação","resumo"];
+
+  var CHECKS = {
+    fatos:   "separe fatos de hipóteses e sinalize o que precisa ser confirmado",
+    invente: "não invente dados, regras, prazos ou responsáveis para preencher lacunas",
+    apenas:  "use apenas as informações fornecidas",
+    faltando:"diga quais informações ainda estão faltando",
+    causa:   "não conclua causa sem evidência",
+    passos:  "sugira os próximos passos de conferência",
+    opcao:   "não escolha uma opção final sem evidências suficientes",
+    perg:    "faça até 3 perguntas antes de responder se faltar informação essencial",
+    riscos:  "aponte riscos, premissas e limitações da resposta"
+  };
+  var CHECK_LABELS = {
+    fatos:   "Separar fatos de hipóteses",
+    invente: "Não inventar dados, regras, prazos ou responsáveis",
+    apenas:  "Usar apenas as informações fornecidas",
+    faltando:"Dizer quais informações ainda estão faltando",
+    causa:   "Não concluir causa sem evidência",
+    passos:  "Sugerir os próximos passos de conferência",
+    opcao:   "Não escolher uma opção final sem evidências",
+    perg:    "Fazer até 3 perguntas se faltar informação",
+    riscos:  "Apontar riscos, premissas e limitações"
+  };
+  var CHECK_ORDER = ["fatos","invente","apenas","faltando","causa","passos","opcao","perg","riscos"];
+
+  var BASE_FICTICIA =
+"Área | Indicador | Meta | Resultado | Sinal\n" +
+"RH | Tempo de triagem | 5 dias | 8 dias | atenção\n" +
+"Qualidade | NCs abertas | 12 | 19 | investigar\n" +
+"Manutenção | Falhas recorrentes | 3 | 7 | investigar\n" +
+"Controladoria | Variação de custo | até 4% | 9% | atenção\n" +
+"Logística | Itens divergentes | 2 | 8 | investigar\n" +
+"(Dados simulados apenas para fins didáticos.)";
+
+  var CASOS = [
+    {
+      id:"doc", n:"Documento", short:"De texto grande para informação útil.",
+      entrada:"Anotações, relatório ou texto extenso.",
+      objetivo:"Resumir, organizar e destacar o que exige ação.",
+      saida:"Fatos principais, pendências, riscos e próximos passos.",
+      cuidado:"A IA não deve criar informação que não esteja no documento.",
+      formato:"resumo", checks:["apenas","faltando","invente"],
+      lblMaterial:"Cole aqui o texto do documento",
+      ph:{
+        papel:"assistente de organização de informações",
+        finalidade:"entender rapidamente o que precisa de atenção neste documento",
+        requisicao:"resuma o conteúdo e destaque os pontos mais importantes",
+        objetivo:"entender rapidamente o que precisa de atenção",
+        item1:"resumo", item2:"pendências", item3:"riscos", item4:"próximos passos",
+        contexto:"documento recebido de outra área, texto longo, sem resumo",
+        criterios:"urgência, impacto, prazo", limites:"não inventar informações; linguagem simples",
+        material:"Cole o texto do documento aqui (sem dados pessoais ou confidenciais)."
+      },
+      ex:{
+        papel:"assistente de organização de informações",
+        finalidade:"entender o que precisa de atenção neste comunicado interno",
+        requisicao:"resuma o conteúdo e destaque os pontos mais importantes",
+        objetivo:"entender rapidamente o que precisa de atenção",
+        item1:"resumo", item2:"pendências", item3:"riscos", item4:"próximos passos",
+        contexto:"comunicado interno fictício sobre a revisão do procedimento de recebimento de materiais; li apenas por cima",
+        criterios:"", limites:"não inventar informações; linguagem simples",
+        material:"Assunto: revisão do procedimento de recebimento de materiais.\nA conferência passa a ser feita em duas etapas: visual na doca e documental no sistema. O prazo para adequação das equipes é de duas semanas. Ainda não foi definido quem treina os novos conferentes. Divergências recorrentes entre nota fiscal e carga física serão acompanhadas semanalmente. Dúvidas devem ser enviadas à área responsável."
+      }
+    },
+    {
+      id:"planilha", n:"Planilha", short:"De números dispersos para sinais que orientam decisão.",
+      entrada:"Planilha com indicadores, datas, áreas ou categorias.",
+      objetivo:"Encontrar desvios, comparar períodos e priorizar o que merece atenção.",
+      saida:"Achados, evidências, hipóteses e perguntas de validação.",
+      cuidado:"A IA apoia a análise, mas não conclui causa sem evidência.",
+      formato:"tabela", checks:["causa","passos","invente","fatos"],
+      lblMaterial:"Cole aqui os dados da tabela",
+      base:true,
+      ph:{
+        papel:"analista de dados operacionais",
+        finalidade:"identificar o que merece verificação nesta tabela",
+        requisicao:"analise a tabela e identifique pontos fora do padrão",
+        objetivo:"saber o que merece verificação",
+        item1:"achado", item2:"evidência", item3:"possível hipótese", item4:"pergunta de validação",
+        contexto:"indicadores de várias áreas com meta e resultado do período",
+        criterios:"tamanho do desvio em relação à meta, recorrência, impacto", limites:"não concluir causa sem evidência",
+        material:"Cole a tabela aqui. Use o botão abaixo para inserir a base fictícia do slide."
+      },
+      ex:{
+        papel:"analista de dados operacionais",
+        finalidade:"identificar o que merece verificação nesta tabela",
+        requisicao:"analise a tabela e identifique pontos fora do padrão",
+        objetivo:"saber o que merece verificação",
+        item1:"achado", item2:"evidência", item3:"possível hipótese", item4:"pergunta de validação",
+        contexto:"indicadores simulados de cinco áreas, com meta e resultado do período",
+        criterios:"tamanho do desvio em relação à meta e recorrência", limites:"não concluir causa sem evidência",
+        material:BASE_FICTICIA
+      }
+    },
+    {
+      id:"comunicacao", n:"Comunicação", short:"De informação bruta para mensagem clara.",
+      entrada:"Texto longo, nota interna, e-mail ou informação técnica.",
+      objetivo:"Adaptar a linguagem ao público e organizar a mensagem.",
+      saida:"Comunicado, e-mail, roteiro ou apresentação mais objetiva.",
+      cuidado:"Manter apenas o conteúdo fornecido, sem inventar informações.",
+      formato:"mensagem pronta", checks:["apenas","invente","faltando"],
+      lblMaterial:"Cole aqui o conteúdo que será transformado em comunicado",
+      ph:{
+        papel:"revisor de comunicação corporativa",
+        finalidade:"transformar uma informação bruta em uma mensagem clara",
+        requisicao:"transforme este conteúdo em um comunicado claro e objetivo",
+        objetivo:"informar a equipe sobre uma mudança de procedimento",
+        item1:"versão mais curta", item2:"versão mais detalhada", item3:"", item4:"",
+        contexto:"público: equipe da minha área; leitura rápida; tom respeitoso",
+        criterios:"clareza, objetividade, tom respeitoso", limites:"linguagem simples, respeitosa e direta; manter apenas as informações fornecidas",
+        material:"Cole a nota interna, o e-mail ou o texto técnico aqui."
+      },
+      ex:{
+        papel:"revisor de comunicação corporativa",
+        finalidade:"transformar uma nota interna em um comunicado claro",
+        requisicao:"transforme este conteúdo em um comunicado claro e objetivo",
+        objetivo:"informar a equipe sobre uma mudança de procedimento",
+        item1:"versão mais curta", item2:"versão mais detalhada", item3:"", item4:"",
+        contexto:"público: equipe administrativa; leitura rápida; os prazos informados são os únicos definidos",
+        criterios:"clareza e objetividade", limites:"linguagem simples, respeitosa e direta; manter apenas as informações fornecidas",
+        material:"A partir da próxima segunda, as solicitações de material de escritório passam a ser feitas pelo formulário digital. Pedidos por e-mail deixam de ser aceitos. O formulário tem campos de item, quantidade e justificativa. Dúvidas devem ser tratadas com a área de suprimentos. Haverá uma explicação rápida de 15 minutos na reunião de segunda."
+      }
+    },
+    {
+      id:"reuniao", n:"Reuniões e anotações", short:"De conversa dispersa para plano de ação.",
+      entrada:"Anotações de reunião, conversa dispersa ou vários pontos soltos.",
+      objetivo:"Organizar temas, separar decisões e identificar pendências.",
+      saida:"Ata objetiva com decisões, responsáveis, prazos e próximos passos.",
+      cuidado:"Não inventar responsáveis ou prazos que não estejam nas anotações.",
+      formato:"ata objetiva", checks:["invente","faltando","apenas"],
+      lblMaterial:"Cole aqui as anotações da reunião",
+      ph:{
+        papel:"assistente de organização de reuniões",
+        finalidade:"transformar minhas anotações em uma ata objetiva",
+        requisicao:"organize as anotações abaixo em uma ata objetiva",
+        objetivo:"sair com decisões, pendências, responsáveis e prazos",
+        item1:"decisões", item2:"pendências", item3:"responsáveis", item4:"próximos passos",
+        contexto:"reunião de alinhamento da equipe; anotações soltas, escritas durante a conversa",
+        criterios:"", limites:"não criar responsáveis ou prazos que não estejam no texto",
+        material:"Cole as anotações da reunião aqui (sem nomes reais, se possível)."
+      },
+      ex:{
+        papel:"assistente de organização de reuniões",
+        finalidade:"transformar minhas anotações em uma ata objetiva",
+        requisicao:"organize as anotações abaixo em uma ata objetiva",
+        objetivo:"sair com decisões, pendências, responsáveis e prazos",
+        item1:"decisões", item2:"pendências", item3:"responsáveis", item4:"próximos passos",
+        contexto:"reunião semanal fictícia de uma equipe de apoio administrativo",
+        criterios:"", limites:"não criar responsáveis ou prazos que não estejam no texto",
+        material:"Reunião semanal.\n- Decidimos padronizar o modelo de relatório mensal.\n- Pessoa A vai revisar o modelo e mandar para a equipe.\n- Falta definir quem consolida os dados de custo.\n- Prazo do relatório de setembro: sexta.\n- Alguém precisa confirmar o acesso da equipe à pasta compartilhada.\n- Próxima reunião: ver data."
+      }
+    },
+    {
+      id:"comparar", n:"Comparar alternativas", short:"De opções soltas para recomendação estruturada.",
+      entrada:"Opções de fornecedores, ferramentas, processos ou propostas.",
+      objetivo:"Definir critérios antes de avaliar e comparar com lógica.",
+      saida:"Quadro com prós, riscos, dúvidas e pontos a validar.",
+      cuidado:"Não escolher automaticamente sem evidências suficientes.",
+      formato:"tabela", checks:["opcao","faltando","invente"],
+      lblMaterial:"Cole aqui as opções que serão comparadas",
+      ph:{
+        papel:"assistente de análise comparativa",
+        finalidade:"comparar as opções com critérios claros",
+        requisicao:"compare as opções apresentadas com base em critérios objetivos",
+        objetivo:"entender vantagens, riscos e pontos que precisam ser verificados",
+        item1:"critério", item2:"opção A", item3:"opção B", item4:"risco e pergunta de validação",
+        contexto:"duas opções para uma mesma necessidade; decisão será tomada com a equipe",
+        criterios:"custo, prazo, esforço, risco", limites:"não escolher uma opção final sem evidências suficientes",
+        material:"Descreva ou cole as opções (A, B, C…) com o que você sabe de cada uma."
+      },
+      ex:{
+        papel:"assistente de análise comparativa",
+        finalidade:"comparar duas propostas fictícias de fornecedor",
+        requisicao:"compare as opções apresentadas com base em critérios objetivos",
+        objetivo:"entender vantagens, riscos e pontos que precisam ser verificados",
+        item1:"critério", item2:"opção A", item3:"opção B", item4:"risco e pergunta de validação",
+        contexto:"duas propostas fictícias para um serviço de transporte interno; decisão será tomada com a equipe",
+        criterios:"custo, prazo de entrega, flexibilidade, risco", limites:"não escolher uma opção final sem evidências suficientes",
+        material:"Opção A: preço menor, prazo de 10 dias, contrato de 12 meses, sem informação sobre atendimento emergencial.\nOpção B: preço 15% maior, prazo de 5 dias, contrato de 6 meses, atendimento emergencial incluído, referências ainda não verificadas."
+      }
+    },
+    {
+      id:"problemas", n:"Resolver problemas", short:"De situação confusa para investigação segura.",
+      entrada:"Retrabalho, atraso, falha recorrente ou dúvida sem causa clara.",
+      objetivo:"Separar fatos, hipóteses e informações que ainda faltam.",
+      saida:"Resumo com fatos, hipóteses, lacunas e próxima pergunta de validação.",
+      cuidado:"Não concluir causa ou solução antes de investigar melhor.",
+      formato:"tabela", checks:["causa","fatos","passos"],
+      lblMaterial:"Cole aqui a descrição da situação",
+      ph:{
+        papel:"assistente de resolução de problemas",
+        finalidade:"entender o que precisa ser investigado primeiro",
+        requisicao:"antes de sugerir solução, organize a situação abaixo em fatos, hipóteses e lacunas",
+        objetivo:"entender o que precisa ser investigado primeiro",
+        item1:"fato", item2:"possível hipótese", item3:"informação faltante", item4:"próxima pergunta",
+        contexto:"retrabalho ou falha que se repete e ainda não tem causa clara",
+        criterios:"frequência, impacto, facilidade de verificação", limites:"não concluir causa sem evidência",
+        material:"Descreva o que está acontecendo: o que se repete, quando, onde e o que já foi tentado."
+      },
+      ex:{
+        papel:"assistente de resolução de problemas",
+        finalidade:"entender o que precisa ser investigado primeiro",
+        requisicao:"antes de sugerir solução, organize a situação abaixo em fatos, hipóteses e lacunas",
+        objetivo:"entender o que precisa ser investigado primeiro",
+        item1:"fato", item2:"possível hipótese", item3:"informação faltante", item4:"próxima pergunta",
+        contexto:"situação fictícia de uma etapa de conferência de documentos",
+        criterios:"frequência, impacto, facilidade de verificação", limites:"não concluir causa sem evidência",
+        material:"Nas últimas três semanas, cerca de uma em cada cinco solicitações voltou para correção. Os erros aparecem mais às segundas. A equipe acha que o formulário está confuso, mas ninguém conferiu os registros. Duas pessoas novas entraram no processo no mês passado."
+      }
+    },
+    {
+      id:"real", n:"Minha tarefa real", short:"Um relatório, planilha, texto ou dúvida da sua rotina.",
+      entrada:"Algo que você gostaria de fazer melhor ou em menos tempo.",
+      objetivo:"Aplicar o método na sua rotina.",
+      saida:"Um prompt aplicável a uma tarefa real.",
+      cuidado:"Use dados fictícios ou anonimizados na prática.",
+      formato:"tópicos", checks:["fatos","invente","perg"],
+      lblMaterial:"Cole aqui o material da sua tarefa",
+      free:true,
+      ph:{
+        papel:"especialista que pode apoiar esta tarefa",
+        finalidade:"descreva o problema, a necessidade ou a decisão",
+        requisicao:"explique exatamente o que deve ser feito",
+        objetivo:"informe onde, com quem ou para qual decisão o resultado será usado",
+        item1:"item que precisa aparecer na resposta", item2:"", item3:"", item4:"",
+        contexto:"cole ou descreva os dados, fatos e contexto disponíveis",
+        criterios:"ex.: prazo, esforço, custo e impacto", limites:"ex.: não inventar dados; limitar o tamanho; linguagem simples",
+        material:"Cole aqui o texto, os dados ou as anotações (sem informação sensível)."
+      },
+      ex:null
+    }
+  ];
+
+  var PERGUNTAS = [
+    "O que você pode ter interpretado errado?",
+    "Que informação está faltando?",
+    "Quais pontos são fatos e quais são hipóteses?",
+    "Como posso deixar isso mais objetivo?",
+    "Que próximos passos fazem sentido?"
+  ];
+  var CHECKLIST = [
+    "A resposta está <b>correta</b>?",
+    "Está <b>clara</b> para o público que vai receber?",
+    "Há alguma <b>informação inventada</b> ou sem base?",
+    "O conteúdo respeita <b>segurança e confidencialidade</b>?",
+    "Eu consigo explicar o resultado com <b>minhas próprias palavras</b>?"
+  ];
+
+  var casoAtual = null;
+
+  /* ================= RAIL ================= */
+  var rail = $("rail");
+  LETRAS.forEach(function(el, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.style.color = el.c;
+    b.innerHTML = '<span class="rl">' + el.l + '</span><span class="rn">' + el.n + '</span>';
+    b.setAttribute("aria-label", "Ir para " + el.n);
+    b.addEventListener("click", function(){
+      var alvo = $("card-" + (i+1));
+      if (alvo) alvo.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+    rail.appendChild(b);
+  });
+
+  function atualizarProgresso(){
+    var feitos = 0;
+    LETRAS.forEach(function(el, i){
+      var ok = el.campos.length === 0
+        ? (document.querySelectorAll("#testes input:checked").length > 0 || val("extra") !== "")
+        : el.campos.every(function(id){ return val(id) !== ""; });
+      if (ok) feitos++;
+      rail.children[i].classList.toggle("done", ok);
+    });
+    $("railCount").textContent = feitos;
+    $("txtProg").textContent = feitos + " de 6 elementos preenchidos";
+    $("fill").style.width = (feitos / 6 * 100) + "%";
+  }
+
+  /* ================= FORMATOS E CHECKS ================= */
+  var fmtBox = $("formatos");
+  FORMATOS.forEach(function(f, i){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip";
+    b.textContent = f;
+    b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+    b.addEventListener("click", function(){ setFormato(f); });
+    fmtBox.appendChild(b);
+  });
+  function setFormato(f){
+    each(fmtBox.children, function(c){ c.setAttribute("aria-pressed", c.textContent === f ? "true" : "false"); });
+  }
+  function formatoEscolhido(){
+    var a = fmtBox.querySelector('.chip[aria-pressed="true"]');
+    return a ? a.textContent.trim() : "tópicos";
+  }
+
+  var testes = $("testes");
+  CHECK_ORDER.forEach(function(k){
+    var l = document.createElement("label");
+    l.className = "check";
+    l.innerHTML = '<input type="checkbox" value="' + k + '"><span>' + CHECK_LABELS[k] + '</span>';
+    testes.appendChild(l);
+  });
+  function setChecks(keys){
+    each(testes.querySelectorAll("input"), function(i){ i.checked = keys.indexOf(i.value) !== -1; });
+  }
+
+  /* ================= CASOS ================= */
+  var casesBox = $("cases");
+  CASOS.forEach(function(c, i){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "case" + (c.free ? " free" : "");
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = '<span class="cn">' + (c.free ? "★" : (i+1)) + '</span><span class="ct">' + c.n + '</span><span class="cs">' + c.short + '</span>';
+    b.addEventListener("click", function(){ escolherCaso(i); });
+    casesBox.appendChild(b);
+  });
+
+  function aplicarPlaceholders(ph){
+    Object.keys(ph).forEach(function(k){
+      var e = $(k);
+      if (e) e.setAttribute("placeholder", ph[k] ? ("ex.: " + ph[k]).replace("ex.: ex.:", "ex.:") : "");
+    });
+  }
+
+  function escolherCaso(i){
+    var c = CASOS[i];
+    casoAtual = c;
+    each(casesBox.children, function(b, j){ b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+
+    $("cbTitle").textContent = c.free ? c.n : ("Caso " + (i+1) + " — " + c.n);
+    $("cbTag").textContent = c.short;
+    $("cbIn").textContent = c.entrada;
+    $("cbGoal").textContent = c.objetivo;
+    $("cbOut").textContent = c.saida;
+    $("cbCare").textContent = c.cuidado;
+    $("cbFoot").textContent = c.ex
+      ? "Quer ver como fica? Carregue um exemplo fictício e depois troque pelos seus dados."
+      : "Pense em algo que você gostaria de fazer melhor ou em menos tempo, e use o roteiro abaixo.";
+    $("btnExemplo").classList.toggle("hidden", !c.ex);
+    $("casebox").classList.remove("hidden");
+    $("warmup").classList.toggle("hidden", !c.free);
+
+    aplicarPlaceholders(c.ph);
+    $("lblMaterial").innerHTML = c.lblMaterial + ' <span class="opt">(sem dados reais)</span>';
+    $("baseBox").classList.toggle("hidden", !c.base);
+    setFormato(c.formato);
+    setChecks(c.checks);
+    atualizarProgresso();
+    toast(c.free ? "Roteiro livre carregado" : "Caso carregado — campos orientados");
+    $("casebox").scrollIntoView({behavior:"smooth", block:"nearest"});
+  }
+
+  $("btnExemplo").addEventListener("click", function(){
+    if (!casoAtual || !casoAtual.ex) return;
+    var ex = casoAtual.ex;
+    Object.keys(ex).forEach(function(k){ var e = $(k); if (e) e.value = ex[k]; });
+    setFormato(casoAtual.formato);
+    setChecks(casoAtual.checks);
+    atualizarProgresso();
+    toast("Exemplo fictício carregado — troque pelos seus dados");
+    $("card-1").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  $("btnBase").addEventListener("click", function(){
+    $("material").value = BASE_FICTICIA;
+    toast("Base fictícia inserida");
+  });
+
+  /* ================= EVENTOS GERAIS ================= */
+  each(document.querySelectorAll("[data-count]"), function(el){ el.addEventListener("input", atualizarProgresso); });
+  each(document.querySelectorAll("#testes input, #extra"), function(el){
+    el.addEventListener("change", atualizarProgresso);
+    el.addEventListener("input", atualizarProgresso);
+  });
+  each(document.querySelectorAll(".ex-toggle"), function(b){
+    b.addEventListener("click", function(){
+      var box = $(b.getAttribute("data-ex"));
+      var aberto = !box.classList.contains("hidden");
+      box.classList.toggle("hidden", aberto);
+      b.textContent = aberto ? "Ver exemplo" : "Esconder exemplo";
+    });
+  });
+
+  /* ================= MONTAGEM ================= */
+  function frase(t){ return (t || "").trim().replace(/[.;]+$/, ""); }
+
+  function montar(){
+    var L = [];
+
+    L.push("Atue como " + frase(val("papel")) + " para me ajudar a " + frase(val("finalidade")) + ".");
+    L.push("");
+
+    L.push("Quero que você " + frase(val("requisicao")) + ".");
+    L.push("Esta resposta será usada para " + frase(val("objetivo")) + ".");
+    L.push("");
+
+    var itens = [val("item1"), val("item2"), val("item3"), val("item4")].filter(function(t){ return t !== ""; });
+    L.push("Apresente o resultado em " + formatoEscolhido() + ", contendo:");
+    itens.forEach(function(t, i){ L.push("- " + frase(t) + (i === itens.length - 1 ? "." : ";")); });
+    L.push("");
+
+    L.push("Considere estas informações: " + frase(val("contexto")) + ".");
+    if (val("criterios")) L.push("Utilize estes critérios: " + frase(val("criterios")) + ".");
+    if (val("limites"))   L.push("Respeite estas condições: " + frase(val("limites")) + ".");
+    L.push("");
+
+    var regras = Array.prototype.slice.call(document.querySelectorAll("#testes input:checked")).map(function(c){ return CHECKS[c.value]; });
+    if (val("extra")) regras.push(frase(val("extra")));
+    if (!regras.length) regras.push("revise a resposta e aponte o que precisa ser validado por uma pessoa");
+    L.push("Antes de concluir:");
+    regras.forEach(function(r, i){ L.push("- " + r + (i === regras.length - 1 ? "." : ";")); });
+    L.push("");
+
+    L.push("Depois da primeira versão, revise e ajuste a resposta com base no meu feedback.");
+
+    if (val("material")) {
+      L.push("");
+      L.push("MATERIAL PARA ANALISAR:");
+      L.push("---");
+      L.push(val("material"));
+      L.push("---");
+    }
+    return L.join("\n");
+  }
+
+  /* ================= GERAR ================= */
+  var obrigatorios = [
+    {id:"papel",      nome:"Papel"},
+    {id:"finalidade", nome:"Finalidade"},
+    {id:"requisicao", nome:"Requisição"},
+    {id:"objetivo",   nome:"Objetivo"},
+    {id:"item1",      nome:"O que precisa aparecer na resposta"},
+    {id:"contexto",   nome:"Contexto"}
+  ];
+
+  $("btnGerar").addEventListener("click", function(){
+    var faltando = [];
+    obrigatorios.forEach(function(o){
+      var campo = $(o.id);
+      var box = campo.closest(".field");
+      var vazio = campo.value.trim() === "";
+      if (box) box.classList.toggle("missing", vazio);
+      if (vazio) faltando.push(o);
+    });
+
+    var alerta = $("alerta");
+    if (faltando.length) {
+      alerta.textContent = faltando.length === 1
+        ? "Falta preencher: " + faltando[0].nome + "."
+        : "Faltam " + faltando.length + " campos essenciais — eles estão marcados em vermelho.";
+      alerta.classList.add("show");
+      var primeiro = $(faltando[0].id);
+      primeiro.scrollIntoView({behavior:"smooth", block:"center"});
+      setTimeout(function(){ primeiro.focus({preventScroll:true}); }, 400);
+      return;
+    }
+
+    alerta.classList.remove("show");
+    $("saida").textContent = montar();
+    $("warnMaterial").classList.toggle("hidden", val("material") !== "");
+    $("resultado").classList.remove("hidden");
+    $("after").classList.remove("hidden");
+    $("resultado").scrollIntoView({behavior:"smooth", block:"start"});
+    setTimeout(function(){ $("btnCopiar").focus({preventScroll:true}); }, 500);
+  });
+
+  $("btnEditar").addEventListener("click", function(){
+    $("card-1").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+  /* ================= COPIAR ================= */
+  var toastTimer;
+  function toast(msg){
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2300);
+  }
+
+  function copiarFallback(texto){
+    var ta = document.createElement("textarea");
+    ta.value = texto;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed"; ta.style.top = "0"; ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select(); ta.setSelectionRange(0, texto.length);
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function copiar(texto, onOk, onFail){
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(texto).then(onOk).catch(function(){ copiarFallback(texto) ? onOk() : onFail(); });
+    } else {
+      copiarFallback(texto) ? onOk() : onFail();
+    }
+  }
+
+  $("btnCopiar").addEventListener("click", function(){
+    var btn = this;
+    copiar($("saida").textContent,
+      function(){
+        btn.textContent = "Copiado ✓";
+        toast("Prompt copiado — agora cole na IA");
+        setTimeout(function(){ btn.textContent = "Copiar tudo"; }, 2500);
+      },
+      function(){
+        var r = document.createRange(); r.selectNodeContents($("saida"));
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        toast("Toque e segure no texto para copiar");
+      });
+  });
+
+  /* ================= PÓS-PROMPT ================= */
+  var ql = $("qlist");
+  PERGUNTAS.forEach(function(p){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "q";
+    b.innerHTML = '<span>' + p + '</span><i>copiar</i>';
+    b.addEventListener("click", function(){
+      copiar(p, function(){ toast("Pergunta copiada — cole na conversa com a IA"); }, function(){ toast("Não foi possível copiar; selecione o texto"); });
+    });
+    ql.appendChild(b);
+  });
+
+  var cl = $("checklist");
+  CHECKLIST.forEach(function(t){
+    var l = document.createElement("label");
+    l.className = "check";
+    l.innerHTML = '<input type="checkbox"><span>' + t + '</span>';
+    cl.appendChild(l);
+  });
+  cl.addEventListener("change", function(){
+    var todos = cl.querySelectorAll("input").length === cl.querySelectorAll("input:checked").length;
+    $("final").classList.toggle("show", todos);
+  });
+
+  /* ================= LIMPAR ================= */
+  $("btnLimpar").addEventListener("click", function(){
+    if (!window.confirm("Apagar tudo o que você preencheu e começar de novo?")) return;
+    each(document.querySelectorAll("input[type=text], textarea"), function(e){ e.value = ""; });
+    each(document.querySelectorAll(".field"), function(e){ e.classList.remove("missing"); });
+    each(cl.querySelectorAll("input"), function(i){ i.checked = false; });
+    $("final").classList.remove("show");
+    $("alerta").classList.remove("show");
+    $("resultado").classList.add("hidden");
+    $("after").classList.add("hidden");
+    $("casebox").classList.add("hidden");
+    $("warmup").classList.add("hidden");
+    $("baseBox").classList.add("hidden");
+    each(casesBox.children, function(b){ b.setAttribute("aria-pressed","false"); });
+    casoAtual = null;
+    setFormato("tópicos");
+    setChecks(["fatos","invente","perg"]);
+    atualizarProgresso();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  setChecks(["fatos","invente","perg"]);
+  atualizarProgresso();
+})();
+</script>
+</body>
+</html>
