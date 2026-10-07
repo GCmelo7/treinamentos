@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B2D63">
+<meta name="description" content="Laboratório IA na Prática: do problema real ao projeto com IA, para lideranças Yazaki (In Company IEL-PE).">
+<title>Laboratório IA na Prática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: caderno de bancada mobile — roteiro (home) + uma missão por tela, com blocos SABER → FAZER → CHECKPOINT */
+:root{
+  --navy:#0B2D63; --navy-2:#173A75;
+  --violet:#5302DD; --violet-2:#8956F9; --violet-soft:#F0ECFD; --violet-line:#DCD2FB;
+  --red:#D71920;
+  --ground:#F4F5FA; --paper:#FFFFFF; --ink:#1D2433; --muted:#5B6478; --line:#E2E5EE;
+  --ok:#0F8A5F; --ok-soft:#E3F5EE; --warn:#B4610A; --warn-soft:#FFF2E2;
+  --c0:#0B2D63; --c1:#2563EB; --c2:#0F8A5F; --c3:#E07A12; --c4:#5302DD; --c5:#D71920;
+  --f-display:"Montserrat", "Segoe UI", Arial, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --r:14px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 16px/1.55 var(--f-body)}
+button,input,textarea{font:inherit;color:inherit}
+a{color:var(--violet)}
+h1,h2,h3,h4{font-family:var(--f-display);color:var(--navy);margin:0;text-wrap:balance;line-height:1.18}
+p{margin:0}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px}
+:focus-visible{outline:3px solid var(--violet-2);outline-offset:2px;border-radius:6px}
+
+/* Top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--navy);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:54px}
+.brand{display:flex;flex-direction:column;line-height:1.1;cursor:pointer;background:none;border:0;padding:0;text-align:left;color:#fff}
+.brand b{font:800 15px/1.1 var(--f-display);letter-spacing:.04em;white-space:nowrap}
+.brand small{font:500 11px/1.2 var(--f-body);opacity:.75;letter-spacing:.04em}
+.dots{margin-left:auto;display:flex;gap:5px}
+.dot{width:30px;height:30px;flex:0 0 30px;border-radius:50%;border:2px solid rgba(255,255,255,.35);background:transparent;color:#fff;font:700 12px var(--f-display);display:grid;place-items:center;cursor:pointer;padding:0}
+.dot.done{background:#fff;color:var(--navy);border-color:#fff}
+.dot.cur{border-color:var(--violet-2);box-shadow:0 0 0 3px rgba(137,86,249,.45)}
+.bar{height:4px;background:rgba(255,255,255,.15)}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--violet-2),#fff);transition:width .4s}
+
+main{padding-block:20px 120px}
+
+/* HOME */
+.hero{background:var(--paper);border-radius:var(--r);padding:22px 20px;border:1px solid var(--line);position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,var(--violet-soft),transparent 70%)}
+.eyebrow{font:700 11px/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.hero h1{font-size:clamp(28px,7vw,40px);font-weight:800;margin:10px 0 10px;position:relative}
+.hero h1 em{font-style:normal;color:var(--violet)}
+.hero p{color:var(--muted);max-width:52ch;position:relative}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 11px;font:600 12px/1 var(--f-display);background:var(--violet-soft);color:var(--violet)}
+.pill.navy{background:#E7ECF5;color:var(--navy)}
+.pill.red{background:#FDE8E9;color:var(--red)}
+
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.how div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+.how b{display:block;font:800 13px var(--f-display);color:var(--navy);margin-bottom:2px}
+.how span{font-size:13px;color:var(--muted);line-height:1.35;display:block}
+@media (max-width:460px){.how{grid-template-columns:1fr}}
+
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:28px 0 12px}
+.sec-title h2{font-size:20px}
+.sec-title span{font:600 12px var(--f-display);color:var(--muted)}
+
+.route{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px;cursor:pointer;text-align:left;width:100%}
+.step:hover{border-color:var(--violet-line)}
+.num{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;color:#fff;font:800 20px var(--f-display);background:var(--mc,var(--navy))}
+.step h3{font-size:16px}
+.step p{font-size:13.5px;color:var(--muted);margin-top:2px;line-height:1.4}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.tag{font:600 10.5px/1 var(--f-display);letter-spacing:.04em;text-transform:uppercase;padding:4px 7px;border-radius:5px;background:#EEF1F7;color:var(--navy-2)}
+.state{font:700 11px var(--f-display);text-align:right;color:var(--muted);white-space:nowrap}
+.state.done{color:var(--ok)}
+.state.here{color:var(--violet)}
+.min{display:block;font:800 15px var(--f-display);color:var(--navy)}
+
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{appearance:none;border:0;border-radius:12px;padding:13px 18px;font:700 15px var(--f-display);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;min-height:48px}
+.btn.primary{background:var(--violet);color:#fff}
+.btn.primary:active{transform:translateY(1px)}
+.btn.ghost{background:var(--paper);color:var(--navy);border:1.5px solid var(--line)}
+.btn.dark{background:var(--navy);color:#fff}
+.btn.ok{background:var(--ok);color:#fff}
+.btn.sm{padding:9px 13px;min-height:40px;font-size:13.5px;border-radius:10px}
+.btn.block{width:100%}
+
+/* MISSION */
+.mhead{border-radius:var(--r);padding:20px;color:#fff;background:var(--mc,var(--navy));position:relative;overflow:hidden}
+.mhead:after{content:attr(data-n);position:absolute;right:10px;bottom:-34px;font:800 150px/1 var(--f-display);opacity:.13}
+.mhead .eyebrow{color:rgba(255,255,255,.85)}
+.mhead h1{color:#fff;font-size:clamp(24px,6vw,32px);font-weight:800;margin:8px 0 6px;max-width:15ch}
+.mhead p{opacity:.92;max-width:44ch;font-size:15px;position:relative;z-index:1}
+.mhead .meta-row .pill{background:rgba(255,255,255,.18);color:#fff}
+.timer{border:0;cursor:pointer}
+.timer.run{background:#fff !important;color:var(--navy) !important}
+
+.block{margin-top:16px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.blabel{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.blabel b{font:800 11px/1 var(--f-display);letter-spacing:.14em;text-transform:uppercase;padding:6px 9px;border-radius:6px}
+.blabel.saber b{background:#E7ECF5;color:var(--navy)}
+.blabel.fazer b{background:var(--violet-soft);color:var(--violet)}
+.blabel.check b{background:var(--ok-soft);color:var(--ok)}
+.blabel span{font-size:13px;color:var(--muted)}
+.block h2{font-size:19px;margin-bottom:8px}
+.block h3{font-size:16px;margin-bottom:6px}
+.lead{color:var(--muted);font-size:15px}
+.lead + .lead{margin-top:8px}
+
+.substep{display:grid;grid-template-columns:30px 1fr;gap:12px;padding-top:16px;margin-top:16px;border-top:1px dashed var(--line)}
+.substep:first-of-type{border-top:0;margin-top:4px;padding-top:4px}
+.sn{width:30px;height:30px;border-radius:50%;background:var(--violet);color:#fff;font:800 14px var(--f-display);display:grid;place-items:center}
+.substep > div{min-width:0}
+.substep h3{font-size:16px;margin:3px 0 4px}
+.hint{font-size:13.5px;color:var(--muted);margin-bottom:10px}
+
+.signals{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.sig{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#FBFBFE}
+.sig b{display:block;font:700 13.5px/1.25 var(--f-display);color:var(--navy)}
+.sig span{display:block;font-size:12.5px;color:var(--muted);line-height:1.35;margin-top:3px}
+@media (max-width:420px){.signals{grid-template-columns:1fr}}
+.notfor{margin-top:12px;border-radius:12px;padding:12px 14px;background:var(--warn-soft);color:#6A3A05;font-size:13.5px}
+.notfor b{font-family:var(--f-display)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:9px 13px;font:600 13.5px/1.25 var(--f-body);cursor:pointer;text-align:left;color:var(--ink)}
+.chip:hover{border-color:var(--violet-line)}
+.chip.on{background:var(--violet);border-color:var(--violet);color:#fff}
+.chip.sug{border-style:dashed;font-weight:500}
+.chip.sug:before{content:"+ ";color:var(--violet);font-weight:700}
+.chip.sug.on:before{color:#fff}
+
+/* pain cards */
+.pains{display:grid;gap:8px}
+.pain{appearance:none;display:flex;gap:10px;align-items:flex-start;text-align:left;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:12px;cursor:pointer;width:100%}
+.pain .box{flex:0 0 22px;height:22px;border-radius:6px;border:2px solid #C5CBDA;display:grid;place-items:center;color:#fff;font-size:14px;margin-top:1px}
+.pain.on{border-color:var(--violet);background:var(--violet-soft)}
+.pain.on .box{background:var(--violet);border-color:var(--violet)}
+.pain small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.pgroup{font:700 11px var(--f-display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+
+/* thermometer */
+.thermo{display:grid;gap:10px}
+.trow{border:1px solid var(--line);border-radius:12px;padding:12px}
+.trow h4{font-size:14.5px;margin-bottom:8px;font-family:var(--f-body);font-weight:600;color:var(--ink)}
+.scale{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:center;margin-top:6px}
+.scale > span{font:600 12px var(--f-display);color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);border:1.5px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{appearance:none;border:0;background:var(--paper);padding:8px 4px;font:600 12.5px var(--f-body);cursor:pointer;border-left:1px solid var(--line)}
+.seg button:first-child{border-left:0}
+.seg button.on{background:var(--navy);color:#fff}
+.rank{margin-top:14px;display:grid;gap:8px}
+.ritem{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer;text-align:left;width:100%}
+.ritem.best{border-color:var(--ok);background:var(--ok-soft)}
+.ritem .rk{font:800 14px var(--f-display);color:var(--muted)}
+.ritem.best .rk{color:var(--ok)}
+.ritem .meter{height:6px;border-radius:3px;background:#E8EBF2;margin-top:6px;overflow:hidden}
+.ritem .meter i{display:block;height:100%;background:var(--navy)}
+.ritem.best .meter i{background:var(--ok)}
+.ritem .sc{font:800 16px var(--f-display);color:var(--navy);font-variant-numeric:tabular-nums}
+.ritem > div{min-width:0}
+.ritem .t{font-size:14px;font-weight:600}
+
+/* inputs */
+.field{display:block;width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px 13px;background:#FCFCFE;font-size:15px;line-height:1.45;resize:vertical}
+.field:focus{border-color:var(--violet-2);outline:none;box-shadow:0 0 0 3px var(--violet-soft)}
+textarea.field{min-height:80px}
+label.lbl{display:block;font:700 13px var(--f-display);color:var(--navy);margin:14px 0 6px}
+
+/* sentence builder */
+.sentence{font-size:17px;line-height:1.9;color:var(--ink);background:#FBFBFE;border:1px solid var(--line);border-radius:12px;padding:14px}
+.blank{display:inline;border-bottom:2px solid var(--violet);color:var(--violet);font-weight:600;padding:0 2px}
+.blank.empty{color:#9AA2B5;border-bottom-style:dashed;font-weight:500}
+.sb-part{margin-top:14px}
+.sb-part .q{font:700 13.5px var(--f-display);color:var(--navy);margin-bottom:6px}
+.sb-part .field{margin-top:8px}
+
+/* PROMPT letters */
+.letters{display:grid;gap:10px}
+.letter{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+.letter > summary{display:flex;gap:12px;align-items:center;padding:12px 14px;background:#FAFAFD;cursor:pointer;list-style:none}
+.letter > summary::-webkit-details-marker{display:none}
+.letter[open] > summary{border-bottom:1px solid var(--line)}
+.letter > summary .txt{min-width:0;flex:1}
+.letter > summary em{font-style:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:13px;color:var(--ink);margin-top:3px;line-height:1.35}
+.letter > summary .edit{font:700 12px var(--f-display);color:var(--violet);white-space:nowrap}
+.letter[open] > summary .edit:after{content:" ▲"}
+.letter:not([open]) > summary .edit:after{content:" ▼"}
+.letter .lt{width:38px;height:38px;flex:0 0 38px;border-radius:10px;color:#fff;display:grid;place-items:center;font:800 18px/1 var(--f-display);background:var(--lc)}
+.letter summary b{font:800 15px var(--f-display);color:var(--navy);display:block}
+.letter header span{font-size:12.5px;color:var(--muted);display:block;line-height:1.3}
+.letter .in{padding:12px 14px;display:grid;gap:10px}
+.prefix{font:600 12px var(--f-mono);color:var(--muted)}
+
+/* prompt card */
+.pcard{margin-top:12px;border-radius:14px;background:#141B2D;color:#E8ECF7;overflow:hidden}
+.pcard header{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;background:#0E1424;font:700 11px var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:#AEB7D0}
+.pcard header i{font-style:normal;color:var(--violet-2)}
+.pcard pre{margin:0;padding:14px;font:400 13.5px/1.6 var(--f-mono);white-space:pre-wrap;word-break:break-word;max-height:330px;overflow:auto}
+.pcard pre .ph{color:#FFC86B}
+.pcard .acts{display:flex;gap:8px;padding:10px 14px 14px;flex-wrap:wrap}
+.pcard .acts .btn{flex:1 1 140px}
+.pcard .btn.copy{background:var(--violet-2);color:#fff}
+.pcard .btn.open{background:#fff;color:var(--navy)}
+.pcard .same{flex:1 1 160px;font-size:12.5px;line-height:1.35;color:#C9D1E8;align-self:center}
+.pcard .same b{color:#fff}
+.pcard.compact pre{max-height:180px}
+
+.callout{margin-top:12px;border-radius:12px;padding:12px 14px;background:var(--violet-soft);color:#2D1470;font-size:14px}
+.callout b{font-family:var(--f-display)}
+.callout.ok{background:var(--ok-soft);color:#0A4D36}
+.callout.warn{background:var(--warn-soft);color:#6A3A05}
+
+/* refine cards */
+.refine{display:grid;gap:10px}
+.rf{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.rf .rh{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rf b{font:800 14.5px var(--f-display);color:var(--navy)}
+.rf p{font:400 13px/1.5 var(--f-mono);color:var(--ink);margin-top:6px;background:#F6F7FB;border-radius:8px;padding:8px 10px}
+.rf.used{border-color:var(--ok)}
+.rf.used b:after{content:" ✓";color:var(--ok)}
+
+/* tabs (formatos) */
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;flex:0 0 auto;border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 12px;font:700 13px var(--f-display);color:var(--navy);cursor:pointer}
+.tab.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.fmt{margin-top:12px}
+.fmt .uses{font-size:13.5px;color:var(--muted)}
+.how2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.how2 div{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;line-height:1.45}
+.how2 b{display:block;font:800 12px var(--f-display);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.how2 .cp b{color:#0F6CBD}
+.how2 .gm b{color:#1A73E8}
+.how2 .pb{grid-column:1/-1;background:#FAFAFD}
+.how2 .pb b{color:var(--muted)}
+@media (max-width:460px){.how2{grid-template-columns:1fr}}
+
+/* checklist */
+.checks{display:grid;gap:8px}
+.ck{appearance:none;display:flex;gap:10px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:14.5px;width:100%}
+.ck .box{flex:0 0 22px;height:22px;border-radius:50%;border:2px solid #C5CBDA;display:grid;place-items:center;color:#fff;font-size:13px}
+.ck.on .box{background:var(--ok);border-color:var(--ok)}
+.ck.on{background:var(--ok-soft);border-color:#BFE5D5}
+
+/* checkpoint */
+.cpt{border:2px solid var(--ok);background:var(--paper)}
+.cpt .val{background:var(--ok-soft);border-radius:10px;padding:12px 14px;font-size:15px;margin-top:6px;color:#0A3D2B}
+.cpt .val.empty{background:#F4F5FA;color:var(--muted);font-style:italic}
+.nav{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.nav .btn{flex:1 1 160px}
+
+/* canvas */
+.canvas{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.canvas .ch{background:var(--navy);color:#fff;padding:18px}
+.canvas .ch small{font:700 11px var(--f-display);letter-spacing:.14em;text-transform:uppercase;color:var(--violet-2)}
+.canvas .ch h2{color:#fff;font-size:22px;margin-top:6px}
+.canvas .ch p{opacity:.8;font-size:13px;margin-top:4px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr}
+.cc{padding:14px 16px;border-top:1px solid var(--line);border-left:1px solid var(--line);min-width:0}
+.cc:nth-child(odd){border-left:0}
+.cc.full{grid-column:1/-1;border-left:0}
+.cc b{display:block;font:800 10.5px var(--f-display);letter-spacing:.12em;text-transform:uppercase;color:var(--violet);margin-bottom:4px}
+.cc span{font-size:14.5px;display:block;word-break:break-word}
+.cc span.empty{color:#9AA2B5;font-style:italic}
+
+
+/* library */
+.lib{display:grid;gap:10px}
+details.li{border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}
+details.li summary{cursor:pointer;list-style:none;padding:14px;display:flex;gap:12px;align-items:center}
+details.li summary::-webkit-details-marker{display:none}
+details.li summary .ic{width:34px;height:34px;flex:0 0 34px;border-radius:9px;background:var(--violet-soft);color:var(--violet);display:grid;place-items:center;font:800 14px var(--f-display)}
+details.li summary b{font:700 15px var(--f-display);color:var(--navy);display:block}
+details.li summary span{font-size:13px;color:var(--muted);display:block}
+details.li summary:after{content:"+";margin-left:auto;font:700 20px var(--f-display);color:var(--muted)}
+details.li[open] summary:after{content:"–"}
+details.li .pcard{margin:0 12px 12px}
+
+.foot{margin-top:28px;text-align:center;color:var(--muted);font-size:12.5px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(30px);background:var(--navy);color:#fff;padding:12px 18px;border-radius:12px;font:600 14px var(--f-display);opacity:0;transition:.25s;pointer-events:none;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.sel-tools{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.tool{appearance:none;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:12px;text-align:left;cursor:pointer}
+.tool b{display:block;font:800 14px var(--f-display);color:var(--navy)}
+.tool span{font-size:12px;color:var(--muted)}
+.tool.on{border-color:var(--violet);background:var(--violet-soft)}
+.rules{display:grid;gap:8px;margin-top:4px}
+.rules div{display:flex;gap:10px;font-size:14.5px;align-items:flex-start}
+.rules i{font-style:normal;flex:0 0 24px;height:24px;border-radius:6px;background:#FDE8E9;color:var(--red);display:grid;place-items:center;font:800 13px var(--f-display)}
+.promptmap{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
+.promptmap div{border-radius:10px;padding:8px 4px;text-align:center;color:#fff;background:var(--lc)}
+.promptmap b{display:block;font:800 18px var(--f-display)}
+.promptmap span{display:block;font:600 10.5px/1.2 var(--f-display)}
+@media (max-width:460px){.promptmap{grid-template-columns:repeat(3,1fr)}}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;font:700 13px var(--f-display);color:var(--navy)}
+.flow span{background:#E7ECF5;border-radius:8px;padding:6px 10px}
+.flow i{font-style:normal;color:var(--violet)}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+
+[hidden]{display:none !important}
+/* v2: passo a passo + barra inferior + ajuda */
+main{padding-block:16px 130px}
+.mhead{padding:16px 18px}
+.mhead:after{font-size:110px;bottom:-24px}
+.mhead h1{font-size:clamp(22px,5.6vw,28px);margin:6px 0 4px}
+.mhead p{font-size:14px}
+.mhead .meta-row{margin-top:10px}
+.steps{display:flex;gap:6px;margin-top:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.steps::-webkit-scrollbar{display:none}
+.sp{appearance:none;flex:1 0 auto;min-width:54px;border:0;border-radius:10px;padding:8px 10px;background:#E7EAF2;color:var(--muted);font:700 12px var(--f-display);cursor:pointer;text-align:center;min-height:36px}
+.sp.cur{background:var(--navy);color:#fff}
+.sp.seen{background:#D9DFEC;color:var(--navy)}
+.piece{margin-top:12px}
+.piece > .block{margin-top:0}
+.bbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));backdrop-filter:blur(8px)}
+.bbar .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:52px auto 1fr;gap:8px;align-items:center}
+.bbar .btn{min-height:50px}
+.bbar .back{padding:0;font-size:20px}
+.bbar .help{background:var(--warn-soft);color:#7A4206;border:0;padding:0 14px}
+.bbar .next.wait{background:#C9CEDB;color:#fff}
+.sheet{position:fixed;inset:0;z-index:40;background:rgba(11,45,99,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet .card{background:var(--paper);width:100%;max-width:720px;border-radius:18px 18px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom,0px));max-height:85vh;overflow:auto}
+.sheet h3{font-size:18px;margin-bottom:10px}
+.sheet ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.sheet li{background:#F6F7FB;border-radius:10px;padding:10px 12px;font-size:14.5px}
+.sheet li b{font-family:var(--f-display);color:var(--navy)}
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.case{appearance:none;text-align:left;border:1.5px solid var(--line);background:var(--paper);border-radius:12px;padding:12px;cursor:pointer;min-height:84px}
+.case b{display:block;font:800 13.5px/1.25 var(--f-display);color:var(--navy)}
+.case span{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.35}
+.case.on{border-color:var(--violet);background:var(--violet-soft)}
+@media (max-width:400px){.cases{grid-template-columns:1fr}}
+.more{appearance:none;border:0;background:none;color:var(--violet);font:700 13.5px var(--f-display);padding:10px 0;cursor:pointer}
+.sigs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.sigs span{background:#E7ECF5;color:var(--navy);border-radius:8px;padding:6px 10px;font:700 12.5px var(--f-display)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.vs div{border-radius:12px;padding:12px;font-size:13.5px}
+.vs .a{background:#FDECEC;color:#6B1414}
+.vs .b{background:var(--ok-soft);color:#0A4D36}
+.vs b{display:block;font:800 11px var(--f-display);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.cardimg{margin-top:12px;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.cardimg img{display:block;width:100%;height:auto}
+.wow{margin-top:12px;border-radius:14px;padding:14px;background:linear-gradient(135deg,var(--navy),#2A1B8F);color:#fff}
+.wow b{font-family:var(--f-display)}
+.wow p{opacity:.9;font-size:14px;margin-top:4px}
+.toast{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+
+/* v3 */
+.pain.big{font-size:16px;line-height:1.35;padding:13px 14px}
+.pgroup{font-size:12px;letter-spacing:.06em;color:var(--navy);margin:16px 0 8px}
+.counter{margin-top:10px;font:700 13px var(--f-display);color:var(--violet)}
+.crit{display:grid;gap:8px;margin-top:12px}
+.crit div{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#FBFBFE}
+.crit b{display:block;font:800 15px var(--f-display);color:var(--navy)}
+.crit span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+.expect{margin-top:14px;border-radius:12px;padding:12px 14px;background:#F6F7FB;border:1px dashed #C9CFDD}
+.expect b{font:800 12px var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+.expect ol{margin:8px 0 0;padding-left:20px;display:grid;gap:6px;font-size:14.5px}
+.pmlist{display:grid;gap:8px;margin-top:12px}
+.pmlist > div{display:flex;gap:12px;align-items:center}
+.pmlist .lt{width:36px;height:36px;flex:0 0 36px;border-radius:10px;color:#fff;display:grid;place-items:center;font:800 17px/1 var(--f-display);background:var(--lc)}
+.pmlist b{display:block;font:800 15px var(--f-display);color:var(--navy)}
+.pmlist span span,.pmlist > div > span:last-child{font-size:14px;color:var(--muted)}
+.letter summary small{font:500 12px var(--f-body);color:var(--muted)}
+.letter > summary em{-webkit-line-clamp:3}
+.kit{display:grid;gap:8px;margin-top:12px}
+.kit div{border-radius:12px;padding:12px 14px;background:var(--violet-soft)}
+.kit b{display:block;font:800 15px var(--f-display);color:var(--violet)}
+.kit span{display:block;font-size:14px;color:#2D1470;margin-top:2px}
+.cpt .val{font-size:15.5px}
+
+/* v4 */
+.cpt-what{background:#F4F5FA;border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.45;color:var(--muted);margin:2px 0 12px}
+.cpt-what b{color:var(--navy)}
+.cpt-how{display:grid;gap:8px;margin-bottom:12px}
+.cpt-how .cs{display:flex;gap:10px;align-items:flex-start;font:700 14.5px/1.35 var(--f-display);color:var(--navy)}
+.cpt-how .cs i{flex:0 0 24px;height:24px;border-radius:50%;background:var(--ok);color:#fff;font:800 13px/24px var(--f-display);text-align:center;font-style:normal}
+.ailine{border-left:4px solid var(--violet);background:var(--violet-soft);border-radius:0 10px 10px 0;padding:9px 12px;font-size:15px;color:var(--ink);margin-left:34px}
+.ailine span{display:block;font:700 10.5px var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--violet);margin-bottom:3px}
+.mywords{margin-top:16px;border:2px dashed var(--violet);background:var(--violet-soft);border-radius:14px;padding:14px}
+.mywords label{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;cursor:pointer}
+.mywords .ic{font-size:22px;line-height:1}
+.mywords b{display:block;font:800 16px/1.25 var(--f-display);color:var(--navy)}
+.mywords small{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.mywords .field{background:#fff;border-color:var(--violet-line);font-size:16px}
+.counter.full{color:var(--ok);font-weight:800}
+.why{background:var(--warn-soft);border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.5;color:#5A3A0A;margin-bottom:12px}
+.why b{color:#7A4306}
+.flow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:14px}
+.flow3 div{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center}
+.flow3 i{display:inline-block;width:24px;height:24px;border-radius:50%;background:var(--c3);color:#fff;font:800 12px/24px var(--f-display);font-style:normal}
+.flow3 .ok{border-color:var(--ok);background:var(--ok-soft)}.flow3 .ok i{background:var(--ok)}
+.flow3 b{display:block;font:800 13px var(--f-display);color:var(--navy);margin-top:5px}
+.flow3 span{display:block;font-size:11.5px;color:var(--muted);line-height:1.3;margin-top:2px}
+</style>
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <button class="brand" id="goHome" type="button"><b>IA NA PRÁTICA</b><small>Laboratório · Yazaki</small></button>
+    <nav class="dots" id="dots" aria-label="Missões"></nav>
+  </div>
+  <div class="bar"><i id="barFill" style="width:0"></i></div>
+</header>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="bbar" id="bbar" hidden></div>
+<div class="sheet" id="sheet" hidden></div>
+
+<script>
+(function(){
+"use strict";
+/* ============ CONFIG ============ */
+var FACILITADOR_WA = ""; /* opcional: número com DDI, ex.: "5581999999999". Vazio = botão escondido */
+
+/* ============ DADOS ============ */
+var TOOLS = {
+  m365:{name:"Copilot (conta da empresa)", short:"Copilot", url:"https://m365.cloud.microsoft/chat", note:"Login corporativo · dados protegidos"},
+  copilot:{name:"Copilot", short:"Copilot", url:"https://copilot.microsoft.com/", note:"App Copilot · conta Microsoft"},
+  gemini:{name:"Gemini", short:"Gemini", url:"https://gemini.google.com/app", note:"App Gemini · conta Google"},
+  chatgpt:{name:"ChatGPT", short:"ChatGPT", url:"https://chatgpt.com/", note:"Plano B · abre mesmo sem login"}
+};
+var AREAS = ["Produção","Qualidade","Manutenção","Engenharia / Projetos","Logística / Almoxarifado","Segurança (EHS)","RH","Controladoria / Financeiro","Gestão / Administrativo","Outra"];
+var CARGOS = ["Gerente","Coordenador(a)","Supervisor(a)","Líder / Encarregado(a)"];
+var PAPEL = {
+  "Produção":"especialista em gestão de produção na indústria automotiva, com experiência em transformar rotinas de liderança em processos simples",
+  "Qualidade":"especialista em qualidade automotiva (5 Porquês, Ishikawa, 8D), com experiência em transformar rotinas de liderança em processos simples",
+  "Manutenção":"especialista em manutenção industrial e confiabilidade, com experiência em transformar rotinas de liderança em processos simples",
+  "Engenharia / Projetos":"gerente de projetos de engenharia industrial, com experiência em transformar rotinas de liderança em processos simples",
+  "Logística / Almoxarifado":"especialista em logística e almoxarifado industrial, com experiência em transformar rotinas de liderança em processos simples",
+  "Segurança (EHS)":"especialista em segurança do trabalho industrial, com experiência em transformar rotinas de liderança em processos simples",
+  "RH":"especialista em gestão de pessoas na indústria, com experiência em transformar rotinas de liderança em processos simples",
+  "Controladoria / Financeiro":"especialista em controladoria industrial, com experiência em transformar rotinas de liderança em processos simples",
+  "Gestão / Administrativo":"especialista em gestão e organização administrativa, com experiência em transformar rotinas de liderança em processos simples",
+  "Outra":"consultor de melhoria de processos na indústria, com experiência em transformar rotinas de liderança em processos simples"
+};
+var COMMON = [
+  "Consolidar indicadores de várias planilhas para a reunião",
+  "Escrever atas e cobrar as pendências das reuniões",
+  "Montar apresentação de resultados para a gerência",
+  "Escrever comunicados e alinhar os turnos",
+  "Treinar quem chega e responder as mesmas dúvidas da equipe"
+];
+var PAINS = {
+  "Produção":["Analisar perdas e paradas de linha por turno","Fazer a passagem de turno com pendências e ocorrências","Planejar escala e alocação de pessoas","Explicar desvios de produtividade x meta","Acompanhar absenteísmo e horas extras da equipe"],
+  "Qualidade":["Organizar não conformidades e reclamações","Investigar causa raiz de problemas que se repetem","Preparar documentação para auditoria","Escrever instrução de trabalho ou alerta de qualidade","Acompanhar ações corretivas até o fim"],
+  "Manutenção":["Analisar histórico de falhas recorrentes","Priorizar as ordens de serviço da semana","Montar checklist de manutenção preventiva","Registrar e padronizar lições aprendidas","Controlar peças críticas e reposição"],
+  "Engenharia / Projetos":["Estruturar escopo, requisitos e riscos de um projeto","Fazer cronograma e relatório de status","Comparar alternativas técnicas ou fornecedores","Documentar mudanças de processo","Preparar reuniões de acompanhamento com várias áreas"],
+  "Logística / Almoxarifado":["Encontrar itens com consumo fora do padrão","Explicar divergência entre inventário e sistema","Acompanhar prazos de fornecedores","Definir reposição e estoque mínimo","Organizar o recebimento e a expedição da semana"],
+  "Segurança (EHS)":["Analisar incidentes e quase-acidentes","Preparar os temas de DDS da semana","Montar checklists de inspeção","Criar campanhas de segurança para a equipe","Acompanhar o plano de ação de segurança"],
+  "RH":["Organizar a triagem de currículos por critérios da vaga","Montar roteiro de entrevista","Escrever comunicados internos","Analisar absenteísmo e rotatividade","Organizar a integração de novos colaboradores"],
+  "Controladoria / Financeiro":["Explicar previsto x realizado","Achar variações de custo fora do padrão","Montar o relatório gerencial do mês","Simular cenários para decisão","Cobrar e consolidar informações de várias áreas"],
+  "Gestão / Administrativo":["Organizar agenda e prioridades da semana","Controlar demandas e solicitações da equipe","Padronizar processos administrativos","Produzir relatórios recorrentes","Preparar e conduzir reuniões de equipe"],
+  "Outra":[]
+};
+var SOL = [
+  {k:"relatorio",t:"Modelo de relatório ou análise",d:"Uma estrutura padrão para juntar e analisar informações",
+   req:"Crie o modelo de relatório ou análise que resolve esse problema: a estrutura, as colunas ou seções, as regras de preenchimento e as perguntas que ele precisa responder.",
+   mod:["uma tabela com as colunas do modelo e um exemplo preenchido","as fórmulas ou cálculos que a planilha precisa","as seções do relatório e o que entra em cada uma"]},
+  {k:"checklist",t:"Checklist ou padrão de rotina",d:"Passos fixos para fazer sempre do mesmo jeito",
+   req:"Crie o checklist padrão que resolve esse problema, com os passos na ordem certa, o responsável e o critério de \"feito\" de cada passo.",
+   mod:["uma lista numerada com responsável e critério de pronto em cada passo","uma versão curta para o quadro de gestão","uma tabela de verificação por turno ou por dia"]},
+  {k:"comunicado",t:"Modelo de comunicado ou mensagem",d:"Texto padrão com partes fixas e campos para preencher",
+   req:"Crie o modelo de comunicação padrão que resolve esse problema, com partes fixas e campos [entre colchetes] para preencher a cada vez.",
+   mod:["um modelo com partes fixas e campos [entre colchetes]","uma versão para WhatsApp com até 6 linhas","uma versão para e-mail"]},
+  {k:"plano",t:"Plano de ação e acompanhamento",d:"Quem faz o quê, até quando, e como cobrar",
+   req:"Crie o modelo de plano de ação e de acompanhamento que resolve esse problema, com uma rotina simples de cobrança.",
+   mod:["uma tabela o quê | quem | até quando | status","mensagens de cobrança prontas para cada status","uma rotina semanal de acompanhamento em 5 passos"]},
+  {k:"treinamento",t:"Roteiro de treinamento ou integração",d:"Etapas para ensinar e verificar o aprendizado",
+   req:"Crie o roteiro de treinamento que resolve esse problema, dividido em etapas, com o objetivo de cada etapa e como verificar o aprendizado.",
+   mod:["um roteiro dia a dia com o objetivo de cada etapa","um checklist do que a pessoa precisa saber","5 perguntas para verificar o aprendizado"]},
+  {k:"outro",t:"Outro tipo de solução",d:"A IA sugeriu algo diferente",
+   req:"Construa a solução que você recomendou, de forma completa e pronta para eu usar.",
+   mod:["um passo a passo numerado","uma tabela","um modelo pronto para copiar"]}
+];
+var OBJ=["O objetivo é reduzir o tempo e o retrabalho dessa tarefa e aplicar já na próxima semana com a minha equipe.","O objetivo é que qualquer pessoa da equipe consiga fazer essa tarefa do mesmo jeito, sem depender de mim.","O objetivo é chegar nas reuniões com a informação pronta e as decisões claras."];
+var PANX=["A equipe tem pouco tempo: precisa ser simples.","Só tenho Excel, Outlook e Copilot: nada de sistema novo.","Precisa funcionar também no celular.","Use linguagem simples, para o chão de fábrica."];
+var TST=["Antes de entregar, aponte o que pode não funcionar na prática.","Liste o que eu preciso validar com a equipe antes de usar.","Se faltar alguma informação essencial, me pergunte antes."];
+var TESTRES=["Funcionou: usaria assim","Funcionou com ajustes","Não serviu para mim"];
+var GANHO=["1 h por semana","2 h por semana","4 h por semana","8 h ou mais por semana"];
+var QUEM=["Sozinho, primeiro","Com 1 pessoa da equipe","Com toda a equipe","Com meu gestor"];
+var QUANDO=["Amanhã","Ainda esta semana","Próxima semana","Na próxima reunião da área"];
+var LETTER_COLORS=["#2563EB","#0F8A5F","#E07A12","#5302DD","#0B8FA8","#D71920"];
+var MISSIONS=[
+  {n:0,t:"Abrir a conversa",min:2,c:"var(--c0)",d:"Abra a IA e apresente-se para ela. É a mesma conversa até o fim.",tags:["Conversa única","Prompt de abertura"],out:"A IA pronta para trabalhar com você"},
+  {n:1,t:"Identificar o problema",min:6,c:"var(--c1)",d:"Marque suas dores. A IA te entrevista e aponta qual vale atacar primeiro.",tags:["Dores da rotina","Diagnóstico com IA"],out:"O problema que vale a pena resolver"},
+  {n:2,t:"Entender o problema",min:7,c:"var(--c2)",d:"A IA te faz 4 perguntas e devolve causas e a melhor solução para começar.",tags:["Entrevista com IA","Raio-x"],out:"Causas e a solução recomendada"},
+  {n:3,t:"Método PROMPT",min:10,c:"var(--c3)",d:"Monte o seu PROMPT, construa a ferramenta e teste com um exemplo real.",tags:["PROMPT","Rodada 1","Rodada 2: teste"],out:"Uma ferramenta pronta e testada"},
+  {n:4,t:"Projeto de implementação",min:5,c:"var(--c4)",d:"A IA organiza tudo em um projeto para apresentar ao seu gestor.",tags:["Projeto","Prompt-mestre","Pitch"],out:"Projeto completo + pitch de 1 minuto"},
+  {n:5,t:"Construir com as ferramentas",min:10,c:"var(--c5)",d:"Agora sim: transforme o projeto em planilha, apresentação, imagem ou assistente.",tags:["Excel","PowerPoint","Imagem","Assistente"],out:"Uma ferramenta construída + o cartão do projeto"}
+];
+var HELP={
+  0:[["A IA não abre ou pede um login que você não tem?","Escolha o ChatGPT (abre sem login) ou faça em dupla com o colega do lado."],["A IA respondeu diferente do esperado?","Normal. O importante é a conversa estar aberta. Siga para a Missão 1."],["Digitar no celular é lento?","Use o microfone do teclado e responda falando. A IA entende."]],
+  1:[["A IA já respondeu sem fazer as perguntas?","Tudo bem. Confira a tabela que ela montou e veja qual dor ela recomendou."],["Nenhuma dor da lista encaixa?","Escreva a sua no campo \"Ou escreva com suas palavras\"."],["Não sabe quanto tempo gasta?","Responda com um chute. A IA precisa do tamanho do problema, não de um número exato."]],
+  2:[["Não sabe responder uma pergunta?","Responda \"não sei\" ou \"depende\". A IA segue com o que tiver."],["A IA fez as 4 perguntas de uma vez?","Responda tudo em uma única mensagem, numerando 1, 2, 3, 4."],["Ficou na dúvida sobre o tipo de solução?","Escolha o mais parecido. Se nada encaixar, marque \"Outro tipo de solução\"."]],
+  3:[["A resposta veio genérica?","Volte ao Passo 1, troque o Modelo por algo mais concreto e rode de novo."],["A IA \"esqueceu\" o seu problema?","Você abriu uma conversa nova. Volte para a anterior. Se perdeu, tudo bem: o prompt já traz o problema escrito."],["O botão Copiar não funcionou?","Toque e segure no texto do prompt, selecione tudo e copie."]],
+  4:[["A resposta parou no meio?","Digite \"continue\" na mesma conversa."],["Ficou longo demais?","Peça: \"resuma o projeto em 1 página\"."]],
+  5:[["A fórmula ou o resultado parecem errados?","Ótimo sinal de que você está validando. Diga à IA o que está errado e peça para corrigir. Ex.: \"esse indicador é quanto maior, melhor\"."],["O botão de gerar arquivo não apareceu?","Use o plano B da ferramenta: a IA te dá o passo a passo para montar em poucos minutos."],["Quer levar para o seu gestor?","Toque e segure no cartão para salvar a imagem e use o pitch que a IA escreveu."],["Como voltar nessa conversa depois?","No Copilot ou no Gemini, a conversa fica no histórico. Renomeie como \"Projeto IA\" para achar rápido."]]
+};
+
+/* ============ ESTADO ============ */
+var KEY="lab-ia-yazaki-lid-v3";
+function blank(){return {area:"",cargo:"",tool:"m365",opened:false,pains:[],custom:"",diag:false,chosen:"",xray:false,sol:"",pr:{papel:"",req:"",obj:"",mod:[],panx:[PANX[0],PANX[1]],tst:[TST[0],TST[1]]},ran1:false,tested:false,testRes:"",built:false,pitch:false,proj:{nome:"",ganho:"",quando:"",quem:"",feita:""},build:"excel",made:false,done:{},sub:{},seen:{}};}
+function load(){try{var r=localStorage.getItem(KEY);if(r){var o=JSON.parse(r);var b=blank();Object.keys(b).forEach(function(k){if(o[k]===undefined)o[k]=b[k];});Object.keys(b.proj).forEach(function(k){if(o.proj[k]===undefined)o.proj[k]="";});return o;}}catch(e){}return blank();}
+var S=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+/* ============ HELPERS ============ */
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});}
+function lc(s){s=String(s||"").trim();return s?s.charAt(0).toLowerCase()+s.slice(1):s;}
+function toggle(arr,v,max){var i=arr.indexOf(v);if(i>-1)arr.splice(i,1);else{if(max&&arr.length>=max){toast("Máximo de "+max+". Desmarque uma para trocar.");return false;}arr.push(v);}return true;}
+function tool(){return TOOLS[S.tool]||TOOLS.m365;}
+function areaTxt(){return S.area&&S.area!=="Outra"?S.area:"";}
+var tt;function toast(m){var t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){t.classList.remove("show");},2200);}
+function copy(text,msg){
+  var done=function(){toast(msg||"Copiado! Agora cole na IA");};
+  var fallback=function(){var ta=document.createElement("textarea");ta.value=text;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,ta.value.length);try{document.execCommand("copy");done();}catch(e){toast("Toque e segure no texto para copiar");}document.body.removeChild(ta);};
+  try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fallback);}else fallback();}catch(e){fallback();}
+}
+function maxPains(){return S.custom.trim()?2:3;}
+function painList(){var l=S.pains.slice();var c=S.custom.trim();if(c&&l.indexOf(c)<0)l.push(c);return l;}
+function sol(){return SOL.filter(function(x){return x.k===S.sol;})[0]||null;}
+function problem(){return S.chosen||(painList().length===1?painList()[0]:"");}
+
+/* ============ PROMPTS ============ */
+function P_open(){
+  var cargo=S.cargo?lc(S.cargo).replace(/\(a\)/,""):"líder";var ar=areaTxt();
+  return "Nesta conversa você vai ser meu consultor de produtividade e de IA aplicada à liderança industrial.\n\nQUEM SOU EU\n- Sou "+cargo+(ar?" na área de "+ar:"")+" em uma indústria automotiva que fabrica chicotes elétricos (os sistemas de cabos e conectores dos veículos).\n- Lidero equipe com rotina de turnos, indicadores, reuniões, cobranças e muita informação chegando por planilha, e-mail e WhatsApp.\n- No dia a dia uso Microsoft 365 (Excel, Outlook, Teams, PowerPoint) e o "+tool().short+".\n\nO QUE VAMOS FAZER\nEstou em um treinamento prático. Nesta mesma conversa, vamos passar por 5 missões até construir um projeto real de IA na minha rotina: escolher o problema, entender a fundo, construir uma ferramenta, testar e montar o projeto. Vou mandar uma missão por vez. Não adiante etapas.\n\nCOMO VOCÊ DEVE TRABALHAR\n- Linguagem direta e prática, de quem conhece chão de fábrica. Nada de teoria.\n- Respostas fáceis de ler no celular: títulos curtos, listas e tabelas. Coloque em negrito o que é mais importante.\n- Não invente dados da empresa. Se faltar informação, me pergunte.\n- Não vou compartilhar dados confidenciais. Quando precisar de dados, crie exemplos fictícios e realistas.\n- Termine cada resposta com o próximo passo em 1 linha.\n\nPARA COMEÇAR, responda com:\n1. Em 2 linhas, o que você entendeu do seu papel nesta conversa.\n2. Uma tabela com 3 tarefas típicas de um "+cargo+(ar?" de "+ar:"")+" em que a IA economiza tempo: tarefa | como a IA ajuda | horas que pode economizar por semana.";
+}
+function P_diag(){
+  var l=painList();
+  if(!l.length)return "[marque suas dores no passo anterior]";
+  var lista=l.map(function(p,i){return (i+1)+". "+p;}).join("\n");
+  var um=l.length===1;
+  return "Missão 1: identificar o problema certo.\n\n"+(um?"Esta é a dor que mais pesa na minha rotina:\n":"Estas são as dores que mais pesam na minha rotina:\n")+lista+"\n\n"+(um?"Quero saber se vale a pena atacar essa dor com IA.":"Quero descobrir em qual delas a IA gera mais ganho para mim e para a minha equipe.")+"\n\nETAPA A · Primeiro, me faça perguntas rápidas, todas em UMA única mensagem"+(um?"":", numeradas por dor")+":\n- Com que frequência isso acontece?\n- Quantas horas eu gasto por semana?\n- Quem mais é afetado e o que acontece quando dá errado?\nEspere minhas respostas antes de continuar.\n\nETAPA B · Depois das minhas respostas:\n1. Mostre uma tabela: dor | frequência | horas por semana | impacto | potencial de IA (alto, médio ou baixo).\n2. Dê uma nota de 0 a 10 para "+(um?"a dor":"cada dor")+", considerando frequência, tempo, impacto e se envolve informação (texto, dados ou comunicação), que é onde a IA mais ajuda.\n3. Termine com este bloco, exatamente neste formato, para eu achar rápido:\n\n🎯 DOR RECOMENDADA: "+(um?"repita o nome da dor":"copie o nome exato de uma das dores da minha lista")+"\nPOR QUE ESSA: 2 linhas\nGANHO POSSÍVEL: horas por semana, em estimativa conservadora";
+}
+function P_xray(){
+  var p=problem()||"[o problema escolhido na Missão 1]";
+  return "Missão 2: raio-x do problema.\n\nVamos aprofundar a dor escolhida: \""+p+"\".\n\nMe faça 4 perguntas, UMA DE CADA VEZ, esperando minha resposta antes da próxima. Se eu responder de forma vaga, peça um exemplo concreto antes de seguir:\n1. Como essa tarefa é feita hoje, passo a passo?\n2. De onde vêm as informações (planilhas, sistemas, e-mails, WhatsApp, conversas)?\n3. Onde está o maior retrabalho, atraso ou erro?\n4. Como seria o resultado ideal para mim e para a minha equipe?\n\nDepois da 4ª resposta, entregue o raio-x neste formato:\n\n📌 PROBLEMA EM 1 FRASE: claro e mensurável\nCAUSAS PRINCIPAIS: 3 itens\nONDE A IA AJUDA: 2 ou 3 itens\nONDE A IA NÃO RESOLVE: 1 ou 2 itens\n\n✅ SOLUÇÃO RECOMENDADA: escolha UM destes tipos e escreva exatamente assim: "+SOL.map(function(x){return x.t;}).join(" · ")+"\nCOMO FUNCIONA: em 3 linhas, o que é e como eu usaria toda semana, só com Excel, Outlook, Teams e o "+tool().short+".";
+}
+function prDefaults(){
+  var pr=S.pr,so=sol();
+  if(!pr.papel)pr.papel=PAPEL[S.area]||PAPEL["Outra"];
+  if(!pr.req)pr.req=so?so.req:"Construa a solução que você recomendou, de forma completa e pronta para eu usar.";
+  if(!pr.obj)pr.obj=OBJ[0];
+  if(!pr.mod.length)pr.mod=[(so||SOL[5]).mod[0]];
+}
+function P_main(){
+  prDefaults();var pr=S.pr;var p=problem()||"[o problema escolhido]";
+  return "Missão 3, rodada 1: construir a solução.\n\nAtue como "+pr.papel+".\n\n"+pr.req+"\n\n"+pr.obj+"\n\nEntregue em: "+(pr.mod.length?pr.mod.join("; "):"[como você quer receber]")+".\n\nContexto: o problema é \""+p+"\". Use tudo o que eu te contei nesta conversa."+(pr.panx.length?" "+pr.panx.join(" "):"")+(pr.tst.length?"\n\n"+pr.tst.join(" "):"")+"\n\nEntregue a ferramenta completa, com título, pronta para usar. Ela ainda vai sem dados: na próxima mensagem eu vou testá-la.";
+}
+function P_test(){return "Missão 3, rodada 2: testar a ferramenta na prática.\n\nAgora quero ver a ferramenta que você acabou de criar funcionando, antes de levar para a equipe. Como não posso usar dados reais da empresa, simule uma semana típica minha"+(areaTxt()?" na área de "+areaTxt():"")+":\n1. DADOS DA SEMANA: crie as informações do jeito que chegam hoje, bagunçadas, em formatos diferentes, com algum dado faltando e pelo menos 2 situações-problema. Use nomes genéricos (Operador A, Linha 2, Turno B).\n2. FERRAMENTA EM USO: aplique a ferramenta nesses dados e mostre o resultado preenchido, como se fosse a minha semana real.\n3. ONDE FALHOU: 3 pontos em que a ferramenta falhou ou pode falhar no dia a dia.\n4. Termine com a ferramenta corrigida, com o título \"✅ VERSÃO FINAL\", pronta para eu usar.";}
+var P_fix="Essa solução não serve para mim porque [explique em uma frase].\nProponha outra abordagem, mais simples, e refaça a ferramenta. Depois teste de novo com o exemplo fictício.";
+function P_project(){return "Missão 4: projeto de implementação.\n\nCom base em tudo o que fizemos nesta conversa, monte o PROJETO DE IMPLEMENTAÇÃO para eu apresentar ao meu gestor. Use exatamente estes títulos, com textos curtos e tabelas:\n\n1. NOME DO PROJETO: curto e forte, até 6 palavras.\n2. PROBLEMA: como é hoje, frequência, horas gastas por semana e impacto na equipe.\n3. SOLUÇÃO: o que é e como funciona na rotina, em até 5 passos (quem faz, quando e com qual ferramenta).\n4. FERRAMENTA: repita aqui, completa, a VERSÃO FINAL que você entregou depois do teste da Missão 3.\n5. PROMPT-MESTRE: um prompt pronto para eu copiar toda vez que fizer essa tarefa, escrito pelo Método PROMPT (Papel, Requisição, Objetivo, Modelo, Panorama, Testar). Onde a informação muda a cada uso, escreva em MAIÚSCULAS o que devo colar ali, por exemplo: COLE AQUI OS DADOS DA SEMANA.\n6. GANHOS: horas por semana economizadas (estimativa conservadora) e outros benefícios.\n7. INDICADORES: 3 formas de medir se funcionou, cada uma com meta.\n8. RISCOS E CUIDADOS: dados, validação humana e o que não fazer.\n9. PLANO DE 30 DIAS: tabela semana | ação | responsável | entrega.\n\nFeche com uma linha: 🚀 PRIMEIRO PASSO AMANHÃ: a primeira ação concreta.";}
+function P_pitch(){return "Agora resuma o projeto em um pitch de 1 minuto para eu falar em voz alta ao meu gestor, sem jargão, em 5 frases curtas:\n1. O problema e quanto ele custa hoje.\n2. A solução com IA.\n3. Como funciona na prática.\n4. O ganho esperado.\n5. O primeiro passo que eu vou dar"+(S.proj.quando?" ("+lc(S.proj.quando)+")":" amanhã")+".";}
+
+var BUILD={
+  excel:{t:"Planilha (Excel)",uses:"Controle semanal, indicadores, plano de ação, checklist com status.",
+    p:function(){return "Missão 5: construir a planilha.\n\nTransforme a VERSÃO FINAL da ferramenta em uma planilha de Excel pronta para usar toda semana. Entregue:\n1. ABAS E COLUNAS: o nome de cada aba e, em tabela: coluna (letra) | nome | o que preencher | exemplo.\n2. FÓRMULAS: prontas para copiar, no Excel em português (SE, SOMASE, CONT.SE, PROCV) e com ponto e vírgula, dizendo em qual célula vai cada uma. Atenção ao sentido de cada meta: quanto maior, melhor ou quanto menor, melhor.\n3. CORES: a regra exata de formatação condicional para vermelho, amarelo e verde.\n4. EXEMPLO: 5 linhas fictícias preenchidas, em uma tabela que eu possa copiar e colar no Excel.\n5. MONTAGEM: passo a passo em até 8 passos.\nSe você conseguir gerar o arquivo .xlsx para download, gere também.";},
+    cp:"No chat do Copilot, se aparecer o arquivo .xlsx, baixe e abra. No computador, você também pode abrir o Excel, clicar em <b>Copilot</b> e pedir para montar a tabela com as colunas que a IA definiu.",
+    gm:"Embaixo de tabelas aparece <b>Exportar para Planilhas</b>. Depois, no Google Sheets: Arquivo → Fazer download → Microsoft Excel.",
+    pb:"Copie a tabela de exemplo, cole no Excel e siga o passo a passo. Em 10 minutos está pronta, e você entende cada fórmula."},
+  ppt:{t:"Apresentação (PowerPoint)",uses:"Levar o projeto ao gestor, apresentar resultado do mês, padronizar a reunião.",
+    p:function(){return "Missão 5: construir a apresentação.\n\nCrie uma apresentação de 5 slides para eu levar o projeto ao meu gestor:\n1. O problema e quanto custa hoje (horas e impacto).\n2. A solução e como funciona na rotina.\n3. O teste: como era antes e como ficou com a ferramenta.\n4. Ganhos, indicadores e riscos.\n5. Plano de 30 dias e o que preciso do gestor.\nPara cada slide: título de até 8 palavras, no máximo 3 tópicos curtos, o visual sugerido e uma frase para eu falar.\nNo final, escreva um único texto, pronto para eu colar no Copilot do PowerPoint em \"Criar uma apresentação\".\nSe você conseguir gerar o arquivo .pptx para download, gere também.";},
+    cp:"No computador: PowerPoint → <b>Copilot</b> → Criar uma apresentação → cole o texto final que a IA escreveu. Depois peça ajustes: \"mais visual\", \"menos texto\".",
+    gm:"Peça a mesma coisa usando o <b>Canvas</b> (botão Canvas na caixa de mensagem). A apresentação pode ser exportada para o Apresentações Google.",
+    pb:"Abra um PowerPoint em branco, crie 5 slides, cole título e tópicos de cada um e use o Designer para deixar visual."},
+  img:{t:"Imagem (quadro de gestão)",uses:"Comunicar o novo padrão para a equipe, cartaz no quadro, capa da apresentação.",
+    p:function(){var pr=problem();return "Missão 5: criar uma imagem para o quadro de gestão.\n\nCrie uma imagem que comunique à minha equipe o novo padrão do nosso projeto"+(pr?", que resolve: \""+pr+"\"":"")+".\n- Formato vertical, tipo cartaz A4.\n- Ambiente de fábrica de chicotes elétricos automotivos, pessoas com EPI, estilo limpo e moderno, cores azul e branco com um destaque em vermelho.\n- Texto na imagem: só um título de no máximo 5 palavras, em português, com a mensagem principal. Confira a grafia.\n- Sem logotipos ou marcas reais.\nDepois da imagem, sugira 2 frases curtas para eu escrever embaixo do cartaz no quadro.";},
+    cp:"Peça direto no chat do Copilot. Se o texto sair com erro, peça \"mesma imagem, sem texto\" e escreva o título por cima no PowerPoint.",
+    gm:"Peça direto no chat do Gemini. Dá para pedir ajustes: \"mais simples\", \"cores mais claras\", \"formato horizontal\".",
+    pb:"A IA ainda erra letras dentro de imagens. Gere sem texto e coloque o título depois no PowerPoint ou no Canva."},
+  agente:{t:"Assistente fixo (agente)",uses:"Repetir a tarefa toda semana sem colar o prompt de novo. O nível mais avançado.",
+    p:function(){return "Missão 5: criar um assistente fixo (agente).\n\nTransforme o prompt-mestre do projeto em um assistente que eu possa usar toda semana sem colar o prompt de novo. Entregue em blocos separados, prontos para copiar, nesta ordem:\n1. NOME: até 4 palavras.\n2. DESCRIÇÃO: 1 linha dizendo para que serve.\n3. INSTRUÇÕES: em segunda pessoa (\"Você é...\"), em até 15 linhas curtas: o papel dele, o que perguntar para mim antes de começar, o passo a passo do trabalho, o formato exato da resposta (com a ferramenta final), como validar o resultado e o que nunca fazer (inventar dados, pedir dados confidenciais).\n4. INICIADORES: 4 frases curtas para começar uma conversa com ele.\n5. TESTE: uma mensagem de exemplo, com dados fictícios, para eu testar se ele funciona.";},
+    cp:"No Copilot da empresa: <b>Agentes → Criar agente</b> (o nome do menu varia conforme a licença). Cole Nome, Descrição e Instruções nos campos e os Iniciadores em \"prompts iniciais\". Depois envie a mensagem de TESTE.",
+    gm:"No Gemini: <b>Gems → Novo Gem</b>. Cole o nome e as instruções, salve e envie a mensagem de TESTE. Funciona melhor no computador.",
+    pb:"Salve as instruções nas suas notas. Toda semana, cole no início de uma conversa nova e siga como se fosse o assistente."}
+};
+var LIB=[
+  {i:"AT",t:"Ata em 2 minutos",d:"Anotações soltas ou transcrição viram ata com pendências",p:"Atue como secretário executivo. Transforme as anotações abaixo em uma ata objetiva com: participantes, decisões tomadas, pendências (o quê | quem | até quando) e pontos em aberto. Não invente nada que não esteja nas anotações.\n\nANOTAÇÕES: [cole aqui ou cole a transcrição do áudio]"},
+  {i:"IN",t:"Leitura de indicadores",d:"O que merece investigação antes da reunião",p:"Atue como analista de melhoria de processos. Analise os indicadores abaixo e aponte os 3 pontos que mais merecem investigação.\nOrganize em tabela: fato observado | possível hipótese | informação faltante | próximo passo. Não conclua causa sem evidência.\nNo final, sugira 5 perguntas para eu levar à reunião.\n\nDADOS: [cole aqui]"},
+  {i:"5P",t:"5 Porquês guiado",d:"A IA conduz a análise de causa com você",p:"Atue como facilitador de análise de causa raiz usando 5 Porquês. O problema é: [descreva o efeito observado].\nMe faça UMA pergunta \"por quê?\" de cada vez e espere minha resposta. Se minha resposta for uma opinião sem evidência, me peça a evidência. Ao final, resuma a cadeia de causas e proponha ações de contenção e correção."},
+  {i:"5W",t:"Plano de ação 5W2H",d:"Da ideia solta ao plano com dono e prazo",p:"Atue como gestor de projetos. Transforme a situação abaixo em um plano de ação 5W2H (o quê, por quê, onde, quando, quem, como, quanto custa) em tabela, com no máximo 8 ações, ordenadas por prioridade.\n\nSITUAÇÃO: [descreva]"},
+  {i:"CT",t:"Comunicado de turno",d:"Mensagem clara para todos os turnos",p:"Escreva um comunicado para os turnos sobre: [assunto]. Até 6 linhas, linguagem simples, tom respeitoso e firme, com: o que muda, a partir de quando, o que cada um precisa fazer e a quem procurar em caso de dúvida. Me dê também uma versão de 2 linhas para o quadro."},
+  {i:"FB",t:"Preparar uma conversa difícil",d:"Roteiro de feedback sem expor ninguém",p:"Atue como mentor de liderança. Preciso dar um feedback sobre esta situação (sem nomes): [descreva o comportamento observado e o impacto].\nMonte um roteiro curto usando Situação-Comportamento-Impacto, com uma pergunta aberta para ouvir a pessoa e um combinado final. Me avise se algo no meu relato parece julgamento em vez de fato."},
+  {i:"CK",t:"Rotina vira checklist",d:"Padronize o que hoje depende de quem faz",p:"Transforme a rotina abaixo em um checklist padrão de até 10 passos, com responsável e critério de \"feito\" em cada passo. Aponte os pontos onde costuma haver erro e como evitar.\n\nROTINA: [descreva como é feito hoje]"},
+  {i:"RD",t:"Ensaiar reunião com a diretoria",d:"Antecipe as perguntas difíceis",p:"Atue como um diretor exigente. Vou te apresentar um resultado ou proposta. Leia e me faça as 5 perguntas mais difíceis que você faria na reunião. Depois, me ajude a preparar respostas curtas e baseadas em dados.\n\nCONTEÚDO: [cole o resumo]"}
+];
+
+/* ============ COMPONENTES ============ */
+var PC={};var OPENL={};
+function pcard(label,text,opts){
+  opts=opts||{};var id="pc"+Math.random().toString(36).slice(2,8);PC[id]=text;
+  var html=esc(text).replace(/\[([^\]]{2,160})\]/g,'<span class="ph">[$1]</span>');
+  var tag=opts.fresh?"conversa nova":(opts.lib?esc(tool().short):"mesma conversa");
+  var act=opts.fresh||opts.lib?'<a class="btn open sm" href="'+tool().url+'" target="_blank" rel="noopener">Abrir '+esc(tool().short)+' ↗</a>':'<span class="same">Cole na <b>mesma conversa</b> da IA. Não abra uma nova.</span>';
+  return '<div class="pcard'+(opts.compact?" compact":"")+'"><header><span>'+esc(label)+'</span><i>'+tag+'</i></header><pre>'+html+'</pre><div class="acts"><button class="btn copy sm" data-copy="'+id+'"'+(opts.mark?' data-mark="'+opts.mark+'"':'')+'>Copiar prompt</button>'+act+'</div></div>';
+}
+function chips(list,selected,attr,opts){opts=opts||{};var h='<div class="chips">';list.forEach(function(v){var on=Array.isArray(selected)?selected.indexOf(v)>-1:selected===v;h+='<button class="chip'+(opts.sug?" sug":"")+(on?" on":"")+'" data-'+attr+'="'+esc(v)+'">'+esc(v)+'</button>';});return h+'</div>';}
+function saber(title,body,mins){return '<section class="block"><div class="blabel saber"><b>Saber</b><span>'+(mins||"1 minuto")+'</span></div><h2>'+title+'</h2>'+body+'</section>';}
+function fazer(n,title,hint,body,sub){return '<section class="block"><div class="blabel fazer"><b>Passo '+n+'</b><span>'+(sub||"")+'</span></div><h2>'+title+'</h2>'+(hint?'<p class="hint">'+hint+'</p>':'')+body+'</section>';}
+function expect(items){return '<div class="expect"><b>O que vai acontecer na IA</b><ol>'+items.map(function(t){return '<li>'+t+'</li>';}).join("")+'</ol></div>';}
+function check(attr,on,label){return '<div class="checks" style="margin-top:12px"><button class="ck'+(on?" on":"")+'" data-flag="'+attr+'"><span class="box">✓</span>'+label+'</button></div>';}
+function cpt(label,body,g){
+  var h='<section class="block cpt"><div class="blabel check"><b>Checkpoint</b><span>'+label+'</span></div><div class="cpt-what"><b>O que é o checkpoint?</b> É onde você conta ao site o que a IA respondeu. Leva 10 segundos e faz o próximo prompt já sair preenchido.</div>';
+  if(g){h+='<div class="cpt-how"><div class="cs"><i>1</i><span>'+g.find+'</span></div>'+(g.ex?'<div class="ailine"><span>Na resposta da IA</span>'+g.ex+'</div>':'')+'<div class="cs"><i>2</i><span>'+g.then+'</span></div></div>';}
+  return h+body+'</section>';}
+
+/* ============ MISSÕES ============ */
+function M0(){return [
+  {l:"Saber",h:saber("Uma conversa só, do começo ao fim",'<p class="lead">Hoje você não vai fazer perguntas soltas para a IA. Você vai abrir <b>uma conversa</b> e trabalhar nela até o fim do laboratório. Como a IA lembra de tudo o que foi dito, cada etapa fica mais precisa que a anterior.</p><div class="flow"><span>Problema</span><i>→</i><span>Diagnóstico</span><i>→</i><span>Solução</span><i>→</i><span>Teste</span><i>→</i><span>Projeto</span></div><div class="rules" style="margin-top:14px"><div><i>1</i><span>Use a IA <b>autorizada pela empresa</b>. Com Copilot corporativo, prefira ele.</span></div><div><i>2</i><span><b>Nada confidencial</b>: sem nomes, salários, dados de clientes ou números estratégicos. Quando precisar de dados, a IA cria exemplos fictícios.</span></div><div><i>3</i><span>Responda falando: use o <b>microfone do teclado</b>. É muito mais rápido no celular.</span></div></div>',"30 segundos")},
+  {l:"1",h:fazer(1,"Quem é você e qual IA vai usar","Isso personaliza todos os prompts das próximas missões.",'<label class="lbl">Sua área</label>'+chips(AREAS,S.area,"area")+'<label class="lbl">Seu cargo</label>'+chips(CARGOS,S.cargo,"cargo")+'<label class="lbl">IA de hoje</label><div class="sel-tools">'+Object.keys(TOOLS).map(function(k){var t=TOOLS[k];return '<button class="tool'+(S.tool===k?" on":"")+'" data-tool="'+k+'"><b>'+esc(t.name)+'</b><span>'+esc(t.note)+'</span></button>';}).join("")+'</div>')},
+  {l:"2",h:fazer(2,"Abra a conversa e apresente-se para a IA","Copie, abra a IA em uma <b>conversa nova</b> e cole. Essa é a conversa que você vai usar até o fim.",pcard("Prompt de abertura",P_open(),{fresh:true,mark:"opened"})+'<div class="callout"><b>Repare:</b> esse prompt já diz à IA <b>quem ela é</b> (Papel) e <b>qual é a situação</b> (Panorama). São 2 das 6 letras do Método PROMPT que você vai usar na Missão 3.</div>')},
+  {l:"✓",h:cpt("conversa aberta",'<div class="val'+(S.area?"":" empty")+'">'+(S.area?esc(S.area)+(S.cargo?" · "+esc(S.cargo):"")+" · "+esc(tool().name)+(S.opened?" · conversa aberta":""):"Escolha sua área no passo 1.")+'</div><p class="hint" style="margin-top:10px">Deixe a conversa aberta. Daqui em diante, todo prompt vai nela.</p>'),can:!!S.area,why:"Escolha sua área (passo 1)."}
+];}
+function painBtn(p){var on=S.pains.indexOf(p)>-1;return '<button class="pain big'+(on?" on":"")+'" data-pain="'+esc(p)+'"><span class="box">✓</span><span>'+esc(p)+'</span></button>';}
+function M1(){
+  var areaP=PAINS[S.area]||[];var l=painList();
+  var p1='<div class="pgroup">Dores de quem lidera equipe, em qualquer área</div><div class="pains">'+COMMON.map(painBtn).join("")+'</div>';
+  if(areaP.length)p1+='<div class="pgroup">Dores comuns em '+esc(S.area)+'</div><div class="pains">'+areaP.map(painBtn).join("")+'</div>';
+  p1+='<div class="mywords"><label for="customPain"><span class="ic">✍️</span><span><b>Não achou a sua? Escreva com suas palavras</b><small>Conta como uma das 3. Quanto mais concreta, melhor.</small></span></label><input class="field" id="customPain" data-bind="custom" placeholder="Ex.: Montar o relatório de refugo toda segunda" value="'+esc(S.custom)+'"></div>';
+  p1+='<div class="counter'+(l.length>=3?" full":"")+'">'+(l.length?l.length+" de 3 escolhidas"+(l.length>=3?" · limite atingido":""):"Nenhuma escolhida ainda")+'</div>';
+  var pick='';
+  if(!l.length)pick='<div class="val empty">Marque suas dores no passo 1.</div>';
+  else pick='<div class="pains">'+l.map(function(p){return '<button class="pain big'+(S.chosen===p?" on":"")+'" data-chosen="'+esc(p)+'"><span class="box">★</span><span>'+esc(p)+'</span></button>';}).join("")+'</div>';
+  return [
+    {l:"Saber",h:saber("Qual problema vale a pena resolver com IA?",'<p class="lead">Não comece pela ferramenta. Comece pela tarefa que mais pesa na sua semana. O melhor problema para começar tem estas 3 características:</p><div class="crit"><div><b>Se repete</b><span>Acontece toda semana, todo turno ou toda reunião.</span></div><div><b>Toma tempo</b><span>Você gasta horas que poderiam ir para a equipe.</span></div><div><b>Envolve informação</b><span>Juntar dados, ler, escrever, organizar ou comunicar. É aí que a IA é forte.</span></div></div><div class="notfor"><b>A IA não resolve sozinha:</b> problema de máquina, falta de pessoas ou decisão que depende de um dado que ninguém registra.</div>')},
+    {l:"1",h:fazer(1,"Escolha até 3 dores da sua rotina","Toque nas tarefas que mais pesam hoje. Não precisa ser a mais importante da empresa, e sim a que mais incomoda você.",p1)},
+    {l:"2",h:fazer(2,"Peça para a IA avaliar suas dores","Cole na mesma conversa. O prompt já leva as dores que você escolheu.",pcard("Diagnóstico das dores",P_diag(),{mark:"diag"})+expect(["A IA faz perguntas rápidas sobre frequência, tempo e impacto.","Você responde em uma mensagem só (pode ser falando, pelo microfone).","Ela monta a tabela com notas e fecha com a linha <b>🎯 DOR RECOMENDADA</b>."]))},
+    {l:"✓",h:cpt("o problema escolhido",pick,l.length?{find:"Na resposta da IA, procure a linha em destaque:",ex:"<b>🎯 DOR RECOMENDADA:</b> "+esc(l[0])+"…",then:"Toque abaixo na mesma dor que a IA recomendou:"}:null),can:!!problem(),why:"Toque na dor que a IA recomendou."}
+  ];
+}
+function M2(){
+  var so=SOL.map(function(s){return '<button class="case'+(S.sol===s.k?" on":"")+'" data-sol="'+s.k+'"><b>'+esc(s.t)+'</b><span>'+esc(s.d)+'</span></button>';}).join("");
+  return [
+    {l:"Saber",h:saber("Deixe a IA te entrevistar",'<p class="lead">Ninguém conhece sua rotina melhor que você, mas é difícil explicar tudo de uma vez. Quando a IA faz as perguntas, ela monta o contexto que precisa, e você não esquece nada importante.</p><div class="vs"><div class="a"><b>Pedido solto</b>"Me ajuda com o relatório de segunda."</div><div class="b"><b>Depois da entrevista</b>A IA sabe como é feito, de onde vêm os dados, onde trava e o que você quer.</div></div>')},
+    {l:"1",h:fazer(1,"Peça o raio-x do problema","Cole na mesma conversa. O prompt já leva o problema que você escolheu.",pcard("Raio-x do problema",P_xray(),{mark:"xray"})+expect(["A IA faz 4 perguntas, <b>uma de cada vez</b>. Responda cada uma antes da próxima.","Depois da 4ª resposta, ela entrega o raio-x: <b>📌 problema em 1 frase</b>, causas, onde a IA ajuda e onde não resolve.","Tudo fecha com a linha <b>✅ SOLUÇÃO RECOMENDADA</b>, que você marca no checkpoint."]))},
+    {l:"✓",h:cpt("a solução recomendada",'<div class="cases">'+so+'</div>',{find:"No fim do raio-x, procure a linha em destaque:",ex:"<b>✅ SOLUÇÃO RECOMENDADA:</b> Checklist ou padrão de rotina",then:"Toque abaixo no mesmo tipo. Se nada encaixar, escolha \"Outro tipo de solução\"."}),can:!!S.sol,why:"Escolha o tipo de solução que a IA recomendou."}
+  ];
+}
+var LETTERS=[{k:"papel",L:"P",n:"Papel",d:"Quem a IA deve ser"},{k:"req",L:"R",n:"Requisição",d:"O que ela deve fazer"},{k:"obj",L:"O",n:"Objetivo",d:"Para que você precisa disso"},{k:"mod",L:"M",n:"Modelo",d:"Como quer receber"},{k:"pan",L:"P",n:"Panorama",d:"O contexto e as restrições"},{k:"tst",L:"T",n:"Testar e transformar",d:"Como a IA deve se revisar"}];
+function letterVal(k){var pr=S.pr;if(k==="mod")return pr.mod.join("; ")||"(escolha ao menos um formato)";if(k==="tst")return pr.tst.join(" ")||"(sem revisão)";if(k==="pan")return "Problema: \""+(problem()||"…")+"\". Use tudo o que eu te contei nesta conversa."+(pr.panx.length?" "+pr.panx.join(" "):"");return pr[k]||"(vazio)";}
+function M3(){
+  prDefaults();var pr=S.pr;var so=sol()||SOL[5];
+  var b='<div class="letters">';
+  LETTERS.forEach(function(l,i){
+    b+='<details class="letter" data-l="'+l.k+'"'+(OPENL[l.k]?" open":"")+'><summary><span class="lt" style="--lc:'+LETTER_COLORS[i]+'">'+l.L+'</span><span class="txt"><b>'+l.n+' <small>· '+l.d+'</small></b><em data-lv="'+l.k+'">'+esc(letterVal(l.k))+'</em></span><span class="edit">Ajustar</span></summary><div class="in">';
+    if(l.k==="papel")b+='<span class="prefix">Atue como…</span><textarea class="field" id="prPapel" data-bind="pr.papel" rows="3">'+esc(pr.papel)+'</textarea>';
+    if(l.k==="req")b+='<textarea class="field" id="prReq" data-bind="pr.req" rows="4">'+esc(pr.req)+'</textarea>';
+    if(l.k==="obj")b+='<textarea class="field" id="prObj" data-bind="pr.obj" rows="2">'+esc(pr.obj)+'</textarea>'+chips(OBJ,pr.obj,"obj",{sug:true});
+    if(l.k==="mod")b+='<p class="hint" style="margin:0">Marque até 3 formatos.</p>'+chips(so.mod.concat(SOL[5].mod.filter(function(x){return so.mod.indexOf(x)<0;})),pr.mod,"mod");
+    if(l.k==="pan")b+='<p class="hint" style="margin:0">O contexto já está na conversa. Marque as restrições que valem para você:</p>'+chips(PANX,pr.panx,"panx");
+    if(l.k==="tst")b+=chips(TST,pr.tst,"tst");
+    b+='</div></details>';
+  });
+  b+='</div>';
+  var fix=S.testRes===TESTRES[2]?'<div style="margin-top:12px">'+pcard("Pedir outra abordagem",P_fix,{compact:true})+'</div>':'';
+  return [
+    {l:"Saber",h:saber("O Método PROMPT: 6 partes de um bom pedido",'<p class="lead">A IA preenche com suposição tudo o que você não diz. O método garante que você diga o essencial.</p><div class="pmlist">'+LETTERS.map(function(l,i){return '<div><span class="lt" style="--lc:'+LETTER_COLORS[i]+'">'+l.L+'</span><span><b>'+l.n+'</b>'+l.d+'</span></div>';}).join("")+'</div><div class="callout"><b>Por que vai ser rápido:</b> o Panorama já está pronto. É tudo o que você contou para a IA nas missões 1 e 2. Por isso o seu PROMPT pode ser curto e certeiro.</div>')},
+    {l:"1",h:fazer(1,"Monte o seu PROMPT","As 6 partes já vêm preenchidas com o que você fez. Toque em uma letra para ajustar.",b)},
+    {l:"2",h:fazer(2,"Rodada 1: construa a ferramenta","Cole na mesma conversa. A IA entrega a ferramenta pronta, mas ainda vazia: só a estrutura.",'<div data-live="main">'+pcard("Seu PROMPT",P_main(),{mark:"ran1"})+'</div>'+check("ran1",S.ran1,"A IA entregou a ferramenta"))},
+    {l:"3",h:fazer(3,"Rodada 2: veja a ferramenta funcionando","",'<div class="why"><b>Por que testar?</b> Na rodada 1 você recebeu a ferramenta vazia. Antes de levar para a equipe, você precisa ver se ela funciona com dados de verdade. Como não podemos usar dados da empresa, a IA simula uma semana típica sua, com a bagunça de sempre, e usa a ferramenta nela. É o <b>T do PROMPT</b>: testar antes de usar.</div><div class="flow3"><div><i>1</i><b>Construir</b><span>Rodada 1: estrutura vazia</span></div><div><i>2</i><b>Testar</b><span>Rodada 2: preenchida com uma semana-exemplo</span></div><div class="ok"><i>✓</i><b>Versão final</b><span>Corrigida e pronta para usar</span></div></div>'+pcard("Teste na prática",P_test(),{mark:"tested"})+expect(["A IA cria os dados de uma semana fictícia da sua área, do jeito bagunçado que chegam.","Usa a ferramenta nesses dados e mostra o resultado preenchido.","Aponta onde falhou e termina com a <b>✅ VERSÃO FINAL</b> corrigida."]))},
+    {l:"✓",h:cpt("ferramenta testada",chips(TESTRES,S.testRes,"testres")+fix,{find:"Leia o resultado do teste e procure no final:",ex:"<b>✅ VERSÃO FINAL</b> (a ferramenta corrigida)",then:"Toque abaixo: a ferramenta funcionou no exemplo da sua semana?"}),can:!!S.testRes,why:"Diga se a ferramenta funcionou no exemplo."}
+  ];
+}
+function M4(){return [
+  {l:"Saber",h:saber("O que importa é o conteúdo",'<p class="lead">Um arquivo bonito com conteúdo raso não serve para nada. O valor está no que a IA construiu com você: o problema bem entendido, a ferramenta testada e o prompt que você reutiliza toda semana. Agora a IA organiza isso em um projeto.</p><div class="kit"><div><b>Projeto</b><span>Problema, solução, ganhos, indicadores e plano de 30 dias</span></div><div><b>Prompt-mestre</b><span>Para repetir a tarefa em 2 minutos, toda semana</span></div><div><b>Pitch</b><span>1 minuto para vender a ideia ao seu gestor</span></div></div>')},
+  {l:"1",h:fazer(1,"Peça o projeto de implementação","Cole na mesma conversa. A resposta é longa: se parar no meio, digite \"continue\".",pcard("Projeto de implementação",P_project(),{mark:"built"})+expect(["A IA monta o projeto com 9 títulos: nome, problema, solução, ferramenta, prompt-mestre, ganhos, indicadores, riscos e plano de 30 dias.","O <b>prompt-mestre</b> é o que você vai reutilizar: onde estiver em MAIÚSCULAS, é o que você cola a cada semana.","Fecha com <b>🚀 PRIMEIRO PASSO AMANHÃ</b>."]))},
+  {l:"2",h:fazer(2,"Peça o pitch de 1 minuto","Use para vender a ideia ao seu gestor amanhã.",'<div data-live="pitch">'+pcard("Pitch de 1 minuto",P_pitch(),{mark:"pitch",compact:true})+'</div><details class="li" style="margin-top:12px"><summary><span class="ic">PC</span><span><b>Depois, no computador</b><span>Se quiser o projeto em arquivo</span></span></summary><div style="padding:0 14px 14px;font-size:14px;line-height:1.5">Copie a resposta da IA para um Word e ajuste a formatação. Se tiver Copilot no PowerPoint, use \"Criar apresentação a partir de arquivo\" com esse Word. Comece pelo conteúdo; o arquivo é acabamento.</div></details>')},
+  {l:"✓",h:cpt("projeto pronto",check("built",S.built,"A IA entregou o projeto")+'<label class="lbl" for="pNome">Nome do projeto (item 1 da resposta)</label><input class="field" id="pNome" data-bind="proj.nome" placeholder="Copie o nome que a IA deu ao projeto" value="'+esc(S.proj.nome)+'"><label class="lbl">Ganho estimado (item 6 da resposta)</label>'+chips(GANHO,S.proj.ganho,"ganho"),{find:"Na resposta da IA, procure os itens:",ex:"<b>1. NOME DO PROJETO</b> e <b>6. GANHOS</b>",then:"Copie o nome e escolha o ganho mais próximo. Eles vão para o seu cartão do projeto."}),can:!!S.built,why:"Marque quando a IA entregar o projeto (passo 1)."}
+];}
+function cardImgBlock(){return '<p class="hint">Toque e segure na imagem para salvar. Ela e o pitch da IA são o que você leva ao seu gestor.</p><div class="cardimg"><img id="cardImg" alt="Cartão do Projeto IA" src=""></div><div class="nav"><button class="btn primary" data-sharecard="1">Compartilhar cartão</button>'+(FACILITADOR_WA?'<a class="btn dark" href="https://wa.me/'+FACILITADOR_WA+'?text='+encodeURIComponent(cardText())+'" target="_blank" rel="noopener">Enviar ao facilitador</a>':'')+'</div>';}
+function cardText(){var p=S.proj;return "PROJETO IA: "+(p.nome||problem())+"\nÁrea: "+([S.area,S.cargo].filter(Boolean).join(" · ")||"-")+"\nProblema: "+(problem()||"-")+"\nSolução: "+((sol()||{}).t||"-")+"\nFerramenta: "+(p.feita||"-")+"\nTeste: "+(S.testRes||"-")+"\nGanho estimado: "+(p.ganho||"-")+"\nPrimeiro teste real: "+([p.quando,p.quem].filter(Boolean).join(" · ")||"-")+"\nIA usada: "+tool().name;}
+function M5(){var p=S.proj;var f=BUILD[S.build]||BUILD.excel;
+  var tabs='<div class="tabs" role="tablist">'+Object.keys(BUILD).map(function(k){return '<button class="tab'+((S.build||"excel")===k?" on":"")+'" role="tab" data-build="'+k+'">'+BUILD[k].t.split(" (")[0]+'</button>';}).join("")+'</div><div class="fmt"><p class="uses"><b>'+esc(f.t)+'.</b> Serve para: '+esc(f.uses)+'</p>'+pcard(f.t,(typeof f.p==="function"?f.p():f.p),{mark:"made"})+'<div class="how2"><div class="cp"><b>No Copilot</b>'+f.cp+'</div><div class="gm"><b>No Gemini</b>'+f.gm+'</div><div class="pb"><b>Plano B (funciona sempre)</b>'+esc(f.pb)+'</div></div><p class="hint" style="margin-top:8px">Botões e opções variam conforme a versão do app e a licença da empresa.</p></div>';
+  return [
+  {l:"Saber",h:saber("Agora sim: as ferramentas",'<p class="lead">A maioria das pessoas começa pela ferramenta e recebe um arquivo bonito e raso. Você fez o contrário: primeiro o problema, a solução e o teste. Agora o arquivo sai com conteúdo de verdade.</p><div class="kit"><div><b>Planilha</b><span>Para controlar e acompanhar toda semana</span></div><div><b>Apresentação</b><span>Para levar o projeto ao gestor</span></div><div><b>Imagem</b><span>Para comunicar o novo padrão à equipe</span></div><div><b>Assistente</b><span>Para repetir a tarefa sem colar o prompt de novo</span></div></div><div class="callout"><b>Valide sempre:</b> no nosso teste, a IA errou uma fórmula de meta (tratou \"quanto maior, melhor\" como \"quanto menor, melhor\"). Confira antes de usar.</div>',"1 minuto")},
+  {l:"1",h:fazer(1,"Escolha uma ferramenta e construa","Faça uma agora, na mesma conversa. As outras ficam para depois.",tabs)},
+  {l:"2",h:fazer(2,"Seu compromisso","Isso vai para o seu cartão do projeto.",'<label class="lbl">Ferramenta que você construiu</label>'+chips(Object.keys(BUILD).map(function(k){return BUILD[k].t;}),p.feita,"feita")+'<label class="lbl">Primeiro teste real</label>'+chips(QUANDO,p.quando,"quando")+'<label class="lbl">Com quem</label>'+chips(QUEM,p.quem,"quem")+'<label class="lbl" for="pNome2">Nome do projeto</label><input class="field" id="pNome2" data-bind="proj.nome" placeholder="Copie o nome que a IA deu ao projeto" value="'+esc(p.nome)+'"><div class="callout" style="margin-top:14px"><b>Guarde a conversa:</b> renomeie para \"Projeto IA\" no histórico do '+esc(tool().short)+' e copie o prompt-mestre para as suas notas.</div>')},
+  {l:"✓",h:cpt("seu cartão do projeto",cardImgBlock()),can:true}
+];}
+
+/* ============ CARTÃO EM IMAGEM ============ */
+function wrapLines(ctx,text,maxW){var words=String(text||"").split(/\s+/);var lines=[];var line="";words.forEach(function(w){var t=line?line+" "+w:w;if(ctx.measureText(t).width>maxW&&line){lines.push(line);line=w;}else line=t;});if(line)lines.push(line);return lines;}
+function drawCard(){
+  var W=1080,H=1350,c=document.createElement("canvas");c.width=W;c.height=H;var x=c.getContext("2d");
+  var F="Montserrat, 'Segoe UI', Arial, sans-serif";var B="'IBM Plex Sans', 'Segoe UI', Arial, sans-serif";
+  x.fillStyle="#FFFFFF";x.fillRect(0,0,W,H);x.fillStyle="#0B2D63";x.fillRect(0,0,W,450);
+  x.fillStyle="#5302DD";x.beginPath();x.arc(W-40,40,230,0,Math.PI*2);x.fill();
+  x.fillStyle="#D71920";x.beginPath();x.moveTo(W,0);x.lineTo(W,170);x.lineTo(W-170,0);x.closePath();x.fill();
+  x.fillStyle="#B9A2FF";x.font="800 30px "+F;x.fillText("PROJETO IA · LIDERANÇAS YAZAKI",72,100);
+  x.fillStyle="#FFFFFF";x.font="800 62px "+F;var tl=wrapLines(x,S.proj.nome||problem()||"Meu projeto",W-170).slice(0,3);tl.forEach(function(l,i){x.fillText(l,72,190+i*72);});
+  x.font="500 30px "+B;x.fillStyle="rgba(255,255,255,.82)";x.fillText([S.area,S.cargo].filter(Boolean).join(" · ")||"Liderança",72,190+tl.length*72+22);
+  var y=520;
+  function field(label,val,maxLines){x.fillStyle="#5302DD";x.font="800 24px "+F;x.fillText(label.toUpperCase(),72,y);y+=42;x.fillStyle="#1D2433";x.font="500 34px "+B;var all=wrapLines(x,val||"a definir",W-144);all.slice(0,maxLines).forEach(function(l,i){x.fillText(l+(i===maxLines-1&&all.length>maxLines?"…":""),72,y);y+=44;});y+=26;}
+  field("Problema",problem(),3);field("Solução com IA",(sol()||{}).t||"",1);
+  var p=S.proj;
+  var rows=[[["Ferramenta construída",(p.feita||"").split(" (")[0]],["Teste na prática",S.testRes]],[["Ganho estimado",p.ganho],["Primeiro teste real",[p.quando,p.quem].filter(Boolean).join(" · ")]]];
+  var gy=Math.max(y+10,860);x.strokeStyle="#E2E5EE";x.lineWidth=2;
+  rows.forEach(function(r){x.beginPath();x.moveTo(72,gy-38);x.lineTo(W-72,gy-38);x.stroke();
+    r.forEach(function(cl,i){var cx=72+i*((W-144)/2),cw=(W-144)/2-30;x.fillStyle="#5302DD";x.font="800 22px "+F;x.fillText(cl[0].toUpperCase(),cx,gy);x.fillStyle="#0B2D63";x.font="800 32px "+F;wrapLines(x,cl[1]||"a definir",cw).slice(0,2).forEach(function(l,k){x.fillText(l,cx,gy+48+k*38);});});
+    gy+=150;});
+  x.fillStyle="#F0ECFD";x.fillRect(0,H-90,W,90);x.fillStyle="#0B2D63";x.font="700 22px "+F;x.fillText("IA na Prática · "+tool().name+" · "+doneCount()+" de 6 missões",72,H-36);x.fillStyle="#5302DD";x.textAlign="right";x.fillText("Método PROMPT",W-72,H-36);x.textAlign="left";
+  return c;
+}
+function refreshCard(){var img=document.getElementById("cardImg");if(!img)return;var go=function(){try{img.src=drawCard().toDataURL("image/png");}catch(e){}};try{document.fonts&&document.fonts.ready?document.fonts.ready.then(go):go();}catch(e){go();}}
+function shareCard(){
+  drawCard().toBlob(function(b){
+    if(!b){toast("Toque e segure na imagem para salvar");return;}
+    var file;try{file=new File([b],"projeto-ia.png",{type:"image/png"});}catch(e){}
+    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:"Meu Projeto IA",text:cardText()}).catch(function(){});}
+    else{try{var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="projeto-ia.png";document.body.appendChild(a);a.click();a.remove();toast("Imagem baixada");}catch(e){toast("Toque e segure na imagem para salvar");}}
+  },"image/png");
+}
+
+/* ============ RENDER ============ */
+var app=document.getElementById("app");var bbar=document.getElementById("bbar");var sheet=document.getElementById("sheet");
+var cur="home";var MV=[M0,M1,M2,M3,M4,M5];var PIECES=[];
+function route(){var h=(location.hash||"").replace("#","");if(/^m[0-5]$/.test(h))cur=+h.slice(1);else if(h==="kit")cur="kit";else cur="home";render();window.scrollTo(0,0);}
+function go(x){location.hash=x==="home"?"inicio":(x==="kit"?"kit":"m"+x);}
+function doneCount(){var n=0;for(var i=0;i<6;i++)if(S.done[i])n++;return n;}
+function hereIdx(){for(var i=0;i<6;i++)if(!S.done[i])return i;return 5;}
+function header(){
+  document.getElementById("dots").innerHTML=MISSIONS.map(function(m){return '<button class="dot'+(S.done[m.n]?" done":"")+(cur===m.n?" cur":"")+'" data-go="'+m.n+'" aria-label="Missão '+m.n+'">'+m.n+'</button>';}).join("");
+  document.getElementById("barFill").style.width=(doneCount()/6*100)+"%";
+}
+function vHome(){
+  var here=hereIdx();var total=MISSIONS.reduce(function(a,m){return a+m.min;},0);
+  var h='<section class="hero"><span class="eyebrow">Laboratório · '+total+' min · no celular</span><h1>Do problema real ao seu <em>projeto com IA</em></h1><p>Uma conversa com a IA, do começo ao fim. Este site te guia etapa por etapa: diz o que fazer e entrega o prompt certo. A IA faz o trabalho pesado com você. No final, você sai com uma ferramenta testada e um projeto pronto para começar amanhã.</p><div class="meta-row"><span class="pill navy">Gerentes, coordenadores e supervisores</span><span class="pill red">Método PROMPT</span></div></section>';
+  h+='<div class="how"><div><b>1 conversa</b><span>Aberta na Missão 0 e usada até o fim.</span></div><div><b>Prompt pronto</b><span>Copie aqui, cole na IA, responda.</span></div><div><b>Travou?</b><span>Botão de ajuda em toda tela.</span></div></div>';
+  h+='<div class="sec-title"><h2>Roteiro</h2><span>'+doneCount()+' de 6 concluídas</span></div><ol class="route">';
+  MISSIONS.forEach(function(m){var st=S.done[m.n]?'<span class="state done">Feita ✓</span>':(m.n===here?'<span class="state here">Estamos aqui</span>':'<span class="state">&nbsp;</span>');
+    h+='<li><button class="step" data-go="'+m.n+'"><span class="num" style="--mc:'+m.c+'">'+m.n+'</span><span style="min-width:0"><h3>'+esc(m.t)+'</h3><p>'+esc(m.d)+'</p><span class="tags">'+m.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join("")+'</span></span><span><span class="min">'+m.min+'′</span>'+st+'</span></button></li>';});
+  h+='</ol><div class="cta"><button class="btn primary block" data-go="'+here+'">'+(doneCount()?'Continuar na Missão '+here:'Começar pela Missão 0')+' →</button><button class="btn ghost block" data-go="kit">Biblioteca de prompts para levar</button></div>';
+  h+='<p class="foot">Seu progresso fica salvo neste aparelho. · <button class="chip" data-reset="1" style="padding:5px 10px;font-size:12px">Recomeçar do zero</button></p>';
+  return h;
+}
+function vKit(){
+  var h='<section class="hero"><span class="eyebrow">Para levar</span><h1>Biblioteca de <em>prompts</em> da liderança</h1><p>Oito prompts prontos para a rotina de quem lidera. Troque o que está entre colchetes e use amanhã.</p></section><div class="lib" style="margin-top:14px">';
+  LIB.forEach(function(l){h+='<details class="li"><summary><span class="ic">'+l.i+'</span><span><b>'+esc(l.t)+'</b><span>'+esc(l.d)+'</span></span></summary>'+pcard(l.t,l.p,{lib:true})+'</details>';});
+  return h+'</div><div class="cta"><button class="btn ghost block" data-go="home">← Voltar ao roteiro</button></div>';
+}
+function vMission(n){
+  var m=MISSIONS[n];PIECES=MV[n]();var si=Math.min(S.sub[n]||0,PIECES.length-1);S.sub[n]=si;S.seen[n]=Math.max(S.seen[n]||0,si);
+  var h='<section class="mhead" style="--mc:'+m.c+'" data-n="'+m.n+'"><span class="eyebrow">Missão '+m.n+' de 5 · '+m.min+' min</span><h1>'+esc(m.t)+'</h1><p>'+esc(m.d)+'</p><div class="meta-row"><button class="pill timer" data-timer="'+m.min+'">⏱ '+m.min+':00 · iniciar</button></div></section>';
+  h+='<div class="steps">'+PIECES.map(function(p,i){return '<button class="sp'+(i===si?" cur":(i<=S.seen[n]?" seen":""))+'" data-sub="'+i+'">'+(p.l==="Saber"?"Saber":(p.l==="✓"?"✓ Check":"Passo "+p.l))+'</button>';}).join("")+'</div>';
+  return h+'<div class="piece">'+PIECES[si].h+'</div>';
+}
+function renderBar(){
+  if(typeof cur!=="number"){bbar.hidden=true;return;}
+  bbar.hidden=false;var n=cur,si=S.sub[n]||0,last=si===PIECES.length-1;var p=PIECES[si];
+  var next=last?(n<5?"Concluir · Missão "+(n+1)+" →":"Concluir laboratório ✓"):(PIECES[si+1].l==="✓"?"Checkpoint →":"Passo "+PIECES[si+1].l+" →");
+  bbar.innerHTML='<div class="in"><button class="btn ghost back" data-nav="-1" aria-label="Voltar">←</button><button class="btn help" data-help="1">Travou?</button><button class="btn primary next'+(last&&p.can===false?" wait":"")+'" data-nav="1">'+next+'</button></div>';
+}
+function render(){
+  PC={};app.innerHTML=cur==="home"?vHome():cur==="kit"?vKit():vMission(cur);
+  header();renderBar();save();
+  if(cur===5&&(S.sub[5]||0)===PIECES.length-1)refreshCard();
+}
+function softRender(){var y=window.scrollY;var a=document.activeElement&&document.activeElement.id;render();window.scrollTo(0,y);if(a){var el=document.getElementById(a);if(el&&(el.tagName==="INPUT"||el.tagName==="TEXTAREA")){el.focus({preventScroll:true});try{var l=el.value.length;el.setSelectionRange(l,l);}catch(e){}}}}
+function live(){
+  var q=function(s){return app.querySelector('[data-live="'+s+'"]');};var el;
+  if((el=q("main")))el.innerHTML=pcard("Seu PROMPT",P_main(),{mark:"ran1"});
+  app.querySelectorAll("[data-lv]").forEach(function(x){x.textContent=letterVal(x.dataset.lv);});
+  save();
+}
+function openHelp(){
+  var n=typeof cur==="number"?cur:0;
+  sheet.innerHTML='<div class="card" role="dialog" aria-label="Ajuda"><h3>Travou na Missão '+n+'?</h3><ul>'+(HELP[n]||[]).map(function(t){return '<li><b>'+esc(t[0])+'</b><br>'+esc(t[1])+'</li>';}).join("")+'<li><b>Ainda travado?</b><br>Levante a mão: o facilitador vem até você. Ou faça em dupla com quem está do lado.</li></ul><button class="btn dark block" data-closehelp="1" style="margin-top:14px">Fechar</button></div>';
+  sheet.hidden=false;
+}
+
+/* ============ EVENTOS ============ */
+var timerInt=null,timerEnd=0;
+document.addEventListener("toggle",function(e){var t=e.target;if(t.classList&&t.classList.contains("letter"))OPENL[t.dataset.l]=t.open;},true);
+sheet.addEventListener("click",function(e){if(e.target===sheet)sheet.hidden=true;});
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button,a");if(!b)return;var d=b.dataset;
+  if(b.id==="goHome"){go("home");return;}
+  if(d.go!==undefined){go(d.go==="home"||d.go==="kit"?d.go:+d.go);return;}
+  if(d.help){openHelp();return;}
+  if(d.closehelp){sheet.hidden=true;return;}
+  if(d.nav){var n=cur,si=S.sub[n]||0;
+    if(+d.nav<0){if(si>0){S.sub[n]=si-1;render();window.scrollTo(0,0);}else if(n>0)go(n-1);else go("home");return;}
+    if(si<PIECES.length-1){S.sub[n]=si+1;render();window.scrollTo(0,0);return;}
+    var p=PIECES[si];if(p.can===false){toast(p.why||"Complete o checkpoint");return;}
+    S.done[n]=true;save();if(n<5)go(n+1);else{toast("Laboratório concluído! Agora é testar no real");go("home");}return;}
+  if(d.sub!==undefined){S.sub[cur]=+d.sub;render();window.scrollTo(0,0);return;}
+  if(d.copy){var txt=PC[d.copy];if(txt)copy(txt,d.msg);if(d.mark&&!S[d.mark]){S[d.mark]=true;save();softRender();}return;}
+  if(d.sharecard){shareCard();return;}
+  if(d.area){S.area=d.area;S.pr.papel="";softRender();return;}
+  if(d.cargo){S.cargo=d.cargo;softRender();return;}
+  if(d.tool){S.tool=d.tool;softRender();return;}
+  if(d.flag){S[d.flag]=!S[d.flag];softRender();return;}
+  if(d.pain){if(S.pains.indexOf(d.pain)<0&&S.pains.length>=maxPains()){toast(S.custom.trim()?"Máximo de 3 contando a que você escreveu. Desmarque uma para trocar.":"Máximo de 3. Desmarque uma para trocar.");return;}if(toggle(S.pains,d.pain)){if(S.chosen&&painList().indexOf(S.chosen)<0)S.chosen="";}softRender();return;}
+  if(d.chosen){S.chosen=d.chosen;softRender();return;}
+  if(d.sol){S.sol=d.sol;S.pr.req="";S.pr.mod=[];softRender();return;}
+  if(d.obj!==undefined){S.pr.obj=d.obj;softRender();return;}
+  if(d.mod!==undefined){toggle(S.pr.mod,d.mod,3);softRender();return;}
+  if(d.panx!==undefined){toggle(S.pr.panx,d.panx);softRender();return;}
+  if(d.tst!==undefined){toggle(S.pr.tst,d.tst);softRender();return;}
+  if(d.build){S.build=d.build;softRender();return;}
+  if(d.testres!==undefined){S.testRes=d.testres;softRender();return;}
+  if(d.ganho!==undefined){S.proj.ganho=d.ganho;softRender();return;}
+  if(d.quando!==undefined){S.proj.quando=d.quando;softRender();return;}
+  if(d.quem!==undefined){S.proj.quem=d.quem;softRender();return;}
+  if(d.feita!==undefined){S.proj.feita=d.feita;softRender();return;}
+  if(d.timer){var mins=+d.timer;
+    if(timerInt){clearInterval(timerInt);timerInt=null;b.classList.remove("run");b.textContent="⏱ "+mins+":00 · iniciar";return;}
+    timerEnd=Date.now()+mins*60000;
+    var tick=function(){var left=Math.max(0,timerEnd-Date.now());var mm=Math.floor(left/60000),ss=Math.floor(left%60000/1000);var tb=app.querySelector("[data-timer]");if(tb){tb.classList.toggle("run",!!left);tb.textContent="⏱ "+mm+":"+(ss<10?"0":"")+ss+(left?" · tocar para parar":" · tempo!");}if(!left){clearInterval(timerInt);timerInt=null;try{navigator.vibrate&&navigator.vibrate([200,100,200]);}catch(x){}toast("Tempo da missão encerrado");}};
+    tick();timerInt=setInterval(tick,1000);return;}
+  if(d.reset){if(b.dataset.armed){S=blank();try{localStorage.removeItem(KEY);}catch(x){}go("home");render();toast("Tudo limpo");}else{b.dataset.armed="1";b.textContent="Toque de novo para confirmar";}return;}
+});
+document.addEventListener("input",function(e){
+  var t=e.target;var bind=t.dataset&&t.dataset.bind;if(!bind)return;
+  var path=bind.split(".");var o=S;for(var i=0;i<path.length-1;i++)o=o[path[i]];o[path[path.length-1]]=t.value;
+  if(bind==="custom"){if(S.custom.trim()&&S.pains.length>2){S.pains=S.pains.slice(0,2);toast("A dor escrita conta como uma das 3. Mantive as 2 primeiras marcadas.");}if(S.chosen&&painList().indexOf(S.chosen)<0)S.chosen="";save();clearTimeout(window.__ct);window.__ct=setTimeout(softRender,800);return;}
+  live();
+});
+window.addEventListener("hashchange",route);
+route();
+})();
+</script>
+
+</body>
+</html>
