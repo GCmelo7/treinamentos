@@ -8,6 +8,7 @@ const PROFILE={
   rotator:['IA aplicada ao trabalho real','Inovação e design de negócios','Estratégia comercial e crescimento'],
   linkedin:'https://www.linkedin.com/in/gabriel-cmelo/',
   instagram:'https://www.instagram.com/gabrielcmelo',
+  whatsapp:'https://wa.me/5581999141429',
   quote:'Tecnologia só gera valor quando melhora o trabalho real.'
 };
 const I={
@@ -29,6 +30,7 @@ const I={
   clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   pin:'<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
   users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>',
+  wa:'<path d="M20.5 11.7a8.6 8.6 0 0 1-12.7 7.5L3.5 20.5l1.3-4.2A8.6 8.6 0 1 1 20.5 11.7z"/><path d="M9 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4 0 .5.4l.7 1.6c.1.2 0 .4-.1.6l-.5.6c.6 1.2 1.6 2.2 2.8 2.8l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .6-.5.8-.6.3-1.5.4-2.6 0-1.9-.7-3.6-2.3-4.4-4.3-.4-1.1-.3-2-.4-2.6z" fill="currentColor" stroke="none"/>',
   dl:'<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>'
 };
 const ic=(n)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${I[n]||I.arrow}</svg>`;
@@ -109,7 +111,7 @@ if(T.kind==='hub'){
     html+=`<section class="panel ${i===0?'on':''}" data-panel="${i}">${body}</section>`;
   });
 }
-html+=`<footer>${esc(PROFILE.name)} · ${new Date().getFullYear()}${T.kind!=='hub'?` · <a href="${T.hubUrl||'../'}">outras trilhas</a>`:''}</footer>`;
+html+=`<footer><a class="wa" href="${PROFILE.whatsapp}" target="_blank" rel="noopener">${ic('wa')}Falar comigo no WhatsApp</a><div>${esc(PROFILE.name)} · ${new Date().getFullYear()}${T.kind!=='hub'?` · <a href="${T.hubUrl||'../'}">outras trilhas</a>`:''}</div></footer>`;
 app.innerHTML=html;
 document.body.insertAdjacentHTML('beforeend',`<div class="sheet-bg" id="sbg"></div><div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="grab"></div><h3 id="sT"></h3><p id="sU"></p><div class="qrbox"><img id="sQ" alt="QR Code"></div><div class="row"><button class="btn sec" id="sCopy">${ic('copy')}Copiar</button><a class="btn pri" id="sOpen" target="_blank" rel="noopener">${ic('arrow')}Abrir</a></div></div><div class="toast" id="toast">${ic('check')}<span></span></div>`);
 
