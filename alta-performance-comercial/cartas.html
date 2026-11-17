@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cartas das práticas | Alta Performance Comercial</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--navy:#0E2A5C;--blue:#1565C0;--turq:#12A3A8;--green:#1DBF8A;--ice:#EAF4FB;--mint:#E8F8F3;--grey:#5A6B85;--line:#D6E1EC;--soft:#F6F9FC;--warn:#FFF6E5;--red:#D64545;--grad:linear-gradient(90deg,#0E2A5C 0%,#12A3A8 60%,#1DBF8A 100%);--f:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);color:var(--navy);background:var(--soft);line-height:1.5;-webkit-font-smoothing:antialiased}
+.topline{height:4px;background:linear-gradient(90deg,var(--blue) 0 66%,#C9D3DE 66% 100%)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:12px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5}
+header b{font-size:12px;letter-spacing:.06em}header span{font-size:11px;color:var(--grey);display:block;font-weight:600}
+header button{margin-left:auto}
+main{max-width:640px;margin:0 auto;padding:18px 16px 60px}
+h1{font-size:22px;line-height:1.2;margin:6px 0 4px}
+h2{font-size:17px;margin:20px 0 8px}
+.k{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--turq);text-transform:uppercase}
+p.lead{color:var(--grey);margin:0 0 14px;font-size:14px}
+.grid{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;font:inherit;color:inherit}
+.opt:hover,.opt:focus{border-color:var(--turq);outline:none}
+.opt .ic{flex:none;width:42px;height:42px;border-radius:12px;background:var(--ice);display:grid;place-items:center;font-size:20px}
+.opt b{display:block;font-size:15px}.opt small{color:var(--grey);font-size:12.5px}
+.btn{border:0;background:var(--navy);color:#fff;font:inherit;font-weight:800;padding:12px 16px;border-radius:12px;cursor:pointer;font-size:14px}
+.btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
+.btn.sm{padding:8px 12px;font-size:12.5px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 6px 24px rgba(14,42,92,.06)}
+.card.res{border:2px solid var(--red);background:#FFFBFB}
+.card.pub{border-left:5px solid var(--turq)}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:999px;background:var(--ice);color:var(--blue);text-transform:uppercase}
+.tag.r{background:#FDECEC;color:var(--red)}
+.card h3{margin:8px 0 6px;font-size:16px}
+.card ul{margin:6px 0;padding-left:18px}.card li{margin:4px 0}
+.quote{background:var(--mint);border-radius:12px;padding:10px 12px;font-style:italic}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+td,th{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}th{font-size:11px;color:var(--grey);text-transform:uppercase;letter-spacing:.04em}
+.gate{background:var(--warn);border:1px solid #F3D28B;border-radius:14px;padding:14px;margin:14px 0;font-size:14px}
+.crumbs{font-size:12px;color:var(--grey);margin-bottom:6px}.crumbs a{color:var(--blue);cursor:pointer;text-decoration:underline}
+.rub{display:grid;gap:10px}
+.rub .row{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.rub .row b{font-size:13.5px;display:block}.rub .row small{color:var(--grey);font-size:12px;display:block;margin-bottom:6px}
+.sc{display:flex;align-items:center;gap:6px;margin:4px 0;font-size:12px}
+.sc span{width:52px;color:var(--grey);font-weight:700}
+.sc button{width:38px;height:34px;border-radius:9px;border:1.5px solid var(--line);background:#fff;font:inherit;font-weight:800;cursor:pointer;color:var(--navy)}
+.sc button.on{background:var(--turq);border-color:var(--turq);color:#fff}
+.tot{display:flex;gap:10px;margin-top:10px}
+.tot div{flex:1;background:var(--navy);color:#fff;border-radius:12px;padding:10px;text-align:center}
+.tot small{display:block;font-size:11px;opacity:.8}.tot b{font-size:22px}
+label.f{display:block;font-size:12.5px;font-weight:700;margin:10px 0 4px}
+input.t,select.t,textarea.t{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px;font:inherit;font-size:14px;background:#fff;color:var(--navy)}
+.hid{filter:blur(9px);user-select:none;pointer-events:none}
+.foot{font-size:11.5px;color:var(--grey);margin-top:24px;text-align:center}
+.ok{color:var(--green);font-weight:800;font-size:13px}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header><div><b>ESCOLA DE NEGÓCIOS</b><span>iEL Pernambuco • Cartas das práticas</span></div>
+<button class="btn ghost sm" id="hideBtn" onclick="toggleHide()">Esconder carta</button></header>
+<main id="app"></main>
+<script>
+/* Todos os dados são FICTÍCIOS e servem apenas à aprendizagem. Cada pessoa abre SOMENTE a carta do próprio papel. */
+const RUB={
+ lab:['Diagnóstico do problema e consequências|Perguntou o que acontece hoje e o que isso custa (SPIN)',
+      'Objetivo, plano e desafio (GPCT)|Descobriu o que o cliente quer, o que já tentou e o prazo',
+      'Viabilidade e decisor (BANT)|Descobriu quem decide e se há orçamento ou processo de aprovação',
+      'Confirmação e próximo passo|Resumiu o que ouviu e propôs um próximo passo sem fechar'],
+ clinica:['Acolheu sem confronto|Recebeu a objeção sem rebater nem se defender',
+      'Perguntou para esclarecer a causa|Investigou o que está por trás da frase',
+      'Respondeu com evidência ou limite pertinente|Trouxe fato, condição ou limite verdadeiro',
+      'Confirmou entendimento ou respeitou a recusa|Checou se resolveu ou aceitou o “não”'],
+ tribunal:['Preparou BATNA e alternativas concretas|Sabia o que faria sem acordo',
+      'Respeitou alçada e contribuição|Não concedeu além do autorizado nem abaixo da BATNA',
+      'Explorou interesses e ofereceu opções|Perguntou prioridades e trocou valor por valor',
+      'Chegou a acordo viável ou não acordo justificado|Fechou bem ou saiu com respeito e motivo'],
+ recuperacao:['Reconhecer|Assumiu o compromisso sem desculpa; separou fato de hipótese',
+      'Investigar|Perguntou impacto e urgência sem induzir',
+      'Encaminhar|Definiu passo realista, dentro da alçada',
+      'Comprometer|Combinou retorno com responsável e prazo verificável']
+};
+const LAB={
+ comercio:{nome:'Comércio | Polo de confecções',
+  vend:'<p>Você vende a solução da <b>TurnoCerto</b> (fictícia) para organizar pedidos de uma loja atacadista de confecções que recebe pedidos de lojistas por WhatsApp e trabalha com grades de tamanhos.</p><p><b>Seu desafio:</b> APENAS abrir e qualificar em 2min30. Sem proposta, sem preço, sem fechamento. Busque 2 ou 3 descobertas: impacto, objetivo/prazo e decisor. O próximo passo pode ser investigar mais. Não invente atributos do produto.</p>',
+  cli:'<p>Você administra a loja. Pedidos chegam por WhatsApp e passam de um turno para o outro. Seu problema declarado: evitar pedidos incompletos e entregas cobradas.</p>',
+  res:['O pico sazonal está próximo: a parte crítica precisa estar organizada em 14 dias.','Um sócio valida contratações acima da sua alçada operacional.','O orçamento inicial ainda não foi formalizado.','A loja já tentou planilhas compartilhadas.'],
+  desf:'Decida se quer receber uma proposta detalhada. NÃO revele teto de preço nem condições do Tribunal.'},
+ servicos:{nome:'Serviços | Continuidade e confiança',
+  vend:'<p>Você apresenta um serviço de manutenção e atendimento recorrente para uma pequena empresa com falhas de resposta entre equipes.</p><p><b>Seu desafio:</b> APENAS abrir e qualificar em 2min30. Sem proposta, sem preço, sem fechamento. Busque 2 ou 3 descobertas: impacto, objetivo/prazo e decisor. Não invente atributos do serviço.</p>',
+  cli:'<p>Você é responsável pelas operações e reclama de chamados repetidos. Busca previsibilidade e confiança depois de uma experiência frustrante com o fornecedor anterior.</p>',
+  res:['Houve demora em atendimentos críticos.','Seu objetivo é ter prazos claros e saber quem responde.','A gerência aprova o investimento anual; o orçamento ainda não foi definido.','Hoje o atendimento é só reativo.'],
+  desf:'Você aceita uma conversa técnica se receber proposta com prazos de atendimento e limites claros, não promessa de “zero falha”.'},
+ industria:{nome:'Indústria | Operação e aprovação',
+  vend:'<p>Você representa um fornecedor de sistema de acompanhamento de ordens entre produção, expedição e comercial.</p><p><b>Seu desafio:</b> APENAS abrir e qualificar em 2min30. Sem proposta, sem preço, sem fechamento. Busque 2 ou 3 descobertas: impacto, objetivo/prazo e decisor. Não invente atributos do produto.</p>',
+  cli:'<p>Você é coordenadora de produção. Pedidos incompletos geram retrabalho e conflito entre áreas, principalmente na troca de turno.</p>',
+  res:['Compras participa da decisão; qualidade valida requisitos técnicos; diretoria aprova o orçamento.','Há um piloto previsto antes da alta demanda.','Segurança de integração é determinante.'],
+  desf:'Você não pode prometer contratação. Antes precisa de uma demonstração com critérios de aceitação escritos.'}
+};
+const OBJ=[
+ ['Sem urgência','“Agora não é prioridade.”','Você ainda não vê o projeto como urgente diante de outras despesas e tem medo de interromper a operação.','O que precisaria acontecer para isso virar prioridade?','Não pressionar; propor estudo de impacto e o momento adequado, se houver abertura.'],
+ ['Falar com o sócio','“Preciso falar com meu sócio.”','O sócio aprova gastos acima do limite e quer entender cronograma de implantação e risco de parada.','Quais critérios ele precisa analisar para decidir com segurança?','Preparar comparação e agendar avaliação com o decisor, se o cliente concordar.'],
+ ['Não confio','“Já contratei isso antes e não deu certo.”','O fornecedor anterior prometeu prazo impossível e não deu suporte.','O que faltou na experiência anterior para você confiar numa nova proposta?','Apresentar escopo, marcos verificáveis, limites e contato responsável.'],
+ ['É tudo igual','“Esses sistemas fazem tudo a mesma coisa.”','Você compara só a lista de funções e não considera implantação, suporte e treinamento.','Na comparação, o que pesa mais: tempo até funcionar ou recursos da ferramenta?','Comparar condições reais e provas, sem desqualificar concorrente.'],
+ ['Faz desconto','“Consegue tirar 15%?”','Você está ancorando. Preço importa, mas a parte crítica funcionar em 14 dias e suporte confiável são prioridades.','Além do preço, o que precisa estar garantido para a decisão fazer sentido?','Investigar e propor condições; desconto só se autorizado e econômico.']
+];
+const ACT={
+ lab:{t:'Laboratório de qualificação',d:'M2 • trios • 3 rodadas de 8 min',ic:'🔎'},
+ clinica:{t:'Clínica de objeções',d:'M2 • trios • 2 ciclos de 10 min',ic:'🧩'},
+ tribunal:{t:'Tribunal do Desconto',d:'M2 • vendedor, comprador e juiz',ic:'⚖️'},
+ recuperacao:{t:'Recuperação de confiança',d:'M3 • gestora, fornecedor e observador',ic:'🤝'}
+};
+const app=document.getElementById('app');
+let hidden=false;
+function toggleHide(){hidden=!hidden;document.querySelectorAll('.secret').forEach(e=>e.classList.toggle('hid',hidden));document.getElementById('hideBtn').textContent=hidden?'Mostrar carta':'Esconder carta'}
+function ls(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||'null');localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function go(h){location.hash=h}
+function crumbs(parts){return '<div class="crumbs">'+parts.map(p=>p[1]?'<a onclick="go(\''+p[1]+'\')">'+p[0]+'</a>':p[0]).join(' › ')+'</div>'}
+function opt(ic,t,d,h){return '<button class="opt" onclick="go(\''+h+'\')"><span class="ic">'+ic+'</span><span><b>'+t+'</b><small>'+d+'</small></span></button>'}
+function gate(h,label){return '<div class="gate"><b>Combinado de honra:</b> abra só a carta do <b>seu</b> papel nesta rodada. Não mostre a tela para o colega. Ao trocar de papel, volte e escolha o novo.<br><br><button class="btn" onclick="go(\''+h+'\')">Sou '+label+' — abrir minha carta</button></div>'}
+function rubric(act,id){
+ const key='apc_cartas_'+id;const st=ls(key)||{pre:[],pos:[]};
+ let h='<div class="rub">';
+ RUB[act].forEach((r,i)=>{const [b,s]=r.split('|');h+='<div class="row"><b>'+(i+1)+'. '+b+'</b><small>'+s+'</small>';
+  ['pre','pos'].forEach(m=>{h+='<div class="sc"><span>'+(m=='pre'?'1ª tent.':'2ª tent.')+'</span>';for(let n=0;n<=3;n++)h+='<button class="'+(st[m][i]===n?'on':'')+'" onclick="score(\''+key+'\',\''+m+'\','+i+','+n+',\''+act+'\',\''+id+'\')">'+n+'</button>';h+='</div>'});h+='</div>'});
+ const sum=a=>a.reduce((x,y)=>x+(y||0),0);
+ h+='</div><div class="tot"><div><small>1ª tentativa</small><b>'+sum(st.pre)+'/12</b></div><div><small>2ª tentativa</small><b>'+sum(st.pos)+'/12</b></div><div><small>Diferença</small><b>'+(sum(st.pos)-sum(st.pre)>=0?'+':'')+(sum(st.pos)-sum(st.pre))+'</b></div></div>';
+ h+='<p style="font-size:12px;color:var(--grey)">Escala: 0 ausente • 1 incompleto • 2 adequado • 3 consistente. Leve a soma 1ª/2ª para o instrutor no debrief. As notas ficam só neste celular.</p>';
+ h+='<label class="f">Feedback em uma frase</label><textarea class="t" rows="2" placeholder="Na 1ª tentativa você ___. Na 2ª, tente ___." oninput="saveFb(\''+key+'\',this.value)">'+(st.fb||'')+'</textarea>';
+ h+='<button class="btn ghost sm" style="margin-top:8px" onclick="if(confirm(\'Zerar as notas desta rodada?\')){localStorage.removeItem(\''+key+'\');render(1)}">Nova rodada (zerar notas)</button>';
+ return h}
+function score(key,m,i,n){const st=ls(key)||{pre:[],pos:[]};st[m][i]=n;ls(key,st);render(1)}
+function saveFb(key,v){const st=ls(key)||{pre:[],pos:[]};st.fb=v;ls(key,st)}
+function home(){
+ let h='<span class="k">Práticas • cartas no celular</span><h1>Escolha a atividade</h1><p class="lead">Seu instrutor diz qual atividade abrir. Todos os casos, nomes e números são fictícios.</p><div class="grid">';
+ for(const k in ACT)h+=opt(ACT[k].ic,ACT[k].t,ACT[k].d,k);
+ return h+'</div>'}
+function vLab(p){
+ const [_,setor,papel,ok]=p;
+ if(!setor){let h=crumbs([['Início','#'],['Laboratório']])+'<span class="k">Laboratório de qualificação</span><h1>Qual setor o seu trio recebeu?</h1><p class="lead">Cada trio usa um setor. Os três papéis do trio escolhem o mesmo.</p><div class="grid">';
+  h+=opt('🧵','Comércio','Polo de confecções','lab/comercio')+opt('🛠️','Serviços','Continuidade e confiança','lab/servicos')+opt('🏭','Indústria','Operação e aprovação','lab/industria');return h+'</div>'}
+ const S=LAB[setor];if(!S)return home();
+ const base=crumbs([['Início','#'],['Laboratório','#lab'],[S.nome]]);
+ if(!papel){return base+'<h1>Qual é o seu papel nesta rodada?</h1><div class="grid">'+opt('💼','Vendedor','Abre e qualifica em 2min30','lab/'+setor+'/vendedor')+opt('🧑‍💼','Cliente','Tem informações reservadas','lab/'+setor+'/cliente')+opt('📋','Observador','Dá nota e feedback','lab/'+setor+'/observador')+'</div>'}
+ const lbl={vendedor:'VENDEDOR',cliente:'CLIENTE',observador:'OBSERVADOR'}[papel];
+ if(ok!=='ok')return base+gate('lab/'+setor+'/'+papel+'/ok',lbl.toLowerCase());
+ let h=base+'<span class="tag">'+lbl+'</span><h1>'+S.nome+'</h1>';
+ if(papel==='vendedor')h+='<div class="card pub secret"><h3>Sua carta</h3>'+S.vend+'</div><div class="card"><h3>Lembrete das etapas</h3><ul><li>Abrir: quem é, por que está ali, pedir licença para perguntar</li><li>Problema e impacto (SPIN)</li><li>Objetivo, plano e prazo (GPCT)</li><li>Decisor e orçamento (BANT)</li><li>Confirmar e combinar próximo passo</li></ul></div>';
+ if(papel==='cliente')h+='<div class="card pub secret"><h3>Sua situação</h3>'+S.cli+'</div><div class="card res secret"><span class="tag r">Reservado</span><h3>Revele SÓ se a pergunta for pertinente</h3><ul>'+S.res.map(x=>'<li>'+x+'</li>').join('')+'</ul><p><b>Desfecho:</b> '+S.desf+'</p></div><div class="card"><b>Regra:</b> nas duas tentativas você mantém os mesmos fatos. Não invente objeções novas.</div>';
+ if(papel==='observador')h+='<div class="card"><h3>Como observar</h3><ul><li>Não ajude durante a tentativa.</li><li>Anote uma frase dita pelo vendedor para usar no feedback.</li><li>Feedback (1 min): um ponto forte + uma correção testável.</li></ul></div>'+rubric('lab','lab_'+setor);
+ return h}
+function vClin(p){
+ const [_,n,papel,ok]=p;const base=crumbs([['Início','#'],['Clínica','#clinica']]);
+ if(!n){let h=base+'<span class="k">Clínica de objeções</span><h1>Qual carta o seu trio recebeu?</h1><div class="grid">';OBJ.forEach((o,i)=>h+=opt(i+1,'Carta '+(i+1)+' — '+o[0],o[1],'clinica/'+(i+1)));return h+'</div>'}
+ const o=OBJ[+n-1];if(!o)return home();
+ if(!papel)return base+'<h1>Carta '+n+' — '+o[0]+'</h1><div class="grid">'+opt('💼','Vendedor','Responde à objeção','clinica/'+n+'/vendedor')+opt('🧑‍💼','Cliente','Tem a preocupação oculta','clinica/'+n+'/cliente')+opt('📋','Observador','Dá nota e feedback','clinica/'+n+'/observador')+'</div>';
+ const lbl={vendedor:'VENDEDOR',cliente:'CLIENTE',observador:'OBSERVADOR'}[papel];
+ if(ok!=='ok')return base+gate('clinica/'+n+'/'+papel+'/ok',lbl.toLowerCase());
+ let h=base+'<span class="tag">'+lbl+'</span><h1>Carta '+n+' — '+o[0]+'</h1>';
+ if(papel==='vendedor')h+='<div class="card pub"><h3>O cliente vai dizer</h3><div class="quote">'+o[1]+'</div><p>Você vende o pacote da TurnoCerto (sistema de organização de pedidos + implantação + treinamento + suporte) para a Loja Fio & Grade. Antes de responder, descubra o que está por trás da frase.</p><p><b>Protocolo:</b> acolher → perguntar a causa → responder com fato ou limite → confirmar.</p></div>';
+ if(papel==='cliente')h+='<div class="card pub secret"><h3>Sua fala</h3><div class="quote">'+o[1]+'</div></div><div class="card res secret"><span class="tag r">Reservado</span><h3>O que está por trás</h3><p>'+o[2]+'</p><p>Revele só se o vendedor fizer uma pergunta pertinente. Se não perguntar, mantenha a frase.</p></div>';
+ if(papel==='observador')h+='<div class="card secret"><h3>Para você (não conte ao vendedor)</h3><p><b>Pergunta que abriria a objeção:</b> '+o[3]+'</p><p><b>Resposta responsável:</b> '+o[4]+'</p></div>'+rubric('clinica','clin_'+n);
+ return h}
+function vTrib(p){
+ const [_,papel,ok]=p;const base=crumbs([['Início','#'],['Tribunal','#tribunal']]);
+ if(!papel)return base+'<span class="k">Tribunal do Desconto</span><h1>Qual é o seu papel?</h1><p class="lead">A Loja Fio & Grade pede 15% de desconto sobre o pacote de R$ 12.000 da TurnoCerto. Valores fictícios.</p><div class="grid">'+opt('💼','Vendedor (TurnoCerto)','Protege a margem e cria valor','tribunal/vendedor')+opt('🧑‍💼','Comprador (gestora da loja)','Quer resolver o pico sem estourar o limite','tribunal/comprador')+opt('⚖️','Juiz','Registra os acordos e dá nota','tribunal/juiz')+'</div>';
+ const lbl={vendedor:'VENDEDOR',comprador:'COMPRADOR',juiz:'JUIZ'}[papel];
+ if(ok!=='ok')return base+gate('tribunal/'+papel+'/ok',lbl.toLowerCase());
+ let h=base+'<span class="tag">'+lbl+'</span><h1>Tribunal do Desconto</h1>';
+ if(papel==='vendedor')h+='<div class="card res secret"><span class="tag r">Reservado ao vendedor</span><h3>Sua posição</h3><p>Pacote-base: implantação padrão em 20 dias, 1 treinamento remoto, 30 dias de suporte remoto, pagamento à vista. <b>Preço: R$ 12.000</b>. Custo variável base: <b>R$ 8.400</b>. Contribuição base: R$ 3.600.</p><p><b>Alçada:</b> até 5% de desconto sem aprovação (mínimo R$ 11.400).</p><p><b>Sua BATNA:</b> outra implantação confirmada, na mesma janela da equipe, com contribuição de <b>R$ 2.800</b>.</p><h3>Variáveis e custo extra para você</h3><table><tr><th>Variável</th><th>Opção</th><th>Custo extra</th></tr><tr><td>Implantação</td><td>Padrão 20 dias</td><td>R$ 0</td></tr><tr><td></td><td>Faseada: crítica em 10 dias, total em 25</td><td>+ R$ 180</td></tr><tr><td></td><td>Acelerada: tudo em 12 dias</td><td>+ R$ 800</td></tr><tr><td>Treinamento</td><td>1 sessão remota</td><td>R$ 0</td></tr><tr><td></td><td>2 sessões presenciais (uma por turno)</td><td>+ R$ 240</td></tr><tr><td>Suporte</td><td>30 dias remoto</td><td>R$ 0</td></tr><tr><td></td><td>90 dias remoto</td><td>+ R$ 150</td></tr><tr><td>Pagamento</td><td>À vista</td><td>R$ 0</td></tr><tr><td></td><td>2 parcelas</td><td>+ R$ 60</td></tr><tr><td></td><td>3 parcelas</td><td>+ R$ 210</td></tr></table><p><b>Conta:</b> contribuição = preço − 8.400 − custos extras. Abaixo de R$ 2.800 o acordo é pior que a sua alternativa.</p><p>Você NÃO sabe o limite do comprador nem quanto ele valoriza cada item.</p></div>'+calcV();
+ if(papel==='comprador')h+='<div class="card res secret"><span class="tag r">Reservado ao comprador</span><h3>Sua situação</h3><p>Você administra a loja. Lojistas enviam pedidos por WhatsApp; a troca de turno causa perdas. O pico se aproxima: a parte crítica precisa funcionar em até 14 dias. O sócio participa da aprovação e teme parada e suporte fraco.</p><p><b>Seu limite normal:</b> R$ 11.500 para o pacote básico.</p><p><b>Autorização condicionada do sócio:</b> até <b>R$ 12.300</b> SOMENTE se o pacote tiver, juntos: implantação faseada (crítica em até 10 dias) + treinamento presencial para os DOIS turnos + suporte de 90 dias. Depende de aprovação expressa do sócio.</p><p><b>Sua BATNA:</b> concorrente a R$ 11.000, implantação em 30 dias e 15 dias de suporte. O risco de perder o pico com ele vale para você ≈ R$ 1.650 → custo ajustado ≈ R$ 12.650.</p><h3>Quanto vale cada item para você (percepção)</h3><table><tr><th>Item</th><th>Valor percebido</th></tr><tr><td>Faseada (crítica em 10 dias)</td><td>≈ R$ 1.400</td></tr><tr><td>Acelerada (tudo em 12 dias)</td><td>≈ R$ 1.700</td></tr><tr><td>2 treinos presenciais</td><td>≈ R$ 650</td></tr><tr><td>Suporte 90 dias</td><td>≈ R$ 350</td></tr><tr><td>2 parcelas</td><td>≈ R$ 200</td></tr><tr><td>3 parcelas</td><td>≈ R$ 550</td></tr></table><p>Abra pedindo 15%, mas preço não é seu único interesse. Não revele o teto ampliado sem investigação pertinente.</p></div>';
+ if(papel==='juiz')h+='<div class="card"><h3>Seu trabalho</h3><ul><li>Não leia as cartas das partes.</li><li>Cronometre: rodada 1 (7 min) → feedback (3) → preparação (4) → rodada 2 (8).</li><li>Registre os dois acordos e dê as notas.</li></ul></div>'+regAcordo()+rubric('tribunal','trib');
+ return h}
+function calcV(){return '<div class="card"><h3>Calculadora do vendedor</h3><label class="f">Preço (R$)</label><input class="t" id="cv_p" type="number" value="12000" oninput="cv()"><label class="f">Implantação</label><select class="t" id="cv_i" onchange="cv()"><option value="0">Padrão</option><option value="180">Faseada</option><option value="800">Acelerada</option></select><label class="f">Treinamento</label><select class="t" id="cv_t" onchange="cv()"><option value="0">1 remoto</option><option value="240">2 presenciais</option></select><label class="f">Suporte</label><select class="t" id="cv_s" onchange="cv()"><option value="0">30 dias</option><option value="150">90 dias</option></select><label class="f">Pagamento</label><select class="t" id="cv_g" onchange="cv()"><option value="0">À vista</option><option value="60">2 parcelas</option><option value="210">3 parcelas</option></select><div class="tot"><div><small>Contribuição</small><b id="cv_r">R$ 3.600</b></div></div><p id="cv_m" style="font-size:13px"></p></div>'}
+function cv(){const g=id=>+document.getElementById(id).value||0;const r=g('cv_p')-8400-g('cv_i')-g('cv_t')-g('cv_s')-g('cv_g');document.getElementById('cv_r').textContent='R$ '+r.toLocaleString('pt-BR');const d=g('cv_p')<11400?'<span style="color:var(--red)">Preço abaixo da sua alçada (mín. R$ 11.400): precisa de aprovação.</span> ':'';document.getElementById('cv_m').innerHTML=d+(r>=2800?'<span class="ok">Acima da sua BATNA (R$ 2.800).</span>':'<span style="color:var(--red);font-weight:800">Abaixo da sua BATNA (R$ 2.800).</span>')}
+function regAcordo(){const st=ls('apc_cartas_trib_acordo')||{};let h='<div class="card"><h3>Registro dos acordos</h3>';
+ [1,2].forEach(n=>{h+='<p style="margin:10px 0 0"><b>Rodada '+n+'</b></p>';[['p','Preço (R$)'],['i','Implantação'],['t','Treinamento'],['s','Suporte'],['g','Pagamento'],['d','Decisão / quem aprova']].forEach(([k,l])=>{h+='<label class="f">'+l+'</label><input class="t" value="'+((st[n+k]||'').replace(/"/g,'&quot;'))+'" oninput="regSave(\''+n+k+'\',this.value)">'})});
+ return h+'<p class="ok" id="regok"></p></div>'}
+function regSave(k,v){const st=ls('apc_cartas_trib_acordo')||{};st[k]=v;ls('apc_cartas_trib_acordo',st);const e=document.getElementById('regok');if(e)e.textContent='Salvo neste celular.'}
+function vRec(p){
+ const [_,papel,ok]=p;const base=crumbs([['Início','#'],['Recuperação','#recuperacao']]);
+ if(!papel)return base+'<span class="k">Recuperação de confiança</span><h1>Qual é o seu papel nesta rodada?</h1><p class="lead">Dia 9: a parte crítica deveria funcionar até o dia 10. Um turno ainda não foi treinado, pedidos continuam falhando e a gestora não foi avisada.</p><div class="grid">'+opt('📞','Gestora da loja (cliente)','Liga cobrando','recuperacao/gestora')+opt('💼','Fornecedor (TurnoCerto)','Responde em 2 minutos','recuperacao/fornecedor')+opt('📋','Observador','Dá nota e feedback','recuperacao/observador')+'</div>';
+ const lbl={gestora:'GESTORA',fornecedor:'FORNECEDOR',observador:'OBSERVADOR'}[papel];
+ if(ok!=='ok')return base+gate('recuperacao/'+papel+'/ok',lbl.toLowerCase());
+ let h=base+'<span class="tag">'+lbl+'</span><h1>Recuperação de confiança</h1>';
+ if(papel==='gestora')h+='<div class="card pub secret"><h3>Sua fala inicial</h3><div class="quote">“Contratei justamente para reduzir erros entre turnos. Amanhã é o compromisso e descobri que uma equipe continua sem treinamento. O que vocês vão fazer?”</div></div><div class="card res secret"><span class="tag r">Reservado</span><ul><li>Você teme perdas no pico e já sofreu com implantação atrasada.</li><li>Aceita discutir correção, mas precisa de plano confiável, uma alternativa provisória para trabalhar e uma atualização para levar ao sócio.</li><li>Só revele a preocupação com o pico e com o sócio se o fornecedor investigar bem.</li></ul></div><div class="card">Mantenha os mesmos fatos nas duas tentativas.</div>';
+ if(papel==='fornecedor')h+='<div class="card pub"><h3>O que foi vendido</h3><p>Pacote de R$ 12.000: parte crítica em 10 dias (faseada), treinamento presencial dos dois turnos e 90 dias de suporte.</p></div><div class="card res secret"><span class="tag r">Reservado ao fornecedor</span><ul><li>Houve falha de agenda no treinamento. O suporte já foi acionado, mas você ainda NÃO tem confirmação do prazo de correção total.</li><li>A equipe técnica tem janela de análise às 16h. Você pode combinar atualização às 17h SOMENTE depois de confirmar o responsável.</li><li>Sem autorização para compensação financeira ou solução instantânea.</li></ul><p><b>Alvo:</b> reconhecer, entender o impacto, dizer o que vai verificar, indicar responsável e combinar novo contato viável.</p></div>';
+ if(papel==='observador')h+='<div class="card"><h3>Como observar</h3><ul><li>Não intervenha na 1ª resposta (2 min).</li><li>Feedback (1 min): um comportamento que funcionou + uma correção testável.</li></ul></div>'+rubric('recuperacao','rec');
+ return h}
+function render(keep){
+ hidden=false;document.getElementById('hideBtn').textContent='Esconder carta';
+ const p=(location.hash||'#').slice(1).split('/');
+ const v={lab:vLab,clinica:vClin,tribunal:vTrib,recuperacao:vRec}[p[0]];
+ app.innerHTML=(v?v(p):home())+'<p class="foot">Casos, empresas e números fictícios, criados para ensino. iEL Pernambuco • Alta Performance Comercial e Fidelização Estratégica</p>';
+ if(p[0]==='tribunal'&&p[1]==='vendedor'&&p[2]==='ok')cv();
+ if(!keep)window.scrollTo(0,0)}
+window.addEventListener('hashchange',render);render();
+</script>
+</body>
+</html>
