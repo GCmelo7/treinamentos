@@ -911,7 +911,7 @@ function renderMomento(){const m=mod,x=m.momentos[idx-1],k=m.id+'/'+idx;for(cons
 function render(scroll=true){renderMods();renderRot();if(idx===0)renderOverview();else renderMomento();
  const n=mod.momentos.length;$('#mPos').textContent=idx?`${idx} de ${n}`:'Visão geral';$('#stepbig').textContent=idx?`${mod.id} • passo ${idx}`:mod.id;
  resetTimer();if(scroll)window.scrollTo(0,0)}
-function go(mid,i){mod=MODS.find(m=>m.id===mid)||MODS[0];idx=Math.max(0,Math.min(i,mod.momentos.length));ST.last=mod.id+'/'+idx;save();const h='#'+mod.id+'/'+idx;if(location.hash!==h)history.replaceState(null,'',h);render()}
+function go(mid,i){mod=MODS.find(m=>m.id===mid)||MODS[0];idx=Math.max(0,Math.min(i,mod.momentos.length));ST.last=mod.id+'/'+idx;save();const h='#'+mod.id+'/'+idx;try{if(location.hash!==h)history.replaceState(null,'',h)}catch(e){};render()}
 function next(){if(idx<mod.momentos.length){if(idx>0){ST.done[mod.id+'/'+idx]=true;save()}go(mod.id,idx+1)}else{ST.done[mod.id+'/'+idx]=true;save();const j=MODS.indexOf(mod);if(j<MODS.length-1)go(MODS[j+1].id,0);else render()}}
 function prev(){if(idx>0)go(mod.id,idx-1);else{const j=MODS.indexOf(mod);if(j>0)go(MODS[j-1].id,MODS[j-1].momentos.length)}}
 /* timer do projetor */
