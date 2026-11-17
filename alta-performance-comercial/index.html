@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alta Performance Comercial com IA — Kit do Participante</title>
+<meta name="description" content="Biblioteca de prompts, Copiloto Comercial, Método PROMPT, Canvas e ferramentas para vender com método e IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0E2A5C;--blue:#1565C0;--turq:#12A3A8;--green:#1DBF8A;--ice:#EAF4FB;--mint:#E8F8F3;--grey:#5A6B85;--line:#D6E1EC;--bg:#FFFFFF;--soft:#F6F9FC;--grad:linear-gradient(90deg,#0E2A5C 0%,#12A3A8 60%,#1DBF8A 100%);--r:16px;--sh:0 6px 24px rgba(14,42,92,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Montserrat,system-ui,sans-serif;color:var(--navy);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+/* faixa do template */
+.topline{height:4px;background:linear-gradient(90deg,var(--blue) 0 66%,#C9D3DE 66% 100%)}
+header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+.brand{display:flex;flex-direction:column;line-height:1.1;text-decoration:none;color:var(--navy)}
+.brand b{font-size:12px;letter-spacing:.06em;font-weight:800}
+.brand span{font-size:11px;color:var(--grey);font-weight:500}
+nav.menu{display:flex;gap:4px;flex-wrap:wrap}
+nav.menu a{font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;padding:8px 10px;border-radius:999px}
+nav.menu a:hover,nav.menu a.on{background:var(--ice);color:var(--blue)}
+.burger{display:none;border:0;background:var(--ice);color:var(--navy);border-radius:10px;padding:8px 12px;font:700 13px Montserrat,system-ui,sans-serif}
+@media(max-width:900px){nav.menu{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;padding:10px 20px 16px;border-bottom:1px solid var(--line)}nav.menu.open{display:flex}.burger{display:block}}
+.chev{position:absolute;color:#D4DCE6;font-weight:900;font-size:56px;letter-spacing:-8px;user-select:none;pointer-events:none}
+section{padding:72px 0;position:relative}
+section.alt{background:var(--soft)}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px}
+.chip.ghost{background:transparent;color:var(--turq);border:2px solid var(--turq)}
+h1,h2,h3{margin:.3em 0;line-height:1.12}
+h1{font-size:clamp(34px,6vw,64px);font-weight:900;letter-spacing:-.02em}
+h2{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.01em}
+h3{font-size:19px;font-weight:800}
+.hl{position:relative;white-space:nowrap;z-index:0}
+.hl:before{content:"";position:absolute;inset:8% -6px 4% -6px;background:#3ED3D8;border-radius:10px;transform:skew(-8deg) rotate(-1.5deg);z-index:-1;opacity:.9}
+.under{display:block;width:70px;height:6px;border-radius:6px;background:var(--turq);margin:10px 0 18px}
+.lead{font-size:18px;color:var(--grey);max-width:720px}
+.hero{padding:64px 0 56px;overflow:hidden}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media(max-width:900px){.hero .grid{grid-template-columns:1fr}}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer;font:700 14px Montserrat,system-ui,sans-serif;padding:13px 18px;border-radius:12px;text-decoration:none;transition:.15s}
+.btn.pri{background:var(--navy);color:#fff}.btn.pri:hover{background:var(--blue)}
+.btn.sec{background:var(--ice);color:var(--navy)}.btn.sec:hover{background:#dcebf7}
+.btn.ok{background:var(--green);color:#fff}
+.btn.sm{padding:8px 12px;font-size:12px;border-radius:10px}
+.heroart{position:relative;background:#fff;border-radius:24px;box-shadow:var(--sh);padding:22px;border:1px solid var(--line)}
+.heroart .letters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}@media(max-width:560px){.heroart .letters{grid-template-columns:repeat(3,1fr)}}
+.lt{border-radius:12px;overflow:hidden;border:1px solid var(--line);text-align:center;background:#fff}
+.lt b{display:block;color:#fff;font-size:24px;font-weight:900;padding:8px 0;background:var(--grad)}
+.lt span{display:block;font-size:10.5px;font-weight:700;padding:8px 2px;line-height:1.2}
+.quote{margin-top:16px;background:var(--mint);border-radius:14px;padding:14px 16px;font-weight:700}
+.cards{display:grid;gap:18px}
+.c4{grid-template-columns:repeat(4,1fr)}.c3{grid-template-columns:repeat(3,1fr)}.c2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:980px){.c4{grid-template-columns:repeat(2,1fr)}.c3{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.c4,.c3,.c2{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column}
+.card .hd{background:var(--grad);color:#fff;padding:14px 18px;font-weight:800;display:flex;align-items:center;gap:10px}
+.card .hd small{display:block;font-weight:600;opacity:.85;font-size:11px;letter-spacing:.05em}
+.card .bd{padding:16px 18px;flex:1}
+.card ul{margin:0;padding-left:18px}.card li{margin:4px 0}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--ice);color:var(--blue);margin:2px 4px 2px 0}
+.mod .num{font-size:34px;font-weight:900;line-height:1}
+.leva{margin-top:12px;background:var(--mint);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600}
+/* forms */
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media(max-width:900px){.panel{grid-template-columns:1fr}}
+.field{margin-bottom:14px}
+.field label{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;margin-bottom:6px}
+.field label .L{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--grad);color:#fff;font-weight:900}
+.field small{display:block;color:var(--grey);font-size:12px;margin:-2px 0 6px}
+textarea,input[type=text],input[type=number],select{width:100%;font:500 14px Montserrat,system-ui,sans-serif;color:var(--navy);border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--turq);box-shadow:0 0 0 3px rgba(18,163,168,.15)}
+.out{position:sticky;top:90px;background:var(--navy);color:#fff;border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+.out pre{white-space:pre-wrap;font:500 13.5px/1.55 Montserrat,system-ui,sans-serif;margin:10px 0 14px;max-height:56vh;overflow:auto;color:#EAF4FB}
+.out .t{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.out .t b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#7FE3E6}
+.check{display:flex;gap:10px;align-items:flex-start;background:var(--ice);border-radius:12px;padding:10px 12px;margin:8px 0;font-weight:600;font-size:14px;cursor:pointer}
+.check input{margin-top:3px;accent-color:var(--turq);width:18px;height:18px}
+.note{font-size:12.5px;color:var(--grey);background:var(--soft);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin-top:12px}
+/* library */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.fchip{border:1.5px solid var(--line);background:#fff;color:var(--navy);font:700 12.5px Montserrat,system-ui,sans-serif;padding:8px 13px;border-radius:999px;cursor:pointer}
+.fchip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.search{max-width:420px}
+.pcard .hd{justify-content:space-between}
+.ptext{white-space:pre-wrap;font-size:13.5px;line-height:1.55;background:var(--soft);border-radius:12px;padding:12px;max-height:220px;overflow:auto;border:1px solid var(--line)}
+.ptext mark{background:#C8F3F4;color:var(--navy);border-radius:4px;padding:0 2px;font-weight:700}
+.ptest{font-size:12.5px;font-weight:700;color:var(--turq);margin:10px 0 0}
+.pact{display:flex;gap:8px;padding:0 18px 16px}
+/* canvas */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 18px}
+.tab{border:0;background:var(--ice);color:var(--navy);font:800 13px Montserrat,system-ui,sans-serif;padding:10px 14px;border-radius:12px;cursor:pointer}
+.tab.on{background:var(--grad);color:#fff}
+.cv{display:none}.cv.on{display:block}
+.cgrid{display:grid;gap:14px}
+.cgrid.g3{grid-template-columns:repeat(3,1fr)}.cgrid.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.cgrid.g3,.cgrid.g2{grid-template-columns:1fr}}
+.cbox{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.cbox h4{margin:0;padding:10px 14px;color:#fff;font-size:13px;letter-spacing:.06em;text-transform:uppercase;background:var(--navy)}
+.cbox:nth-child(3n+2) h4{background:var(--blue)}.cbox:nth-child(3n) h4{background:var(--turq)}
+.cbox p{margin:8px 14px 0;font-size:12.5px;color:var(--grey)}
+.cbox textarea{border:0;border-radius:0;min-height:110px;padding:10px 14px}
+.saved{font-size:12px;font-weight:700;color:var(--green)}
+/* tools */
+.calc .row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.calc .row input{max-width:120px;text-align:right;font-weight:800}
+.res{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.res div{background:var(--ice);border-radius:12px;padding:12px;text-align:center}
+.res b{display:block;font-size:26px;font-weight:900;color:var(--turq)}
+.res span{font-size:11.5px;font-weight:700}
+@media(max-width:640px){.res{grid-template-columns:1fr 1fr}}
+.rule{display:flex;gap:14px;align-items:flex-start}
+.rule .n{flex:none;width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
+.mat a.card{text-decoration:none;color:var(--navy);transition:.15s}.mat a.card:hover{transform:translateY(-3px)}
+footer{border-top:1px solid var(--line);padding:28px 0 0;margin-top:20px;text-align:center;font-size:12.5px;color:var(--grey)}
+footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22px auto 0;border-radius:4px 4px 0 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--navy);color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;box-shadow:var(--sh);transition:.25s;z-index:99}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media print{header.site,.btns,.btn,.tabs,footer,.toast,section:not(#canvas),.no-print{display:none!important}.cv{display:block!important;page-break-after:always}#canvas{padding:0}.cbox textarea{border:0;min-height:auto}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header class="site"><div class="wrap bar">
+  <a class="brand" href="#inicio"><b>ALTA PERFORMANCE COMERCIAL</b><span>Kit do participante • vendas com método e IA</span></a>
+  <button class="burger" onclick="document.querySelector('nav.menu').classList.toggle('open')">Menu</button>
+  <nav class="menu">
+    <a href="aula.html" style="background:var(--navy);color:#fff">Aula ao vivo</a><a href="#trilha">Trilha</a><a href="#prompt">Monte seu PROMPT</a><a href="#copiloto">Copiloto</a><a href="#biblioteca">Biblioteca</a><a href="#canvas">Canvas</a><a href="#ferramentas">Ferramentas</a><a href="#materiais">Materiais</a>
+  </nav>
+</div></header>
+
+<section class="hero" id="inicio"><div class="chev" style="right:24px;top:18px">»</div>
+<div class="wrap grid">
+  <div>
+    <span class="chip">Material do participante</span>
+    <h1>A IA acelera quem tem <span class="hl">método.</span></h1>
+    <span class="under"></span>
+    <p class="lead">Quem não tem, só erra mais rápido. Aqui você encontra tudo para vender com método — do primeiro contato à fidelização — e para usar a IA como copiloto, não como piloto.</p>
+    <div class="btns">
+      <a class="btn pri" href="aula.html">Acompanhar a aula ao vivo</a>
+      <a class="btn sec" href="#prompt">Montar um prompt</a>
+      <a class="btn sec" href="#biblioteca">Ver biblioteca de prompts</a>
+      <a class="btn sec" href="#canvas">Preencher meu Canvas</a>
+    </div>
+  </div>
+  <div class="heroart">
+    <span class="chip ghost">Método PROMPT</span>
+    <h3 style="margin:12px 0 14px">Seis letras para pensar antes de pedir</h3>
+    <div class="letters">
+      <div class="lt"><b>P</b><span>Papel</span></div><div class="lt"><b>R</b><span>Requisição</span></div><div class="lt"><b>O</b><span>Objetivo</span></div>
+      <div class="lt"><b>M</b><span>Modelo</span></div><div class="lt"><b>P</b><span>Panorama</span></div><div class="lt"><b>T</b><span>Testar e transformar</span></div>
+    </div>
+    <div class="quote">A IA rascunha. Você decide — e responde pelo que envia.</div>
+  </div>
+</div></section>
+
+<section class="alt" id="trilha"><div class="wrap">
+  <span class="chip">A jornada</span>
+  <h2>Do instinto ao método — e do método ao resultado</h2><span class="under"></span>
+  <div class="cards c4">
+    <div class="card mod"><div class="hd"><span class="num">1</span><div><small>MÓDULO 1</small>Do instinto ao método</div></div><div class="bd">
+      <ul><li>Mentalidade e competências treináveis</li><li>Rituais de evolução e disciplina</li><li>Domínio da oferta e tradução de valor</li><li>SPIN, GPCT e BANT (siglas traduzidas)</li><li>Funil: avanço, não só volume</li></ul>
+      <div class="leva">Você leva: Canvas camada 1, um ritual e uma boa pergunta.</div><a class="btn sec sm" style="margin-top:12px" href="aula.html#M1/0">Abrir na Aula ao vivo »</a></div></div>
+    <div class="card mod"><div class="hd"><span class="num">2</span><div><small>MÓDULO 2</small>Do diagnóstico à decisão</div></div><div class="bd">
+      <ul><li>Abordagem presencial e no WhatsApp</li><li>Qualificação consultiva</li><li>Proposta de valor e objeções</li><li>Negociação: BATNA, zona de acordo e margem</li><li>Fechamento e cadência de follow-up</li></ul>
+      <div class="leva">Você leva: Canvas camada 2 e um próximo passo com dono e prazo.</div><a class="btn sec sm" style="margin-top:12px" href="aula.html#M2/0">Abrir na Aula ao vivo »</a></div></div>
+    <div class="card mod"><div class="hd"><span class="num">3</span><div><small>MÓDULO 3</small>Fidelização e plano</div></div><div class="bd">
+      <ul><li>Satisfação × lealdade × fidelização</li><li>Recuperação de confiança</li><li>NPS, retenção, recompra e ticket</li><li>Carteira priorizada e indicação ética</li><li>Plano de 30 dias com indicador</li></ul>
+      <div class="leva">Você leva: Canvas camada 3 e o plano de 30 dias.</div><a class="btn sec sm" style="margin-top:12px" href="aula.html#M3/0">Abrir na Aula ao vivo »</a></div></div>
+    <div class="card mod"><div class="hd"><span class="num">IA</span><div><small>MÓDULO IA</small>Copiloto Comercial</div></div><div class="bd">
+      <ul><li>Método PROMPT na prática</li><li>Seu Copiloto em 3 camadas</li><li>Funil, Sales Model Canvas e CRM</li><li>SDR, WhatsApp e cadência</li><li>Negociação e pós-venda com IA</li></ul>
+      <div class="leva">Você leva: Copiloto configurado, mensagem testada e plano de 7 dias.</div><a class="btn sec sm" style="margin-top:12px" href="aula.html#POS/0">Abrir na Aula ao vivo »</a></div></div>
+  </div>
+</div></section>
+
+<section id="prompt"><div class="chev" style="right:24px;top:24px">»</div><div class="wrap">
+  <span class="chip">Ferramenta</span>
+  <h2>Monte seu <span class="hl">PROMPT</span></h2><span class="under"></span>
+  <p class="lead">Preencha as letras. O pedido se monta sozinho ao lado — é só copiar e colar na IA que você usa.</p>
+  <div class="panel" style="margin-top:22px">
+    <div>
+      <div class="field"><label><span class="L">P</span>Papel</label><small>Quem a IA deve ser? Ex.: “um comprador de loja de confecções”, “um revisor exigente”.</small><textarea data-p="papel" rows="2" placeholder="Aja como..."></textarea></div>
+      <div class="field"><label><span class="L">R</span>Requisição</label><small>O que você quer agora, em uma frase.</small><textarea data-p="req" rows="2" placeholder="Escreva a primeira mensagem de WhatsApp para..."></textarea></div>
+      <div class="field"><label><span class="L">O</span>Objetivo</label><small>Para que serve? Abrir conversa, qualificar, recuperar, fechar…</small><textarea data-p="obj" rows="2" placeholder="Abrir conversa — não vender nem mandar preço."></textarea></div>
+      <div class="field"><label><span class="L">M</span>Modelo</label><small>Formato da resposta: tamanho, tom, estrutura.</small><textarea data-p="mod" rows="2" placeholder="Até 4 linhas, tom próximo, terminar com UMA pergunta fácil."></textarea></div>
+      <div class="field"><label><span class="L">P</span>Panorama</label><small>Contexto do seu negócio e deste cliente (sem dados pessoais — use “Cliente A”).</small><textarea data-p="pan" rows="3" placeholder="Vendo... para... O cliente..."></textarea></div>
+      <div class="field"><label><span class="L">T</span>Testar e transformar</label><small>Marque o que a IA deve fazer junto com a resposta.</small>
+        <label class="check"><input type="checkbox" data-t="1" checked>Não inventar preço, prazo, desconto ou resultado</label>
+        <label class="check"><input type="checkbox" data-t="2" checked>Perguntar antes se faltar informação</label>
+        <label class="check"><input type="checkbox" data-t="3">Entregar 2 versões para eu comparar</label>
+        <label class="check"><input type="checkbox" data-t="4">Avaliar a resposta como se fosse o cliente</label>
+      </div>
+    </div>
+    <div class="out"><div class="t"><b>Seu prompt</b><span><button class="btn ok sm" onclick="copyEl('pout')">Copiar</button> <button class="btn sec sm" onclick="exPrompt()">Exemplo</button></span></div><pre id="pout">Preencha os campos ao lado…</pre>
+      <div style="font-size:12.5px;color:#BFE9EA"><b style="color:#fff">Antes de enviar ao cliente — o T:</b><br>1. Está correto? Preço, prazo, dado e promessa conferidos.<br>2. Serve para este cliente? Eu responderia?<br>3. O que melhora? Peça uma correção específica e compare.</div></div>
+  </div>
+</div></section>
+
+<section class="alt" id="copiloto"><div class="wrap">
+  <span class="chip">Ferramenta</span>
+  <h2>Gerador do <span class="hl">Copiloto</span> Comercial</h2><span class="under"></span>
+  <p class="lead">Escreva seu contexto uma vez. Cole nas instruções de um projeto/assistente da sua IA — ou no início de cada conversa, na versão gratuita.</p>
+  <div class="panel" style="margin-top:22px">
+    <div>
+      <div class="field"><label>Quem sou</label><small>Nome, cargo, empresa, cidade.</small><input type="text" data-c="quem" placeholder="Ana, supervisora comercial na Distribuidora X, em Caruaru"></div>
+      <div class="field"><label>O que vendo e para quem</label><input type="text" data-c="vendo" placeholder="Bebidas e mercearia para mercadinhos do Agreste"></div>
+      <div class="field"><label>Problemas que resolvo</label><textarea data-c="resolve" rows="2" placeholder="Ruptura de estoque; entrega fora do dia..."></textarea></div>
+      <div class="field"><label>O que NÃO resolvo (limites)</label><textarea data-c="nao" rows="2" placeholder="Pedidos abaixo de... ; entrega no mesmo dia..."></textarea></div>
+      <div class="field"><label>Provas reais que posso usar</label><textarea data-c="provas" rows="2" placeholder="Apenas evidências reais — nunca inventadas"></textarea></div>
+      <div class="field"><label>Meu tom</label><input type="text" data-c="tom" placeholder="Direto, próximo, sem exagero"></div>
+      <label class="check"><input type="checkbox" id="altaperf" checked>Incluir o comportamento de “Vendedor de alta performance”</label>
+      <div class="btns"><button class="btn sec sm" onclick="fromCanvas()">Puxar dados do meu Canvas</button></div>
+    </div>
+    <div class="out"><div class="t"><b>Seu Copiloto</b><span><button class="btn ok sm" onclick="copyEl('cout')">Copiar</button></span></div><pre id="cout"></pre></div>
+  </div>
+  <p class="note">Tudo o que você digita fica salvo só neste aparelho (navegador). Nada é enviado para servidor.</p>
+</div></section>
+
+<section id="biblioteca"><div class="chev" style="right:24px;top:24px">»</div><div class="wrap">
+  <span class="chip">Biblioteca</span>
+  <h2>Prompts prontos por etapa do <span class="hl">funil</span></h2><span class="under"></span>
+  <p class="lead">Troque o que está <mark style="background:#C8F3F4;border-radius:4px;padding:0 3px">[entre colchetes]</mark>. Use sempre dados anonimizados e faça o teste antes de usar.</p>
+  <input class="search" type="text" id="q" placeholder="Buscar prompt (ex.: objeção, WhatsApp, carteira)…" style="margin-top:14px">
+  <div class="filters" id="filters"></div>
+  <div class="cards c3" id="lib"></div>
+</div></section>
+
+<section class="alt" id="canvas"><div class="wrap">
+  <span class="chip">Canvas</span>
+  <h2>Meu Mapa de <span class="hl">Alta Performance</span></h2><span class="under"></span>
+  <p class="lead no-print">Construa camada por camada, a cada módulo. Salva automaticamente neste aparelho. Use “Imprimir / PDF” para guardar.</p>
+  <div class="tabs no-print" id="ctabs"></div>
+  <div id="cvs"></div>
+  <div class="btns no-print"><button class="btn pri" onclick="window.print()">Imprimir / salvar PDF</button><button class="btn sec" onclick="clearCanvas()">Limpar meu Canvas</button><span class="saved" id="savedmsg"></span></div>
+</div></section>
+
+<section id="ferramentas"><div class="chev" style="right:24px;top:24px">»</div><div class="wrap">
+  <span class="chip">Ferramentas</span>
+  <h2>Da meta ao contato de <span class="hl">hoje</span></h2><span class="under"></span>
+  <div class="cards c2">
+    <div class="card calc"><div class="hd">Meta reversa — use as suas taxas</div><div class="bd">
+      <div class="row"><span>Meta de vendas no mês</span><input type="number" id="m_meta" value="10"></div>
+      <div class="row"><span>Proposta → venda (%)</span><input type="number" id="m_t1" value="50"></div>
+      <div class="row"><span>Reunião realizada → proposta (%)</span><input type="number" id="m_t2" value="50"></div>
+      <div class="row"><span>Conversa → reunião realizada (%)</span><input type="number" id="m_t3" value="40"></div>
+      <div class="row"><span>Contato → conversa (%)</span><input type="number" id="m_t4" value="25"></div>
+      <div class="row"><span>Comparecimento às reuniões (%)</span><input type="number" id="m_t5" value="75"></div>
+      <div class="row"><span>Dias úteis no mês</span><input type="number" id="m_d" value="20"></div>
+      <div class="res" id="mres"></div>
+      <p class="note">Exemplo inicial fictício. Sem taxas próprias? Meça uma semana antes de calcular.</p>
+    </div></div>
+    <div class="card"><div class="hd">Critério de saída por etapa (Sales Model Canvas)</div><div class="bd">
+      <div class="field"><label>Etapa</label><select id="smc_e"><option>Prospecção</option><option selected>Qualificação</option><option>Diagnóstico</option><option>Proposta</option><option>Negociação</option><option>Pós-venda</option></select></div>
+      <div class="field"><label>Objetivo da etapa</label><input type="text" data-s="obj" placeholder="Confirmar necessidade e decisor"></div>
+      <div class="field"><label>O que autoriza avançar</label><input type="text" data-s="val" placeholder="Dor, prazo e decisor confirmados"></div>
+      <div class="field"><label>Motivo de descarte</label><input type="text" data-s="desc" placeholder="Fora do perfil; sem decisor acessível"></div>
+      <div class="field"><label>Tempo máximo parada</label><input type="text" data-s="tempo" placeholder="7 dias"></div>
+      <div class="field"><label>Próximo passo padrão</label><input type="text" data-s="prox" placeholder="Reunião com o decisor"></div>
+      <p class="note">Referência: Sales Model Canvas — Thiago Reis (Growth Machine). Blocos completos no kit impresso.</p>
+    </div></div>
+  </div>
+  <h3 style="margin-top:40px">Cinco regras que protegem seu nome</h3>
+  <div class="cards c3" style="margin-top:14px">
+    <div class="card"><div class="bd rule"><span class="n">1</span><div><b>Dados mínimos e anonimizados</b><br>Use “Cliente A”. Nada de nome, telefone ou CPF na IA.</div></div></div>
+    <div class="card"><div class="bd rule"><span class="n">2</span><div><b>Você valida</b><br>Promessas, preços e contas passam por você.</div></div></div>
+    <div class="card"><div class="bd rule"><span class="n">3</span><div><b>Contato com permissão</b><br>Nada de disparo irregular ou insistência após recusa.</div></div></div>
+    <div class="card"><div class="bd rule"><span class="n">4</span><div><b>A IA erra e inventa</b><br>Confira antes de enviar.</div></div></div>
+    <div class="card"><div class="bd rule"><span class="n">5</span><div><b>Sem internet?</b><br>O método continua no papel.</div></div></div>
+    <div class="card"><div class="bd rule"><span class="n">»</span><div><b>A IA escreve, você envia</b><br>Quem envia responde pela mensagem.</div></div></div>
+  </div>
+</div></section>
+
+<section class="alt mat" id="materiais"><div class="wrap">
+  <span class="chip">Materiais</span>
+  <h2>Kits, Canvas e planilhas</h2><span class="under"></span>
+  <p class="lead">Arquivos de apoio do curso. O acesso pode depender da liberação da turma.</p>
+  <div class="cards c3" style="margin-top:18px" id="mats"></div>
+</div></section>
+
+<footer><div class="wrap">Material de apoio às capacitações em Alta Performance Comercial • Gabriel Melo<br>Casos e números de exemplo são fictícios. Conteúdos de terceiros citados com a fonte.</div><div class="fb"></div></footer>
+<div class="toast" id="toast">Copiado!</div>
+
+<script>
+const LIB=[{"etapa": "Método PROMPT", "titulo": "Pedido PROMPT — primeira mensagem (modelo)", "texto": "PAPEL: Aja como um vendedor consultivo de uma fornecedora de etiquetas e tags para confecções do Agreste.\nREQUISIÇÃO: Escreva a primeira mensagem de WhatsApp para Carla, dona de uma loja de jeans em Toritama que nunca comprou de nós.\nOBJETIVO: abrir conversa — não vender nem mandar preço.\nMODELO: até 4 linhas, tom próximo e respeitoso, sem emoji, terminar com UMA pergunta fácil.\nPANORAMA: vi no Instagram que a loja lançou coleção nova esta semana. Não sei quem é o fornecedor atual.\nREGRA: não invente preço, prazo, desconto ou resultado.", "teste": "Releia as 6 letras: falta alguma?"}, {"etapa": "Método PROMPT", "titulo": "T — Testar a resposta", "texto": "1) Liste tudo nesta mensagem que é preço, prazo, número, garantia ou promessa. Marque o que eu não informei a você.\n2) Responda como se você fosse a Carla, dona da loja. Você responderia? O que te faria ignorar?\n3) Esta mensagem soa como um vendedor do interior de Pernambuco falando com uma cliente? O que soa artificial?", "teste": "A IA apontou algo que você não informou?"}, {"etapa": "Método PROMPT", "titulo": "T — Transformar a resposta", "texto": "Reescreva a mensagem:\n• mais curta (até 3 linhas);\n• sem nada que eu não tenha informado;\n• no meu tom: [direto e próximo];\n• terminando com uma pergunta que ela responda em uma palavra.\nDepois, mostre em 3 tópicos o que mudou em relação à versão anterior.", "teste": "A nova versão ficou mais curta e sem invenção?"}, {"etapa": "Copiloto", "titulo": "Copiloto de exemplo — loja fictícia", "texto": "Você é o copiloto comercial de Rafael, vendedor da Etiq Agreste (empresa FICTÍCIA), em Caruaru-PE.\nO QUE VENDEMOS: etiquetas bordadas, tags e etiquetas de composição para confecções.\nPARA QUEM: lojas e fabricantes de moda do Polo de Confecções do Agreste (Caruaru, Toritama, Santa Cruz).\nPROBLEMAS QUE RESOLVEMOS: atraso de etiquetas no lançamento de coleção; erros de composição; pedidos pequenos que grandes fornecedores recusam.\nO QUE NÃO RESOLVEMOS: estampas, embalagens e pedidos para entrega em menos de 5 dias úteis.\nPROVAS QUE PODEMOS USAR: amostras físicas; pedido mínimo baixo (confirmar o valor com o comercial antes de citar).\nTOM: direto, próximo, sem exagero, sem emoji.\nREGRAS: nunca invente preço, prazo, desconto ou resultado; se faltar informação, pergunte antes de escrever; mensagens de WhatsApp curtas; termine sempre com uma pergunta ou próximo passo; nunca peça nem use dados pessoais de clientes.\nANTES DE ESCREVER, pergunte qual é o cliente, a situação e o objetivo da mensagem, se eu não tiver informado.", "teste": "O Copiloto pergunta antes de escrever?"}, {"etapa": "Copiloto", "titulo": "Prompt-mestre em branco", "texto": "Você é meu copiloto comercial. Trabalhe sempre a partir deste contexto.\nQUEM SOU: [nome], [cargo] na [empresa], em [cidade].\nO QUE VENDO: [oferta], para [cliente ideal].\nPROBLEMAS QUE RESOLVO: [problema 1]; [problema 2].\nO QUE NÃO RESOLVO: [limites — quando não sou a melhor opção].\nPROVAS QUE POSSO USAR: [evidências reais; nunca invente outras].\nMEU TOM: [ex.: direto, próximo, sem exagero].\nREGRAS: nunca invente preço, prazo, garantia ou resultado; se faltar informação, pergunte antes de escrever; termine sempre com uma pergunta ou próximo passo; não use dados pessoais de clientes.\n\nTESTE DA PRÁTICA 2 (colar depois): Cliente: [tipo de cliente, anonimizado]. Situação: [o que está acontecendo]. Me dê 3 perguntas de diagnóstico, uma por vez, que eu possa fazer na próxima conversa. Nenhuma pode induzir a resposta.", "teste": "Preencheu os limites (o que NÃO resolve)?"}, {"etapa": "Copiloto", "titulo": "Vendedor de alta performance", "texto": "Além do contexto acima, comporte-se como o parceiro de preparação de um vendedor de alta performance:\n1. ANTES de escrever qualquer coisa, me pergunte: qual é o cliente, o que já sei dele, qual é o objetivo desta conversa e qual é o próximo passo que eu quero.\n2. Se eu pedir uma proposta antes de entender o problema do cliente, me alerte e sugira 2 perguntas de diagnóstico.\n3. Nunca escreva promessa que eu não possa cumprir; marque [CONFIRMAR] em qualquer preço, prazo ou número.\n4. Termine toda mensagem com um próximo passo claro e consentido.\n5. Depois de cada conversa que eu resumir, registre: necessidade, objeção, decisor, próximo passo e data — no formato de linha de CRM.\n6. Uma vez por semana, quando eu pedir, me ajude a revisar: o que funcionou, o que eu repeti sem resultado e o que vou treinar.\nVocê me ajuda a pensar. Quem decide e envia sou eu.", "teste": "A IA te fez perguntas antes de redigir?"}, {"etapa": "Prospecção", "titulo": "Sinais de perfil de cliente ideal", "texto": "Para [oferta], liste 8 sinais públicos e profissionais de que um [segmento — ex.: distribuidora de bebidas do Agreste] pode precisar disso agora. Para cada sinal, diga onde eu verificaria (site, Instagram da empresa, vagas abertas, notícia local). Não invente informação sobre empresas reais.", "teste": "Os sinais podem ser verificados em fonte pública?"}, {"etapa": "Qualificação", "titulo": "Sequência GPCTBA C&I — 3 perguntas", "texto": "Meu cliente é [tipo, anonimizado] e a situação é [resumo]. Monte uma sequência de 3 perguntas para a próxima conversa, cobrindo objetivos, planos e autoridade (quem decide). Depois, avalie as 3 perguntas que EU escrevi: [colar]. Aponte a mais fraca e por quê. (GPCTBA C&I: objetivos, planos, desafios, prazo, orçamento, autoridade, consequências de não agir, implicações positivas de agir — framework usado pela Growth Machine.)", "teste": "Alguma pergunta soa como interrogatório?"}, {"etapa": "Prospecção", "titulo": "Primeira mensagem + cadência D0–D9", "texto": "Cliente: [tipo, anonimizado]. O que sei: [contexto real e público]. Tenho permissão/canal autorizado: [sim/como].\nEscreva a primeira mensagem de WhatsApp: contexto real, sem oferta, sem link, até 4 linhas, uma pergunta fácil.\nDepois monte a cadência de exemplo: D2 roteiro de ligação de 30 segundos; D5 um conteúdo útil (sugira qual); D9 mensagem de encerramento respeitoso que deixe a porta aberta. Se o cliente pedir para parar, a cadência termina.", "teste": "Você responderia a esta mensagem?"}, {"etapa": "Prospecção", "titulo": "Agendamento sem faltas", "texto": "O cliente [tipo] aceitou conversar. Escreva:\n1) a mensagem que oferece duas opções de dia e horário ([opção 1] e [opção 2]);\n2) a confirmação, pedindo que avise se algo mudar;\n3) no dia, um resumo da pauta em 3 tópicos.\nCada mensagem com até 3 linhas.", "teste": "Ofereceu duas opções de horário?"}, {"etapa": "Qualificação", "titulo": "SDR de bolso — cliente simulado", "texto": "Vamos treinar uma conversa de vendas. Você será o CLIENTE e eu o VENDEDOR.\nPERSONAGEM: dona de uma loja de confecções em Caruaru (caso FICTÍCIO). Recebe pedidos por WhatsApp; quando muda o turno, pedidos se perdem.\nINFORMAÇÕES ESCONDIDAS (só revele se eu fizer uma pergunta boa e aberta sobre o assunto):\n• quem decide a compra é o sócio, que teme parar a operação;\n• o pico de vendas começa em 3 semanas;\n• já tentaram resolver com planilha compartilhada e não funcionou;\n• o orçamento ainda não foi definido.\nREGRAS: responda de forma curta e realista; se eu oferecer produto antes de entender o problema, esfrie a conversa; não revele as informações escondidas sem uma boa pergunta.\nQuando eu escrever FIM, avalie minha conversa de 0 a 3 em: diagnóstico do problema, objetivos e prazo, autoridade (quem decide) e próximo passo combinado. Cite a melhor e a pior pergunta que fiz.", "teste": "Quais perguntas revelaram as informações escondidas?"}, {"etapa": "Diagnóstico", "titulo": "Perguntas SPIN para o seu cliente", "texto": "Liste 10 perguntas de diagnóstico no formato SPIN (Situação, Problema, Implicação, Necessidade) para [cliente ideal] que enfrenta [problema]. Marque as 3 mais fortes e explique por quê. Nenhuma pergunta pode induzir a resposta.", "teste": "Alguma pergunta já supõe a resposta?"}, {"etapa": "Proposta", "titulo": "Tradução de valor", "texto": "Transforme [atributo da oferta] em benefício para [cliente], no contexto [situação do cliente], com a evidência [prova real]. Use a sequência Atributo → Contexto → Benefício → Evidência. Liste também o limite da oferta (quando ela NÃO é a melhor opção). Não prometa resultado.", "teste": "Há alguma promessa que você não pode cumprir?"}, {"etapa": "Objeção", "titulo": "Cliente difícil — objeção escondida", "texto": "Seja um cliente [perfil] que diz “[objeção — ex.: preciso falar com meu sócio]”, mas cuja preocupação real é outra (escolha uma plausível e não me conte). Só revele se eu investigar bem. Depois de 2 respostas minhas, me dê feedback: acolhi, perguntei antes de responder, usei evidência, confirmei?", "teste": "Você investigou antes de responder?"}, {"etapa": "Negociação", "titulo": "Três cenários de negociação (fictício)", "texto": "Sou o vendedor. A loja quer rever o pacote de R$ 12.000. Dados (FICTÍCIOS): custo variável R$ 8.400; custos extras — implantação faseada (crítica em 10 dias) +R$ 180; acelerada (tudo em 12 dias) +R$ 800; duas sessões presenciais de treinamento +R$ 240; suporte de 90 dias +R$ 150; pagamento em 2 parcelas +R$ 60; em 3 parcelas +R$ 210. Minha alçada de desconto é 5%. Minha melhor alternativa sem acordo (BATNA) gera R$ 2.800 de contribuição.\nMonte TRÊS cenários de pacote. Para cada um: preço, itens, contribuição = preço − 8.400 − extras (mostre a conta), riscos e se fica acima da BATNA.\nNão autorize desconto acima da alçada e não invente custos.", "teste": "A conta de cada cenário bate com a tabela?"}, {"etapa": "Negociação", "titulo": "Concessões com contrapartida", "texto": "Meu preço é [X], meu custo variável é [Y] e o cliente pediu [desconto]. Liste 5 concessões que custam pouco para mim e valem para ele (prazo, implantação, treinamento, suporte, pagamento) e o que eu peço em troca de cada uma. Calcule a contribuição de cada cenário.", "teste": "A IA respeitou sua alçada de desconto?"}, {"etapa": "Fechamento", "titulo": "Follow-up D+1, D+3 e D+7", "texto": "Resumo da conversa: [colar sem dados pessoais]. Escreva o follow-up D+1 (resumo útil), D+3 (evidência ou resposta à dúvida) e D+7 (confirmar decisão ou encerrar com respeito). Cada mensagem com até 4 linhas e algo útil — nada de “e aí, pensou?”.", "teste": "Algum contato é só cobrança?"}, {"etapa": "Fechamento", "titulo": "Compromisso com dono e prazo", "texto": "Com base nesta conversa [resumo], escreva a frase de fechamento consultivo em três movimentos: resumo da necessidade e condições; confirmação de critérios e decisor; pedido de um compromisso concreto, com data, que o cliente possa aceitar ou recusar.", "teste": "O próximo passo tem dono e data?"}, {"etapa": "Pós-venda", "titulo": "Gatilhos de relacionamento", "texto": "Gatilho: [pedido entregue há 7 dias / reclamação aberta / janela de reposição chegando]. Cliente: [tipo, anonimizado].\nEscreva uma mensagem útil para este gatilho, sem oferta se houver reclamação aberta ou se o cliente recusou promoções. Indique o responsável sugerido e o prazo. Até 4 linhas.", "teste": "Há oferta para quem tem reclamação aberta?"}, {"etapa": "Pós-venda", "titulo": "Priorização da carteira", "texto": "Abaixo está minha carteira (anonimizada, últimos 90 dias): cliente, compras, receita, margem, dias desde a última compra / ciclo usual, sinal ou reclamação, potencial.\n[colar tabela]\nEscolha 4 ações para esta semana, com justificativa, responsável e indicador.\nREGRAS: reparar antes de ofertar; respeitar quem recusou promoções; não chamar de cliente perdido sem entender o ciclo; considerar a margem antes de sugerir desconto.", "teste": "A IA respeitou quem recusou promoções?"}, {"etapa": "Pós-venda", "titulo": "Recuperação de confiança", "texto": "Um cliente reclamou que [o que aconteceu]. Escreva minha resposta em 3 passos: reconhecer o ocorrido sem desculpas; perguntar o impacto para ele; combinar um encaminhamento que eu possa cumprir, com responsável e horário de retorno. Não prometa solução que eu ainda não confirmei.", "teste": "Prometeu algo que não foi verificado?"}, {"etapa": "Pós-venda", "titulo": "Pedido de indicação ético", "texto": "O cliente [tipo] teve boa experiência com [o que foi entregue]. Escreva uma mensagem que primeiro confirma se tudo correu bem e, só se a resposta for positiva, convida a indicar outro lojista para quem faça sentido — sem pressão e sem pedir telefone de terceiros.", "teste": "O convite vem depois de confirmar o valor entregue?"}, {"etapa": "Gestão e CRM", "titulo": "Sales Model Canvas — critério de saída", "texto": "Meu funil tem as etapas: [listar]. Para a etapa [QUALIFICAÇÃO], sugira:\n• objetivo da etapa;\n• o que precisa estar confirmado para avançar (critério de saída);\n• motivos para descartar a oportunidade;\n• próximo passo padrão;\n• tempo máximo parada antes de eu agir.\nAntes de responder, me faça as perguntas que faltarem sobre o meu negócio. Referência: Sales Model Canvas (Thiago Reis, Growth Machine).", "teste": "O critério de avanço é um fato confirmado?"}, {"etapa": "Gestão e CRM", "titulo": "Meta reversa", "texto": "Minha meta é [10] vendas no mês. Minhas taxas atuais são: proposta→venda [50%]; reunião realizada→proposta [50%]; conversa→reunião [40%]; contato→conversa [25%]; comparecimento às reuniões [75%].\nCalcule de trás para frente quantas propostas, reuniões realizadas e agendadas, conversas e contatos eu preciso no mês e por dia útil ([20] dias). Mostre a conta. Depois diga qual taxa, se melhorar 10 pontos, reduz mais o esforço.", "teste": "A IA mostrou a conta?"}, {"etapa": "Gestão e CRM", "titulo": "CRM + resumo de conversa", "texto": "Monte as colunas de um CRM em planilha para [negócio], com as etapas [listar] e uma lista fixa de motivos de perda. Diga quais campos são obrigatórios.\n\nRESUMO (após cada conversa): Resuma esta conversa em uma linha de CRM com: cliente (código), etapa, necessidade, objeção, decisor, próximo passo e data. Conversa: [colar sem nomes, telefones ou dados pessoais].", "teste": "Dá para preencher em um minuto por cliente?"}, {"etapa": "Gestão e CRM", "titulo": "Ritual semanal do gestor", "texto": "Aqui estão os números da semana da minha equipe por etapa (anonimizados): [colar]. E os motivos de perda registrados: [colar].\n1) Compare as passagens entre etapas e aponte onde o funil mais vazou.\n2) Agrupe os motivos de perda em até 4 categorias.\n3) Sugira UMA conversa para a equipe treinar esta semana e escreva o roteiro do cliente simulado.\nNão conclua causas que os dados não mostram; diga o que precisaria ser verificado.", "teste": "Terminou com uma decisão sobre o funil?"}];
+const MATS=[
+ ["Kit do Módulo IA","Prompts prontos e plano B offline","https://docs.google.com/presentation/d/1fPwWKTw3oFWEYGsZxa3TeXdCHG8X7gWGkJ4NWlH3j8k/edit"],
+ ["Kit de Templates","Canvas e fichas de todas as atividades","https://docs.google.com/presentation/d/1NdklAh0WjrIV1_DdeYvvyEsAOrzV4zpoxfmxed-UNe8/edit"],
+ ["CRM Simples","Planilha com funil, motivos de perda e meta reversa","https://docs.google.com/spreadsheets/d/1uSQcPYYHPtyUI12YCBNoh2W7UckjeFofMNHjOPR95hs/edit"],
+ ["Canvas — 3 camadas","Versão em documento para editar","https://docs.google.com/document/d/1JVERIqZSAlIr33LSHsdr-jFGBIjq556xTI-EGieuhN8/edit"],
+ ["Kit de Práticas — Módulo 1","Protocolos, cenas e rubricas","https://docs.google.com/presentation/d/1a16iba1R29_oDm4Jhw_cVRUVHkci3rV9h9uMk25T2ZQ/edit"],
+ ["Pasta do curso","Todos os materiais","https://drive.google.com/drive/folders/1s_kfkk4zo26xU-auWHp97Udt-9QNKsa2"]];
+const CANVAS=[
+ {id:"c1",nome:"Camada 1 • Módulo 1",g:"g3",boxes:[["VOCÊ","Sua força comercial, o comportamento a melhorar e o hábito de evolução."],["OFERTA","Para quem? Qual problema resolve? Que benefício pode ser verificado?"],["DESAFIO INICIAL","O que está travando suas vendas? (guarde até o fim do curso)"],["FATO × HIPÓTESE","O que é fato e o que ainda é hipótese?"],["CONVERSA","Que pergunta consultiva aproxima do problema?"],["FUNIL","Em que etapa está a oportunidade e que evidência comprova o avanço?"]]},
+ {id:"c2",nome:"Camada 2 • Módulo 2",g:"g3",boxes:[["ABORDAGEM","Canal, contexto e abertura relevante."],["QUALIFICAÇÃO","Necessidade, objetivo, decisor e prazo."],["OBJEÇÃO-CHAVE","O que o cliente declarou? Como verificar?"],["LIMITES E ALTERNATIVAS","Melhor alternativa sem acordo (BATNA), alçada, custos, opções de pacote."],["PRÓXIMO PASSO","Quem fará o quê e em que momento?"],["TESTE DE COERÊNCIA","Que valor foi demonstrado? O que não podemos prometer?"]]},
+ {id:"c3",nome:"Camada 3 • Módulo 3",g:"g2",boxes:[["CARTEIRA PRIORITÁRIA","Qual cliente/segmento? Que fatos sustentam a prioridade?"],["AÇÃO DE FIDELIZAÇÃO","Qual gatilho, contato útil, dono e momento?"],["INDICADORES","Indicador • fórmula • fonte • linha de base • revisão"],["PLANO DE 30 DIAS","Semana 1 medir • 2 testar • 3 executar • 4 revisar"]]},
+ {id:"ci",nome:"Módulo IA • Plano de 7 dias",g:"g2",boxes:[["DIA 1 E 2","Copiloto pronto • lista de clientes ideais"],["DIAS 3 A 5","Contatos autorizados com mensagem testada (meta ajustada à sua capacidade)"],["DIA 6","CRM atualizado"],["DIA 7","O que funcionou? O que vou ajustar?"]]},
+ {id:"cs",nome:"Síntese • 1 página",g:"g2",boxes:[["MEU DESAFIO ERA…","Do Módulo 1"],["MINHA PRIMEIRA AÇÃO SERÁ…","Com responsável e data"],["VOU VERIFICAR A EVOLUÇÃO POR…","Indicador e fonte"],["COMPROMISSO","Até ___, farei ___. Comprovarei por ___."]]}];
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem('apc_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('apc_'+k,JSON.stringify(v))}catch(e){}}};
+function toast(t){const e=$('#toast');e.textContent=t||'Copiado!';e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1600)}
+function copyText(t){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast()).catch(()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();toast()})}
+function copyEl(id){copyText($('#'+id).innerText)}
+/* PROMPT */
+const P=store.get('prompt',{});
+$$('[data-p]').forEach(e=>{e.value=P[e.dataset.p]||'';e.addEventListener('input',buildPrompt)});
+$$('[data-t]').forEach(e=>{if(P['t'+e.dataset.t]!==undefined)e.checked=P['t'+e.dataset.t];e.addEventListener('change',buildPrompt)});
+function buildPrompt(){const v={};$$('[data-p]').forEach(e=>v[e.dataset.p]=e.value.trim());$$('[data-t]').forEach(e=>v['t'+e.dataset.t]=e.checked);store.set('prompt',v);
+ const L=[];if(v.papel)L.push('PAPEL: '+v.papel);if(v.req)L.push('REQUISIÇÃO: '+v.req);if(v.obj)L.push('OBJETIVO: '+v.obj);if(v.mod)L.push('MODELO: '+v.mod);if(v.pan)L.push('PANORAMA: '+v.pan);
+ const T=[];if(v.t1)T.push('não invente preço, prazo, desconto ou resultado');if(v.t2)T.push('se faltar informação, pergunte antes de escrever');if(v.t3)T.push('entregue 2 versões para eu comparar');if(v.t4)T.push('depois, avalie a resposta como se fosse o cliente: ele responderia? o que o faria ignorar?');
+ if(T.length)L.push('REGRAS: '+T.join('; ')+'.');$('#pout').textContent=L.length?L.join('\n'):'Preencha os campos ao lado…'}
+function exPrompt(){const ex={papel:'Aja como um vendedor consultivo de uma fornecedora de etiquetas para confecções do Agreste.',req:'Escreva a primeira mensagem de WhatsApp para a Cliente A, dona de uma loja de jeans em Toritama que nunca comprou de nós.',obj:'Abrir conversa — não vender nem mandar preço.',mod:'Até 4 linhas, tom próximo, sem emoji, terminar com UMA pergunta fácil.',pan:'Vi no Instagram que a loja lançou coleção nova esta semana. Não sei quem é o fornecedor atual.'};$$('[data-p]').forEach(e=>e.value=ex[e.dataset.p]);buildPrompt()}
+buildPrompt();
+/* COPILOTO */
+const C=store.get('copiloto',{});
+$$('[data-c]').forEach(e=>{e.value=C[e.dataset.c]||'';e.addEventListener('input',buildCop)});$('#altaperf').addEventListener('change',buildCop);
+function buildCop(){const v={};$$('[data-c]').forEach(e=>v[e.dataset.c]=e.value.trim());store.set('copiloto',v);const f=(x,d)=>x||d;
+ let t=`Você é meu copiloto comercial. Trabalhe sempre a partir deste contexto.
+QUEM SOU: ${f(v.quem,'[nome, cargo, empresa, cidade]')}
+O QUE VENDO E PARA QUEM: ${f(v.vendo,'[oferta] para [cliente ideal]')}
+PROBLEMAS QUE RESOLVO: ${f(v.resolve,'[problema 1]; [problema 2]')}
+O QUE NÃO RESOLVO: ${f(v.nao,'[limites — quando não sou a melhor opção]')}
+PROVAS QUE POSSO USAR: ${f(v.provas,'[evidências reais; nunca invente outras]')}
+MEU TOM: ${f(v.tom,'[ex.: direto, próximo, sem exagero]')}
+REGRAS: nunca invente preço, prazo, garantia ou resultado; se faltar informação, pergunte antes de escrever; termine sempre com uma pergunta ou próximo passo; não use dados pessoais de clientes (uso códigos como Cliente A).
+A CADA PEDIDO eu informo o contexto do cliente (situação, histórico, decisor) e a tarefa.`;
+ if($('#altaperf').checked)t+=`
+
+COMPORTAMENTO — VENDEDOR DE ALTA PERFORMANCE:
+1. Antes de escrever, pergunte qual é o cliente, o que já sei dele, o objetivo da conversa e o próximo passo que quero.
+2. Se eu pedir proposta antes de entender o problema, me alerte e sugira 2 perguntas de diagnóstico.
+3. Marque [CONFIRMAR] em qualquer preço, prazo ou número.
+4. Termine toda mensagem com um próximo passo claro e consentido.
+5. Quando eu resumir uma conversa, devolva uma linha de CRM: necessidade, objeção, decisor, próximo passo e data.
+Você me ajuda a pensar. Quem decide e envia sou eu.`;
+ $('#cout').textContent=t}
+function fromCanvas(){const cv=store.get('canvas',{});const set=(k,val)=>{const e=$(`[data-c="${k}"]`);if(val&&!e.value)e.value=val};set('vendo',cv['c1_1']);set('nao',cv['c2_3']);buildCop();toast('Dados do Canvas aplicados onde estava vazio')}
+buildCop();
+/* BIBLIOTECA */
+const ETAPAS=['Todas',...new Set(LIB.map(x=>x.etapa))];let fsel='Todas';
+$('#filters').innerHTML=ETAPAS.map(e=>`<button class="fchip${e==='Todas'?' on':''}" data-f="${e}">${e}</button>`).join('');
+$$('.fchip').forEach(b=>b.onclick=()=>{fsel=b.dataset.f;$$('.fchip').forEach(x=>x.classList.toggle('on',x===b));renderLib()});
+$('#q').addEventListener('input',renderLib);
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function renderLib(){const q=$('#q').value.toLowerCase();const items=LIB.map((x,i)=>({...x,i})).filter(x=>(fsel==='Todas'||x.etapa===fsel)&&(!q||(x.titulo+x.texto+x.etapa).toLowerCase().includes(q)));
+ $('#lib').innerHTML=items.length?items.map(x=>`<div class="card pcard"><div class="hd"><span>${esc(x.titulo)}</span><span class="tag" style="background:rgba(255,255,255,.2);color:#fff">${x.etapa}</span></div><div class="bd"><div class="ptext">${esc(x.texto).replace(/\[([^\]]+)\]/g,'<mark>[$1]</mark>')}</div><p class="ptest">Teste antes de usar: ${esc(x.teste)}</p></div><div class="pact"><button class="btn pri sm" onclick="copyText(LIB[${x.i}].texto)">Copiar prompt</button></div></div>`).join(''):'<p>Nenhum prompt encontrado.</p>'}
+renderLib();
+/* CANVAS */
+const CV=store.get('canvas',{});
+$('#ctabs').innerHTML=CANVAS.map((c,i)=>`<button class="tab${i?'':' on'}" data-tab="${c.id}">${c.nome}</button>`).join('');
+$('#cvs').innerHTML=CANVAS.map((c,i)=>`<div class="cv${i?'':' on'}" id="cv_${c.id}"><h3 class="print-only">${c.nome}</h3><div class="cgrid ${c.g}">${c.boxes.map((b,j)=>`<div class="cbox"><h4>${b[0]}</h4><p>${b[1]}</p><textarea data-cv="${c.id}_${j}">${esc(CV[c.id+'_'+j]||'')}</textarea></div>`).join('')}</div></div>`).join('');
+$$('.tab').forEach(t=>t.onclick=()=>{$$('.tab').forEach(x=>x.classList.toggle('on',x===t));$$('.cv').forEach(v=>v.classList.toggle('on',v.id==='cv_'+t.dataset.tab))});
+let st;$$('[data-cv]').forEach(e=>e.addEventListener('input',()=>{CV[e.dataset.cv]=e.value;store.set('canvas',CV);clearTimeout(st);$('#savedmsg').textContent='Salvo neste aparelho ✓';st=setTimeout(()=>$('#savedmsg').textContent='',1500)}));
+function clearCanvas(){if(confirm('Apagar todo o seu Canvas deste aparelho?')){store.set('canvas',{});$$('[data-cv]').forEach(e=>e.value='');toast('Canvas limpo')}}
+/* META REVERSA */
+function meta(){const g=id=>parseFloat($('#'+id).value)||0;const M=g('m_meta'),t1=g('m_t1')/100,t2=g('m_t2')/100,t3=g('m_t3')/100,t4=g('m_t4')/100,t5=g('m_t5')/100,d=g('m_d');const c=x=>isFinite(x)?Math.ceil(x):'—';
+ const prop=c(M/t1),reu=c(prop/t2),ag=c(reu/t5),conv=c(reu/t3),cont=c(conv/t4),dia=c(cont/d);
+ $('#mres').innerHTML=[[prop,'propostas'],[reu,'reuniões realizadas'],[ag,'reuniões agendadas'],[conv,'conversas'],[cont,'contatos no mês'],[dia,'contatos por dia útil']].map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join('')}
+$$('.calc input').forEach(e=>e.addEventListener('input',meta));meta();
+const S=store.get('smc',{});$$('[data-s]').forEach(e=>{e.value=S[e.dataset.s]||'';e.addEventListener('input',()=>{S[e.dataset.s]=e.value;store.set('smc',S)})});
+/* MATERIAIS */
+$('#mats').innerHTML=MATS.map(m=>`<a class="card" href="${m[2]}" target="_blank" rel="noopener"><div class="hd">${m[0]}</div><div class="bd">${m[1]}<br><b style="color:var(--turq)">Abrir »</b></div></a>`).join('');
+/* menu ativo */
+const secs=$$('section[id]');addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(scrollY>=s.offsetTop-120)cur=s.id});$$('nav.menu a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+cur))});
+$$('nav.menu a').forEach(a=>a.onclick=()=>$('nav.menu').classList.remove('open'));
+</script>
+</body>
+</html>
