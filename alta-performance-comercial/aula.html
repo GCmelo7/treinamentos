@@ -225,7 +225,7 @@ MODS.push({
       ideia: "Escolha um desafio real. Ele fica guardado com você e volta no encerramento do Módulo 3, para ser confrontado com o seu plano de 30 dias.",
       w: [{ type: "choose", id: "m1_trava", q: "Onde está a trava, hoje?", opts: ["Abordagem", "Preço", "Organização", "Confiança", "Outra"] },
           { type: "fields", id: "m1_desafio", fields: [["d", "Complete a frase", "Hoje, o que mais trava minhas vendas é…", 2]],
-            tpl: "{d}", canvas: { key: "c1_2", label: "Salvar no Canvas (Desafio inicial)" } }],
+            tpl: "{d}", canvas: { key: "c1_desafio", label: "Salvar no Canvas (Desafio inicial)" } }],
       nota: "O registro é seu. Não será recolhido nem exposto." },
 
     { bloco: "Noite 1 • Abertura", sl: "4–5", t: 13, tipo: "pratica", titulo: "Uma compra que você nunca esqueceu",
@@ -255,7 +255,7 @@ MODS.push({
       cards: [["Preparar", "Domínio da oferta e do contexto."], ["Diagnosticar", "Necessidades e prioridades."], ["Conduzir", "Escolhas e próximos passos."], ["Aprender", "Feedback e ajuste da prática."]],
       w: [{ type: "choose", id: "m1_comp", q: "Qual competência mais precisa evoluir?", opts: ["Preparar", "Diagnosticar", "Conduzir", "Aprender"] },
           { type: "fields", id: "m1_autodiag", fields: [["c", "Que comportamento real comprova essa escolha?", "Ex.: apresento o produto antes de perguntar o que o cliente precisa", 2]],
-            tpl: "Competência a desenvolver: {@m1_comp}. Evidência: {c}", canvas: { key: "c1_0", label: "Levar para o Canvas (Você)" } }] },
+            tpl: "Competência a desenvolver: {@m1_comp}. Evidência: {c}", canvas: { key: "c1_evoluir", label: "Levar para o Canvas (O que vou evoluir)" } }] },
 
     { bloco: "Noite 1 • Mentalidade", sl: "15", t: 5, tipo: "pratica", titulo: "A diferença entre agir e controlar",
       ideia: "Você responde pela sua ação. Outros fatores exigem leitura de contexto — e não são desculpa nem culpa sua.",
@@ -271,7 +271,7 @@ MODS.push({
       ideia: "Depois de uma perda, separe o que aconteceu do que você supõe. Só então decida como seguir.",
       cards: [["Regular", "Evitar reação impulsiva."], ["Compreender", "Perguntar só com abertura."], ["Registrar", "Guardar fatos e contexto."], ["Seguir", "Respeitar e priorizar."]],
       w: [{ type: "fields", id: "m1_fhv", fields: [["f", "Fato", "Cliente afirmou não ter verba.", 1], ["h", "Hipótese", "A prioridade pode ter mudado.", 1], ["v", "Verificação", "Perguntar se e quando vale retomar.", 1]],
-            tpl: "Fato: {f}\nHipótese: {h}\nVerificação: {v}", canvas: { key: "c1_3", label: "Levar para o Canvas (Fato × hipótese)" } }] },
+            tpl: "Fato: {f}\nHipótese: {h}\nVerificação: {v}", canvas: { key: "c1_fato", label: "Levar para o Canvas (Fato × hipótese)" } }] },
 
     { bloco: "Noite 1 • Resiliência", sl: "20", t: 4, tipo: "discussao", titulo: "Qual decisão comercial você mudaria?",
       ideia: "Pense numa oportunidade travada sua. Defenda a decisão com um fato, não apenas com sua impressão.",
@@ -303,13 +303,13 @@ MODS.push({
     { bloco: "Noite 1 • Disciplina", sl: "29", t: 2, tipo: "pratica", titulo: "Um ritual real para os próximos cinco dias",
       ideia: "Troque “vou me organizar” por uma ação observável.",
       w: [{ type: "fields", id: "m1_ritual", fields: [["q", "Quando?", "Antes de cada visita importante", 1], ["s", "Em qual situação?", "Clientes novos de atacado", 1], ["c", "Como saberei que fiz?", "Duas perguntas anotadas no CRM", 1]],
-            tpl: "Meu ritual: {q}, em {s}. Saberei que fiz porque {c}.", canvas: { key: "c1_0", label: "Levar para o Canvas (Você)" } }],
+            tpl: "Meu ritual: {q}, em {s}. Saberei que fiz porque {c}.", canvas: { key: "c1_habito", label: "Levar para o Canvas (Meu hábito)" } }],
       nota: "Exemplos: comércio — rever os 3 produtos mais procurados antes de abrir; serviço — preparar hipótese e pergunta antes do atendimento; indústria — validar o processo do cliente antes da visita." },
 
     { bloco: "Noite 1 • Oferta e valor", sl: "30–31", t: 8, tipo: "pratica", titulo: "Segurança vem de conhecer o que você vende",
       ideia: "Inclusive os limites. Antes de apresentar, responda quatro perguntas sobre a sua oferta.",
       w: [{ type: "fields", id: "m1_oferta", fields: [["p", "Para quem?", "Qual perfil realmente se beneficia?", 1], ["pr", "Que problema?", "Que situação ou desejo atende?", 1], ["d", "Qual diferença?", "O que comprova o benefício?", 1], ["l", "Qual limite?", "Quando não é a melhor opção?", 1]],
-            tpl: "Para {p}, que enfrenta {pr}. Diferença: {d}. Limite: {l}.", canvas: { key: "c1_1", label: "Levar para o Canvas (Oferta)" } }] },
+            tpl: "Para {p}, que enfrenta {pr}. Diferença: {d}. Limite: {l}.", canvas: { map: { p: "c1_cliente", l: "c1_limite" }, label: "Levar para o Canvas (Cliente e limite)" } }] },
 
     { bloco: "Noite 1 • Oferta e valor", sl: "32–34", t: 14, tipo: "conceito", titulo: "Tradução de valor",
       ideia: "Valor não existe isolado do problema do cliente. Suba a escada: atributo → contexto → benefício → evidência.",
@@ -320,7 +320,7 @@ MODS.push({
     { bloco: "Noite 1 • Oferta e valor", sl: "35 + IA", t: 7, tipo: "ia", titulo: "Da característica ao motivo para comprar",
       ideia: "Primeiro a turma constrói a frase de valor com o instrutor. Depois, a mesma tarefa vai para a IA duas vezes: um pedido fraco e um pedido com método.",
       w: [{ type: "fields", id: "m1_valor", fields: [["cl", "Cliente", "lojista de moda praia do Agreste", 1], ["ct", "Contexto", "repõe grades toda semana pelo WhatsApp", 1], ["at", "Atributo", "catálogo com pedido mínimo por grade", 1], ["be", "Benefício", "menos erro de tamanho na reposição", 1], ["ev", "Evidência", "comparar devoluções antes e depois de 30 dias", 1]],
-            tpl: "Para {cl} que enfrenta {ct}, {at} pode ajudar em {be}, verificável por {ev}." },
+            tpl: "Para {cl} que enfrenta {ct}, {at} pode ajudar em {be}, verificável por {ev}.", canvas: { map: { at: "c1_atributo", ct: "c1_contexto", be: "c1_beneficio", ev: "c1_evidencia" }, label: "Levar para o Canvas (Oferta e valor)" } },
           { type: "compare", id: "m1_iademo", a: ["Pedido fraco", "Me dá um argumento de venda para o meu produto."],
             b: ["Pedido com método (PROMPT)", "Aja como um vendedor consultivo. Quero transformar esta frase de valor em uma mensagem curta para o cliente: “{@m1_valor}”. Objetivo: abrir conversa, sem prometer resultado. Até 4 linhas, tom próximo, terminando com uma pergunta. Não invente números."] }],
       nota: "Quem demonstra é o instrutor. A turma só observa a diferença entre as duas respostas." },
@@ -330,7 +330,7 @@ MODS.push({
 
     { bloco: "Noite 1 • Fechamento", sl: "38", t: 1, tipo: "pratica", titulo: "Bilhete de saída",
       ideia: "Uma mudança observável para a próxima venda. Retomamos na próxima aula.",
-      w: [{ type: "fields", id: "m1_bilhete", fields: [["dx", "Na próxima venda, vou deixar de…", "", 1], ["cm", "E vou começar a…", "", 1]], tpl: "Vou deixar de {dx} e começar a {cm}." }] },
+      w: [{ type: "fields", id: "m1_bilhete", fields: [["dx", "Na próxima venda, vou deixar de…", "", 1], ["cm", "E vou começar a…", "", 1]], tpl: "Vou deixar de {dx} e começar a {cm}.", canvas: { map: { dx: "c1_deixar", cm: "c1_comecar" }, label: "Levar para o Canvas (Compromisso)" } }] },
 
     { bloco: "Noite 2 • Venda consultiva", sl: "39–40", t: 6, tipo: "conceito", titulo: "O melhor argumento começa com uma boa compreensão",
       ideia: "Ontem olhamos para o vendedor. Agora vamos organizar a conversa: investigar contexto, problema, impacto e objetivo — sem virar interrogatório." },
@@ -344,7 +344,7 @@ MODS.push({
     { bloco: "Noite 2 • Venda consultiva", sl: "44–45", t: 7, tipo: "pratica", titulo: "BANT e GPCT: viabilidade e projeto do cliente",
       ideia: "BANT é uma lente de viabilidade, não um filtro para desrespeitar clientes. GPCT ajuda a entender para onde o cliente quer ir.",
       cards: [["B • Orçamento", "Há condição de investir?"], ["A • Decisão", "Quem decide ou influencia?"], ["N • Necessidade", "Existe aderência real?"], ["T • Prazo", "Quando faz sentido agir?"], ["G • Objetivos", "Onde quer chegar?"], ["P • Planos", "O que já pretende fazer?"], ["C • Desafios", "O que está dificultando?"], ["T • Prazo", "Para quando?"]],
-      w: [{ type: "fields", id: "m1_perg", fields: [["b", "Uma pergunta de viabilidade (BANT)", "Quem mais participa dessa decisão?", 1], ["g", "Uma pergunta de projeto (GPCT)", "O que vocês querem que esteja funcionando antes do pico?", 1]], tpl: "BANT: {b}\nGPCT: {g}" }] },
+      w: [{ type: "fields", id: "m1_perg", fields: [["b", "Uma pergunta de viabilidade (BANT)", "Quem mais participa dessa decisão?", 1], ["g", "Uma pergunta de projeto (GPCT)", "O que vocês querem que esteja funcionando antes do pico?", 1]], tpl: "BANT: {b}\nGPCT: {g}", canvas: { key: "c1_pergunta", label: "Levar para o Canvas (Minha pergunta)" } }] },
 
     { bloco: "Noite 2 • Venda consultiva", sl: "46", t: 2, tipo: "pratica", titulo: "Método não é decorar três siglas",
       ideia: "Escolha as perguntas que fazem sentido. SPIN para necessidade e consequências; GPCT para direção e planos; BANT para condições de avançar.",
@@ -388,7 +388,7 @@ MODS.push({
       ideia: "No presencial, os primeiros segundos importam. No WhatsApp, clareza primeiro, questionário depois.",
       dialog: [["Genérica", "“Posso ajudar?” — seguido de um catálogo inteiro."], ["Consultiva", "“Você está buscando para revender ou para uso próprio? Posso mostrar as opções adequadas.”"], ["Cliente (WhatsApp)", "“Quanto sai uma grade para lojista?”"]],
       w: [{ type: "fields", id: "m2_whats", fields: [["p", "Preço ou faixa disponível", "A grade sai a partir de R$ ___", 1], ["c", "Condição de compra", "pedido mínimo de ___ grades, entrega em ___ dias", 1], ["q", "Uma pergunta útil", "É para reposição ou coleção nova?", 1]],
-            tpl: "{p}, com {c}. {q}" }],
+            tpl: "{p}, com {c}. {q}", canvas: { key: "c2_abordagem", label: "Levar para o Canvas (Abordagem)" } }],
       nota: "Responder a pergunta do cliente primeiro. Questionário antes do preço afasta." },
 
     { bloco: "Abordagem", sl: "7", t: 5, tipo: "pratica", titulo: "Leia sinais, não rotule pessoas",
@@ -398,7 +398,7 @@ MODS.push({
     { bloco: "Qualificação", sl: "8–10", t: 10, tipo: "pratica", titulo: "Três lentes. Uma conversa.",
       ideia: "A dor não conta toda a história, e viabilidade não é adivinhação. Use GPCT para o projeto e BANT para as condições de avançar.",
       cards: [["Objetivo", "O que quer melhorar?"], ["Plano", "O que já tentaram?"], ["Desafio", "Por que ainda falha?"], ["Prazo", "Quando precisa funcionar?"], ["Necessidade real", "Há aderência?"], ["Investimento", "Há capacidade?"], ["Decisor", "Quem decide e quem influencia?"], ["Prazo de decisão", "Quando decidem?"]],
-      w: [{ type: "fields", id: "m2_qualif", fields: [["g", "Sua pergunta de projeto (GPCT)", "O que precisa estar funcionando antes do pico?", 1], ["b", "Sua pergunta de viabilidade (BANT)", "Quem participa da aprovação?", 1]], tpl: "GPCT: {g}\nBANT: {b}", canvas: { key: "c2_1", label: "Levar para o Canvas (Qualificação)" } }] },
+      w: [{ type: "fields", id: "m2_qualif", fields: [["g", "Sua pergunta de projeto (GPCT)", "O que precisa estar funcionando antes do pico?", 1], ["b", "Sua pergunta de viabilidade (BANT)", "Quem participa da aprovação?", 1]], tpl: "GPCT: {g}\nBANT: {b}", canvas: { map: { g: "c2_gpct", b: "c2_bant" }, label: "Levar para o Canvas (Qualificação)" } }] },
 
     { bloco: "Qualificação", sl: "11", t: 4, tipo: "pratica", titulo: "Qualificar também é saber recuar",
       ideia: "Avançar quando há aderência e próximo passo. Investigar quando falta informação decisiva. Recuar quando a oferta não atende ou o risco é inaceitável.",
@@ -427,7 +427,7 @@ MODS.push({
     { bloco: "Proposta", sl: "19–20", t: 10, tipo: "pratica", titulo: "Pitch bom é resposta, não discurso",
       ideia: "Contexto confirmado → solução adequada → evidência honesta → proposta de avanço. E condições claras: o que será entregue, como verificar, prazo e próximo passo.",
       w: [{ type: "fields", id: "m2_pitch", fields: [["c", "Contexto confirmado", "Vocês perdem pedidos na troca de turno e o pico começa em 14 dias", 2], ["s", "Solução adequada", "", 1], ["e", "Evidência honesta", "", 1], ["a", "Proposta de avanço", "", 1]],
-            tpl: "Pelo que conversamos, {c}. Por isso, sugiro {s}. Para verificar: {e}. Próximo passo: {a}" }] },
+            tpl: "Pelo que conversamos, {c}. Por isso, sugiro {s}. Para verificar: {e}. Próximo passo: {a}", canvas: { key: "c2_proposta", label: "Levar para o Canvas (Proposta de valor)" } }] },
 
     { bloco: "Proposta", sl: "21", t: 4, tipo: "pratica", titulo: "Aumentar ticket só quando aumenta valor",
       ideia: "Upsell: oferta superior quando o cliente realmente precisa de mais. Cross-sell: algo complementar que reduz uma dificuldade validada.",
@@ -437,7 +437,7 @@ MODS.push({
       ideia: "Protocolo: acolher → clarificar → responder → confirmar. Escute sem interromper, pergunte antes de supor, responda com evidência e verifique se resolveu.",
       w: [{ type: "choose", id: "m2_obj", q: "Escolha uma objeção:", opts: ["“Agora não é prioridade.”", "“Preciso falar com meu sócio.”", "“Já contratei isso antes e não deu certo.”", "“Esses sistemas fazem tudo a mesma coisa.”", "“Consegue tirar 15%?”"] },
           { type: "fields", id: "m2_protocolo", fields: [["a", "Acolher", "Faz sentido querer…", 1], ["c", "Clarificar (pergunta)", "O que precisaria acontecer para…?", 1], ["r", "Responder com evidência", "", 1], ["f", "Confirmar", "Isso responde à sua preocupação?", 1]],
-            tpl: "Objeção: {@m2_obj}\n1. {a}\n2. {c}\n3. {r}\n4. {f}", canvas: { key: "c2_2", label: "Levar para o Canvas (Objeção-chave)" } }] },
+            tpl: "Objeção: {@m2_obj}\n1. {a}\n2. {c}\n3. {r}\n4. {f}", canvas: { key: "c2_obj_real", label: "Levar para o Canvas (Objeção-chave)" } }] },
 
     { bloco: "Prática 2", sl: "25–26", t: 26, tipo: "pratica", titulo: "Clínica de objeções: descobrir antes de responder",
       ideia: "Duas rodadas completas. A mesma objeção é respondida antes e depois do feedback. Duas pessoas vendem; a terceira já vendeu no laboratório.",
@@ -448,7 +448,7 @@ MODS.push({
     { bloco: "Negociação", sl: "27–29", t: 12, tipo: "pratica", titulo: "Negociar começa antes do desconto",
       ideia: "Posição é o que o cliente pede; interesse é o porquê. BATNA é a alternativa real de cada lado. ZOPA não é só faixa de preço: inclui escopo, risco e entrega.",
       cards: [["Posição", "“Quero pagar menos.”"], ["Interesse", "“Preciso reduzir risco sem perder o prazo.”"], ["BATNA", "Melhor alternativa sem acordo — de cada lado."], ["ZOPA", "Zona de acordo: limite do vendedor, prioridades do comprador, escopo e risco."]],
-      w: [{ type: "fields", id: "m2_batna", fields: [["mb", "Minha melhor alternativa se não houver acordo", "", 1], ["cb", "A provável alternativa do cliente", "", 1], ["li", "Meu limite autorizado", "", 1]], tpl: "Minha BATNA: {mb}\nBATNA provável do cliente: {cb}\nMeu limite: {li}", canvas: { key: "c2_3", label: "Levar para o Canvas (Limites e alternativas)" } }] },
+      w: [{ type: "fields", id: "m2_batna", fields: [["mb", "Minha melhor alternativa se não houver acordo", "", 1], ["cb", "A provável alternativa do cliente", "", 1], ["li", "Meu limite autorizado", "", 1]], tpl: "Minha BATNA: {mb}\nBATNA provável do cliente: {cb}\nMeu limite: {li}", canvas: { key: "c2_limites", label: "Levar para o Canvas (Limites e alternativas)" } }] },
 
     { bloco: "Negociação", sl: "30", t: 5, tipo: "pratica", titulo: "15% no preço. 50% na contribuição.", ficticio: true,
       ideia: "Desconto sai inteiro da sua margem. Teste com os números do exemplo e depois com os seus.",
@@ -469,11 +469,11 @@ MODS.push({
     { bloco: "Fechamento", sl: "36–37", t: 11, tipo: "pratica", titulo: "Fechamento não é pressão. É compromisso claro.",
       ideia: "Resuma necessidade e condições, confirme critérios e decisor, e peça um compromisso concreto e consentido — com dono e prazo.",
       w: [{ type: "quiz", id: "m2_combinado", opts: ["Vago", "Útil"], items: [["“Vou te mandar e você me diz.”", 0], ["“Envio as duas opções hoje; você e seu sócio avaliam amanhã às 15h?”", 1], ["“Qualquer coisa, me chama.”", 0], ["“Te ligo quinta às 10h para ouvir a decisão. Pode ser?”", 1]] },
-          { type: "fields", id: "m2_fech", fields: [["r", "Resumo", "Pelo que alinhamos…", 1], ["c", "Critério e decisor", "A decisão depende de… Está correto?", 1], ["p", "Compromisso (dono e prazo)", "", 1]], tpl: "{r}\n{c}\n{p}", canvas: { key: "c2_4", label: "Levar para o Canvas (Próximo passo)" } }] },
+          { type: "fields", id: "m2_fech", fields: [["r", "Resumo", "Pelo que alinhamos…", 1], ["c", "Critério e decisor", "A decisão depende de… Está correto?", 1], ["p", "Compromisso (dono e prazo)", "", 1]], tpl: "{r}\n{c}\n{p}", canvas: { key: "c2_passo", label: "Levar para o Canvas (Fechamento e próximo passo)" } }] },
 
     { bloco: "Fechamento", sl: "38", t: 3, tipo: "pratica", titulo: "Follow-up não é “e aí, pensou?”",
       ideia: "Cada contato entrega algo útil. Se o cliente pediu outro prazo, o pedido dele prevalece.",
-      w: [{ type: "fields", id: "m2_cad", fields: [["d1", "D+1 • resumo útil e condições acordadas", "", 1], ["d3", "D+3 • evidência ou resposta à dúvida pendente", "", 1], ["d7", "D+7 • confirmar decisão ou encerrar contato", "", 1]], tpl: "D+1: {d1}\nD+3: {d3}\nD+7: {d7}" }] },
+      w: [{ type: "fields", id: "m2_cad", fields: [["d1", "D+1 • resumo útil e condições acordadas", "", 1], ["d3", "D+3 • evidência ou resposta à dúvida pendente", "", 1], ["d7", "D+7 • confirmar decisão ou encerrar contato", "", 1]], tpl: "D+1: {d1}\nD+3: {d3}\nD+7: {d7}", canvas: { map: { d1: "c2_d1", d3: "c2_d3", d7: "c2_d7" }, label: "Levar para o Canvas (Cadência)" } }] },
 
     { bloco: "Fechamento", sl: "39", t: 2, tipo: "canvas", titulo: "Canvas: da conversa à decisão",
       ideia: "Segunda camada do seu mapa. Termine em casa se precisar.",
@@ -537,7 +537,7 @@ MODS.push({
     { bloco: "Parte B • Relacionamento", sl: "22", t: 5, tipo: "pratica", titulo: "Fidelizar é um sistema, não uma campanha",
       ideia: "Gatilho → ação útil → responsável. Registro → verificação → ajuste.",
       w: [{ type: "fields", id: "m3_prog", fields: [["g", "Gatilho", "15 dias após a entrega", 1], ["a", "Ação útil", "Ligação para conferir a saída das peças", 1], ["r", "Responsável", "", 1], ["v", "Como verificar", "Registro no CRM + recompra no ciclo", 1]],
-            tpl: "Quando {g}, {r} fará: {a}. Verificação: {v}.", canvas: { key: "c3_1", label: "Levar para o Canvas (Ação de fidelização)" } }] },
+            tpl: "Quando {g}, {r} fará: {a}. Verificação: {v}.", canvas: { map: { g: "c3_g", a: "c3_au", r: "c3_r", v: "c3_v" }, label: "Levar para o Canvas (Ação de fidelização)" } }] },
 
     { bloco: "Parte B • Relacionamento", sl: "23", t: 5, tipo: "pratica", titulo: "Indicação se merece, não se exige",
       ideia: "Recompra: necessidade atual confirmada. Indicação: convite depois de valor entregue, sem pressão e sem pedir contato de terceiros sem consentimento.",
@@ -545,7 +545,7 @@ MODS.push({
 
     { bloco: "Parte C • Seu plano", sl: "24–26", t: 13, tipo: "pratica", titulo: "Agora a carteira é sua",
       ideia: "Use um cliente e um desafio reais (ou um caso fictício). Um plano precisa caber na agenda: uma prioridade por vez, sob a sua autonomia, com prazo e capacidade conhecidos.",
-      w: [{ type: "fields", id: "m3_exp", fields: [["h", "Hipótese: o que pode melhorar?", "", 1], ["a", "Ação: o que vou mudar?", "", 1], ["v", "Verificação: o que vou observar?", "", 1]], tpl: "Hipótese: {h}\nAção: {a}\nVerificação: {v}" }] },
+      w: [{ type: "fields", id: "m3_exp", fields: [["h", "Hipótese: o que pode melhorar?", "", 1], ["a", "Ação: o que vou mudar?", "", 1], ["v", "Verificação: o que vou observar?", "", 1]], tpl: "Hipótese: {h}\nAção: {a}\nVerificação: {v}", canvas: { map: { h: "c3_h", a: "c3_a", v: "c3_v2" }, label: "Levar para o Canvas (Hipótese → ação → verificação)" } }] },
 
     { bloco: "Parte C • Seu plano", sl: "27", t: 6, tipo: "conceito", titulo: "Do problema à agenda de 30 dias", ficticio: true,
       ideia: "Modelo resolvido para inspirar — não para copiar.",
@@ -563,7 +563,7 @@ MODS.push({
     { bloco: "Parte C • Seu plano", sl: "29", t: 20, tipo: "canvas", titulo: "Construa seu plano de 30 dias",
       ideia: "Cada pessoa registra o próprio plano. Checkpoint com um colega: indicador, fonte e linha de base. Conclua com a primeira ação e o prazo.",
       w: [{ type: "canvas", layer: "c3" },
-          { type: "prompt", id: "m3_planoia", text: "Você é meu copiloto comercial. Meu plano de 30 dias está abaixo. Sugira UMA primeira ação que caiba em 30 minutos na próxima segunda-feira e aponte o ponto mais fraco do plano. Não invente números.\n\nCarteira prioritária: {c3_0}\nAção de fidelização: {c3_1}\nIndicadores: {c3_2}\nPlano: {c3_3}" }],
+          { type: "prompt", id: "m3_planoia", text: "Você é meu copiloto comercial. Meu plano de 30 dias está abaixo. Sugira UMA primeira ação que caiba em 30 minutos na próxima segunda-feira e aponte o ponto mais fraco do plano. Não invente números.\n\nCarteira prioritária: {c3_t0_0}; {c3_t1_0}\nAção de fidelização: {c3_au}\nIndicador: {c3_ind}\nSemana 1: {c3_s1}\nSemana 2: {c3_s2}\nSemana 3: {c3_s3}\nSemana 4: {c3_s4}" }],
       nota: "A IA sugere; a decisão é sua. Semana 1 medir • 2 testar • 3 executar • 4 revisar." },
 
     { bloco: "Parte C • Seu plano", sl: "30", t: 3, tipo: "pratica", titulo: "Seu plano sobrevive à segunda-feira?",
@@ -613,12 +613,110 @@ MODS.push({
 });
 
 
-const CANVAS={
- c1:{nome:"Camada 1 • Módulo 1",boxes:[["VOCÊ","Sua força comercial, o comportamento a melhorar e o hábito de evolução."],["OFERTA","Para quem? Qual problema resolve? Que benefício pode ser verificado?"],["DESAFIO INICIAL","O que está travando suas vendas?"],["FATO × HIPÓTESE","O que é fato e o que ainda é hipótese?"],["CONVERSA","Que pergunta consultiva aproxima do problema?"],["FUNIL","Em que etapa está a oportunidade e que evidência comprova o avanço?"]]},
- c2:{nome:"Camada 2 • Módulo 2",boxes:[["ABORDAGEM","Canal, contexto e abertura relevante."],["QUALIFICAÇÃO","Necessidade, objetivo, decisor e prazo."],["OBJEÇÃO-CHAVE","O que o cliente declarou? Como verificar?"],["LIMITES E ALTERNATIVAS","BATNA, alçada, custos, opções de pacote."],["PRÓXIMO PASSO","Quem fará o quê e em que momento?"],["TESTE DE COERÊNCIA","Que valor foi demonstrado? O que não podemos prometer?"]]},
- c3:{nome:"Camada 3 • Módulo 3",boxes:[["CARTEIRA PRIORITÁRIA","Qual cliente/segmento? Que fatos sustentam a prioridade?"],["AÇÃO DE FIDELIZAÇÃO","Qual gatilho, contato útil, dono e momento?"],["INDICADORES","Indicador • fórmula • fonte • linha de base • revisão"],["PLANO DE 30 DIAS","Semana 1 medir • 2 testar • 3 executar • 4 revisar"]]},
- ci:{nome:"Plano de 7 dias",boxes:[["DIA 1 E 2","Copiloto pronto • lista de clientes ideais"],["DIAS 3 A 5","Contatos autorizados com mensagem testada"],["DIA 6","CRM atualizado"],["DIA 7","O que funcionou? O que vou ajustar?"]]},
- cs:{nome:"Síntese",boxes:[["MEU DESAFIO ERA…","Do Módulo 1"],["MINHA PRIMEIRA AÇÃO SERÁ…","Com responsável e data"],["VOU VERIFICAR A EVOLUÇÃO POR…","Indicador e fonte"],["COMPROMISSO","Até ___, farei ___. Comprovarei por ___."]]}};
+// ESQUEMA ÚNICO DOS CANVAS — usado pelo kit (index), pela Aula ao vivo e pela página do Canvas
+// Cada caixa: id, área do grid, número, título, pergunta-guia, ícone e campos [chave, rótulo, linhas]
+const CANVAS_LAYERS = [
+ { id: "c1", tag: "CAMADA 1 • MÓDULO 1", nome: "Do instinto ao método", titulo: "Meu Mapa de Alta Performance",
+   sub: "Mentalidade, oferta, diagnóstico e mini-funil",
+   grid: ["des des des des des des", "for cli ofe ofe per per", "evo lim ofe ofe fat fat", "hab hab fun fun fun fun", "com com com pas pas pas"],
+   rows: "auto 1fr 1fr 1.05fr auto",
+   boxes: [
+    { a: "des", n: "★", t: "Desafio inicial", q: "O que está travando suas vendas hoje? Guarde: ele volta no fim do Módulo 3.", ic: "flag", tone: "hl", f: [["c1_desafio", "Hoje, o que mais trava minhas vendas é…", 1]] },
+    { a: "for", n: 1, t: "Minha força", q: "O que já faço bem? Um comportamento observável.", ic: "star", col: "VOCÊ", f: [["c1_forca", "", 3]] },
+    { a: "evo", n: 2, t: "O que vou evoluir", q: "Preparar, diagnosticar, conduzir ou aprender? Que comportamento real prova isso?", ic: "up", f: [["c1_evoluir", "", 3]] },
+    { a: "cli", n: 3, t: "Meu cliente", q: "Para quem a oferta é adequada? O que esse cliente valoriza?", ic: "user", col: "CLIENTE E OFERTA", f: [["c1_cliente", "", 3]] },
+    { a: "lim", n: 5, t: "Meu limite", q: "Quando a minha oferta NÃO é a melhor opção?", ic: "stop", f: [["c1_limite", "", 3]] },
+    { a: "ofe", n: 4, t: "Minha oferta e seu valor", q: "Suba a escada: o que faz → onde importa → o que melhora → como provar.", ic: "tag", f: [["c1_atributo", "Atributo — o que a oferta faz", 2], ["c1_contexto", "Contexto — onde isso importa", 2], ["c1_beneficio", "Benefício — o que pode melhorar", 2], ["c1_evidencia", "Evidência — como provar ou verificar", 2]] },
+    { a: "per", n: 6, t: "Minha pergunta", q: "Que pergunta consultiva faz o cliente refletir? (SPIN, GPCT ou BANT)", ic: "ask", col: "CONVERSA", f: [["c1_pergunta", "", 3]] },
+    { a: "fat", n: 7, t: "Fato × hipótese", q: "Numa oportunidade travada: o que é fato, o que suponho e como vou verificar?", ic: "check", f: [["c1_fato", "", 3]] },
+    { a: "hab", n: 8, t: "Meu hábito de 5 dias", q: "Quando? Em qual situação? Como saberei que fiz?", ic: "cal", f: [["c1_habito", "", 3], ["c1_dias", "Marque os dias: D1 D2 D3 D4 D5", 1]] },
+    { a: "fun", n: 9, t: "Meu mini-funil", q: "Onde a oportunidade está e como fazê-la avançar com responsabilidade?", ic: "funnel", kind: "funil",
+      f: [["c1_fu_e", "Entrada • oportunidade identificada", 1], ["c1_fu_c", "Conversa • primeiro contato útil", 1], ["c1_fu_d", "Diagnóstico • necessidade compreendida", 1], ["c1_fu_p", "Próximo passo • avanço consentido", 1], ["c1_fu_m", "Etapa que mais precisa melhorar", 1], ["c1_fu_k", "Critério para verificar o avanço", 1]] },
+    { a: "com", n: 10, t: "Compromisso do módulo", q: "Na próxima conversa…", ic: "hand", tone: "mint", f: [["c1_deixar", "vou deixar de…", 1], ["c1_comecar", "e começar a…", 1]] },
+    { a: "pas", n: 11, t: "Próximo passo", q: "Que ação concreta farei, com quem e até quando?", ic: "arrow", tone: "mint", f: [["c1_passo", "", 2]] }
+   ] },
+ { id: "c2", tag: "CAMADA 2 • MÓDULO 2", nome: "Do diagnóstico à decisão", titulo: "Da conversa à decisão",
+   sub: "Abordagem, qualificação, proposta, objeção, negociação e fechamento",
+   grid: ["abo qua pro obj lim pas", "abo qua pro obj lim pas", "cad cad cad coe coe pon"],
+   rows: "1fr 1fr auto", flow: true,
+   boxes: [
+    { a: "abo", n: 1, t: "Abordagem", q: "Canal, contexto e uma abertura que dê ao cliente um motivo para conversar.", ic: "chat", f: [["c2_canal", "Canal e contexto", 2], ["c2_abordagem", "Minha abertura", 4]] },
+    { a: "qua", n: 2, t: "Qualificação", q: "Entender o projeto (GPCT) e as condições de avançar (BANT).", ic: "search", f: [["c2_gpct", "Objetivo • plano • desafio • prazo", 4], ["c2_bant", "Necessidade • investimento • decisor • prazo de decisão", 3]] },
+    { a: "pro", n: 3, t: "Proposta de valor", q: "Contexto confirmado → solução adequada → evidência honesta → avanço.", ic: "gift", f: [["c2_proposta", "", 7]] },
+    { a: "obj", n: 4, t: "Objeção-chave", q: "O que o cliente declarou? O que pode estar por trás? Como verificar?", ic: "shield", f: [["c2_objecao", "Fala declarada", 2], ["c2_obj_real", "Preocupação provável e pergunta para verificar", 4]] },
+    { a: "lim", n: 5, t: "Limites e alternativas", q: "Negociar começa antes do desconto.", ic: "scale", f: [["c2_limites", "Minha BATNA • BATNA do cliente • minha alçada", 4], ["c2_trocas", "Concessões com contrapartida", 2]] },
+    { a: "pas", n: 6, t: "Fechamento e próximo passo", q: "Compromisso claro e consentido: quem fará o quê, em que momento?", ic: "flag", f: [["c2_passo", "", 7]] },
+    { a: "cad", n: 7, t: "Cadência de acompanhamento", q: "Cada contato entrega algo útil. Se o cliente pediu outro prazo, vale o dele.", ic: "cal", kind: "row", f: [["c2_d1", "D+1 • resumo útil e condições", 2], ["c2_d3", "D+3 • evidência ou resposta à dúvida", 2], ["c2_d7", "D+7 • confirmar decisão ou encerrar", 2]] },
+    { a: "coe", n: 8, t: "Teste de coerência", q: "O que eu provei — e o que eu não posso prometer?", ic: "check", tone: "mint", kind: "row", f: [["c2_valor", "Valor demonstrado", 2], ["c2_naoprom", "Não posso prometer", 2]] },
+    { a: "pon", n: 9, t: "Ponte para o Módulo 3", q: "Que entrega e acompanhamento sustentarão a experiência?", ic: "arrow", tone: "mint", f: [["c2_ponte", "", 2]] }
+   ] },
+ { id: "c3", tag: "CAMADA 3 • MÓDULO 3", nome: "Fidelização e plano", titulo: "Da entrega à próxima escolha",
+   sub: "Carteira, fidelização, indicadores e plano de 30 dias",
+   grid: ["car car car car fid fid", "ind ind hip hip fid fid", "sem sem sem sem sem sem", "acao acao acao acao ban ban"],
+   rows: "1.15fr 1fr auto auto",
+   boxes: [
+    { a: "car", n: 1, t: "Carteira prioritária", q: "Quem merece atenção primeiro — e que fato sustenta a prioridade?", ic: "users", kind: "table",
+      cols: ["Cliente (código) e fato", "Ação adequada", "Dono e prazo"], rowsN: 4, f: [] },
+    { a: "fid", n: 2, t: "Ação de fidelização", q: "Fidelizar é um sistema, não uma campanha.", ic: "heart", f: [["c3_g", "Gatilho — quando acontece?", 2], ["c3_au", "Ação útil — o que o cliente recebe?", 2], ["c3_r", "Responsável", 1], ["c3_v", "Registro e verificação", 2]] },
+    { a: "ind", n: 3, t: "Indicador", q: "Um indicador que orienta a decisão — sem números inventados.", ic: "chart", f: [["c3_ind", "Indicador e fórmula", 2], ["c3_fonte", "Fonte", 1], ["c3_base", "Linha de base (ou: medir na semana 1)", 1], ["c3_rev", "Quando vou revisar", 1]] },
+    { a: "hip", n: 4, t: "Hipótese → ação → verificação", q: "Plano bom tem responsável, prazo e evidência.", ic: "bulb", f: [["c3_h", "Hipótese: o que pode melhorar?", 2], ["c3_a", "Ação: o que vou mudar?", 2], ["c3_v2", "Verificação: o que vou observar?", 2]] },
+    { a: "sem", n: 5, t: "Plano de 30 dias", q: "Uma prioridade por vez, sob a sua autonomia, com prazo e capacidade conhecidos.", ic: "cal", kind: "row", f: [["c3_s1", "Semana 1 • medir e organizar", 3], ["c3_s2", "Semana 2 • testar a melhoria", 3], ["c3_s3", "Semana 3 • executar e acompanhar", 3], ["c3_s4", "Semana 4 • revisar e decidir", 3]] },
+    { a: "acao", n: 6, t: "Compromisso", q: "Primeira ação, com dono, data e prova.", ic: "hand", tone: "mint", kind: "row", f: [["c3_acao", "Primeira ação", 2], ["c3_resp", "Responsável e data", 2], ["c3_prova", "Como vou verificar que ocorreu", 2]] },
+    { a: "ban", n: 7, t: "Banca do plano", q: "Nota 0–12 antes e depois do feedback.", ic: "star", tone: "mint", kind: "row", f: [["c3_pre", "PRÉ /12", 1], ["c3_pos", "PÓS /12", 1], ["c3_melhoria", "Melhoria feita no plano", 2]] }
+   ] },
+ { id: "ci", tag: "IA • COPILOTO", nome: "Copiloto Comercial", titulo: "Meu Copiloto e minha semana com IA",
+   sub: "O contexto que a IA precisa para ajudar — e o plano para virar hábito",
+   grid: ["quem ven res reg", "nao pro tom reg", "d12 d35 d6 d7", "msg msg msg msg"],
+   rows: "1fr 1fr auto auto",
+   boxes: [
+    { a: "quem", n: 1, t: "Quem sou", q: "Nome, cargo, empresa e cidade.", ic: "user", col: "COPILOTO", f: [["ci_quem", "", 3]] },
+    { a: "ven", n: 2, t: "O que vendo e para quem", q: "Oferta e cliente ideal (Camada 1).", ic: "tag", f: [["ci_vendo", "", 3]] },
+    { a: "res", n: 3, t: "Problemas que resolvo", q: "Os problemas reais do cliente que a oferta ataca.", ic: "check", f: [["ci_resolve", "", 3]] },
+    { a: "nao", n: 4, t: "O que não resolvo", q: "Limites e quando não sou a melhor opção (Camadas 1 e 2).", ic: "stop", f: [["ci_nao", "", 3]] },
+    { a: "pro", n: 5, t: "Provas reais", q: "Só evidências verdadeiras. Nunca invente outras.", ic: "shield", f: [["ci_provas", "", 3]] },
+    { a: "tom", n: 6, t: "Meu tom", q: "Como eu falo com o cliente.", ic: "chat", f: [["ci_tom", "", 3]] },
+    { a: "reg", n: "!", t: "Regras fixas", q: "Vão escritas no Copiloto.", ic: "shield", tone: "navy", kind: "rules",
+      rules: ["Dados mínimos: “Cliente A”. Nada de nome, telefone ou CPF.", "Você valida promessas, preços e contas.", "Contato só com permissão. Sem disparo em massa.", "A IA erra e inventa: confira antes de enviar.", "Sem internet, o método continua no papel."], f: [] },
+    { a: "d12", n: 7, t: "Dias 1 e 2", q: "Copiloto pronto • lista de clientes ideais.", ic: "cal", col: "PLANO DE 7 DIAS", f: [["ci_d12", "", 3]] },
+    { a: "d35", n: 8, t: "Dias 3 a 5", q: "Contatos autorizados com mensagem testada.", ic: "chat", f: [["ci_d35", "", 3]] },
+    { a: "d6", n: 9, t: "Dia 6", q: "CRM atualizado.", ic: "chart", f: [["ci_d6", "", 3]] },
+    { a: "d7", n: 10, t: "Dia 7", q: "O que funcionou? O que vou ajustar?", ic: "bulb", f: [["ci_d7", "", 3]] },
+    { a: "msg", n: 11, t: "Meu prompt mais útil", q: "O pedido que eu mais vou repetir — já no Método PROMPT.", ic: "ask", tone: "mint", f: [["ci_msg", "", 2]] }
+   ] },
+ { id: "cs", tag: "SÍNTESE • 1 PÁGINA", nome: "Plano de Alta Performance", titulo: "30 dias para transformar método em ação",
+   sub: "Preencha a partir das três camadas, sem metas fictícias",
+   grid: ["des des cli cli", "aca aca ind ind", "s1 s2 s3 s4", "com com sen sen"],
+   rows: "auto auto auto auto",
+   boxes: [
+    { a: "des", n: 1, t: "Desafio original", q: "O que eu registrei no Módulo 1.", ic: "flag", f: [["cs_desafio", "", 2]], pull: "c1_desafio" },
+    { a: "cli", n: 2, t: "Cliente e prioridade", q: "Quem e por que agora?", ic: "users", f: [["cs_cliente", "", 2]] },
+    { a: "aca", n: 3, t: "Ação principal", q: "O que vou fazer, com que recursos e autorizações?", ic: "arrow", f: [["cs_acao", "", 2], ["cs_resp", "Responsável • recursos", 1]], pull: "c3_acao" },
+    { a: "ind", n: 4, t: "Indicador e linha de base", q: "Fórmula, fonte e ponto de partida.", ic: "chart", f: [["cs_ind", "", 2], ["cs_base", "Fonte • linha de base", 1]], pull: "c3_ind" },
+    { a: "s1", n: 5, t: "Semana 1", q: "Medir e organizar.", ic: "cal", f: [["cs_s1", "", 2]], pull: "c3_s1" },
+    { a: "s2", n: 6, t: "Semana 2", q: "Testar a melhoria.", ic: "cal", f: [["cs_s2", "", 2]], pull: "c3_s2" },
+    { a: "s3", n: 7, t: "Semana 3", q: "Executar e acompanhar.", ic: "cal", f: [["cs_s3", "", 2]], pull: "c3_s3" },
+    { a: "s4", n: 8, t: "Semana 4", q: "Revisar e decidir.", ic: "cal", f: [["cs_s4", "", 2]], pull: "c3_s4" },
+    { a: "com", n: 9, t: "Primeiro compromisso", q: "Até ___, farei ___. Comprovarei por ___.", ic: "hand", tone: "mint", f: [["cs_farei", "", 2]] },
+    { a: "sen", n: 10, t: "Se o indicador não melhorar", q: "O que vou investigar primeiro?", ic: "search", tone: "mint", f: [["cs_senao", "", 2]] }
+   ] }
+];
+const CANVAS_ICONS = {
+ flag: '<path d="M5 21V4m0 0h11l-2 4 2 4H5"/>', star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+ up: '<path d="M4 17l6-6 4 4 6-7M14 8h6v6"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+ users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.6-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .8 3.2 2.6 3.7 5.2"/>',
+ stop: '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>', tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+ ask: '<path d="M4 5h16v11H9l-5 4z"/><path d="M10 9.2a2 2 0 1 1 2.8 1.8c-.6.3-.8.7-.8 1.3M12 14h.01"/>', check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', funnel: '<path d="M3 4h18l-7 8v7l-4 2v-9z"/>',
+ hand: '<path d="M7 11V6a2 2 0 0 1 4 0v4M11 10V4a2 2 0 0 1 4 0v6M15 10V6a2 2 0 0 1 4 0v7a8 8 0 0 1-8 8h-1a6 6 0 0 1-5-3l-2-4a2 2 0 0 1 3.5-2L7 13"/>',
+ arrow: '<path d="M4 12h14M13 6l6 6-6 6"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/>', search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 5 5"/>',
+ gift: '<rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1.5S9 9 12 9c3 0 6-.5 6-1.5S14 5 12 9"/>',
+ shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>', scale: '<path d="M12 4v17M6 21h12M5 8h14M5 8l-3 6a3 3 0 0 0 6 0zM19 8l-3 6a3 3 0 0 0 6 0z"/>',
+ heart: '<path d="M12 20s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.5-8 11-8 11z"/>', chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
+};
+function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`)});return k}
+function canvasFilled(layer,CV){const k=canvasKeys(layer);return [k.filter(x=>(CV[x]||'').trim()).length,k.length]}
+
 const GLOS=[["SPIN","Situação, Problema, Implicação e Necessidade: quatro tipos de pergunta para diagnosticar."],["GPCT","Goals, Plans, Challenges, Timeline — objetivos, planos, desafios e prazo do cliente."],["BANT","Budget, Authority, Need, Timeline — orçamento, decisor, necessidade e prazo: lente de viabilidade."],["BATNA","Melhor alternativa sem acordo: o que cada lado faz se a negociação não fechar."],["ZOPA","Zona de possível acordo: onde os limites dos dois lados se encontram (preço, escopo, risco e entrega)."],["Contribuição","Preço menos custo variável. É dela que sai qualquer desconto."],["Upsell","Oferecer uma versão superior quando o cliente realmente precisa de mais."],["Cross-sell","Oferecer algo complementar que resolve uma dificuldade validada."],["Follow-up","Acompanhamento depois do contato. Cada retorno deve entregar algo útil."],["Funil","Mapa das etapas do cliente: atrair, engajar, converter e fidelizar."],["NPS","Net Promoter Score: % de promotores (9–10) menos % de detratores (0–6)."],["Retenção","Clientes que continuam ativos no fim de um período ÷ ativos no início."],["Recompra","Clientes que compraram de novo ÷ clientes elegíveis no período."],["Ticket médio","Receita ÷ número de pedidos."],["Coorte","Grupo de clientes acompanhado no mesmo período, para comparar de forma justa."],["CRM","Registro organizado dos clientes, conversas e próximos passos."],["SDR","Sales Development Representative: quem prospecta e qualifica antes do vendedor que fecha."],["Método PROMPT","Papel, Requisição, Objetivo, Modelo, Panorama e Testar e transformar: seis letras para pedir bem à IA."],["Copiloto Comercial","Prompt-mestre com o seu contexto, para a IA ajudar sem você repetir tudo a cada conversa."],["LGPD","Lei Geral de Proteção de Dados. Na IA, use dados mínimos e anonimizados (Cliente A)."]];
 const TIPOS={conceito:"Conceito",pratica:"Prática",discussao:"Discussão",pausa:"Pausa",ia:"IA",canvas:"Canvas"};
 const CARTEIRA=[["C1","Boutique Centro",7,"R$ 34.000","24%","8 / 14","Duas grades erradas; troca pendente.","Alto: nova coleção."],["C2","Loja Arcoverde",6,"R$ 28.000","29%","17 / 14","Pediu reposição hoje.","Alto: demanda informada."],["C3","Atacado Toritama",3,"R$ 56.000","12%","29 / 30","Pedido atrasado; compromisso para amanhã.","Médio: volume alto, margem baixa."],["C4","Vitrine Santa Cruz",5,"R$ 21.000","31%","45 / 15","Reclamação encerrada; silêncio desde então.","Médio: depende de diagnóstico."],["C5","Malharia Polo",2,"R$ 42.000","9%","10 / 45","Sem reclamação.","Alto: volume, margem restrita."],["C6","Loja Caruaru Sul",6,"R$ 17.000","35%","21 / 14","Sem reclamação.","Médio: reposição regular."],["C7","Moda Recife",3,"R$ 25.000","27%","5 / 30","Sem reclamação; interesse em nova linha.","Alto: interesse em linha nova."],["C8","Feira Moda Local",9,"R$ 14.000","22%","9 / 7","Reclamação pontual já resolvida.","Médio: compras frequentes."],["C9","E-commerce Interior",4,"R$ 19.000","33%","55 / 30","Sem reclamação; sazonalidade incerta.","Médio: investigar necessidade."],["C10","Boutique Garanhuns",2,"R$ 10.000","39%","6 / 60","Sem reclamação.","Baixo no horizonte imediato."],["C11","Revenda Sertão",0,"R$ 0","N/D","120 / 30","Não deseja mensagens promocionais.","Baixo; respeitar preferência."],["C12","Distribuidor Mix",5,"R$ 31.000","18%","13 / 14","Pedido incompleto; correção anterior não cumprida.","Alto: reposição depende da solução."]];
@@ -637,7 +735,7 @@ const W=(id,d)=>ST.w[id]!==undefined?ST.w[id]:d;
 const setW=(id,v)=>{ST.w[id]=v;save()};
 /* valor composto de um widget para placeholders {@id} */
 const OUT={};
-function resolve(t,vals){return t.replace(/\{@([\w]+)\}/g,(m,k)=>OUT[k]?OUT[k]():'[…]').replace(/\{(c[\w]+_\d+)\}/g,(m,k)=>CV[k]&&CV[k].trim()?CV[k].trim():'[preencha no Canvas]').replace(/\{(\w+)\}/g,(m,k)=>vals&&vals[k]!==undefined?(vals[k].trim()||'___'):m)}
+function resolve(t,vals){return t.replace(/\{@([\w]+)\}/g,(m,k)=>OUT[k]?OUT[k]():'[…]').replace(/\{((?:c\d|ci|cs|cv)_[\w]+)\}/g,(m,k)=>CV[k]&&CV[k].trim()?CV[k].trim():'[preencha no Canvas]').replace(/\{(\w+)\}/g,(m,k)=>vals&&vals[k]!==undefined?(vals[k].trim()||'___'):m)}
 function cvPush(key,text,label){if(!text.trim())return toast('Preencha primeiro');const cur=(CV[key]||'').trim();if(cur.includes(text.trim()))return toast('Já está no Canvas');CV[key]=cur?cur+'\n'+text.trim():text.trim();saveCV();toast('Enviado para o Canvas ✓')}
 
 /* ---------- widgets ---------- */
@@ -654,7 +752,7 @@ R.fields=(w,el)=>{let v=W(w.id,{});
  const upd=()=>{const p=el.querySelector('pre');if(p)p.textContent=comp()};
  el.querySelectorAll('[data-k]').forEach(i=>i.oninput=()=>{v[i.dataset.k]=i.value;setW(w.id,v);upd();refreshDeps()});upd();
  const c=el.querySelector('.cp');if(c)c.onclick=()=>copy(comp());
- const cv=el.querySelector('.cv');if(cv)cv.onclick=()=>{if(w.fields.every(f=>!(v[f[0]]||'').trim()))return toast('Preencha primeiro');cvPush(w.canvas.key,comp())}};
+ const cv=el.querySelector('.cv');if(cv)cv.onclick=()=>{if(w.fields.every(f=>!(v[f[0]]||'').trim()))return toast('Preencha primeiro');if(w.canvas.map){Object.entries(w.canvas.map).forEach(([fk,ck])=>{if((v[fk]||'').trim())cvPush(ck,v[fk])})}else cvPush(w.canvas.key,comp())}};
 R.quiz=(w,el)=>{let v=W(w.id,{});
  const draw=()=>{const n=w.items.length,ok=w.items.filter((it,i)=>v[i]===it[1]).length,ans=Object.keys(v).length;
   el.innerHTML=`<h4>Classifique</h4>${w.items.map((it,i)=>`<div class="qrow"><p>${esc(it[0])}</p><div class="opts">${w.opts.map((o,j)=>{let c='';if(v[i]!==undefined){if(j===it[1])c=' ok';else if(j===v[i])c=' no'}return`<button class="op${c}" data-i="${i}" data-j="${j}">${esc(o)}</button>`}).join('')}</div></div>`).join('')}${ans?`<div class="qscore">${ok} de ${n} certas${ans<n?' até agora':''}</div><div class="row"><button class="btn sec rs">Refazer</button></div>`:''}`;
@@ -697,24 +795,27 @@ R.compare=(w,el)=>{const a=()=>resolve(w.a[1],{}),b=()=>resolve(w.b[1],{});
  const up=()=>{el.querySelector('.pa').textContent=a();el.querySelector('.pb').textContent=b()};up();el._refresh=up;el.querySelector('.c1').onclick=()=>copy(a());el.querySelector('.c2').onclick=()=>copy(b())};
 R.reveal=(w,el)=>{el.innerHTML=`<h4>Para o debrief</h4><button class="btn sec rvb">${esc(w.label)}</button><div class="rv" hidden>${esc(w.text)}</div>`;el.querySelector('.rvb').onclick=()=>{const r=el.querySelector('.rv');r.hidden=!r.hidden}};
 R.links=(w,el)=>{el.innerHTML=`<h4>Abrir no kit</h4><div class="lk">${w.items.map(l=>`<a href="${l[1]}">${esc(l[0])}</a>`).join('')}</div>`};
-R.canvas=(w,el)=>{const L=CANVAS[w.layer];el.innerHTML=`<h4>${esc(L.nome)}<span class="saved"></span></h4><div class="cvg">${L.boxes.map((b,i)=>`<div class="cvb"><h5>${esc(b[0])}</h5><p>${esc(b[1])}</p><textarea data-k="${w.layer}_${i}">${esc(CV[w.layer+'_'+i]||'')}</textarea></div>`).join('')}</div><div class="row"><a class="btn sec" href="index.html#canvas">Abrir o Canvas completo »</a></div>`;
- let t;el.querySelectorAll('textarea').forEach(a=>a.oninput=()=>{CV[a.dataset.k]=a.value;saveCV();const s=el.querySelector('.saved');s.textContent='Salvo ✓';clearTimeout(t);t=setTimeout(()=>s.textContent='',1400);refreshDeps()})};
-R.copiloto=(w,el)=>{const C=LS.get('copiloto',{}),g=(k,d)=>(C[k]||'').trim()||d,cv=k=>(CV[k]||'').trim();
+R.canvas=(w,el)=>{const L=CANVAS_LAYERS.find(l=>l.id===w.layer);const [a,b]=canvasFilled(L.id,CV);
+ const fields=[];L.boxes.forEach(bx=>{if(bx.kind==='table'){for(let r=0;r<bx.rowsN;r++)fields.push([`${L.id}_t${r}_0`,`${bx.t} • ${r+1}`,bx.cols[0]+' — '+bx.cols[1].toLowerCase()])}else bx.f.forEach(f=>fields.push([f[0],bx.t+(f[1]?' • '+f[1]:''),bx.q]))});
+ el.innerHTML=`<h4>${esc(L.tag)} • ${esc(L.titulo)}<span class="saved"></span></h4><p style="margin:0 0 12px;font-size:14px;color:#33476B">Preencha aqui ou no quadro completo, que imprime em A3. ${a} de ${b} campos preenchidos.</p><div class="row" style="margin:0 0 14px"><a class="btn pri" href="canvas.html#${L.id}">Abrir o Canvas em formato de quadro »</a><a class="btn sec" href="canvas.html?blank=1#${L.id}">Versão em branco para imprimir</a></div><div class="cvg">${fields.map(f=>`<div class="cvb"><h5>${esc(f[1])}</h5><p>${esc(f[2])}</p><textarea data-k="${f[0]}">${esc(CV[f[0]]||'')}</textarea></div>`).join('')}</div>`;
+ let t;el.querySelectorAll('textarea').forEach(x=>x.oninput=()=>{CV[x.dataset.k]=x.value;saveCV();const s=el.querySelector('.saved');s.textContent='Salvo ✓';clearTimeout(t);t=setTimeout(()=>s.textContent='',1400);refreshDeps()})};
+R.copiloto=(w,el)=>{const OLD=LS.get('copiloto',{}),g=(k,d)=>(CV['ci_'+k]||OLD[k]||'').trim()||d,cv=k=>(CV[k]||'').trim();
  const comp=()=>`Você é meu copiloto comercial. Trabalhe sempre a partir deste contexto.
 QUEM SOU: ${g('quem','[nome, cargo, empresa, cidade]')}
-O QUE VENDO E PARA QUEM: ${g('vendo',cv('c1_1')||'[oferta] para [cliente ideal]')}
-PROBLEMAS QUE RESOLVO: ${g('resolve','[problema 1]; [problema 2]')}
-O QUE NÃO RESOLVO E MEUS LIMITES: ${g('nao',cv('c2_3')||'[limites]')}
-PROVAS QUE POSSO USAR: ${g('provas','[evidências reais; nunca invente outras]')}
+O QUE VENDO E PARA QUEM: ${g('vendo',cv('c1_cliente')||'[oferta] para [cliente ideal]')}
+PROBLEMAS QUE RESOLVO: ${g('resolve',cv('c1_beneficio')||'[problema 1]; [problema 2]')}
+O QUE NÃO RESOLVO E MEUS LIMITES: ${g('nao',cv('c1_limite')||cv('c2_limites')||'[limites]')}
+PROVAS QUE POSSO USAR: ${g('provas',cv('c1_evidencia')||'[evidências reais; nunca invente outras]')}
 MEU TOM: ${g('tom','[ex.: direto, próximo, sem exagero]')}
-MINHA CARTEIRA PRIORITÁRIA: ${cv('c3_0')||'[do Canvas, camada 3]'}
-COMO EU QUALIFICO: ${cv('c2_1')||'[do Canvas, camada 2]'}
+MINHA CARTEIRA PRIORITÁRIA: ${[0,1,2,3].map(r=>cv('c3_t'+r+'_0')).filter(Boolean).join('; ')||'[do Canvas, camada 3]'}
+COMO EU QUALIFICO: ${cv('c2_gpct')||'[do Canvas, camada 2]'}
 REGRAS: nunca invente preço, prazo, garantia ou resultado; se faltar informação, pergunte antes de escrever; marque [CONFIRMAR] em qualquer número; termine sempre com uma pergunta ou próximo passo; não use dados pessoais de clientes (uso códigos como Cliente A).
 Você me ajuda a pensar. Quem decide e envia sou eu.`;
- el.innerHTML=`<h4>Seu Copiloto, gerado do Canvas</h4><p style="margin:0 0 10px;font-size:14px;color:#33476B">Os campos entre colchetes ainda estão vazios. Complete no Gerador do Copiloto ou no Canvas e volte aqui.</p><div class="out" style="margin:0"><div class="t"><b>Cole nas instruções da sua IA</b><span class="row" style="margin:0"><button class="btn ok cp">Copiar</button><a class="btn ghost" href="index.html#copiloto">Completar no Gerador</a></span></div><pre>${esc(comp())}</pre></div>`;
+ el.innerHTML=`<h4>Seu Copiloto, gerado do Canvas</h4><p style="margin:0 0 10px;font-size:14px;color:#33476B">Os campos entre colchetes ainda estão vazios. Complete no Gerador do Copiloto ou no Canvas e volte aqui.</p><div class="out" style="margin:0"><div class="t"><b>Cole nas instruções da sua IA</b><span class="row" style="margin:0"><button class="btn ok cp">Copiar</button><a class="btn ghost" href="canvas.html#ci">Completar no Canvas IA</a></span></div><pre>${esc(comp())}</pre></div>`;
  el.querySelector('.cp').onclick=()=>copy(comp())};
-R.desafio=(w,el)=>{const d=(CV.c1_2||'').trim();if(!(CV.cs_0||'').trim()&&d){CV.cs_0=d;saveCV()}
- el.innerHTML=`<h4>Seu desafio do Módulo 1</h4><div class="rv" style="margin:0 0 12px">${d?esc(d):'Você não registrou o desafio no Módulo 1 neste aparelho. Escreva abaixo como lembra dele.'}</div>${CANVAS.cs.boxes.map((b,i)=>`<label class="f">${esc(b[0])}</label><textarea rows="2" data-k="cs_${i}" placeholder="${esc(b[1])}">${esc(CV['cs_'+i]||'')}</textarea>`).join('')}`;
+R.desafio=(w,el)=>{const d=(CV.c1_desafio||'').trim();if(!(CV.cs_desafio||'').trim()&&d){CV.cs_desafio=d;saveCV()}
+ const F=[['cs_desafio','Meu desafio era…','Do Módulo 1'],['cs_acao','Minha primeira ação será…','Com responsável e data'],['cs_ind','Vou verificar a evolução por…','Indicador e fonte'],['cs_farei','Compromisso','Até ___, farei ___. Comprovarei por ___.']];
+ el.innerHTML=`<h4>Seu desafio do Módulo 1</h4><div class="rv" style="margin:0 0 12px">${d?esc(d):'Você não registrou o desafio no Módulo 1 neste aparelho. Escreva abaixo como lembra dele.'}</div>${F.map(f=>`<label class="f">${esc(f[1])}</label><textarea rows="2" data-k="${f[0]}" placeholder="${esc(f[2])}">${esc(CV[f[0]]||'')}</textarea>`).join('')}<div class="row"><a class="btn sec" href="canvas.html#cs">Ver a síntese de 1 página »</a></div>`;
  el.querySelectorAll('textarea').forEach(a=>a.oninput=()=>{CV[a.dataset.k]=a.value;saveCV()})};
 R.tribunal=(w,el)=>{let v=W(w.id,{r:0,a:[{},{}]});const F=[['preco','Preço'],['impl','Implantação'],['trein','Treinamento'],['sup','Suporte'],['pag','Pagamento'],['dec','Decisão / quem aprova']];
  const draw=()=>{const a=v.a[v.r];el.innerHTML=`<h4>Registro do pacote</h4><div class="tabs">${['Acordo 1','Acordo 2'].map((t,i)=>`<button class="${v.r===i?'on':''}" data-r="${i}">${t}</button>`).join('')}</div><div class="grid2">${F.map(f=>`<div><label class="f">${f[1]}</label><input type="text" data-k="${f[0]}" value="${esc(a[f[0]]||'')}"></div>`).join('')}</div>`;

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvas — Meu Mapa de Alta Performance Comercial</title>
+<meta name="description" content="Canvas de três camadas, Copiloto e síntese de 30 dias: preencha na tela ou imprima.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0E2A5C;--blue:#1565C0;--turq:#12A3A8;--green:#1DBF8A;--ice:#EAF4FB;--mint:#E8F8F3;--grey:#5A6B85;--line:#D6E1EC;--soft:#F6F9FC;--grad:linear-gradient(90deg,#0E2A5C 0%,#12A3A8 60%,#1DBF8A 100%);--f:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);color:var(--navy);background:#EEF3F8;-webkit-font-smoothing:antialiased}
+button{font-family:var(--f)}
+.topline{height:4px;background:linear-gradient(90deg,var(--blue) 0 66%,#C9D3DE 66% 100%)}
+header.site{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:12px;padding:10px 20px;max-width:1560px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;line-height:1.1;text-decoration:none;color:var(--navy)}
+.brand b{font-size:12px;letter-spacing:.06em;font-weight:800}.brand span{font-size:11px;color:var(--grey);font-weight:600}
+.tabs{display:flex;gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px;margin:0 auto;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;color:var(--navy);font-weight:800;font-size:12.5px;padding:8px 13px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px}
+.tabs button.on{background:var(--navy);color:#fff}
+.tabs i{font-style:normal;font-size:10.5px;font-weight:800;background:var(--ice);color:var(--turq);padding:2px 7px;border-radius:999px}
+.tabs button.on i{background:rgba(255,255,255,.18);color:#7FE3E6}
+.tools{display:flex;gap:6px;flex-wrap:wrap}
+.ib{border:1.5px solid var(--line);background:#fff;color:var(--navy);font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:10px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.ib:hover{border-color:var(--turq)}.ib.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
+@media(max-width:980px){.tabs{order:3;width:100%;margin:0;justify-content:space-between}.tabs button{flex:1;justify-content:center;padding:8px 6px;font-size:11.5px}.tabs i{display:none}.tabs .w{display:none}}
+.wrap{max-width:1560px;margin:0 auto;padding:22px 20px 60px}
+.hint{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--grey);margin:0 0 14px}
+.hint b{color:var(--navy)}
+.saved{font-weight:800;color:var(--green)}
+/* ---------- quadro (pôster) ---------- */
+.board{background:#fff;border-radius:18px;box-shadow:0 10px 40px rgba(14,42,92,.10);padding:22px 24px 18px;position:relative;overflow:hidden}
+.board:before{content:"";position:absolute;left:24px;right:24px;top:0;height:5px;background:linear-gradient(90deg,var(--blue) 0 66%,#C9D3DE 66% 100%);border-radius:0 0 4px 4px}
+.bhead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin:6px 0 14px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--grad);color:#fff;font-weight:800;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.btitle{font-size:clamp(22px,2.6vw,36px);font-weight:900;letter-spacing:-.015em;margin:8px 0 2px;line-height:1.05}
+.hl{background:linear-gradient(transparent 8%,#3ED3D8 8%,#3ED3D8 94%,transparent 94%);border-radius:8px;padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.bsub{font-size:13px;color:var(--grey);font-weight:600}
+.who{display:grid;grid-template-columns:auto 220px;gap:6px 10px;align-items:center;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--grey);text-transform:uppercase}
+.who .ed{min-height:24px;border-bottom:1.5px solid var(--line);font-size:13px;letter-spacing:0;text-transform:none;color:var(--navy);font-weight:600;padding:2px 2px}
+.chev{position:absolute;right:26px;top:16px;color:#D9E1EA;font-weight:900;font-size:46px;letter-spacing:-7px;pointer-events:none}
+.grid{display:grid;gap:10px;grid-template-columns:repeat(6,minmax(0,1fr))}
+.box{border:1.5px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-height:0;background:#fff;position:relative}
+.box .bh{display:flex;align-items:center;gap:8px;padding:9px 11px 0}
+.box .num{flex:none;width:24px;height:24px;border-radius:8px;background:var(--grad);color:#fff;font-size:11.5px;font-weight:900;display:grid;place-items:center}
+.box svg{flex:none;width:18px;height:18px;stroke:var(--turq);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.box .bt{font-size:12.5px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;line-height:1.15}
+.box .col{position:absolute;top:-8px;left:12px;background:#fff;padding:0 6px;font-size:9.5px;font-weight:900;letter-spacing:.12em;color:var(--turq)}
+.box .q{font-size:11px;color:var(--grey);font-weight:600;padding:3px 11px 6px;line-height:1.35}
+.box .fl{display:flex;flex-direction:column;gap:6px;padding:0 11px 10px;flex:1;min-height:0}
+.box .fl.row{flex-direction:row}.box .fl.row>.fd{flex:1}
+.fd{display:flex;flex-direction:column;min-height:0;flex:1}
+.fd label{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--turq);margin:0 0 2px}
+.ed{flex:1;min-height:calc(var(--r,2)*21px);outline:none;font-size:13px;line-height:21px;color:var(--navy);font-weight:500;white-space:pre-wrap;word-break:break-word;overflow:hidden;
+ background-image:repeating-linear-gradient(transparent 0 20px,#E3EAF2 20px 21px);background-attachment:local;border-radius:4px;padding:0 2px;cursor:text}
+.ed:focus{background-color:#F4FBFB;box-shadow:0 0 0 2px rgba(18,163,168,.25)}
+.ed:empty:before{content:attr(data-ph);color:#A9B6C7;font-weight:500}
+.box.hl{background:#E3F8F9;border-color:#9FE3E5}.box.hl .ed{background-image:repeating-linear-gradient(transparent 0 20px,#BCEBEC 20px 21px)}
+.box.mint{background:var(--mint);border-color:#BFEBDB}.box.mint .ed{background-image:repeating-linear-gradient(transparent 0 20px,#CDEFE2 20px 21px)}
+.box.navy{background:var(--navy);border-color:var(--navy);color:#fff}.box.navy .q{color:#9FB3D1}.box.navy svg{stroke:#7FE3E6}
+.rules{margin:0;padding:2px 12px 12px 30px;font-size:12px;line-height:1.45;color:#EAF4FB}.rules li{margin:4px 0}
+/* fluxo (camada 2) */
+.flow .box.fx:after{content:"»";position:absolute;right:-12px;top:42%;width:20px;height:20px;border-radius:50%;background:#fff;border:1.5px solid var(--line);color:var(--turq);font-weight:900;font-size:13px;display:grid;place-items:center;z-index:2;line-height:1}
+/* funil */
+.fun{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px}
+.fun .st{position:relative;background:var(--ice);border-radius:10px;padding:6px 8px 4px;clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%,8% 50%)}
+.fun .st:first-child{clip-path:polygon(0 0,92% 0,100% 50%,92% 100%,0 100%)}
+.fun .st label{display:block;font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);padding-left:8%}
+.fun .st .ed{min-height:42px;padding-left:8%;background-image:repeating-linear-gradient(transparent 0 20px,#CFE2F2 20px 21px)}
+.fun .st:nth-child(2){background:#DDF1F6}.fun .st:nth-child(3){background:#D3F0EC}.fun .st:nth-child(4){background:#D8F5E8}
+.fun2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+/* tabela */
+table.tb{width:100%;border-collapse:collapse;font-size:12px;margin:0 0 4px}
+table.tb th{font-size:9.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--navy);text-align:left;padding:5px 7px}
+table.tb th:first-child{border-radius:8px 0 0 0}table.tb th:last-child{border-radius:0 8px 0 0}
+table.tb td{border-bottom:1px solid #E3EAF2;padding:0;vertical-align:top}
+table.tb td:first-child{width:38%}
+table.tb .ed{min-height:44px;background-image:none;padding:5px 7px;line-height:18px;font-size:12.5px}
+table.tb td.rn{width:26px;font-weight:900;color:var(--turq);text-align:center;padding-top:6px}
+.bfoot{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:10px;color:var(--grey);font-weight:600}
+.bfoot .lg{height:30px}
+.ielhead,.ielfoot{display:none}
+/* celular: vira lista */
+@media(max-width:900px){.board{padding:18px 14px}.bhead{flex-direction:column;align-items:flex-start}.who{grid-template-columns:auto 1fr;width:100%}.grid{display:flex;flex-direction:column}.box{order:var(--o)}.flow .box.fx:after{display:none}.fun{grid-template-columns:1fr 1fr}.fun2{grid-template-columns:1fr}.box .fl.row{flex-direction:column}.chev{display:none}.tw{overflow-x:auto}}
+/* impressão: A3 paisagem, uma camada por página */
+@page{size:A3 landscape;margin:7mm}
+@media print{
+ body{background:#fff}
+ header.site,.hint,.noprint{display:none!important}
+ .wrap{padding:0;max-width:none}
+ .board{box-shadow:none;border-radius:0;padding:4mm 6mm 3mm;width:406mm;height:283mm;display:flex;flex-direction:column}
+ .grid{flex:1;min-height:0}
+ .box{break-inside:avoid}
+ .ed:empty:before{content:""}
+ .ed:focus{box-shadow:none}
+ .board{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+}
+body.iel .ielhead,body.iel .ielfoot{display:block}
+</style>
+</head>
+<body>
+<div class="topline noprint"></div>
+<header class="site"><div class="bar">
+  <a class="brand" href="index.html"><b>CANVAS</b><span>Meu Mapa de Alta Performance</span></a>
+  <nav class="tabs" id="tabs"></nav>
+  <div class="tools"><button class="ib dark" id="bPrint">Imprimir</button><button class="ib" id="bBlank">Imprimir em branco</button><a class="ib" href="aula.html">Aula ao vivo »</a></div>
+</div></header>
+<div class="wrap">
+  <p class="hint"><span>Clique em qualquer espaço e escreva. <b>Tudo fica salvo só neste aparelho.</b> No celular, as caixas aparecem uma embaixo da outra.</span><span class="saved" id="saved"></span><button class="ib noprint" id="bClear" style="margin-left:auto">Limpar esta camada</button></p>
+  <div id="board"></div>
+</div>
+<script>
+// ESQUEMA ÚNICO DOS CANVAS — usado pelo kit (index), pela Aula ao vivo e pela página do Canvas
+// Cada caixa: id, área do grid, número, título, pergunta-guia, ícone e campos [chave, rótulo, linhas]
+const CANVAS_LAYERS = [
+ { id: "c1", tag: "CAMADA 1 • MÓDULO 1", nome: "Do instinto ao método", titulo: "Meu Mapa de Alta Performance",
+   sub: "Mentalidade, oferta, diagnóstico e mini-funil",
+   grid: ["des des des des des des", "for cli ofe ofe per per", "evo lim ofe ofe fat fat", "hab hab fun fun fun fun", "com com com pas pas pas"],
+   rows: "auto 1fr 1fr 1.05fr auto",
+   boxes: [
+    { a: "des", n: "★", t: "Desafio inicial", q: "O que está travando suas vendas hoje? Guarde: ele volta no fim do Módulo 3.", ic: "flag", tone: "hl", f: [["c1_desafio", "Hoje, o que mais trava minhas vendas é…", 1]] },
+    { a: "for", n: 1, t: "Minha força", q: "O que já faço bem? Um comportamento observável.", ic: "star", col: "VOCÊ", f: [["c1_forca", "", 3]] },
+    { a: "evo", n: 2, t: "O que vou evoluir", q: "Preparar, diagnosticar, conduzir ou aprender? Que comportamento real prova isso?", ic: "up", f: [["c1_evoluir", "", 3]] },
+    { a: "cli", n: 3, t: "Meu cliente", q: "Para quem a oferta é adequada? O que esse cliente valoriza?", ic: "user", col: "CLIENTE E OFERTA", f: [["c1_cliente", "", 3]] },
+    { a: "lim", n: 5, t: "Meu limite", q: "Quando a minha oferta NÃO é a melhor opção?", ic: "stop", f: [["c1_limite", "", 3]] },
+    { a: "ofe", n: 4, t: "Minha oferta e seu valor", q: "Suba a escada: o que faz → onde importa → o que melhora → como provar.", ic: "tag", f: [["c1_atributo", "Atributo — o que a oferta faz", 2], ["c1_contexto", "Contexto — onde isso importa", 2], ["c1_beneficio", "Benefício — o que pode melhorar", 2], ["c1_evidencia", "Evidência — como provar ou verificar", 2]] },
+    { a: "per", n: 6, t: "Minha pergunta", q: "Que pergunta consultiva faz o cliente refletir? (SPIN, GPCT ou BANT)", ic: "ask", col: "CONVERSA", f: [["c1_pergunta", "", 3]] },
+    { a: "fat", n: 7, t: "Fato × hipótese", q: "Numa oportunidade travada: o que é fato, o que suponho e como vou verificar?", ic: "check", f: [["c1_fato", "", 3]] },
+    { a: "hab", n: 8, t: "Meu hábito de 5 dias", q: "Quando? Em qual situação? Como saberei que fiz?", ic: "cal", f: [["c1_habito", "", 3], ["c1_dias", "Marque os dias: D1 D2 D3 D4 D5", 1]] },
+    { a: "fun", n: 9, t: "Meu mini-funil", q: "Onde a oportunidade está e como fazê-la avançar com responsabilidade?", ic: "funnel", kind: "funil",
+      f: [["c1_fu_e", "Entrada • oportunidade identificada", 1], ["c1_fu_c", "Conversa • primeiro contato útil", 1], ["c1_fu_d", "Diagnóstico • necessidade compreendida", 1], ["c1_fu_p", "Próximo passo • avanço consentido", 1], ["c1_fu_m", "Etapa que mais precisa melhorar", 1], ["c1_fu_k", "Critério para verificar o avanço", 1]] },
+    { a: "com", n: 10, t: "Compromisso do módulo", q: "Na próxima conversa…", ic: "hand", tone: "mint", f: [["c1_deixar", "vou deixar de…", 1], ["c1_comecar", "e começar a…", 1]] },
+    { a: "pas", n: 11, t: "Próximo passo", q: "Que ação concreta farei, com quem e até quando?", ic: "arrow", tone: "mint", f: [["c1_passo", "", 2]] }
+   ] },
+ { id: "c2", tag: "CAMADA 2 • MÓDULO 2", nome: "Do diagnóstico à decisão", titulo: "Da conversa à decisão",
+   sub: "Abordagem, qualificação, proposta, objeção, negociação e fechamento",
+   grid: ["abo qua pro obj lim pas", "abo qua pro obj lim pas", "cad cad cad coe coe pon"],
+   rows: "1fr 1fr auto", flow: true,
+   boxes: [
+    { a: "abo", n: 1, t: "Abordagem", q: "Canal, contexto e uma abertura que dê ao cliente um motivo para conversar.", ic: "chat", f: [["c2_canal", "Canal e contexto", 2], ["c2_abordagem", "Minha abertura", 4]] },
+    { a: "qua", n: 2, t: "Qualificação", q: "Entender o projeto (GPCT) e as condições de avançar (BANT).", ic: "search", f: [["c2_gpct", "Objetivo • plano • desafio • prazo", 4], ["c2_bant", "Necessidade • investimento • decisor • prazo de decisão", 3]] },
+    { a: "pro", n: 3, t: "Proposta de valor", q: "Contexto confirmado → solução adequada → evidência honesta → avanço.", ic: "gift", f: [["c2_proposta", "", 7]] },
+    { a: "obj", n: 4, t: "Objeção-chave", q: "O que o cliente declarou? O que pode estar por trás? Como verificar?", ic: "shield", f: [["c2_objecao", "Fala declarada", 2], ["c2_obj_real", "Preocupação provável e pergunta para verificar", 4]] },
+    { a: "lim", n: 5, t: "Limites e alternativas", q: "Negociar começa antes do desconto.", ic: "scale", f: [["c2_limites", "Minha BATNA • BATNA do cliente • minha alçada", 4], ["c2_trocas", "Concessões com contrapartida", 2]] },
+    { a: "pas", n: 6, t: "Fechamento e próximo passo", q: "Compromisso claro e consentido: quem fará o quê, em que momento?", ic: "flag", f: [["c2_passo", "", 7]] },
+    { a: "cad", n: 7, t: "Cadência de acompanhamento", q: "Cada contato entrega algo útil. Se o cliente pediu outro prazo, vale o dele.", ic: "cal", kind: "row", f: [["c2_d1", "D+1 • resumo útil e condições", 2], ["c2_d3", "D+3 • evidência ou resposta à dúvida", 2], ["c2_d7", "D+7 • confirmar decisão ou encerrar", 2]] },
+    { a: "coe", n: 8, t: "Teste de coerência", q: "O que eu provei — e o que eu não posso prometer?", ic: "check", tone: "mint", kind: "row", f: [["c2_valor", "Valor demonstrado", 2], ["c2_naoprom", "Não posso prometer", 2]] },
+    { a: "pon", n: 9, t: "Ponte para o Módulo 3", q: "Que entrega e acompanhamento sustentarão a experiência?", ic: "arrow", tone: "mint", f: [["c2_ponte", "", 2]] }
+   ] },
+ { id: "c3", tag: "CAMADA 3 • MÓDULO 3", nome: "Fidelização e plano", titulo: "Da entrega à próxima escolha",
+   sub: "Carteira, fidelização, indicadores e plano de 30 dias",
+   grid: ["car car car car fid fid", "ind ind hip hip fid fid", "sem sem sem sem sem sem", "acao acao acao acao ban ban"],
+   rows: "1.15fr 1fr auto auto",
+   boxes: [
+    { a: "car", n: 1, t: "Carteira prioritária", q: "Quem merece atenção primeiro — e que fato sustenta a prioridade?", ic: "users", kind: "table",
+      cols: ["Cliente (código) e fato", "Ação adequada", "Dono e prazo"], rowsN: 4, f: [] },
+    { a: "fid", n: 2, t: "Ação de fidelização", q: "Fidelizar é um sistema, não uma campanha.", ic: "heart", f: [["c3_g", "Gatilho — quando acontece?", 2], ["c3_au", "Ação útil — o que o cliente recebe?", 2], ["c3_r", "Responsável", 1], ["c3_v", "Registro e verificação", 2]] },
+    { a: "ind", n: 3, t: "Indicador", q: "Um indicador que orienta a decisão — sem números inventados.", ic: "chart", f: [["c3_ind", "Indicador e fórmula", 2], ["c3_fonte", "Fonte", 1], ["c3_base", "Linha de base (ou: medir na semana 1)", 1], ["c3_rev", "Quando vou revisar", 1]] },
+    { a: "hip", n: 4, t: "Hipótese → ação → verificação", q: "Plano bom tem responsável, prazo e evidência.", ic: "bulb", f: [["c3_h", "Hipótese: o que pode melhorar?", 2], ["c3_a", "Ação: o que vou mudar?", 2], ["c3_v2", "Verificação: o que vou observar?", 2]] },
+    { a: "sem", n: 5, t: "Plano de 30 dias", q: "Uma prioridade por vez, sob a sua autonomia, com prazo e capacidade conhecidos.", ic: "cal", kind: "row", f: [["c3_s1", "Semana 1 • medir e organizar", 3], ["c3_s2", "Semana 2 • testar a melhoria", 3], ["c3_s3", "Semana 3 • executar e acompanhar", 3], ["c3_s4", "Semana 4 • revisar e decidir", 3]] },
+    { a: "acao", n: 6, t: "Compromisso", q: "Primeira ação, com dono, data e prova.", ic: "hand", tone: "mint", kind: "row", f: [["c3_acao", "Primeira ação", 2], ["c3_resp", "Responsável e data", 2], ["c3_prova", "Como vou verificar que ocorreu", 2]] },
+    { a: "ban", n: 7, t: "Banca do plano", q: "Nota 0–12 antes e depois do feedback.", ic: "star", tone: "mint", kind: "row", f: [["c3_pre", "PRÉ /12", 1], ["c3_pos", "PÓS /12", 1], ["c3_melhoria", "Melhoria feita no plano", 2]] }
+   ] },
+ { id: "ci", tag: "IA • COPILOTO", nome: "Copiloto Comercial", titulo: "Meu Copiloto e minha semana com IA",
+   sub: "O contexto que a IA precisa para ajudar — e o plano para virar hábito",
+   grid: ["quem ven res reg", "nao pro tom reg", "d12 d35 d6 d7", "msg msg msg msg"],
+   rows: "1fr 1fr auto auto",
+   boxes: [
+    { a: "quem", n: 1, t: "Quem sou", q: "Nome, cargo, empresa e cidade.", ic: "user", col: "COPILOTO", f: [["ci_quem", "", 3]] },
+    { a: "ven", n: 2, t: "O que vendo e para quem", q: "Oferta e cliente ideal (Camada 1).", ic: "tag", f: [["ci_vendo", "", 3]] },
+    { a: "res", n: 3, t: "Problemas que resolvo", q: "Os problemas reais do cliente que a oferta ataca.", ic: "check", f: [["ci_resolve", "", 3]] },
+    { a: "nao", n: 4, t: "O que não resolvo", q: "Limites e quando não sou a melhor opção (Camadas 1 e 2).", ic: "stop", f: [["ci_nao", "", 3]] },
+    { a: "pro", n: 5, t: "Provas reais", q: "Só evidências verdadeiras. Nunca invente outras.", ic: "shield", f: [["ci_provas", "", 3]] },
+    { a: "tom", n: 6, t: "Meu tom", q: "Como eu falo com o cliente.", ic: "chat", f: [["ci_tom", "", 3]] },
+    { a: "reg", n: "!", t: "Regras fixas", q: "Vão escritas no Copiloto.", ic: "shield", tone: "navy", kind: "rules",
+      rules: ["Dados mínimos: “Cliente A”. Nada de nome, telefone ou CPF.", "Você valida promessas, preços e contas.", "Contato só com permissão. Sem disparo em massa.", "A IA erra e inventa: confira antes de enviar.", "Sem internet, o método continua no papel."], f: [] },
+    { a: "d12", n: 7, t: "Dias 1 e 2", q: "Copiloto pronto • lista de clientes ideais.", ic: "cal", col: "PLANO DE 7 DIAS", f: [["ci_d12", "", 3]] },
+    { a: "d35", n: 8, t: "Dias 3 a 5", q: "Contatos autorizados com mensagem testada.", ic: "chat", f: [["ci_d35", "", 3]] },
+    { a: "d6", n: 9, t: "Dia 6", q: "CRM atualizado.", ic: "chart", f: [["ci_d6", "", 3]] },
+    { a: "d7", n: 10, t: "Dia 7", q: "O que funcionou? O que vou ajustar?", ic: "bulb", f: [["ci_d7", "", 3]] },
+    { a: "msg", n: 11, t: "Meu prompt mais útil", q: "O pedido que eu mais vou repetir — já no Método PROMPT.", ic: "ask", tone: "mint", f: [["ci_msg", "", 2]] }
+   ] },
+ { id: "cs", tag: "SÍNTESE • 1 PÁGINA", nome: "Plano de Alta Performance", titulo: "30 dias para transformar método em ação",
+   sub: "Preencha a partir das três camadas, sem metas fictícias",
+   grid: ["des des cli cli", "aca aca ind ind", "s1 s2 s3 s4", "com com sen sen"],
+   rows: "auto auto auto auto",
+   boxes: [
+    { a: "des", n: 1, t: "Desafio original", q: "O que eu registrei no Módulo 1.", ic: "flag", f: [["cs_desafio", "", 2]], pull: "c1_desafio" },
+    { a: "cli", n: 2, t: "Cliente e prioridade", q: "Quem e por que agora?", ic: "users", f: [["cs_cliente", "", 2]] },
+    { a: "aca", n: 3, t: "Ação principal", q: "O que vou fazer, com que recursos e autorizações?", ic: "arrow", f: [["cs_acao", "", 2], ["cs_resp", "Responsável • recursos", 1]], pull: "c3_acao" },
+    { a: "ind", n: 4, t: "Indicador e linha de base", q: "Fórmula, fonte e ponto de partida.", ic: "chart", f: [["cs_ind", "", 2], ["cs_base", "Fonte • linha de base", 1]], pull: "c3_ind" },
+    { a: "s1", n: 5, t: "Semana 1", q: "Medir e organizar.", ic: "cal", f: [["cs_s1", "", 2]], pull: "c3_s1" },
+    { a: "s2", n: 6, t: "Semana 2", q: "Testar a melhoria.", ic: "cal", f: [["cs_s2", "", 2]], pull: "c3_s2" },
+    { a: "s3", n: 7, t: "Semana 3", q: "Executar e acompanhar.", ic: "cal", f: [["cs_s3", "", 2]], pull: "c3_s3" },
+    { a: "s4", n: 8, t: "Semana 4", q: "Revisar e decidir.", ic: "cal", f: [["cs_s4", "", 2]], pull: "c3_s4" },
+    { a: "com", n: 9, t: "Primeiro compromisso", q: "Até ___, farei ___. Comprovarei por ___.", ic: "hand", tone: "mint", f: [["cs_farei", "", 2]] },
+    { a: "sen", n: 10, t: "Se o indicador não melhorar", q: "O que vou investigar primeiro?", ic: "search", tone: "mint", f: [["cs_senao", "", 2]] }
+   ] }
+];
+const CANVAS_ICONS = {
+ flag: '<path d="M5 21V4m0 0h11l-2 4 2 4H5"/>', star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+ up: '<path d="M4 17l6-6 4 4 6-7M14 8h6v6"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+ users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.6-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .8 3.2 2.6 3.7 5.2"/>',
+ stop: '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>', tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+ ask: '<path d="M4 5h16v11H9l-5 4z"/><path d="M10 9.2a2 2 0 1 1 2.8 1.8c-.6.3-.8.7-.8 1.3M12 14h.01"/>', check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', funnel: '<path d="M3 4h18l-7 8v7l-4 2v-9z"/>',
+ hand: '<path d="M7 11V6a2 2 0 0 1 4 0v4M11 10V4a2 2 0 0 1 4 0v6M15 10V6a2 2 0 0 1 4 0v7a8 8 0 0 1-8 8h-1a6 6 0 0 1-5-3l-2-4a2 2 0 0 1 3.5-2L7 13"/>',
+ arrow: '<path d="M4 12h14M13 6l6 6-6 6"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/>', search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 5 5"/>',
+ gift: '<rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1.5S9 9 12 9c3 0 6-.5 6-1.5S14 5 12 9"/>',
+ shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>', scale: '<path d="M12 4v17M6 21h12M5 8h14M5 8l-3 6a3 3 0 0 0 6 0zM19 8l-3 6a3 3 0 0 0 6 0z"/>',
+ heart: '<path d="M12 20s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.5-8 11-8 11z"/>', chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
+};
+function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`)});return k}
+function canvasFilled(layer,CV){const k=canvasKeys(layer);return [k.filter(x=>(CV[x]||'').trim()).length,k.length]}
+
+const IEL=null;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const LS={get(k,d){try{const v=localStorage.getItem('apc_'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('apc_'+k,JSON.stringify(v))}catch(e){}}};
+const CV=LS.get('canvas',{});
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let cur=(location.hash.slice(1)||'c1'),blank=false;
+if(!CANVAS_LAYERS.find(l=>l.id===cur))cur='c1';
+function ed(key,ph,rows){const v=blank?'':(CV[key]||'');return `<div class="ed" contenteditable="true" data-k="${key}" data-ph="${esc(ph||'')}" style="--r:${rows||2}">${esc(v)}</div>`}
+function ico(n){return `<svg viewBox="0 0 24 24">${CANVAS_ICONS[n]||''}</svg>`}
+function boxHTML(L,b,i){
+ const fx=L.flow&&['abo','qua','pro','obj','lim'].includes(b.a)?' fx':'';
+ let body='';
+ if(b.kind==='funil'){const st=b.f.slice(0,4),rest=b.f.slice(4);
+  body=`<div class="fun">${st.map(f=>`<div class="st"><label>${esc(f[1])}</label>${ed(f[0],'',2)}</div>`).join('')}</div><div class="fun2">${rest.map(f=>`<div class="fd"><label>${esc(f[1])}</label>${ed(f[0],'',1)}</div>`).join('')}</div>`}
+ else if(b.kind==='table'){body=`<div class="tw"><table class="tb"><tr><th></th>${b.cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${Array.from({length:b.rowsN},(x,r)=>`<tr><td class="rn">${r+1}</td>${b.cols.map((c,ci)=>`<td>${ed(`${L.id}_t${r}_${ci}`,'',1)}</td>`).join('')}</tr>`).join('')}</table></div>`}
+ else if(b.kind==='rules'){body=`<ol class="rules">${b.rules.map(r=>`<li>${esc(r)}</li>`).join('')}</ol>`}
+ else body=b.f.map(f=>`<div class="fd">${f[1]?`<label>${esc(f[1])}</label>`:''}${ed(f[0],b.pull&&!CV[f[0]]&&CV[b.pull]&&!blank?'Toque para trazer da camada anterior':'',f[2])}</div>`).join('');
+ const order=typeof b.n==='number'?b.n:(b.n==='★'?0:99);
+ return `<section class="box${b.tone?' '+b.tone:''}${fx}" style="grid-area:${b.a};--o:${order}">${b.col?`<span class="col">${esc(b.col)}</span>`:''}<div class="bh"><span class="num">${b.n}</span>${ico(b.ic)}<span class="bt">${esc(b.t)}</span></div><div class="q">${esc(b.q)}</div><div class="fl${b.kind==='row'?' row':''}">${body}</div></section>`}
+function hlTitle(t){const w=t.split(' '),k=Math.max(1,Math.ceil(w.length*.4));return esc(w.slice(0,w.length-k).join(' '))+' <span class="hl">'+esc(w.slice(-k).join(' '))+'</span>'}
+function render(){
+ const L=CANVAS_LAYERS.find(l=>l.id===cur);
+ $('#tabs').innerHTML=CANVAS_LAYERS.map(l=>{const [a,b]=canvasFilled(l.id,CV);return `<button class="${l.id===cur?'on':''}" data-l="${l.id}">${l.id==='ci'?'IA':l.id==='cs'?'Síntese':'<span class="w">Camada </span>'+l.id[1]}<i>${Math.round(a/b*100)}%</i></button>`}).join('');
+ $$('#tabs button').forEach(b=>b.onclick=()=>{cur=b.dataset.l;history.replaceState(null,'','#'+cur);render()});
+ $('#board').innerHTML=`<div class="board">${IEL?`<img class="ielhead" src="${IEL.head}" alt="" style="width:100%;margin:-4px 0 4px">`:''}<div class="chev">»</div>
+  <div class="bhead"><div><span class="chip">${esc(L.tag)}</span><div class="btitle">${hlTitle(L.titulo)}</div><div class="bsub">${esc(L.nome)} • ${esc(L.sub)}</div></div>
+  <div class="who"><span>Nome</span>${ed('cv_nome','',1)}<span>Empresa</span>${ed('cv_empresa','',1)}</div></div>
+  <div class="grid${L.flow?' flow':''}" style="grid-template-areas:${L.grid.map(r=>`'${r}'`).join(' ')};grid-template-rows:${L.rows}">${L.boxes.map((b,i)=>boxHTML(L,b,i)).join('')}</div>
+  <div class="bfoot"><span>Use dados mínimos: clientes como “Cliente A”. Números de exemplo são fictícios.</span>${IEL?`<img class="lg" src="${IEL.foot}" alt="">`:'<span>Alta Performance Comercial • Meu Mapa</span>'}</div></div>`;
+ let t;$$('.ed').forEach(e=>{
+  e.addEventListener('input',()=>{CV[e.dataset.k]=e.innerText.replace(/\n$/,'');LS.set('canvas',CV);$('#saved').textContent='Salvo ✓';clearTimeout(t);t=setTimeout(()=>{$('#saved').textContent='';updTabs()},1200)});
+  e.addEventListener('paste',ev=>{ev.preventDefault();const tx=(ev.clipboardData||window.clipboardData).getData('text');document.execCommand('insertText',false,tx)});
+  e.addEventListener('focus',()=>{const b=L.boxes.find(x=>x.f.some(f=>f[0]===e.dataset.k));if(b&&b.pull&&!e.innerText.trim()&&(CV[b.pull]||'').trim()){e.innerText=CV[b.pull];CV[e.dataset.k]=CV[b.pull];LS.set('canvas',CV)}})})}
+function updTabs(){$$('#tabs button').forEach(b=>{const [a,n]=canvasFilled(b.dataset.l,CV);b.querySelector('i').textContent=Math.round(a/n*100)+'%'})}
+$('#bPrint').onclick=()=>window.print();
+$('#bBlank').onclick=()=>{blank=true;render();setTimeout(()=>{window.print();blank=false;render()},150)};
+$('#bClear').onclick=()=>{if(!confirm('Apagar tudo o que você escreveu nesta camada, neste aparelho?'))return;canvasKeys(cur).forEach(k=>delete CV[k]);LS.set('canvas',CV);render()};
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(CANVAS_LAYERS.find(l=>l.id===h)){cur=h;render()}});
+const qp=new URLSearchParams(location.search);if(qp.get('blank'))blank=true;if(IEL)document.body.classList.add('iel');
+render();
+</script>
+</body>
+</html>
