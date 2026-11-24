@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Início | Alta Performance Comercial</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1F4D">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="apc-config.js"></script>
+<script src="supabase.min.js"></script>
+<script src="apc-auth.js"></script>
+<style>
+:root{--navy:#0E2A5C;--deep:#0B1F4D;--blue:#1565C0;--turq:#12A3A8;--green:#1DBF8A;--ice:#EAF4FB;--mint:#E8F8F3;--grey:#5A6B85;--line:#D6E1EC;--soft:#F6F9FC;--grad:linear-gradient(90deg,#0E2A5C 0%,#12A3A8 60%,#1DBF8A 100%);--r:18px;--sh:0 6px 24px rgba(14,42,92,.07);--f:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--f);color:var(--navy);background:var(--soft);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.topline{height:4px;background:linear-gradient(90deg,var(--blue) 0 66%,#C9D3DE 66% 100%)}
+header.site{background:#fff;border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex;align-items:center;gap:16px;padding-top:14px;padding-bottom:14px}
+.brand b{display:block;font-size:12px;letter-spacing:.07em;font-weight:800}.brand span{font-size:11px;color:var(--grey);font-weight:600}
+.course{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--grey);text-align:right}
+@media(max-width:640px){.course{display:none}}
+
+.hero{background:linear-gradient(140deg,#0B1F4D 0%,#0E3A7A 60%,#12A3A8 120%);color:#fff;padding:38px 0 42px}
+.hero .k{font-size:12px;font-weight:800;letter-spacing:.09em;color:#7BE3E6;text-transform:uppercase}
+.hero h1{font-size:clamp(26px,3.6vw,40px);line-height:1.12;margin:8px 0 10px;font-weight:800;letter-spacing:-.01em}
+.hero p{margin:0;max-width:640px;font-size:16px;opacity:.92}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.b{display:inline-flex;align-items:center;gap:10px;border-radius:14px;padding:14px 20px;font-weight:800;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .12s,filter .12s}
+.b:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.b.pri{background:#fff;color:var(--deep)}
+.b.pri small{display:block;font-size:11.5px;font-weight:600;color:var(--grey)}
+.b.ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.b svg{flex:none}
+
+section.blk{padding:40px 0 8px}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.sh h2{font-size:22px;margin:0;font-weight:800}
+.sh p{margin:4px 0 0;color:var(--grey);font-size:14px}
+.chip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--turq);margin-bottom:2px}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--sh);position:relative}
+.step .n{width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;font-weight:900;display:grid;place-items:center;font-size:16px;margin-bottom:10px}
+.step b{display:block;font-size:15px;margin-bottom:4px}
+.step span{font-size:13.5px;color:var(--grey)}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1000px){.mods{grid-template-columns:1fr 1fr}}@media(max-width:560px){.mods{grid-template-columns:1fr}}
+.mod{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:20px;display:flex;flex-direction:column;gap:10px;text-decoration:none;transition:border-color .15s,transform .12s}
+.mod:hover{border-color:var(--turq);transform:translateY(-2px)}
+.mod .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.mod .tag{font-size:12px;font-weight:800;letter-spacing:.06em;color:#fff;background:var(--navy);border-radius:999px;padding:5px 11px}
+.mod .min{font-size:12.5px;color:var(--grey);font-weight:700}
+.mod h3{margin:2px 0 0;font-size:18px;line-height:1.25}
+.mod p{margin:0;color:var(--grey);font-size:13.5px}
+.bar{height:8px;border-radius:8px;background:#DCE6F0;overflow:hidden}.bar i{display:block;height:100%;background:var(--grad);width:0}
+.mod .pl{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--grey)}
+.mod .go{margin-top:auto;display:flex;align-items:center;gap:8px;font-weight:800;color:var(--blue);font-size:14px}
+
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:900px){.tools{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.tools{grid-template-columns:1fr}}
+.tool{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh);padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none;transition:border-color .15s,transform .12s}
+.tool:hover{border-color:var(--turq);transform:translateY(-2px)}
+.tool .ic{width:46px;height:46px;border-radius:13px;background:var(--grad);display:grid;place-items:center}
+.tool h3{margin:4px 0 0;font-size:16.5px}
+.tool .what{font-size:13.5px;color:var(--navy)}
+.tool .when{font-size:12.5px;color:var(--grey);background:var(--soft);border-radius:10px;padding:8px 10px}
+.tool .when b{color:var(--navy)}
+.tool .go{margin-top:auto;padding-top:4px;display:flex;align-items:center;gap:8px;font-weight:800;color:var(--blue);font-size:14px}
+.tool .meta{font-size:12px;font-weight:700;color:var(--turq)}
+
+.faq{display:grid;gap:10px;max-width:860px}
+details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0 18px}
+summary{cursor:pointer;list-style:none;font-weight:800;font-size:15px;padding:16px 28px 16px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:0;top:12px;font-size:22px;color:var(--turq);font-weight:700}
+details[open] summary:after{content:"–"}
+details p{margin:0 0 16px;color:var(--grey);font-size:14.5px}
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--mint);border-radius:14px;padding:14px 16px;font-size:14px;margin-top:18px;max-width:860px}
+footer.apc-foot{margin-top:48px}
+:focus-visible{outline:3px solid var(--turq);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header class="site"><div class="wrap">
+  <div class="brand"><b>ESCOLA DE NEGÓCIOS</b><span>IEL Pernambuco</span></div>
+  <div class="course">Alta Performance Comercial<br>e Fidelização Estratégica</div>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="k">Sua área do curso</div>
+  <h1 id="hello">Bem-vindo ao seu treinamento</h1>
+  <p>Aqui ficam as aulas, as atividades, o seu Canvas e os materiais. Tudo o que você preencher é salvo sozinho. Comece pelo botão abaixo.</p>
+  <div class="cta">
+    <a class="b pri" id="cta" href="aula.html#M1/0"><svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E2A5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg><span><span id="cta-t">Começar pelo Módulo 1</span><small id="cta-s">Aula ao vivo • visão geral</small></span></a>
+    <a class="b ghost" href="#como"><svg aria-hidden="true" class="lucide lucide-circle-help" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /> </svg>Como funciona</a>
+  </div>
+</div></section>
+
+<main>
+<section class="blk"><div class="wrap">
+  <div class="sh"><div><span class="chip">Passo a passo</span><h2>Comece por aqui</h2><p>Em sala, siga esta ordem. O instrutor indica o passo do momento.</p></div></div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><b>Abra a Aula ao vivo</b><span>Escolha o módulo do dia. Cada passo mostra a ideia central e a atividade da hora.</span></div>
+    <div class="step"><div class="n">2</div><b>Faça a atividade do momento</b><span>Responda no próprio passo quando o instrutor pedir. Não precisa apertar "salvar".</span></div>
+    <div class="step"><div class="n">3</div><b>Leve para o Canvas</b><span>O botão "Levar para o Canvas" monta o seu Mapa de Alta Performance aos poucos.</span></div>
+    <div class="step"><div class="n">4</div><b>Depois do curso, aplique</b><span>Use o Kit (prompts, Copiloto, biblioteca) e revise o seu plano de 30 dias.</span></div>
+  </div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="sh"><div><span class="chip">Aula ao vivo</span><h2>Seus módulos</h2><p>Os passos de cada encontro, com as atividades. A barra mostra o que você já concluiu.</p></div></div>
+  <div class="mods" id="mods"></div>
+</div></section>
+
+<section class="blk"><div class="wrap">
+  <div class="sh"><div><span class="chip">Ferramentas e materiais</span><h2>O que é cada coisa</h2><p>Use quando precisar. Cada cartão diz para que serve e quando usar.</p></div></div>
+  <div class="tools">
+    <a class="tool" href="canvas.html">
+      <div class="ic"><svg aria-hidden="true" class="lucide lucide-layout-grid" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="7" height="7" x="3" y="3" rx="1" /> <rect width="7" height="7" x="14" y="3" rx="1" /> <rect width="7" height="7" x="14" y="14" rx="1" /> <rect width="7" height="7" x="3" y="14" rx="1" /> </svg></div><h3>Canvas: Meu Mapa</h3>
+      <div class="what">O seu plano em uma página: três camadas (uma por módulo), a do Copiloto de IA e a síntese final.</div>
+      <div class="when"><b>Quando:</b> ao fim de cada módulo, e para imprimir ou revisar depois.</div>
+      <div class="meta" id="cv-meta"></div>
+      <div class="go">Abrir o Canvas <svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div></a>
+    <a class="tool" href="index.html">
+      <div class="ic"><svg aria-hidden="true" class="lucide lucide-book-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 7v14" /> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /> </svg></div><h3>Kit do participante</h3>
+      <div class="what">A trilha do curso, a biblioteca de prompts, o Copiloto Comercial e as ferramentas de apoio.</div>
+      <div class="when"><b>Quando:</b> depois da aula, para aplicar no seu dia a dia.</div>
+      <div class="go">Abrir o Kit <svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div></a>
+    <a class="tool" href="index.html#prompt">
+      <div class="ic"><svg aria-hidden="true" class="lucide lucide-wand-sparkles" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" /> <path d="m14 7 3 3" /> <path d="M5 6v4" /> <path d="M19 14v4" /> <path d="M10 2v2" /> <path d="M7 8H3" /> <path d="M21 16h-4" /> <path d="M11 3H9" /> </svg></div><h3>Monte seu PROMPT</h3>
+      <div class="what">Monta, em 6 campos, um pedido claro para a IA (ChatGPT, Copilot, Gemini) e copia pronto.</div>
+      <div class="when"><b>Quando:</b> sempre que for pedir algo à IA. Use "Cliente A" no lugar de nomes reais.</div>
+      <div class="go">Montar um prompt <svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div></a>
+    <a class="tool" href="cartas.html">
+      <div class="ic"><svg aria-hidden="true" class="lucide lucide-smartphone" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="14" height="20" x="5" y="2" rx="2" ry="2" /> <path d="M12 18h.01" /> </svg></div><h3>Cartas das práticas</h3>
+      <div class="what">As cartas dos exercícios em trio (vendedor, cliente, observador) e a rubrica de notas.</div>
+      <div class="when"><b>Quando:</b> só quando o instrutor pedir. Abra apenas a carta do seu papel.</div>
+      <div class="go">Abrir as cartas <svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div></a>
+    <a class="tool" id="lk-sheet" href="#" target="_blank" rel="noopener">
+      <div class="ic"><svg aria-hidden="true" class="lucide lucide-sheet" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> <line x1="3" x2="21" y1="9" y2="9" /> <line x1="3" x2="21" y1="15" y2="15" /> <line x1="9" x2="9" y1="9" y2="21" /> <line x1="15" x2="15" y1="9" y2="21" /> </svg></div><h3>Planilha da carteira</h3>
+      <div class="what">Os 12 lojistas fictícios do Laboratório da Carteira, com compras, margem e ciclo.</div>
+      <div class="when"><b>Quando:</b> no Módulo 3, durante o laboratório. Só leitura.</div>
+      <div class="go">Abrir a planilha <svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div></a>
+    <a class="tool" id="lk-drive" href="#" target="_blank" rel="noopener">
+      <div class="ic"><svg aria-hidden="true" class="lucide lucide-folder-down" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" /> <path d="M12 10v6" /> <path d="m15 13-3 3-3-3" /> </svg></div><h3>Materiais para baixar</h3>
+      <div class="what">Canvas em PDF editável, modelos, fichas e a planilha de CRM, na pasta do curso no Google Drive.</div>
+      <div class="when"><b>Quando:</b> para guardar no computador ou imprimir.</div>
+      <div class="go">Abrir a pasta <svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div></a>
+  </div>
+</div></section>
+
+<section class="blk" id="como"><div class="wrap">
+  <div class="sh"><div><span class="chip">Ajuda rápida</span><h2>Perguntas frequentes</h2></div></div>
+  <div class="faq">
+    <details open><summary>Por onde eu começo?</summary><p>Pelo botão branco no topo desta página. Ele abre a Aula ao vivo no ponto certo: no primeiro acesso, o Módulo 1; depois, o último passo em que você estava.</p></details>
+    <details><summary>Minhas respostas ficam salvas?</summary><p>Sim, sozinhas. Tudo o que você escreve é guardado na sua conta poucos segundos depois. No topo da tela, o indicador mostra "Tudo salvo" quando terminou.</p></details>
+    <details><summary>Posso usar no celular e no computador?</summary><p>Pode. Entre com o mesmo e-mail e senha: suas respostas aparecem nos dois. Em sala, o celular é o mais prático; para escrever o plano, prefira o computador.</p></details>
+    <details><summary>E se a internet cair?</summary><p>Continue normalmente. As respostas ficam guardadas no aparelho e são enviadas para a sua conta quando a conexão voltar. O indicador fica vermelho enquanto isso.</p></details>
+    <details><summary>Esqueci minha senha. E agora?</summary><p>Na tela de entrada, toque em "Esqueci minha senha" e informe o seu e-mail. Você recebe um link para criar uma nova senha (confira também o spam).</p></details>
+    <details><summary>O que posso escrever aqui?</summary><p>Situações reais do seu trabalho, mas sem dados pessoais de clientes: use "Cliente A", "Empresa B". Os casos do curso (Loja Fio & Grade, TurnoCerto) são fictícios.</p></details>
+    <details><summary>Como saio da minha conta?</summary><p>No topo de qualquer página, toque em "Sair". Faça isso sempre que usar um computador compartilhado.</p></details>
+  </div>
+  <div class="note"><svg aria-hidden="true" class="lucide lucide-lock" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B6B55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /> </svg><span>Suas respostas são privadas: outros participantes não veem o que você preencheu. O acesso aos dados fica restrito à coordenação do curso, só para fins pedagógicos.</span></div>
+</div></section>
+</main>
+
+<script>
+const MODS=[];
+// MÓDULO 1 — Do instinto ao método (230 min, duas noites)
+const R_M1 = ["Pergunta não indutiva", "Oferta adequada ao problema", "Próximo passo concreto e respeitoso", "Ritual mensurável"];
+MODS.push({
+  id: "M1", nome: "Módulo 1", titulo: "Do instinto ao método",
+  sub: "Mentalidade, método e conversas que geram valor.",
+  total: 230,
+  entregas: ["Canvas camada 1 preenchido", "Um ritual de 5 dias", "Uma hipótese de valor", "Uma boa pergunta de diagnóstico"],
+  momentos: [
+    { bloco: "Noite 1 • Abertura", sl: "1–2", t: 6, tipo: "conceito", titulo: "Vender melhor começa antes do primeiro argumento",
+      ideia: "A venda começa no preparo. Neste módulo você sai do “vendo no feeling” para um jeito de vender que dá para repetir, revisar e melhorar.",
+      cards: [["Mentalidade", "Como você enxerga o seu papel e o seu desenvolvimento."], ["Método", "Um caminho de perguntas e decisões, não um roteiro decorado."], ["Conversas que geram valor", "Entender antes de propor. Conduzir sem pressionar."]],
+      pergunta: "O que você espera levar destas aulas para a sua próxima semana de vendas?" },
+
+    { bloco: "Noite 1 • Abertura", sl: "3", t: 4, tipo: "pratica", titulo: "O que está travando suas vendas?",
+      ideia: "Escolha um desafio real. Ele fica guardado com você e volta no encerramento do Módulo 3, para ser confrontado com o seu plano de 30 dias.",
+      w: [{ type: "choose", id: "m1_trava", q: "Onde está a trava, hoje?", opts: ["Abordagem", "Preço", "Organização", "Confiança", "Outra"] },
+          { type: "fields", id: "m1_desafio", fields: [["d", "Complete a frase", "Hoje, o que mais trava minhas vendas é…", 2]],
+            tpl: "{d}", canvas: { key: "c1_desafio", label: "Salvar no Canvas (Desafio inicial)" } }],
+      nota: "O registro é seu. Não será recolhido nem exposto." },
+
+    { bloco: "Noite 1 • Abertura", sl: "4–5", t: 13, tipo: "pratica", titulo: "Uma compra que você nunca esqueceu",
+      ideia: "Em duplas, lembre uma compra excelente ou frustrante. Não conte o que você sentiu: conte o que o vendedor FEZ.",
+      w: [{ type: "choose", id: "m1_verbos", multi: true, q: "Toque nos verbos que descrevem o que o vendedor fez:", opts: ["Perguntou", "Escutou", "Explicou", "Comparou", "Recomendou", "Retornou", "Prometeu", "Ignorou", "Pressionou", "Empurrou o catálogo"] }],
+      cards: [["Clareza", "O cliente entendeu alternativas e limites."], ["Confiança", "Percebeu preparo e atenção."], ["Condução", "Soube qual seria o próximo passo."]],
+      pergunta: "Os verbos da sala cabem em clareza, confiança ou condução?" },
+
+    { bloco: "Noite 1 • Mentalidade", sl: "6", t: 3, tipo: "discussao", titulo: "Você reconhece um bom vendedor",
+      ideia: "Mas consegue repetir esses comportamentos quando é você quem está vendendo? Reconhecer é fácil; repetir exige método.",
+      pergunta: "Qual comportamento do “bom vendedor” você mais esquece no dia a dia?" },
+
+    { bloco: "Noite 1 • Mentalidade", sl: "7–9", t: 13, tipo: "pratica", titulo: "Cena A e Cena B: o mesmo cliente, duas conversas", ficticio: true,
+      ideia: "Caso fictício: uma loja enfrenta erros na passagem de pedidos entre turnos. Compare as duas conversas.",
+      dialog: [["CENA A", ""], ["Cliente", "Temos enfrentado falhas quando muda a equipe."], ["Vendedor", "Entendi. Nosso sistema centraliza pedidos, gera relatórios e automatiza alertas."], ["Cliente", "Parece interessante. Vou avaliar com a equipe."],
+               ["CENA B", "Antes da visita, o vendedor conheceu a operação com turnos e pedidos por WhatsApp."], ["Vendedor", "Vi que vocês atendem em turnos e recebem pedidos por WhatsApp. É assim mesmo?"], ["Cliente", "Sim. Temos duas equipes e às vezes a informação não passa."], ["Vendedor", "Em quais situações isso mais prejudica o cliente?"]],
+      w: [{ type: "choose", id: "m1_cenaA", q: "Por que o cliente da Cena A não viu motivo para avançar?", opts: ["O produto era ruim", "O vendedor apresentou a solução antes de entender o problema", "O cliente não tinha dinheiro", "Faltou desconto"], reveal: "Leitura esperada: o vendedor apresentou a solução antes de entender impacto, frequência, prioridade e quem decide." }],
+      cards: [["Preparo", "Estudou o contexto antes."], ["Curiosidade", "Validou o que sabia."], ["Condução", "Aprofundou antes de propor."]] },
+
+    { bloco: "Noite 1 • Mentalidade", sl: "10–12", t: 13, tipo: "conceito", titulo: "Vendedor não nasce pronto",
+      ideia: "Talento pode ajudar. Preparo, feedback e treino desenvolvem competência — e alta performance é consistência, não o seu melhor dia.",
+      cards: [["Vendedor não nasce pronto", "Competência comercial se desenvolve com preparo, feedback e treino."], ["Identidade comercial", "Você é alguém que só vende, ou alguém que estuda, melhora e responde pela experiência do cliente?"], ["Alta performance", "Qualidade consistente, aprendizagem e resultados sustentáveis."]],
+      pergunta: "O que diferencia o seu melhor dia de um dia comum?" },
+
+    { bloco: "Noite 1 • Mentalidade", sl: "13–14", t: 6, tipo: "pratica", titulo: "Quatro competências treináveis",
+      ideia: "Escolha a competência que mais precisa evoluir e prove a escolha com um comportamento real — não com uma impressão.",
+      cards: [["Preparar", "Domínio da oferta e do contexto."], ["Diagnosticar", "Necessidades e prioridades."], ["Conduzir", "Escolhas e próximos passos."], ["Aprender", "Feedback e ajuste da prática."]],
+      w: [{ type: "choose", id: "m1_comp", q: "Qual competência mais precisa evoluir?", opts: ["Preparar", "Diagnosticar", "Conduzir", "Aprender"] },
+          { type: "fields", id: "m1_autodiag", fields: [["c", "Que comportamento real comprova essa escolha?", "Ex.: apresento o produto antes de perguntar o que o cliente precisa", 2]],
+            tpl: "Competência a desenvolver: {@m1_comp}. Evidência: {c}", canvas: { key: "c1_evoluir", label: "Levar para o Canvas (O que vou evoluir)" } }] },
+
+    { bloco: "Noite 1 • Mentalidade", sl: "15", t: 5, tipo: "pratica", titulo: "A diferença entre agir e controlar",
+      ideia: "Você responde pela sua ação. Outros fatores exigem leitura de contexto — e não são desculpa nem culpa sua.",
+      w: [{ type: "quiz", id: "m1_controle", opts: ["Minha ação", "Exige contexto"], items: [["Preparar perguntas antes da visita", 0], ["Orçamento do cliente", 1], ["Registrar o que foi combinado", 0], ["Decisão final do cliente", 1], ["Respeitar o tempo do cliente", 0], ["Movimento da concorrência", 1], ["Qualidade do meu follow-up", 0], ["Cenário econômico", 1]]}] },
+
+    { bloco: "Noite 1 • Resiliência", sl: "16–18", t: 11, tipo: "discussao", titulo: "Cinco oportunidades travadas. Qual você investiga primeiro?", ficticio: true,
+      ideia: "O “não” é uma resposta, não uma sentença sobre você. Leia os cinco casos, vote em qual investigaria primeiro e defenda a escolha com um fato do card.",
+      cards: [["A • Sem orçamento agora", "Precisa da solução, mas o orçamento deste trimestre não comporta."], ["B • Sem verba aprovada", "Gostou da proposta, mas a verba ainda não foi liberada."], ["C • Fora do perfil", "A solução não atende ao que o cliente precisa."], ["D • Sumiu", "Ótima primeira conversa; depois, nenhuma resposta."], ["E • Decisor ausente", "Tem urgência, mas quem conversa com você não pode aprovar."]],
+      w: [{ type: "choose", id: "m1_5op", q: "1. Vote: qual você investigaria primeiro?", opts: ["A", "B", "C", "D", "E"], why: "2. Defenda com um FATO do card:",
+            reveal: "Uma leitura possível (lâmina 18):\nE — Decisor ausente » INVESTIGAR PRIMEIRO: pedir acesso a quem aprova.\nA — Sem orçamento agora » RETOMAR: combinar uma data para voltar a conversar.\nB — Sem verba aprovada » RETOMAR: entender quando a verba é decidida.\nD — Sumiu » UM CONTATO ÚTIL: depois, encerrar com respeito.\nC — Fora do perfil » ENCERRAR: com respeito, indicando outra opção se puder.\nNão existe resposta única. Existe decisão com evidência." }] },
+
+    { bloco: "Noite 1 • Resiliência", sl: "19–20", t: 11, tipo: "pratica", titulo: "Fato → hipótese → verificação",
+      ideia: "Fato é o que aconteceu ou foi dito. Hipótese é o que você supõe. Verificação é a pergunta que confirma. Só decida depois de verificar.",
+      dialog: [["EXEMPLO 1", ""], ["Fato", "“Não tenho verba agora.”"], ["Hipótese", "A prioridade pode ter mudado."], ["Verificação", "“Em que momento isso volta a ser prioridade?”"],
+               ["EXEMPLO 2", ""], ["Fato", "Não respondeu às duas últimas mensagens."], ["Hipótese", "Pode estar sem tempo ou ter escolhido outro fornecedor."], ["Verificação", "“Faz sentido seguirmos ou prefere que eu encerre por aqui?”"],
+               ["EXEMPLO 3", ""], ["Fato", "“O concorrente é mais barato.”"], ["Hipótese", "Pode estar comparando só o preço."], ["Verificação", "“Além do preço, o que pesa na sua decisão?”"]],
+      cards: [["Regular", "Evitar reação impulsiva."], ["Compreender", "Perguntar só com abertura."], ["Registrar", "Guardar fatos e contexto."], ["Seguir", "Respeitar e priorizar."]],
+      w: [{ type: "fields", id: "m1_fhv", fields: [["f", "Agora você: o fato", "O que aconteceu ou foi dito?", 1], ["h", "A hipótese", "O que você supõe?", 1], ["v", "A verificação", "Que pergunta confirma?", 1]],
+            tpl: "Fato: {f}\nHipótese: {h}\nVerificação: {v}", canvas: { key: "c1_fato", label: "Levar para o Canvas (Fato × hipótese)" } }] },
+
+    { bloco: "Noite 1 • Resiliência", sl: "21", t: 4, tipo: "discussao", titulo: "E a sua oportunidade travada?",
+      ideia: "Em duplas, 4 minutos: 1) escolha UMA oportunidade sua que travou; 2) escreva o fato principal; 3) escolha o caminho e conte ao colega. O colega só pergunta: “Qual fato sustenta isso?”",
+      cards: [["Aumentar contatos", "Quando faz sentido: houve interesse real e o contato parou sem motivo conhecido."], ["Rever as perguntas", "Quando faz sentido: você ainda não sabe a dor, o decisor ou o prazo."], ["Combinar o momento", "Quando faz sentido: o cliente deu um prazo ou depende de algo (verba, coleção, safra)."], ["Encerrar com respeito", "Quando faz sentido: está fora do perfil ou o cliente disse não com clareza."]],
+      w: [{ type: "fields", id: "m1_travada", fields: [["fa", "Travou porque… (o fato)", "Cliente A não responde desde a proposta", 1]], tpl: "Travou porque {fa}." },
+          { type: "choose", id: "m1_decisao", q: "Qual caminho você escolhe?", opts: ["Aumentar contatos", "Rever as perguntas", "Combinar o momento", "Encerrar com respeito"], why: "Porque… (qual fato sustenta?)" }],
+      nota: "Use “Cliente A”: ninguém precisa expor cliente ou empresa." },
+
+    { bloco: "Noite 1", sl: "22", t: 15, tipo: "pausa", titulo: "Intervalo",
+      ideia: "Pausa para voltar com foco. Na sequência: disciplina, domínio da oferta e proposta de valor." },
+
+    { bloco: "Noite 1 • Disciplina", sl: "23–24", t: 10, tipo: "pratica", titulo: "Cinco rituais de evolução",
+      ideia: "Motivação começa o movimento. A rotina permite repetir o que funciona — e corrigir o que não funciona.",
+      cards: [["Preparar", "Cliente, oferta, contexto."], ["Priorizar", "Oportunidades relevantes."], ["Conversar", "Diagnóstico e próximo passo."], ["Registrar", "Fatos e compromissos."], ["Treinar", "Revisão com feedback."]],
+      w: [{ type: "week", id: "m1_rituais", rows: ["Preparar", "Priorizar", "Conversar", "Registrar", "Treinar"] }],
+      nota: "Use o quadro na semana que vem: marque o que você realmente fez em cada dia." },
+
+    { bloco: "Noite 1 • Disciplina", sl: "25", t: 6, tipo: "pratica", titulo: "Movimento não é necessariamente avanço", ficticio: true,
+      ideia: "Os números mostram etapas; não comprovam qualidade nem vendas. Onde a queda entre etapas pede investigação?",
+      w: [{ type: "calc", kind: "funil", id: "m1_painel", stages: [["Contatos iniciados", 70], ["Respostas", 14], ["Conversas relevantes", 6], ["Próximos passos", 3]] }],
+      nota: "Exemplo fictício. Troque pelos seus números da última semana." },
+
+    { bloco: "Noite 1 • Disciplina", sl: "26–27", t: 7, tipo: "conceito", titulo: "Volume sem critério não vira venda",
+      ideia: "O funil é o mapa do caminho do cliente, do primeiro contato à fidelização. Cada etapa tem uma função e um indicador.",
+      cards: [["Atração", "Contatos com perfil • contatos iniciados"], ["Qualificação", "Separar curiosidade de oportunidade • respostas e aderência"], ["Diagnóstico", "Dor, contexto e prioridade • conversas relevantes"], ["Proposta de valor", "Solução, impacto e próximo passo • propostas qualificadas"], ["Conversão", "Oportunidade vira decisão • vendas ganhas"], ["Fidelização", "Recompra, relação e indicação • retenção"]],
+      w: [{ type: "choose", id: "m1_perda", q: "Em qual estágio você mais perde clientes?", opts: ["Atrair", "Engajar", "Converter", "Fidelizar"] }] },
+
+    { bloco: "Noite 1 • Disciplina", sl: "28–29", t: 10, tipo: "conceito", titulo: "60 minutos com intenção",
+      ideia: "Uma ilustração adaptável, não uma receita: 10 min preparar • 30 min conversar • 10 min registrar • 10 min revisar.",
+      w: [{ type: "quiz", id: "m1_treino", opts: ["Repetição cega", "Prática deliberada"], items: [["Repete a mesma conversa sem registrar o que aconteceu", 0], ["Revê uma pergunta e testa uma melhoria na próxima oportunidade", 1], ["Pede feedback a um colega depois de uma visita", 1], ["Usa o mesmo argumento para todos os clientes", 0]] }] },
+
+    { bloco: "Noite 1 • Disciplina", sl: "30", t: 2, tipo: "pratica", titulo: "Um ritual real para os próximos cinco dias",
+      ideia: "Troque “vou me organizar” por uma ação observável.",
+      w: [{ type: "fields", id: "m1_ritual", fields: [["q", "Quando?", "Antes de cada visita importante", 1], ["s", "Em qual situação?", "Clientes novos de atacado", 1], ["c", "Como saberei que fiz?", "Duas perguntas anotadas no CRM", 1]],
+            tpl: "Meu ritual: {q}, em {s}. Saberei que fiz porque {c}.", canvas: { key: "c1_habito", label: "Levar para o Canvas (Meu hábito)" } }],
+      nota: "Exemplos: comércio — rever os 3 produtos mais procurados antes de abrir; serviço — preparar hipótese e pergunta antes do atendimento; indústria — validar o processo do cliente antes da visita." },
+
+    { bloco: "Noite 1 • Oferta e valor", sl: "31–32", t: 8, tipo: "pratica", titulo: "Segurança vem de conhecer o que você vende",
+      ideia: "Inclusive os limites. Antes de apresentar, responda quatro perguntas sobre a sua oferta.",
+      w: [{ type: "fields", id: "m1_oferta", fields: [["p", "Para quem?", "Qual perfil realmente se beneficia?", 1], ["pr", "Que problema?", "Que situação ou desejo atende?", 1], ["d", "Qual diferença?", "O que comprova o benefício?", 1], ["l", "Qual limite?", "Quando não é a melhor opção?", 1]],
+            tpl: "Para {p}, que enfrenta {pr}. Diferença: {d}. Limite: {l}.", canvas: { map: { p: "c1_cliente", l: "c1_limite" }, label: "Levar para o Canvas (Cliente e limite)" } }] },
+
+    { bloco: "Noite 1 • Oferta e valor", sl: "33–35", t: 14, tipo: "conceito", titulo: "Tradução de valor",
+      ideia: "Valor não existe isolado do problema do cliente. Suba a escada: atributo → contexto → benefício → evidência.",
+      cards: [["Atributo", "O que a oferta faz."], ["Contexto", "Onde isso importa."], ["Benefício", "O que pode melhorar."], ["Evidência", "Como provar ou verificar."]],
+      w: [{ type: "quiz", id: "m1_promessa", opts: ["Promessa vazia", "Argumento responsável"], items: [["“Garante mais vendas e resolve todos os problemas.”", 0], ["“Pode ajudar nesta dificuldade; vamos verificar se serve para sua operação.”", 1], ["“Nenhum cliente nosso nunca reclamou.”", 0], ["“Em lojas com pedidos por WhatsApp, isso costuma reduzir retrabalho; podemos medir em 30 dias.”", 1]] }],
+      nota: "Mesmo raciocínio em setores diferentes — comércio: caimento do tecido → adequação ao uso; serviços: acompanhamento → continuidade; indústria: monitoramento → sinalizar falhas antes." },
+
+    { bloco: "Noite 1 • Oferta e valor", sl: "36–37", t: 7, tipo: "ia", titulo: "Da característica ao motivo para comprar",
+      ideia: "Quatro passos: 1 cliente (para quem?), 2 dor (o que atrapalha hoje?), 3 característica (o que a oferta faz?), 4 benefício verificável (o que melhora e como provar?). Depois, a mesma frase vai para a IA de duas formas: um pedido fraco e um pedido com método.",
+      w: [{ type: "fields", id: "m1_valor", fields: [["cl", "Cliente", "lojista de moda praia do Agreste", 1], ["ct", "Contexto", "repõe grades toda semana pelo WhatsApp", 1], ["at", "Atributo", "catálogo com pedido mínimo por grade", 1], ["be", "Benefício", "menos erro de tamanho na reposição", 1], ["ev", "Evidência", "comparar devoluções antes e depois de 30 dias", 1]],
+            tpl: "Para {cl} que enfrenta {ct}, {at} pode ajudar em {be}, verificável por {ev}.", canvas: { map: { at: "c1_atributo", ct: "c1_contexto", be: "c1_beneficio", ev: "c1_evidencia" }, label: "Levar para o Canvas (Oferta e valor)" } },
+          { type: "compare", id: "m1_iademo", a: ["Pedido fraco", "Me dá um argumento de venda para o meu produto."],
+            b: ["Pedido com método (PROMPT)", "Aja como um vendedor consultivo. Quero transformar esta frase de valor em uma mensagem curta para o cliente: “{@m1_valor}”. Objetivo: abrir conversa, sem prometer resultado. Até 4 linhas, tom próximo, terminando com uma pergunta. Não invente números."] }],
+      nota: "Quem demonstra é o instrutor. A turma só observa a diferença entre as duas respostas." },
+
+    { bloco: "Noite 1 • Fechamento", sl: "38–39", t: 6, tipo: "conceito", titulo: "Mentalidade é o comportamento que você repete",
+      ideia: "Quem conhece só o produto explica características. Quem conhece o cliente mostra por que elas importam." },
+
+    { bloco: "Noite 1 • Fechamento", sl: "40", t: 1, tipo: "pratica", titulo: "Bilhete de saída",
+      ideia: "Uma mudança observável para a próxima venda. Retomamos na próxima aula.",
+      w: [{ type: "fields", id: "m1_bilhete", fields: [["dx", "Na próxima venda, vou deixar de…", "", 1], ["cm", "E vou começar a…", "", 1]], tpl: "Vou deixar de {dx} e começar a {cm}.", canvas: { map: { dx: "c1_deixar", cm: "c1_comecar" }, label: "Levar para o Canvas (Compromisso)" } }] },
+
+    { bloco: "Noite 2 • Venda consultiva", sl: "41–42", t: 6, tipo: "conceito", titulo: "O melhor argumento começa com uma boa compreensão",
+      ideia: "Ontem olhamos para o vendedor. Agora vamos organizar a conversa: investigar contexto, problema, impacto e objetivo — sem virar interrogatório." },
+
+    { bloco: "Noite 2 • Venda consultiva", sl: "43–45", t: 11, tipo: "pratica", titulo: "SPIN: quatro movimentos de diagnóstico", ficticio: true,
+      ideia: "Use com naturalidade: as quatro perguntas não são um roteiro obrigatório. As respostas pertencem ao cliente.",
+      cards: [["S • Situação", "Compreender o contexto."], ["P • Problema", "Identificar a dificuldade."], ["I • Implicação", "Explorar consequências."], ["N • Necessidade", "Entender o valor da mudança."]],
+      dialog: [["Vendedor", "Como os pedidos passam de uma equipe para a outra?"], ["Cliente", "Parte vai para o sistema e parte fica em mensagens."], ["Vendedor", "O que acontece quando um pedido é perdido?"], ["Cliente", "Atrasamos entregas e precisamos refazer o atendimento."], ["Vendedor", "Se o repasse funcionasse bem, o que mudaria na rotina?"], ["Cliente", "Teríamos menos retrabalho e menos reclamações."]],
+      w: [{ type: "quiz", id: "m1_spin", opts: ["S", "P", "I", "N"], items: [["Como funciona hoje a reposição da loja?", 0], ["Onde isso costuma dar errado?", 1], ["O que acontece com o cliente quando a grade chega errada?", 2], ["Se isso estivesse resolvido, o que mudaria para você?", 3]] }] },
+
+    { bloco: "Noite 2 • Venda consultiva", sl: "46–47", t: 7, tipo: "pratica", titulo: "BANT e GPCT: viabilidade e projeto do cliente",
+      ideia: "BANT é uma lente de viabilidade, não um filtro para desrespeitar clientes. GPCT ajuda a entender para onde o cliente quer ir.",
+      cards: [["B • Orçamento", "Há condição de investir?"], ["A • Decisão", "Quem decide ou influencia?"], ["N • Necessidade", "Existe aderência real?"], ["T • Prazo", "Quando faz sentido agir?"], ["G • Objetivos", "Onde quer chegar?"], ["P • Planos", "O que já pretende fazer?"], ["C • Desafios", "O que está dificultando?"], ["T • Prazo", "Para quando?"]],
+      w: [{ type: "fields", id: "m1_perg", fields: [["b", "Uma pergunta de viabilidade (BANT)", "Quem mais participa dessa decisão?", 1], ["g", "Uma pergunta de projeto (GPCT)", "O que vocês querem que esteja funcionando antes do pico?", 1]], tpl: "BANT: {b}\nGPCT: {g}", canvas: { key: "c1_pergunta", label: "Levar para o Canvas (Minha pergunta)" } }] },
+
+    { bloco: "Noite 2 • Venda consultiva", sl: "48", t: 2, tipo: "pratica", titulo: "Método não é decorar três siglas",
+      ideia: "Escolha as perguntas que fazem sentido. SPIN para necessidade e consequências; GPCT para direção e planos; BANT para condições de avançar.",
+      w: [{ type: "quiz", id: "m1_lente", opts: ["SPIN", "GPCT", "BANT"], items: [["Quero entender as consequências do problema", 0], ["Quero saber se há verba e quem aprova", 2], ["Quero entender onde o cliente quer chegar este ano", 1]] }] },
+
+    { bloco: "Noite 2 • Funil", sl: "49–50", t: 8, tipo: "pratica", titulo: "Acompanhar avanço, não apenas volume", ficticio: true,
+      ideia: "O funil é um mapa de oportunidades, não uma promessa de fechamento. A queda entre etapas indica onde olhar — não prova a causa.",
+      cards: [["Entrada", "Quem chegou ou foi abordado."], ["Conversa", "Quem interagiu de fato."], ["Diagnóstico", "Quem tem necessidade compreendida."], ["Próximo passo", "Quem assumiu avanço combinado."]],
+      w: [{ type: "calc", kind: "funil", id: "m1_minifunil", stages: [["Contatos", 20], ["Conversas", 9], ["Diagnósticos", 4], ["Próximos passos", 2]] }] },
+
+    { bloco: "Noite 2 • Laboratório", sl: "51–52", t: 13, tipo: "canvas", titulo: "Construa o seu Mapa de Alta Performance",
+      ideia: "Um cliente. Uma oferta. Uma pergunta. Um ritual. Um próximo passo. Não busque perfeição — busque clareza e coerência.",
+      w: [{ type: "canvas", layer: "c1" }],
+      nota: "Comece em sala e termine em casa: o Canvas fica salvo neste aparelho." },
+
+    { bloco: "Noite 2 • Laboratório", sl: "53", t: 4, tipo: "pratica", titulo: "Revisão em duplas",
+      ideia: "O método faz sentido para um cliente de verdade? Teste a coerência e dê UMA sugestão específica ao colega — sem refazer o trabalho dele.",
+      w: [{ type: "rubric", id: "m1_rev", crit: R_M1 }] },
+
+    { bloco: "Noite 2 • Fechamento", sl: "54", t: 4, tipo: "conceito", titulo: "Alta performance é transformar intenção em comportamento",
+      ideia: "Você sai com uma rotina, uma hipótese de valor, uma boa pergunta e um próximo passo." }
+  ]
+});
+
+// MÓDULO 2 — Do diagnóstico à decisão (234 min)
+MODS.push({
+  id: "M2", nome: "Módulo 2", titulo: "Do diagnóstico à decisão",
+  sub: "O cliente já explicou o problema. Agora precisa avaliar uma solução, decidir e assumir o próximo passo.",
+  total: 234,
+  entregas: ["Canvas camada 2", "Uma abordagem e uma pergunta de qualificação testadas", "Um protocolo de objeção", "Um próximo passo com dono e prazo"],
+  momentos: [
+    { bloco: "Abertura", sl: "1–2", t: 4, tipo: "conceito", titulo: "A mesma loja. Uma decisão mais difícil", ficticio: true,
+      ideia: "Loja de confecções: pedidos por WhatsApp, equipes em turnos e falhas no repasse. O fornecedor propõe organizar o fluxo por R$ 12.000. Há pico sazonal e risco de atraso.",
+      cards: [["Até aqui", "Diagnóstico: entendemos o problema."], ["Agora", "Abordagem, qualificação, proposta, objeções e negociação."], ["Fio condutor", "O mesmo caso acompanha o módulo inteiro."]] },
+
+    { bloco: "Abertura", sl: "3–4", t: 6, tipo: "conceito", titulo: "O caso em detalhe: quem compra e o que está à venda", ficticio: true,
+      ideia: "QUEM COMPRA: a Loja Fio & Grade, atacadista de confecções em Caruaru. Lojistas do Agreste fazem pedidos por WhatsApp, por grade de tamanhos; o pedido começa num turno e termina no outro, e na troca ele se perde. QUEM VENDE: a TurnoCerto, que implanta um sistema de organização de pedidos. Tudo fictício.",
+      cards: [["O problema", "Grade incompleta, entrega cobrada, lojista reclamando."], ["O prazo", "Pico chegando: parte crítica em até 14 dias."], ["Quem decide", "A gestora usa e indica; o sócio aprova acima da alçada dela."], ["O que o sistema faz", "Cada pedido vira registro com grade, quantidade, status e responsável; pendências visíveis na troca de turno."], ["O pacote-base", "Sistema + implantação em 20 dias + 1 treinamento remoto + 30 dias de suporte: R$ 12.000."], ["O que pode mudar", "Prazo de implantação, treinamento, suporte e forma de pagamento."]],
+      nota: "Esse é o produto negociado no Tribunal, à tarde, e acompanhado no Módulo 3." },
+
+    { bloco: "Abordagem", sl: "5–6", t: 6, tipo: "conceito", titulo: "A primeira abordagem conquista o direito de continuar",
+      ideia: "Relevância antes de apresentação: dê ao cliente um motivo claro para conversar. Rapport é atenção, não intimidade artificial.",
+      cards: [["Escuta e presença", "Atenção total ao que o cliente diz."], ["Adequação do ritmo", "Nem lento demais, nem atropelando."], ["Confirmação", "Repetir com suas palavras o que entendeu."]] },
+
+    { bloco: "Abordagem", sl: "7–8", t: 5, tipo: "pratica", titulo: "Presencial e WhatsApp",
+      ideia: "No presencial, os primeiros segundos importam. No WhatsApp, clareza primeiro, questionário depois.",
+      dialog: [["Genérica", "“Posso ajudar?” — seguido de um catálogo inteiro."], ["Consultiva", "“Você está buscando para revender ou para uso próprio? Posso mostrar as opções adequadas.”"], ["Cliente (WhatsApp)", "“Quanto sai uma grade para lojista?”"]],
+      w: [{ type: "fields", id: "m2_whats", fields: [["p", "Preço ou faixa disponível", "A grade sai a partir de R$ ___", 1], ["c", "Condição de compra", "pedido mínimo de ___ grades, entrega em ___ dias", 1], ["q", "Uma pergunta útil", "É para reposição ou coleção nova?", 1]],
+            tpl: "{p}, com {c}. {q}", canvas: { key: "c2_abordagem", label: "Levar para o Canvas (Abordagem)" } }],
+      nota: "Responder a pergunta do cliente primeiro. Questionário antes do preço afasta." },
+
+    { bloco: "Abordagem", sl: "9", t: 4, tipo: "conceito", titulo: "Exemplo: uma abordagem que abre a conversa", ficticio: true,
+      ideia: "A gestora pediu contato pelo site. O vendedor se apresenta, responde o preço, faz UMA pergunta útil e propõe o próximo passo com opção.",
+      dialog: [["Vendedor", "Bom dia! Aqui é o Rafael, da TurnoCerto. Você pediu contato pelo site sobre pedidos que se perdem na troca de turno. Posso fazer 2 perguntas rápidas para entender seu caso?"], ["Gestora", "Pode. Mas quanto custa?"], ["Vendedor", "O pacote de implantação parte de R$ 12.000; o valor final depende do escopo. Hoje, em que momento o pedido mais se perde?"], ["Gestora", "Na passagem da manhã para a tarde."], ["Vendedor", "Entendi. Posso te ligar 15 minutos amanhã, às 10h ou às 16h? Se preferir, seguimos por aqui."], ["Gestora", "Amanhã às 10h."]],
+      cards: [["1 • Diz quem é", "E por que está escrevendo."], ["2 • Responde o preço", "Faixa honesta e do que depende."], ["3 • Uma pergunta útil", "Que muda a proposta."], ["4 • Próximo passo", "Com opção e respeito ao canal."]],
+      nota: "Evite: “oi, tudo bem?” sem assunto, áudio longo, esconder o preço, mandar catálogo sem perguntar nada." },
+
+    { bloco: "Abordagem", sl: "10–11", t: 6, tipo: "pratica", titulo: "Leia sinais, não rotule pessoas",
+      ideia: "Adapte a conduta ao sinal que o cliente dá naquele momento. Sinal é o que a pessoa diz ou faz AGORA; rótulo é o que você supõe que ela É.",
+      dialog: [["Gestora (pede rapidez)", "“Tenho 2 minutos. Quanto custa e quanto tempo leva?” → preço-base, prazo e UMA pergunta. Não diga “ela é do tipo dominante”."], ["Gestora (pede detalhe)", "“Como o pedido passa de um turno para o outro?” → passo a passo e um exemplo. Não diga “ela é analítica”."], ["Gestora (preocupação com risco)", "“Da última vez atrasaram e a loja parou.” → marcos, limites e plano B. Não diga “ela é difícil”."], ["Gestora (valoriza a relação)", "“Quem vai estar com a gente depois?” → nome do responsável e canal de suporte. Não diga “ela é emocional”."]],
+      w: [{ type: "quiz", id: "m2_sinais", opts: ["Seja objetivo", "Explique critérios", "Esclareça riscos", "Acompanhe com respeito"], items: [["O cliente busca rapidez", 0], ["O cliente pede detalhes", 1], ["O cliente mostra preocupação", 2], ["O cliente valoriza a relação", 3]] }] },
+
+    { bloco: "Qualificação", sl: "12–16", t: 11, tipo: "pratica", titulo: "Três lentes. Uma conversa.",
+      ideia: "A dor não conta toda a história, e viabilidade não é adivinhação. GPCT (objetivos, planos, desafios e prazo) entende o projeto; BANT (orçamento, autoridade, necessidade e momento) checa se dá para avançar. Veja cada letra aplicada ao caso.",
+      dialog: [["G • Goals (objetivos)", "“O que vocês querem que melhore até o pico?” → “Nenhum pedido perdido na troca de turno.”"], ["P • Plans (planos)", "“O que já fizeram para resolver?” → “Planilha compartilhada e um grupo de WhatsApp da equipe.”"], ["C • Challenges (desafios)", "“Por que isso ainda não funcionou?” → “Cada turno anota de um jeito e ninguém confere.”"], ["T • Timeline (prazo)", "“Até quando precisa funcionar?” → “A parte crítica em 14 dias, antes do pico.”"], ["B • Budget (orçamento)", "“Vocês já reservaram um valor ou ainda estão avaliando?” → “Ainda não formalizamos.”"], ["A • Authority (autoridade)", "“Além de você, quem participa da decisão?” → “Meu sócio aprova acima da minha alçada.”"], ["N • Need (necessidade)", "“O que acontece se nada mudar até o pico?” → “Pedido incompleto, frete cobrado e lojista reclamando.”"], ["T • Timing (momento)", "“Quando vocês pretendem decidir?” → “Esta semana, para dar tempo de implantar.”"]],
+      cards: [["O que o GPCT revelou", "O problema é passagem de turno sem dono: a proposta precisa de treinamento dos dois turnos."], ["O que o BANT revelou", "Oportunidade real; a proposta precisa chegar ao sócio. Orçamento não definido não é cliente desqualificado."]],
+      w: [{ type: "fields", id: "m2_qualif", fields: [["g", "Sua pergunta de projeto (GPCT)", "O que precisa estar funcionando antes do pico?", 1], ["b", "Sua pergunta de viabilidade (BANT)", "Quem participa da aprovação?", 1]], tpl: "GPCT: {g}\nBANT: {b}", canvas: { map: { g: "c2_gpct", b: "c2_bant" }, label: "Levar para o Canvas (Qualificação)" } }] },
+
+    { bloco: "Qualificação", sl: "17", t: 2, tipo: "pratica", titulo: "Qualificar também é saber recuar",
+      ideia: "Avançar quando há aderência e próximo passo. Investigar quando falta informação decisiva. Recuar quando a oferta não atende ou o risco é inaceitável.",
+      w: [{ type: "quiz", id: "m2_avanco", opts: ["Avançar", "Investigar", "Recuar"], items: [["Necessidade clara, decisor presente e reunião marcada", 0], ["Dor clara, mas não sei quem aprova", 1], ["O cliente precisa de algo que não vendemos", 2], ["Interesse alto, mas prazo e orçamento desconhecidos", 1]] }] },
+
+    { bloco: "Qualificação", sl: "18–19", t: 11, tipo: "discussao", titulo: "A loja volta à conversa: o que descobrimos?", ficticio: true,
+      ideia: "O que decide a compra não aparece no catálogo. Observe como cada pergunta revela uma condição da decisão.",
+      dialog: [["Cliente", "Pedidos chegam pelo WhatsApp, e alguns se perdem na troca dos turnos."], ["Vendedor", "Qual parte do repasse gera mais retrabalho?"], ["Cliente", "Quando muda a equipe, o pedido não fica claro."], ["Vendedor", "O que precisa estar funcionando antes do pico?"], ["Cliente", "O essencial do repasse. A implantação inteira pode ser gradual."], ["Vendedor", "Quem participa da aprovação e qual é a faixa disponível?"]],
+      pergunta: "Que informação mudou a proposta que faria sentido apresentar?" },
+
+    { bloco: "IA no módulo", sl: "20–21", t: 6, tipo: "ia", titulo: "IA pode ensaiar. O vendedor decide.",
+      ideia: "Demonstração: a IA simula a objeção “Preciso falar com meu sócio” e o vendedor testa uma pergunta consultiva. Para pedir bem, seis letras: o Método PROMPT.",
+      cards: [["P • Papel", "Quem a IA deve ser."], ["R • Requisição", "O que você quer agora."], ["O • Objetivo", "Para que serve."], ["M • Modelo", "Formato da resposta."], ["P • Panorama", "Contexto, sem dados pessoais."], ["T • Testar e transformar", "Conferir, ajustar e só então usar."]],
+      w: [{ type: "prompt", id: "m2_socio", text: "PAPEL: Aja como dono de uma loja atacadista de confecções, cauteloso, que recebeu uma proposta de R$ 12.000 para organizar pedidos (caso fictício).\nREQUISIÇÃO: Responda às minhas mensagens como esse cliente. Comece dizendo: “Preciso falar com meu sócio.”\nOBJETIVO: Quero treinar perguntas consultivas, não fechar a venda.\nMODELO: Respostas curtas, como no WhatsApp. Só revele o motivo real se eu fizer uma boa pergunta.\nPANORAMA: O motivo real (só revele se eu perguntar bem): o sócio recebeu outra proposta e quer comparar antes de decidir.\nTESTAR: Depois de 4 trocas, saia do papel e avalie minhas perguntas de 0 a 3, com uma sugestão de melhoria." },
+          { type: "links", items: [["Abrir o Monte seu PROMPT", "index.html#prompt"]] }],
+      nota: "Caso fictício. Sem internet? O instrutor faz o papel do cliente e a turma dá o feedback." },
+
+    { bloco: "Intervalo", sl: "22", t: 15, tipo: "pausa", titulo: "Intervalo", ideia: "Pausa para recuperar o foco. Na volta: laboratório de qualificação." },
+
+    { bloco: "Prática 1", sl: "23–26", t: 32, tipo: "pratica", titulo: "Laboratório: a pergunta precisa gerar descoberta",
+      ideia: "Trios: vendedor, cliente e observador. Cada um abre SÓ a sua carta no celular. O vendedor pratica APENAS abrir e qualificar: sem proposta, sem preço, sem fechamento. Três rodadas de 8 minutos: todo mundo vende uma vez.",
+      cards: [["Etapa 1 • Abrir", "Quem é, por que está ali, licença para perguntar."], ["Etapa 2 • Problema e impacto", "O que acontece hoje e o que isso custa (SPIN)."], ["Etapa 3 • Objetivo, plano e prazo", "O que querem, o que já tentaram, até quando (GPCT)."], ["Etapa 4 • Viabilidade e decisor", "Quem decide e se há orçamento (BANT)."], ["Etapa 5 • Confirmar e combinar", "Resume o que ouviu e propõe o próximo passo."]],
+      w: [{ type: "links", h: "Cartas no celular", items: [["Abrir as cartas do Laboratório", "cartas.html#lab"]] },
+          { type: "clock", id: "m2_lab", rows: [["Formar trios e abrir as cartas", 120], ["Rodada A — 1ª tentativa", 150], ["Feedback do observador", 60], ["2ª tentativa (mesma carta)", 150], ["Notas antes × depois", 60], ["Troca de papéis", 60], ["Rodada B (mesma sequência)", 480], ["Rodada C (mesma sequência)", 480], ["Debrief: médias pré × pós", 180]] },
+          { type: "rubric", id: "m2_lab_r", crit: ["Diagnóstico do problema e consequências", "Objetivo, plano e desafio (GPCT)", "Viabilidade e decisor (BANT)", "Confirmação e próximo passo"] }],
+      nota: "Entre as tentativas, o cliente não muda dados nem inventa objeção nova. O que muda é a qualidade da pergunta. Combinado de honra: cada um abre só a carta do próprio papel." },
+
+    { bloco: "Proposta", sl: "27–28", t: 8, tipo: "pratica", titulo: "Pitch bom é resposta, não discurso",
+      ideia: "Contexto confirmado → solução adequada → evidência honesta → proposta de avanço. E condições claras: o que será entregue, como verificar, prazo e próximo passo.",
+      w: [{ type: "fields", id: "m2_pitch", fields: [["c", "Contexto confirmado", "Vocês perdem pedidos na troca de turno e o pico começa em 14 dias", 2], ["s", "Solução adequada", "", 1], ["e", "Evidência honesta", "", 1], ["a", "Proposta de avanço", "", 1]],
+            tpl: "Pelo que conversamos, {c}. Por isso, sugiro {s}. Para verificar: {e}. Próximo passo: {a}", canvas: { key: "c2_proposta", label: "Levar para o Canvas (Proposta de valor)" } }] },
+
+    { bloco: "Proposta", sl: "29", t: 3, tipo: "pratica", titulo: "Aumentar ticket só quando aumenta valor",
+      ideia: "Upsell: oferta superior quando o cliente realmente precisa de mais. Cross-sell: algo complementar que reduz uma dificuldade validada.",
+      w: [{ type: "quiz", id: "m2_upsell", opts: ["Ético", "Empurrado"], items: [["Plano superior porque a loja dobrou o volume de pedidos", 0], ["Pacote maior porque a meta do mês está apertada", 1], ["Treinamento extra porque um turno não usa o sistema", 0], ["Acessório oferecido a todos, sem perguntar", 1]] }] },
+
+    { bloco: "Objeções", sl: "30–32", t: 9, tipo: "pratica", titulo: "A objeção pode esconder outra preocupação",
+      ideia: "Protocolo: acolher → clarificar → responder → confirmar. Escute sem interromper, pergunte antes de supor, responda com evidência e verifique se resolveu.",
+      w: [{ type: "choose", id: "m2_obj", q: "Escolha uma objeção:", opts: ["“Agora não é prioridade.”", "“Preciso falar com meu sócio.”", "“Já contratei isso antes e não deu certo.”", "“Esses sistemas fazem tudo a mesma coisa.”", "“Consegue tirar 15%?”"] },
+          { type: "fields", id: "m2_protocolo", fields: [["a", "Acolher", "Faz sentido querer…", 1], ["c", "Clarificar (pergunta)", "O que precisaria acontecer para…?", 1], ["r", "Responder com evidência", "", 1], ["f", "Confirmar", "Isso responde à sua preocupação?", 1]],
+            tpl: "Objeção: {@m2_obj}\n1. {a}\n2. {c}\n3. {r}\n4. {f}", canvas: { key: "c2_obj_real", label: "Levar para o Canvas (Objeção-chave)" } }] },
+
+    { bloco: "Prática 2", sl: "33–34", t: 25, tipo: "pratica", titulo: "Clínica de objeções: descobrir antes de responder",
+      ideia: "Duas rodadas completas. A mesma objeção é respondida antes e depois do feedback. Duas pessoas vendem; a terceira já vendeu no laboratório. Cartas no celular.",
+      w: [{ type: "links", h: "Cartas no celular", items: [["Abrir as cartas da Clínica", "cartas.html#clinica"]] }, { type: "clock", id: "m2_clin", rows: [["Explicar escala e entregar cartas", 120], ["Ciclo 1 — tentativa", 180], ["Feedback", 120], ["Repetição", 180], ["Avaliação", 60], ["Troca", 60], ["Ciclo 2 — tentativa", 180], ["Feedback", 120], ["Repetição", 180], ["Avaliação e troca", 120], ["Discussão e Canvas", 240]] },
+          { type: "rubric", id: "m2_clin_r", crit: ["Acolheu sem confronto", "Perguntou para esclarecer a causa", "Respondeu com evidência ou limite pertinente", "Confirmou entendimento ou respeitou a recusa"] }],
+      nota: "Não venceu uma objeção: entendeu uma decisão." },
+
+    { bloco: "Negociação", sl: "35–39", t: 16, tipo: "pratica", titulo: "Negociar começa antes do desconto: BATNA e ZOPA",
+      ideia: "Posição é o que o cliente pede; interesse é o porquê. BATNA (Best Alternative To a Negotiated Agreement = melhor alternativa a um acordo negociado) vem de Roger Fisher e William Ury, do Projeto de Negociação de Harvard, no livro “Getting to Yes” (1981; no Brasil, “Como chegar ao sim”). ZOPA (Zone Of Possible Agreement = zona de possível acordo) foi difundida por Howard Raiffa (Harvard, 1982).",
+      cards: [["BATNA é", "Uma alternativa REAL, CONFIRMADA, que você executa sozinho. Não é blefe, ameaça nem “talvez apareça outro cliente”."], ["Como achar a sua", "1 Liste o que faria sem acordo • 2 Confirme o que é real • 3 Calcule cada saída • 4 A melhor é a sua BATNA."], ["ZOPA é", "A faixa entre o MÍNIMO que o vendedor aceita e o MÁXIMO que o comprador paga. Se não se cruzam, mude o pacote ou use a BATNA."], ["Exemplo (fictício)", "Lote de 300 peças, tabela R$ 9.000. Outro lojista paga R$ 8.400 (BATNA do vendedor). Comprador paga no máximo R$ 8.800. ZOPA: R$ 8.400 a R$ 8.800. Pedido de 20% (R$ 7.200) fica fora."]],
+      w: [{ type: "fields", id: "m2_batna", fields: [["mb", "Minha melhor alternativa se não houver acordo", "", 1], ["cb", "A provável alternativa do cliente", "", 1], ["li", "Meu limite autorizado", "", 1]], tpl: "Minha BATNA: {mb}\nBATNA provável do cliente: {cb}\nMeu limite: {li}", canvas: { key: "c2_limites", label: "Levar para o Canvas (Limites e alternativas)" } }] },
+
+    { bloco: "Negociação", sl: "40", t: 4, tipo: "pratica", titulo: "15% no preço. 50% na contribuição.", ficticio: true,
+      ideia: "Desconto sai inteiro da sua margem. Teste com os números do exemplo e depois com os seus.",
+      w: [{ type: "calc", kind: "margem", id: "m2_margem" }] },
+
+    { bloco: "Negociação", sl: "41", t: 2, tipo: "conceito", titulo: "Trocar o barato para você pelo valioso para ele",
+      ideia: "Concessão sempre com contrapartida.",
+      cards: [["Implantação", "Faseada ou integral acelerada."], ["Treinamento", "Sessões adicionais para os turnos."], ["Suporte e pagamento", "Suporte estendido e formas de pagamento."]] },
+
+    { bloco: "Prática 3", sl: "42–46", t: 34, tipo: "pratica", titulo: "Tribunal do Desconto", ficticio: true,
+      ideia: "A Loja Fio & Grade quer 15% de desconto sobre o pacote de R$ 12.000 da TurnoCerto. Trios: VENDEDOR, COMPRADOR e JUIZ. 1 Abram só a sua carta no celular • 2 Rodada 1 (7 min) • 3 Feedback do juiz (3) + preparação (4) • 4 Rodada 2 (8) • 5 O juiz registra os acordos e as notas. Além do preço, negociem implantação, treinamento, suporte e pagamento.",
+      w: [{ type: "links", h: "Cartas no celular", items: [["Abrir as cartas do Tribunal", "cartas.html#tribunal"]] }, { type: "clock", id: "m2_trib", rows: [["Instruções e cartas no celular", 240], ["Primeira negociação", 420], ["Feedback", 180], ["Preparação: BATNA, alçada, contrapartidas", 240], ["Segunda negociação", 480], ["Notas pré × pós", 180], ["Os caminhos e por que o excelente vence", 300]] },
+          { type: "tribunal", id: "m2_trib_reg" },
+          { type: "rubric", id: "m2_trib_r", crit: ["Preparou BATNA e alternativas concretas", "Respeitou alçada e contribuição", "Explorou interesses e ofereceu opções", "Chegou a acordo viável ou não acordo justificado"] },
+          { type: "reveal", label: "Depois do debrief: os caminhos do Tribunal", text: "BATNA do vendedor: R$ 2.800 de contribuição.\nEXCELENTE: R$ 12.000, faseada + 2 treinos presenciais + suporte 90 dias, à vista → R$ 3.030.\nEXCELENTE (variação): R$ 12.200, mesmo pacote em 3 parcelas → R$ 3.020.\nBOM: R$ 11.500, faseada, treino e suporte básicos → R$ 2.920.\nRUIM: R$ 11.500 com implantação acelerada → R$ 2.300 (abaixo da BATNA).\nNÃO ACORDO JUSTIFICADO: R$ 10.200 (15%) com acelerada → R$ 1.000.\n\nPor que o excelente vence: para o vendedor, 12.000 − 8.400 − 180 − 240 − 150 = R$ 3.030. Para o comprador, o concorrente custa R$ 11.000 + R$ 1.650 de risco de perder o pico = R$ 12.650; este pacote resolve o pico e ainda traz treino e suporte. Troque o que custa pouco para você e vale muito para o cliente. Valores fictícios." }],
+      nota: "Os números de cada lado estão nas cartas do celular e só são revelados no debrief. Alternativa lúdica para turmas cansadas: Jogo das Trocas (lâminas ocultas no fim do deck)." },
+
+    { bloco: "Fechamento", sl: "47 e 50", t: 7, tipo: "pratica", titulo: "Fechamento não é pressão. É compromisso claro.",
+      ideia: "Resuma necessidade e condições, confirme critérios e decisor, e peça um compromisso concreto e consentido — com dono e prazo.",
+      w: [{ type: "quiz", id: "m2_combinado", opts: ["Vago", "Útil"], items: [["“Vou te mandar e você me diz.”", 0], ["“Envio as duas opções hoje; você e seu sócio avaliam amanhã às 15h?”", 1], ["“Qualquer coisa, me chama.”", 0], ["“Te ligo quinta às 10h para ouvir a decisão. Pode ser?”", 1]] },
+          { type: "fields", id: "m2_fech", fields: [["r", "Resumo", "Pelo que alinhamos…", 1], ["c", "Critério e decisor", "A decisão depende de… Está correto?", 1], ["p", "Compromisso (dono e prazo)", "", 1]], tpl: "{r}\n{c}\n{p}", canvas: { key: "c2_passo", label: "Levar para o Canvas (Fechamento e próximo passo)" } }] },
+
+    { bloco: "Fechamento", sl: "48–49", t: 6, tipo: "conceito", titulo: "Gatilhos mentais: atalhos de decisão, usados com verdade",
+      ideia: "“Gatilho mental” é o nome popular dos princípios de influência descritos por Robert Cialdini em “As armas da persuasão” (1984). Ajudam o cliente a decidir quando são verdadeiros e verificáveis; viram manipulação quando são inventados.",
+      cards: [["Reciprocidade", "Entregar um diagnóstico útil antes de pedir a reunião."], ["Compromisso e coerência", "Resumir o que a própria gestora disse que precisa."], ["Prova social", "Caso de cliente parecido, real e com autorização."], ["Autoridade", "Mostrar o método e quem é o responsável técnico."], ["Afinidade", "Falar a língua da loja: grade, turno, pico."], ["Escassez", "Só se for verdade: “a agenda de implantação antes do pico tem 2 vagas”."]],
+      w: [{ type: "quiz", id: "m2_gatilho", opts: ["Ético", "Manipulação"], items: [["“Temos 2 vagas de implantação antes do pico” (é verdade)", 0], ["“Últimas vagas!” toda semana", 1], ["Depoimento real, com autorização do cliente", 0], ["Contagem regressiva que reinicia quando a página recarrega", 1], ["Lembrar o prazo do pico que o próprio cliente informou", 0]] }],
+      nota: "Teste: você diria isso se o cliente pudesse conferir tudo?" },
+
+    { bloco: "Fechamento", sl: "51–53", t: 8, tipo: "pratica", titulo: "Follow-up não é “e aí, pensou?”",
+      ideia: "Cada contato entrega algo útil. Se o cliente pediu outro prazo, o pedido dele prevalece. A IA pode escrever o rascunho; você revisa e envia.",
+      dialog: [["D+1 • WhatsApp", "“Gestora, conforme combinamos ontem, segue o resumo das duas opções e o prazo da parte crítica (10 dias). Seu sócio prefere ver por aqui ou por e-mail?”"], ["D+3 • E-mail", "Assunto: Comparativo para a conversa com seu sócio. “Montei uma comparação lado a lado de prazo, treinamento e suporte. Se ajudar, participo de 15 minutos com vocês dois.”"], ["D+7 • WhatsApp", "“Retomo como combinamos. Falta alguma validação para decidir? Se o projeto não fizer sentido agora, encerro o acompanhamento e fico à disposição.”"], ["Depois de um “agora não”", "“Você pediu para retomar depois do pico. Como foi a operação? Separei o que vimos de gargalo para olharmos juntos, se fizer sentido.”"]],
+      w: [{ type: "fields", id: "m2_cad", fields: [["d1", "D+1 • resumo útil e condições acordadas", "", 1], ["d3", "D+3 • evidência ou resposta à dúvida pendente", "", 1], ["d7", "D+7 • confirmar decisão ou encerrar contato", "", 1]], tpl: "D+1: {d1}\nD+3: {d3}\nD+7: {d7}", canvas: { map: { d1: "c2_d1", d3: "c2_d3", d7: "c2_d7" }, label: "Levar para o Canvas (Cadência)" } },
+          { type: "prompt", id: "m2_follow_ia", text: "Você é meu assistente comercial. Escreva um follow-up de WhatsApp D+1 para Cliente A, resumindo [o que combinamos], com uma pergunta de próximo passo. Máximo 3 linhas, tom cordial, sem pressão e sem inventar dados." }],
+      nota: "Antes de enviar: os fatos estão certos? Soa como você? Tem algo útil? Respeita o prazo pedido? Nunca: disparo em massa, dados pessoais no prompt, envio sem ler." },
+
+    { bloco: "Fechamento", sl: "54", t: 2, tipo: "canvas", titulo: "Canvas: da conversa à decisão",
+      ideia: "Segunda camada do seu mapa. Termine em casa se precisar.",
+      w: [{ type: "canvas", layer: "c2" }] },
+
+    { bloco: "Fechamento", sl: "55", t: 2, tipo: "conceito", titulo: "A venda concluída abre outra responsabilidade",
+      ideia: "Diagnosticar → negociar e decidir → entregar, acompanhar e fidelizar. É o tema do Módulo 3." }
+  ]
+});
+
+// MÓDULO 3 — Fidelização e plano (237 min)
+MODS.push({
+  id: "M3", nome: "Módulo 3", titulo: "Fidelização e plano",
+  sub: "A assinatura inicia a prova de valor. A próxima escolha do cliente dependerá do que for entregue.",
+  total: 237,
+  entregas: ["Canvas camada 3", "Copiloto Comercial configurado", "Plano de 30 dias com indicador", "Retorno ao desafio inicial"],
+  momentos: [
+    { bloco: "Parte A • Fornecedor", sl: "1–4", t: 11, tipo: "conceito", titulo: "A assinatura inicia a prova de valor", ficticio: true,
+      ideia: "Relembrando: a TurnoCerto vendeu à Loja Fio & Grade um sistema de organização de pedidos + implantação + treinamento + suporte. Pacote aprovado: R$ 12.000, sem desconto. Etapa crítica em dez dias, dois turnos treinados, suporte por 90 dias. Dia 9: um turno ainda não foi treinado, falhas continuam e a gestora descobriu antes de receber atualização.",
+      cards: [["O acordo", "É o começo do compromisso."], ["Dia 9", "A promessa encontra a operação."], ["A pergunta", "O que o fornecedor faz agora?"]] },
+
+    { bloco: "Parte A • Fornecedor", sl: "5", t: 4, tipo: "pratica", titulo: "Satisfeito não é necessariamente fiel",
+      ideia: "Satisfação avalia uma experiência. Lealdade é preferência diante de alternativas. Fidelização são as práticas que sustentam novas escolhas.",
+      w: [{ type: "quiz", id: "m3_conc", opts: ["Satisfação", "Lealdade", "Fidelização"], items: [["“Gostei do atendimento de hoje.”", 0], ["“Mesmo com proposta mais barata, fico com vocês.”", 1], ["Ligação de acompanhamento 15 dias após a entrega", 2], ["Nota 9 na pesquisa pós-compra", 0]] }] },
+
+    { bloco: "Parte A • Fornecedor", sl: "6", t: 4, tipo: "conceito", titulo: "O cliente não vive só o momento da compra",
+      ideia: "A jornada pós-contrato decide a próxima compra.",
+      cards: [["Entrega e implantação", "O combinado começa a ser testado."], ["Uso, apoio e correção", "Onde a confiança se constrói ou se perde."], ["Reavaliação e próxima escolha", "O cliente decide se volta."]] },
+
+    { bloco: "Parte A • Fornecedor", sl: "7–8", t: 7, tipo: "pratica", titulo: "Três passos para recuperar confiança",
+      ideia: "Reconhecer o ocorrido. Investigar impacto e capacidade de correção. Combinar e verificar um encaminhamento.",
+      w: [{ type: "quiz", id: "m3_resp", opts: ["Defensiva", "Responsável"], items: [["“Estamos fazendo o possível.”", 0], ["“Vou apurar o impacto e confirmar a próxima atualização.”", 1], ["“A equipe técnica resolve, fica tranquila.”", 0], ["“Você tem razão em cobrar o que foi combinado. Qual parte está afetando mais os pedidos de hoje?”", 1]] }] },
+
+    { bloco: "Parte A • Prática 1", sl: "9–14", t: 31, tipo: "pratica", titulo: "Recuperação de confiança", ficticio: true,
+      ideia: "Dia 9, 15h. Combinado: parte crítica funcionando até o dia 10, com os dois turnos treinados. Aconteceu: um turno ainda não foi treinado, pedidos continuam falhando e a gestora descobriu sozinha. Ela liga: “Contratei justamente para reduzir erros entre turnos. Amanhã é o compromisso e descobri que uma equipe continua sem treinamento. O que vocês vão fazer?” Você é o responsável comercial da TurnoCerto e tem 2 minutos.",
+      cards: [["Gestora (cliente)", "Tem uma preocupação que só revela se você perguntar do jeito certo."], ["Fornecedor (vendedor)", "Sabe o que pode e o que NÃO pode prometer."], ["Observador", "Tem a rubrica, não interfere na 1ª tentativa e dá o feedback."]],
+      dialog: [["1 • Reconhecer", "Nota 0: “Não é bem assim, o sistema funciona.” • Nota 3: “Você tem razão, combinamos o dia 10.”"], ["2 • Investigar", "Nota 0: não pergunta nada • Nota 3: “Qual etapa está afetando mais os pedidos hoje?”"], ["3 • Encaminhar", "Nota 0: “Amanhã está tudo resolvido.” • Nota 3: “Vou acionar a equipe técnica agora e confirmar quem cuida.”"], ["4 • Comprometer", "Nota 0: “Qualquer coisa me chama.” • Nota 3: “Te dou posição até as 17h, com o nome do responsável.”"]],
+      w: [{ type: "links", h: "Cartas no celular", items: [["Abrir as cartas da Recuperação", "cartas.html#recuperacao"]] },
+          { type: "clock", id: "m3_rec", rows: [["Situação e papéis", 300], ["1ª resposta", 120], ["Feedback", 60], ["2ª resposta", 120], ["Notas e troca", 60], ["Ciclo 2 (mesma sequência)", 360], ["Ciclo 3 (mesma sequência)", 360], ["Processar resultados", 180], ["Resposta de referência", 180]] },
+          { type: "rubric", id: "m3_rec_r", crit: ["Reconhecer", "Investigar", "Encaminhar", "Comprometer"] },
+          { type: "reveal", label: "Resposta de referência (depois do debrief)", text: "DEFENSIVA: “Estamos fazendo o possível, a equipe técnica resolve.”\n\nRESPONSÁVEL: “Você tem razão ao cobrar o que foi combinado para o dia 10. [RECONHECER] Ainda não tenho a confirmação da correção total, então não vou prometer o que não verifiquei. Qual etapa do repasse está afetando mais os pedidos de hoje? [INVESTIGAR] Vou acionar a equipe técnica agora e confirmar um responsável. [ENCAMINHAR] Proponho te dar posição formal até as 17h. Podemos alinhar assim?” [COMPROMETER]" }],
+      nota: "Processar: qual movimento mais subiu? Qual continua baixo e por quê? Que frase da 2ª tentativa você leva para um cliente real? Se a média não subiu, revemos o feedback, não maquiamos a nota." },
+
+    { bloco: "Intervalo", sl: "15", t: 15, tipo: "pausa", titulo: "Intervalo", ideia: "Na sequência: indicadores, carteira e plano de 30 dias." },
+
+    { bloco: "Parte B • A loja", sl: "16", t: 3, tipo: "conceito", titulo: "Antes você era o fornecedor. Agora você é a loja.", ficticio: true,
+      ideia: "Depois de corrigir o repasse, a gestora enxerga a própria carteira de lojistas. O desafio de fidelizar agora é dela — e é o seu." },
+
+    { bloco: "Parte B • Indicadores", sl: "17–22", t: 16, tipo: "pratica", titulo: "NPS, retenção, recompra e ticket", ficticio: true,
+      ideia: "Quatro números, quatro perguntas: eles recomendariam (NPS)? ficaram (retenção)? voltaram (recompra)? quanto compram (ticket médio)? Nenhum número sozinho conta a história.",
+      cards: [["NPS • o que é", "Net Promoter Score (Índice Líquido de Promotores), criado por Fred Reichheld (Bain & Company, Harvard Business Review, 2003). Pergunta: “De 0 a 10, quanto você recomendaria a loja a outro lojista?” 0–6 detratores • 7–8 neutros • 9–10 promotores. NPS = % promotores − % detratores (de −100 a +100)."], ["NPS • a conta do +28", "25 respostas: 12 promotores, 8 neutros, 5 detratores. 12 ÷ 25 = 48%. 5 ÷ 25 = 20%. 48 − 20 = +28. Não quer dizer que 28% recomendam. Próximo passo: ler os comentários dos 5 detratores."], ["Retenção", "Coorte = grupo acompanhado desde o início. 20 lojistas ativos em 1º de julho; 16 deles ainda compram em 30 de setembro: 16 ÷ 20 = 80%. Os 5 novos que entraram NÃO contam. Evasão (churn) = 4 ÷ 20 = 20%."], ["Recompra", "Clientes que compraram 2+ vezes ÷ clientes ativos: 10 ÷ 16 = 62,5%."], ["Ticket médio", "Receita ÷ pedidos: R$ 48.000 ÷ 40 = R$ 1.200 por pedido."], ["Leitura conjunta", "Ticket subindo e recompra caindo = poucos clientes comprando mais (risco de concentração)."]],
+      w: [{ type: "calc", kind: "ind", id: "m3_ind" }],
+      nota: "Todos os exemplos são fictícios e independentes da carteira de 12 clientes. Amostra pequena: com 25 respostas, uma resposta muda o NPS em 4 pontos." },
+
+    { bloco: "Parte B • Carteira", sl: "23–24", t: 6, tipo: "conceito", titulo: "Carteira não é lista. É prioridade.",
+      ideia: "Olhe saúde da relação, valor e potencial, e escolha a próxima ação adequada. Sinal de risco pede investigação, não rótulo.",
+      cards: [["Saúde da relação", "Pendências e reclamações."], ["Valor e potencial", "Receita, margem e oportunidade."], ["Próxima ação", "A mais adequada para cada caso."], ["Sinais de risco", "Reclamação aberta • queda diante do ciclo usual • silêncio após falha."]] },
+
+    { bloco: "Parte B • Prática 2", sl: "25–30", t: 34, tipo: "pratica", titulo: "Laboratório da Carteira: doze clientes, recursos limitados", ficticio: true,
+      ideia: "Agora vocês são a Loja Fio & Grade cuidando dos seus 12 lojistas. Abram a planilha (só leitura), leiam cliente por cliente e escolham QUATRO ações para esta semana aqui no site: cliente, tipo de ação, responsável e indicador. Justifiquem cada escolha com um fato.",
+      cards: [["Compras", "Pedidos nos últimos 90 dias."], ["Receita", "Quanto comprou em R$ nos últimos 90 dias."], ["Margem", "Quanto sobra de cada R$ 100 vendidos (9% é pouco; 35% é muito)."], ["Última / ciclo", "Dias desde a última compra / intervalo normal. 45 / 15 = 3 vezes atrasado."], ["Sinal", "O que aconteceu: reclamação, pedido, recusa de promoção."], ["Seis tipos de ação", "Recuperar • Responder demanda • Diagnosticar • Desenvolver • Acompanhar sem pressa • Não contatar."]],
+      w: [{ type: "links", h: "Planilha da carteira", items: [["Abrir a planilha dos 12 lojistas (Google Sheets, só leitura)", "https://docs.google.com/spreadsheets/d/1Mjj8goAPRpaap6D8fEeSbtLvuma8Ny2G1bZ68330iNc/edit?usp=sharing"]] },
+          { type: "clock", id: "m3_cart", rows: [["Planilha, colunas e ações", 480], ["Ranking 1", 300], ["Feedback", 120], ["Ranking 2", 300], ["Notas antes × depois", 120], ["Comparar dois trios", 240], ["Gabarito comentado", 480]] },
+          { type: "carteira", id: "m3_carteira" },
+          { type: "rubric", id: "m3_cart_r", crit: ["Uso das evidências", "Proteção da relação", "Adequação da ação", "Medição"] },
+          { type: "reveal", label: "Gabarito comentado (depois do ranking 2)", text: "PRIMEIRA FAIXA\nC3 Atacado Toritama • RECUPERAR: pedido atrasado e compromisso para amanhã; margem de 12% limita concessões.\nC12 Distribuidor Mix • RECUPERAR: pedido incompleto e correção anterior não cumprida.\nC1 Boutique Centro • RECUPERAR: duas grades erradas e troca pendente; não ofertar coleção antes de reparar.\nC2 Loja Arcoverde • RESPONDER HOJE: pediu reposição hoje, margem de 29%; mesma faixa das recuperações.\nComo fazer tudo: operações cuida de C3, C12 e C1; comercial responde C2 hoje.\n\nDEMAIS\nC4 DIAGNOSTICAR: ciclo triplicado depois de reclamação.\nC5 CUIDADO COM A MARGEM (9%): nada de desconto ou volume sem conta.\nC6 RECOMPRA A INVESTIGAR: um pouco acima do ciclo.\nC7 DESENVOLVER: indicação só depois de confirmar que a coleção anterior funcionou.\nC8 RECOMPRA: confirmar a correção e oferecer reposição.\nC9 NÃO É PERDIDO: 55/30 com sazonalidade incerta; diagnosticar.\nC10 SEM PRESSA: comprou há 6 dias, ciclo de 60.\nC11 NÃO ENVIAR PROMOÇÃO: recusou mensagens; respeitar." }],
+      nota: "O gabarito fica com o instrutor até o debrief (lâminas 29–30). Pode haver empates e responsáveis diferentes." },
+
+    { bloco: "Parte B • Relacionamento", sl: "31", t: 4, tipo: "pratica", titulo: "Fidelizar é um sistema, não uma campanha",
+      ideia: "Gatilho → ação útil → responsável. Registro → verificação → ajuste.",
+      w: [{ type: "fields", id: "m3_prog", fields: [["g", "Gatilho", "15 dias após a entrega", 1], ["a", "Ação útil", "Ligação para conferir a saída das peças", 1], ["r", "Responsável", "", 1], ["v", "Como verificar", "Registro no CRM + recompra no ciclo", 1]],
+            tpl: "Quando {g}, {r} fará: {a}. Verificação: {v}.", canvas: { map: { g: "c3_g", a: "c3_au", r: "c3_r", v: "c3_v" }, label: "Levar para o Canvas (Ação de fidelização)" } }] },
+
+    { bloco: "Parte B • Relacionamento", sl: "32–33", t: 6, tipo: "conceito", titulo: "Gatilhos mentais na fidelização",
+      ideia: "Os mesmos princípios de influência (Cialdini) servem para fortalecer a relação, quando são verdadeiros. Fidelizar não é prender: o cliente fica porque quer, não porque não consegue sair.",
+      cards: [["Reciprocidade", "Avisar o lojista antes de faltar a grade que ele mais vende."], ["Compromisso e coerência", "Plano de reposição combinado pelo próprio cliente."], ["Prova social", "Mostrar como outros lojistas organizam a vitrine, com autorização."], ["Afinidade", "Lembrar o que importa para aquele lojista (feira, coleção, tamanho)."], ["Escassez real", "Acesso antecipado à coleção para quem compra com frequência."], ["Unidade (pertencimento)", "Grupo de lojistas com conteúdo útil, não só promoção."]],
+      w: [{ type: "quiz", id: "m3_gat", opts: ["Fideliza", "Prende"], items: [["Pontos que expiram sem aviso", 1], ["Regras simples e benefício claro", 0], ["Disparo em massa sem como sair da lista", 1], ["Pausar ou cancelar é fácil", 0], ["Multa escondida para cancelar", 1]] }],
+      nota: "Teste: se o cliente soubesse tudo, ele continuaria?" },
+
+    { bloco: "Parte B • Relacionamento", sl: "34", t: 4, tipo: "pratica", titulo: "Indicação se merece, não se exige",
+      ideia: "Recompra: necessidade atual confirmada. Indicação: convite depois de valor entregue, sem pressão e sem pedir contato de terceiros sem consentimento.",
+      w: [{ type: "quiz", id: "m3_ind_et", opts: ["Ético", "Não ético"], items: [["Pedir indicação logo após resolver uma reclamação", 1], ["Oferecer material para o cliente compartilhar, se quiser", 0], ["Pedir nome e telefone de três lojistas na entrega", 1], ["Convidar depois de confirmar que a coleção vendeu bem", 0]] }] },
+
+    { bloco: "Parte C • Seu plano", sl: "35–37", t: 11, tipo: "pratica", titulo: "Agora a carteira é sua",
+      ideia: "Use um cliente e um desafio reais (ou um caso fictício). Um plano precisa caber na agenda: uma prioridade por vez, sob a sua autonomia, com prazo e capacidade conhecidos.",
+      w: [{ type: "fields", id: "m3_exp", fields: [["h", "Hipótese: o que pode melhorar?", "", 1], ["a", "Ação: o que vou mudar?", "", 1], ["v", "Verificação: o que vou observar?", "", 1]], tpl: "Hipótese: {h}\nAção: {a}\nVerificação: {v}", canvas: { map: { h: "c3_h", a: "c3_a", v: "c3_v2" }, label: "Levar para o Canvas (Hipótese → ação → verificação)" } }] },
+
+    { bloco: "Parte C • Seu plano", sl: "38", t: 5, tipo: "conceito", titulo: "Do problema à agenda de 30 dias", ficticio: true,
+      ideia: "Modelo resolvido para inspirar — não para copiar.",
+      cards: [["Problema", "Falhas na reposição de grades."], ["Ação", "Confirmar pedidos e registrar responsáveis."], ["Medida", "Pedidos com confirmação correta e no prazo."]] },
+
+    { bloco: "Parte C • Seu plano", sl: "39", t: 4, tipo: "conceito", titulo: "O método vira um plano completo",
+      ideia: "Terceira camada do Canvas: carteira prioritária, ação de fidelização, indicadores, plano de 30 dias e compromisso." },
+
+    { bloco: "Parte C • IA", sl: "40–41", t: 11, tipo: "ia", titulo: "Seu Copiloto Comercial",
+      ideia: "Tudo o que você escreveu no Canvas vira o contexto do seu Copiloto. Antes de usar, cinco regras que protegem o seu nome.",
+      cards: [["1. Dados mínimos", "Use “Cliente A”. Nada de nome, telefone ou CPF."], ["2. Você valida", "Promessas, preços e contas passam por você."], ["3. Contato com permissão", "Nada de disparo em massa ou insistência após recusa."], ["4. A IA erra", "Confira antes de enviar."], ["5. Sem internet?", "O método continua no papel."]],
+      w: [{ type: "copiloto" }],
+      nota: "A IA escreve; quem envia é você — e você responde pela mensagem." },
+
+    { bloco: "Parte C • Seu plano", sl: "42", t: 20, tipo: "canvas", titulo: "Construa seu plano de 30 dias",
+      ideia: "Cada pessoa registra o próprio plano. Checkpoint com um colega: indicador, fonte e linha de base. Conclua com a primeira ação e o prazo.",
+      w: [{ type: "canvas", layer: "c3" },
+          { type: "prompt", id: "m3_planoia", text: "Você é meu copiloto comercial. Meu plano de 30 dias está abaixo. Sugira UMA primeira ação que caiba em 30 minutos na próxima segunda-feira e aponte o ponto mais fraco do plano. Não invente números.\n\nCarteira prioritária: {c3_t0_0}; {c3_t1_0}\nAção de fidelização: {c3_au}\nIndicador: {c3_ind}\nSemana 1: {c3_s1}\nSemana 2: {c3_s2}\nSemana 3: {c3_s3}\nSemana 4: {c3_s4}" }],
+      nota: "A IA sugere; a decisão é sua. Semana 1 medir • 2 testar • 3 executar • 4 revisar." },
+
+    { bloco: "Parte C • Seu plano", sl: "43", t: 3, tipo: "pratica", titulo: "Seu plano sobrevive à segunda-feira?",
+      w: [{ type: "check", id: "m3_valid", items: ["Há responsável e primeiro prazo", "A ação cabe na minha rotina", "A métrica tem fonte ou coleta prevista"] }] },
+
+    { bloco: "Parte C • Prática 3", sl: "44–46", t: 24, tipo: "pratica", titulo: "Banca do Plano",
+      ideia: "Em duplas: apresente o plano com evidências (desafio → ação → indicador), receba UMA melhoria concreta e apresente a versão revisada.",
+      w: [{ type: "clock", id: "m3_banca", rows: [["Briefing", 180], ["Rodada 1 — apresentação", 120], ["Feedback específico", 60], ["Reapresentação ajustada", 90], ["Nota pré × pós", 60], ["Troca", 90], ["Rodada 2 (mesma sequência)", 420], ["Margem para revisão", 180], ["Debrief", 240]] },
+          { type: "rubric", id: "m3_banca_r", crit: ["Prioridade", "Viabilidade", "Indicador", "Aprendizado"] }],
+      nota: "A versão revisada vale mais que um elogio. Melhora do plano no papel não é aumento de faturamento." },
+
+    { bloco: "Encerramento", sl: "47", t: 2, tipo: "ia", titulo: "Tudo o que você usou, num só lugar",
+      w: [{ type: "links", items: [["Biblioteca de prompts", "index.html#biblioteca"], ["Monte seu PROMPT", "index.html#prompt"], ["Gerador do Copiloto", "index.html#copiloto"], ["Canvas completo", "index.html#canvas"], ["Materiais do curso", "index.html#materiais"]] }] },
+
+    { bloco: "Encerramento", sl: "48", t: 5, tipo: "pratica", titulo: "Voltamos ao desafio do primeiro dia",
+      ideia: "O que estava travando suas vendas? Confronte o desafio com a sua primeira ação e o seu indicador.",
+      w: [{ type: "desafio" }] },
+
+    { bloco: "Encerramento", sl: "49", t: 4, tipo: "pratica", titulo: "Avaliação do curso",
+      ideia: "Registre sua experiência e o que poderá aplicar. O link oficial é informado pelo instrutor." },
+
+    { bloco: "Encerramento", sl: "50", t: 3, tipo: "conceito", titulo: "A próxima escolha será consequência do que você fizer",
+      ideia: "Mentalidade → conversa → decisão → relação → execução. Primeiro passo definido. Indicador identificado." }
+  ]
+});
+
+// DEPOIS DA AULA — continuidade com IA
+MODS.push({
+  id: "POS", nome: "Depois da aula", titulo: "A IA vira hábito",
+  sub: "Atividades para fazer sozinho, no seu ritmo, com o seu Copiloto.",
+  total: 0,
+  entregas: ["Uma objeção real ensaiada", "Uma mensagem de abordagem testada", "Plano de 7 dias cumprido"],
+  momentos: [
+    { bloco: "Ensaio", sl: "IA 25", t: 15, tipo: "ia", titulo: "A IA no papel do cliente difícil",
+      ideia: "Escolha a objeção que você mais ouve e ensaie. A IA faz o cliente; depois sai do papel e avalia você.",
+      w: [{ type: "fields", id: "pos_ensaio", fields: [["seg", "Seu segmento (sem nomes de clientes)", "distribuidora de bebidas para mercadinhos", 1], ["obj", "A objeção que você mais ouve", "“Seu concorrente faz mais barato.”", 1], ["mot", "O motivo real que costuma estar por trás", "medo de ficar sem estoque no fim de semana", 1]],
+            tpl: "PAPEL: Aja como um cliente exigente de {seg}.\nREQUISIÇÃO: Responda às minhas mensagens como esse cliente. Comece com a objeção: {obj}\nOBJETIVO: Quero treinar perguntas que descubram o motivo real, não fechar a venda.\nMODELO: Respostas curtas, como no WhatsApp.\nPANORAMA: O motivo real (só revele se eu fizer uma boa pergunta): {mot}.\nTESTAR: Depois de 5 trocas, saia do papel, dê nota de 0 a 3 para acolher, clarificar, responder e confirmar, e sugira UMA melhoria." }] },
+
+    { bloco: "Prospecção", sl: "IA 22", t: 10, tipo: "ia", titulo: "A primeira mensagem conquista o direito à segunda",
+      ideia: "Mensagem curta, relevante para o cliente, sem preço e sem pressão — terminando com UMA pergunta fácil.",
+      w: [{ type: "links", items: [["Montar a mensagem no Monte seu PROMPT", "index.html#prompt"], ["Ver prompts de prospecção na biblioteca", "index.html#biblioteca"]] }] },
+
+    { bloco: "Hábito", sl: "IA 33", t: 7, tipo: "canvas", titulo: "Uma semana para a IA virar hábito",
+      ideia: "Dias 1 e 2: Copiloto pronto e lista de clientes ideais. Dias 3 a 5: contatos autorizados com mensagem testada. Dia 6: CRM atualizado. Dia 7: o que funcionou, o que ajustar.",
+      w: [{ type: "canvas", layer: "ci" }] }
+  ]
+});
+
+
+// ESQUEMA ÚNICO DOS CANVAS — usado pelo kit (index), pela Aula ao vivo e pela página do Canvas
+// Cada caixa: id, área do grid, número, título, pergunta-guia, ícone e campos [chave, rótulo, linhas]
+const CANVAS_LAYERS = [
+ { id: "c1", tag: "CAMADA 1 • MÓDULO 1", nome: "Do instinto ao método", titulo: "Meu Mapa de Alta Performance",
+   sub: "Mentalidade, oferta, diagnóstico e mini-funil",
+   grid: ["des des des des des des", "for cli ofe ofe per per", "evo lim ofe ofe fat fat", "hab hab fun fun fun fun", "com com com pas pas pas"],
+   rows: "auto 1fr 1fr 1.05fr auto",
+   boxes: [
+    { a: "des", n: "★", t: "Desafio inicial", q: "O que está travando suas vendas hoje? Guarde: ele volta no fim do Módulo 3.", ic: "flag", tone: "hl", f: [["c1_desafio", "Hoje, o que mais trava minhas vendas é…", 1]] },
+    { a: "for", n: 1, t: "Minha força", q: "O que já faço bem? Um comportamento observável.", ic: "star", col: "VOCÊ", f: [["c1_forca", "", 3]] },
+    { a: "evo", n: 2, t: "O que vou evoluir", q: "Preparar, diagnosticar, conduzir ou aprender? Que comportamento real prova isso?", ic: "up", f: [["c1_evoluir", "", 3]] },
+    { a: "cli", n: 3, t: "Meu cliente", q: "Para quem a oferta é adequada? O que esse cliente valoriza?", ic: "user", col: "CLIENTE E OFERTA", f: [["c1_cliente", "", 3]] },
+    { a: "lim", n: 5, t: "Meu limite", q: "Quando a minha oferta NÃO é a melhor opção?", ic: "stop", f: [["c1_limite", "", 3]] },
+    { a: "ofe", n: 4, t: "Minha oferta e seu valor", q: "Suba a escada: o que faz → onde importa → o que melhora → como provar.", ic: "tag", f: [["c1_atributo", "Atributo — o que a oferta faz", 2], ["c1_contexto", "Contexto — onde isso importa", 2], ["c1_beneficio", "Benefício — o que pode melhorar", 2], ["c1_evidencia", "Evidência — como provar ou verificar", 2]] },
+    { a: "per", n: 6, t: "Minha pergunta", q: "Que pergunta consultiva faz o cliente refletir? (SPIN, GPCT ou BANT)", ic: "ask", col: "CONVERSA", f: [["c1_pergunta", "", 3]] },
+    { a: "fat", n: 7, t: "Fato × hipótese", q: "Numa oportunidade travada: o que é fato, o que suponho e como vou verificar?", ic: "check", f: [["c1_fato", "", 3]] },
+    { a: "hab", n: 8, t: "Meu hábito de 5 dias", q: "Quando? Em qual situação? Como saberei que fiz?", ic: "cal", f: [["c1_habito", "", 3], ["c1_dias", "Marque os dias: D1 D2 D3 D4 D5", 1]] },
+    { a: "fun", n: 9, t: "Meu mini-funil", q: "Onde a oportunidade está e como fazê-la avançar com responsabilidade?", ic: "funnel", kind: "funil",
+      f: [["c1_fu_e", "Entrada • oportunidade identificada", 1], ["c1_fu_c", "Conversa • primeiro contato útil", 1], ["c1_fu_d", "Diagnóstico • necessidade compreendida", 1], ["c1_fu_p", "Próximo passo • avanço consentido", 1], ["c1_fu_m", "Etapa que mais precisa melhorar", 1], ["c1_fu_k", "Critério para verificar o avanço", 1]] },
+    { a: "com", n: 10, t: "Compromisso do módulo", q: "Na próxima conversa…", ic: "hand", tone: "mint", f: [["c1_deixar", "vou deixar de…", 1], ["c1_comecar", "e começar a…", 1]] },
+    { a: "pas", n: 11, t: "Próximo passo", q: "Que ação concreta farei, com quem e até quando?", ic: "arrow", tone: "mint", f: [["c1_passo", "", 2]] }
+   ] },
+ { id: "c2", tag: "CAMADA 2 • MÓDULO 2", nome: "Do diagnóstico à decisão", titulo: "Da conversa à decisão",
+   sub: "Abordagem, qualificação, proposta, objeção, negociação e fechamento",
+   grid: ["abo qua pro obj lim pas", "abo qua pro obj lim pas", "cad cad cad coe coe pon"],
+   rows: "1fr 1fr auto", flow: true,
+   boxes: [
+    { a: "abo", n: 1, t: "Abordagem", q: "Canal, contexto e uma abertura que dê ao cliente um motivo para conversar.", ic: "chat", f: [["c2_canal", "Canal e contexto", 2], ["c2_abordagem", "Minha abertura", 4]] },
+    { a: "qua", n: 2, t: "Qualificação", q: "Entender o projeto (GPCT) e as condições de avançar (BANT).", ic: "search", f: [["c2_gpct", "Objetivo • plano • desafio • prazo", 4], ["c2_bant", "Necessidade • investimento • decisor • prazo de decisão", 3]] },
+    { a: "pro", n: 3, t: "Proposta de valor", q: "Contexto confirmado → solução adequada → evidência honesta → avanço.", ic: "gift", f: [["c2_proposta", "", 7]] },
+    { a: "obj", n: 4, t: "Objeção-chave", q: "O que o cliente declarou? O que pode estar por trás? Como verificar?", ic: "shield", f: [["c2_objecao", "Fala declarada", 2], ["c2_obj_real", "Preocupação provável e pergunta para verificar", 4]] },
+    { a: "lim", n: 5, t: "Limites e alternativas", q: "Negociar começa antes do desconto.", ic: "scale", f: [["c2_limites", "Minha BATNA • BATNA do cliente • minha alçada", 4], ["c2_trocas", "Concessões com contrapartida", 2]] },
+    { a: "pas", n: 6, t: "Fechamento e próximo passo", q: "Compromisso claro e consentido: quem fará o quê, em que momento?", ic: "flag", f: [["c2_passo", "", 7]] },
+    { a: "cad", n: 7, t: "Cadência de acompanhamento", q: "Cada contato entrega algo útil. Se o cliente pediu outro prazo, vale o dele.", ic: "cal", kind: "row", f: [["c2_d1", "D+1 • resumo útil e condições", 2], ["c2_d3", "D+3 • evidência ou resposta à dúvida", 2], ["c2_d7", "D+7 • confirmar decisão ou encerrar", 2]] },
+    { a: "coe", n: 8, t: "Teste de coerência", q: "O que eu provei — e o que eu não posso prometer?", ic: "check", tone: "mint", kind: "row", f: [["c2_valor", "Valor demonstrado", 2], ["c2_naoprom", "Não posso prometer", 2]] },
+    { a: "pon", n: 9, t: "Ponte para o Módulo 3", q: "Que entrega e acompanhamento sustentarão a experiência?", ic: "arrow", tone: "mint", f: [["c2_ponte", "", 2]] }
+   ] },
+ { id: "c3", tag: "CAMADA 3 • MÓDULO 3", nome: "Fidelização e plano", titulo: "Da entrega à próxima escolha",
+   sub: "Carteira, fidelização, indicadores e plano de 30 dias",
+   grid: ["car car car car fid fid", "ind ind hip hip fid fid", "sem sem sem sem sem sem", "acao acao acao acao ban ban"],
+   rows: "1.15fr 1fr auto auto",
+   boxes: [
+    { a: "car", n: 1, t: "Carteira prioritária", q: "Quem merece atenção primeiro — e que fato sustenta a prioridade?", ic: "users", kind: "table",
+      cols: ["Cliente (código) e fato", "Ação adequada", "Dono e prazo"], rowsN: 4, f: [] },
+    { a: "fid", n: 2, t: "Ação de fidelização", q: "Fidelizar é um sistema, não uma campanha.", ic: "heart", f: [["c3_g", "Gatilho — quando acontece?", 2], ["c3_au", "Ação útil — o que o cliente recebe?", 2], ["c3_r", "Responsável", 1], ["c3_v", "Registro e verificação", 2]] },
+    { a: "ind", n: 3, t: "Indicador", q: "Um indicador que orienta a decisão — sem números inventados.", ic: "chart", f: [["c3_ind", "Indicador e fórmula", 2], ["c3_fonte", "Fonte", 1], ["c3_base", "Linha de base (ou: medir na semana 1)", 1], ["c3_rev", "Quando vou revisar", 1]] },
+    { a: "hip", n: 4, t: "Hipótese → ação → verificação", q: "Plano bom tem responsável, prazo e evidência.", ic: "bulb", f: [["c3_h", "Hipótese: o que pode melhorar?", 2], ["c3_a", "Ação: o que vou mudar?", 2], ["c3_v2", "Verificação: o que vou observar?", 2]] },
+    { a: "sem", n: 5, t: "Plano de 30 dias", q: "Uma prioridade por vez, sob a sua autonomia, com prazo e capacidade conhecidos.", ic: "cal", kind: "row", f: [["c3_s1", "Semana 1 • medir e organizar", 3], ["c3_s2", "Semana 2 • testar a melhoria", 3], ["c3_s3", "Semana 3 • executar e acompanhar", 3], ["c3_s4", "Semana 4 • revisar e decidir", 3]] },
+    { a: "acao", n: 6, t: "Compromisso", q: "Primeira ação, com dono, data e prova.", ic: "hand", tone: "mint", kind: "row", f: [["c3_acao", "Primeira ação", 2], ["c3_resp", "Responsável e data", 2], ["c3_prova", "Como vou verificar que ocorreu", 2]] },
+    { a: "ban", n: 7, t: "Banca do plano", q: "Nota 0–12 antes e depois do feedback.", ic: "star", tone: "mint", kind: "row", f: [["c3_pre", "PRÉ /12", 1], ["c3_pos", "PÓS /12", 1], ["c3_melhoria", "Melhoria feita no plano", 2]] }
+   ] },
+ { id: "ci", tag: "IA • COPILOTO", nome: "Copiloto Comercial", titulo: "Meu Copiloto e minha semana com IA",
+   sub: "O contexto que a IA precisa para ajudar — e o plano para virar hábito",
+   grid: ["quem ven res reg", "nao pro tom reg", "d12 d35 d6 d7", "msg msg msg msg"],
+   rows: "1fr 1fr auto auto",
+   boxes: [
+    { a: "quem", n: 1, t: "Quem sou", q: "Nome, cargo, empresa e cidade.", ic: "user", col: "COPILOTO", f: [["ci_quem", "", 3]] },
+    { a: "ven", n: 2, t: "O que vendo e para quem", q: "Oferta e cliente ideal (Camada 1).", ic: "tag", f: [["ci_vendo", "", 3]] },
+    { a: "res", n: 3, t: "Problemas que resolvo", q: "Os problemas reais do cliente que a oferta ataca.", ic: "check", f: [["ci_resolve", "", 3]] },
+    { a: "nao", n: 4, t: "O que não resolvo", q: "Limites e quando não sou a melhor opção (Camadas 1 e 2).", ic: "stop", f: [["ci_nao", "", 3]] },
+    { a: "pro", n: 5, t: "Provas reais", q: "Só evidências verdadeiras. Nunca invente outras.", ic: "shield", f: [["ci_provas", "", 3]] },
+    { a: "tom", n: 6, t: "Meu tom", q: "Como eu falo com o cliente.", ic: "chat", f: [["ci_tom", "", 3]] },
+    { a: "reg", n: "!", t: "Regras fixas", q: "Vão escritas no Copiloto.", ic: "shield", tone: "navy", kind: "rules",
+      rules: ["Dados mínimos: “Cliente A”. Nada de nome, telefone ou CPF.", "Você valida promessas, preços e contas.", "Contato só com permissão. Sem disparo em massa.", "A IA erra e inventa: confira antes de enviar.", "Sem internet, o método continua no papel."], f: [] },
+    { a: "d12", n: 7, t: "Dias 1 e 2", q: "Copiloto pronto • lista de clientes ideais.", ic: "cal", col: "PLANO DE 7 DIAS", f: [["ci_d12", "", 3]] },
+    { a: "d35", n: 8, t: "Dias 3 a 5", q: "Contatos autorizados com mensagem testada.", ic: "chat", f: [["ci_d35", "", 3]] },
+    { a: "d6", n: 9, t: "Dia 6", q: "CRM atualizado.", ic: "chart", f: [["ci_d6", "", 3]] },
+    { a: "d7", n: 10, t: "Dia 7", q: "O que funcionou? O que vou ajustar?", ic: "bulb", f: [["ci_d7", "", 3]] },
+    { a: "msg", n: 11, t: "Meu prompt mais útil", q: "O pedido que eu mais vou repetir — já no Método PROMPT.", ic: "ask", tone: "mint", f: [["ci_msg", "", 2]] }
+   ] },
+ { id: "cs", tag: "SÍNTESE • 1 PÁGINA", nome: "Plano de Alta Performance", titulo: "30 dias para transformar método em ação",
+   sub: "Preencha a partir das três camadas, sem metas fictícias",
+   grid: ["des des cli cli", "aca aca ind ind", "s1 s2 s3 s4", "com com sen sen"],
+   rows: "auto auto auto auto",
+   boxes: [
+    { a: "des", n: 1, t: "Desafio original", q: "O que eu registrei no Módulo 1.", ic: "flag", f: [["cs_desafio", "", 2]], pull: "c1_desafio" },
+    { a: "cli", n: 2, t: "Cliente e prioridade", q: "Quem e por que agora?", ic: "users", f: [["cs_cliente", "", 2]] },
+    { a: "aca", n: 3, t: "Ação principal", q: "O que vou fazer, com que recursos e autorizações?", ic: "arrow", f: [["cs_acao", "", 2], ["cs_resp", "Responsável • recursos", 1]], pull: "c3_acao" },
+    { a: "ind", n: 4, t: "Indicador e linha de base", q: "Fórmula, fonte e ponto de partida.", ic: "chart", f: [["cs_ind", "", 2], ["cs_base", "Fonte • linha de base", 1]], pull: "c3_ind" },
+    { a: "s1", n: 5, t: "Semana 1", q: "Medir e organizar.", ic: "cal", f: [["cs_s1", "", 2]], pull: "c3_s1" },
+    { a: "s2", n: 6, t: "Semana 2", q: "Testar a melhoria.", ic: "cal", f: [["cs_s2", "", 2]], pull: "c3_s2" },
+    { a: "s3", n: 7, t: "Semana 3", q: "Executar e acompanhar.", ic: "cal", f: [["cs_s3", "", 2]], pull: "c3_s3" },
+    { a: "s4", n: 8, t: "Semana 4", q: "Revisar e decidir.", ic: "cal", f: [["cs_s4", "", 2]], pull: "c3_s4" },
+    { a: "com", n: 9, t: "Primeiro compromisso", q: "Até ___, farei ___. Comprovarei por ___.", ic: "hand", tone: "mint", f: [["cs_farei", "", 2]] },
+    { a: "sen", n: 10, t: "Se o indicador não melhorar", q: "O que vou investigar primeiro?", ic: "search", tone: "mint", f: [["cs_senao", "", 2]] }
+   ] }
+];
+const CANVAS_ICONS = {
+ flag: '<path d="M5 21V4m0 0h11l-2 4 2 4H5"/>', star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+ up: '<path d="M4 17l6-6 4 4 6-7M14 8h6v6"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+ users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c1-3.5 3.6-5.5 6.5-5.5s5.5 2 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .8 3.2 2.6 3.7 5.2"/>',
+ stop: '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>', tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+ ask: '<path d="M4 5h16v11H9l-5 4z"/><path d="M10 9.2a2 2 0 1 1 2.8 1.8c-.6.3-.8.7-.8 1.3M12 14h.01"/>', check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+ cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', funnel: '<path d="M3 4h18l-7 8v7l-4 2v-9z"/>',
+ hand: '<path d="M7 11V6a2 2 0 0 1 4 0v4M11 10V4a2 2 0 0 1 4 0v6M15 10V6a2 2 0 0 1 4 0v7a8 8 0 0 1-8 8h-1a6 6 0 0 1-5-3l-2-4a2 2 0 0 1 3.5-2L7 13"/>',
+ arrow: '<path d="M4 12h14M13 6l6 6-6 6"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/>', search: '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 5 5"/>',
+ gift: '<rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12M12 9c-2-4-6-4-6-1.5S9 9 12 9c3 0 6-.5 6-1.5S14 5 12 9"/>',
+ shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>', scale: '<path d="M12 4v17M6 21h12M5 8h14M5 8l-3 6a3 3 0 0 0 6 0zM19 8l-3 6a3 3 0 0 0 6 0z"/>',
+ heart: '<path d="M12 20s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.5-8 11-8 11z"/>', chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+ bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
+};
+function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`)});return k}
+function canvasFilled(layer,CV){const k=canvasKeys(layer);return [k.filter(x=>(CV[x]||'').trim()).length,k.length]}
+
+(function(){
+  const C=window.APC_CONFIG||{};
+  document.getElementById('lk-sheet').href=C.PLANILHA_CARTEIRA||'#';
+  document.getElementById('lk-drive').href=C.DRIVE_MATERIAIS||'#';
+  const get=(k,d)=>{try{const v=localStorage.getItem('apc_'+k);return v?JSON.parse(v):d}catch(e){return d}};
+  const AR='<svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1565C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg>';
+  const DESC={M1:'Mentalidade, oferta, diagnóstico e funil: do instinto ao método.',M2:'Abordagem, qualificação, objeções e negociação até a decisão.',M3:'Pós-venda, indicadores, carteira e o seu plano de 30 dias.',POS:'Para depois do curso: a IA como hábito no seu dia a dia.'};
+  function render(){
+    const ST=get('aula',{done:{},last:''}),done=ST.done||{};
+    const nome=(window.APC&&APC.nome)||'';
+    document.getElementById('hello').textContent=nome?('Olá, '+nome.split(' ')[0]+'. Vamos continuar?'):'Bem-vindo ao seu treinamento';
+    let h='';
+    MODS.forEach(m=>{const n=m.momentos.length,d=m.momentos.filter((x,i)=>done[m.id+'/'+(i+1)]).length,p=n?Math.round(d/n*100):0;
+      const lab=m.id==='POS'?'DEPOIS DO CURSO':m.nome.toUpperCase();
+      h+=`<a class="mod" href="aula.html#${m.id}/0"><div class="top"><span class="tag">${lab}</span>${m.total?`<span class="min">${m.total} min</span>`:''}</div><h3>${m.titulo}</h3><p>${DESC[m.id]||''}</p><div class="bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso ${lab}"><i style="width:${p}%"></i></div><div class="pl"><span>${d} de ${n} passos</span><span>${p}%</span></div><div class="go">${d?'Continuar':'Abrir'} ${AR}</div></a>`});
+    document.getElementById('mods').innerHTML=h;
+    const CV=get('canvas',{});let f=0,t=0;['c1','c2','c3'].forEach(l=>{const r=canvasFilled(l,CV);f+=r[0];t+=r[1]});
+    document.getElementById('cv-meta').textContent=f?`${f} de ${t} campos preenchidos nas três camadas`:'Ainda vazio: ele se preenche durante as aulas';
+    const last=ST.last&&/^[A-Z0-9]+\/\d+$/.test(ST.last)?ST.last:'';const cta=document.getElementById('cta');
+    if(last&&last!=='M1/0'){const [mid,ix]=last.split('/'),m=MODS.find(x=>x.id===mid),i=+ix;const mo=m&&i?m.momentos[i-1]:null;
+      cta.href='aula.html#'+last;document.getElementById('cta-t').textContent='Continuar de onde parei';
+      document.getElementById('cta-s').textContent=(m?(m.id==='POS'?'Depois do curso':m.nome):'')+(i?` • passo ${i}`:' • visão geral')+(mo?` — ${mo.titulo}`:'')}
+  }
+  render();
+  document.addEventListener('apc:data',render);
+  if(window.APC&&APC.ready)APC.ready.then(render);
+})();
+</script>
+</body>
+</html>

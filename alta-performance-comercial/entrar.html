@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Entrar | Alta Performance Comercial</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B1F4D">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="apc-config.js"></script>
+<script src="supabase.min.js"></script>
+<script src="apc-auth.js"></script>
+<style>
+:root{--navy:#0E2A5C;--deep:#0B1F4D;--blue:#1565C0;--turq:#12A3A8;--green:#1DBF8A;--ice:#EAF4FB;--grey:#5A6B85;--line:#D6E1EC;--soft:#F6F9FC;--red:#C0392B;--f:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:var(--f);color:var(--navy);background:var(--soft);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;min-height:100vh}
+.wrap{flex:1;display:grid;grid-template-columns:1.05fr 1fr;min-height:100vh}
+.side{background:linear-gradient(150deg,#0B1F4D 0%,#0E3A7A 55%,#12A3A8 100%);color:#fff;padding:48px 56px;display:flex;flex-direction:column;gap:28px;position:relative;overflow:hidden}
+.side:after{content:"";position:absolute;right:-120px;bottom:-120px;width:380px;height:380px;border-radius:50%;border:56px solid rgba(255,255,255,.06)}
+.brand b{display:block;font-size:13px;letter-spacing:.08em;font-weight:800}.brand span{font-size:12px;opacity:.85;font-weight:600}
+.side h1{font-size:clamp(28px,3.2vw,42px);line-height:1.1;margin:auto 0 0;font-weight:800;letter-spacing:-.01em}
+.side h1 em{font-style:normal;color:#7BE3E6}
+.side p.lead{font-size:16px;line-height:1.55;opacity:.92;margin:0;max-width:460px}
+.pts{display:grid;gap:12px;margin:4px 0 auto;padding:0;list-style:none;max-width:470px}
+.pts li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.45;font-weight:500}
+.pts li i{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
+.by{font-size:12px;opacity:.8;font-weight:600}
+.main{display:flex;align-items:center;justify-content:center;padding:40px 20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 10px 40px rgba(14,42,92,.08);padding:30px 28px;width:100%;max-width:430px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:4px;margin-bottom:22px}
+.tabs button{border:0;background:transparent;font:inherit;font-weight:800;font-size:14px;color:var(--grey);padding:11px;border-radius:9px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--navy);color:#fff}
+h2{font-size:22px;margin:0 0 4px;font-weight:800}
+.sub{color:var(--grey);font-size:14px;margin:0 0 18px;line-height:1.5}
+label{display:block;font-size:13px;font-weight:700;margin:14px 0 6px}
+.in{position:relative}
+input[type=text],input[type=email],input[type=password]{width:100%;font:inherit;font-size:16px;color:var(--navy);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;background:#fff;outline:none;transition:border-color .15s}
+input:focus{border-color:var(--turq);box-shadow:0 0 0 3px rgba(18,163,168,.15)}
+.eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;font:inherit;font-size:12.5px;font-weight:700;color:var(--blue);cursor:pointer;padding:6px 8px}
+.hint{font-size:12px;color:var(--grey);margin-top:5px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.5;color:var(--grey);margin:16px 0 0;font-weight:500}
+.chk input{margin-top:3px;width:18px;height:18px;accent-color:var(--turq);flex:none}
+.btn{width:100%;margin-top:20px;border:0;border-radius:12px;background:linear-gradient(90deg,#0E2A5C,#12A3A8);color:#fff;font:inherit;font-size:16px;font-weight:800;padding:15px;cursor:pointer;transition:filter .15s}
+.btn:hover{filter:brightness(1.08)}.btn:disabled{opacity:.6;cursor:wait}
+.link{display:inline-block;margin-top:14px;border:0;background:none;font:inherit;font-size:13px;font-weight:700;color:var(--blue);cursor:pointer;padding:0}
+.msg{border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.45;margin-top:16px;font-weight:600}
+.msg.err{background:#FDECEC;color:var(--red)}.msg.ok{background:#E3F8F1;color:#0B6B55}.msg.info{background:var(--ice);color:var(--navy)}
+.priv{font-size:11.5px;color:var(--grey);line-height:1.5;margin-top:18px;text-align:center}
+footer.apc-foot{margin-top:0}
+[hidden]{display:none!important}
+@media(max-width:900px){.wrap{display:block;min-height:0}.side{padding:28px 22px;gap:16px}.side h1{margin:6px 0 0;font-size:26px}.pts,.side p.lead{display:none}.main{padding:22px 16px 34px;align-items:flex-start}.card{padding:24px 20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="side" aria-label="Sobre o sistema">
+    <div class="brand"><b>ESCOLA DE NEGÓCIOS</b><span>IEL Pernambuco</span></div>
+    <h1>Alta Performance Comercial e <em>Fidelização Estratégica</em></h1>
+    <p class="lead">Sua área do curso: aulas, atividades, canvas e materiais num só lugar. Tudo o que você preencher fica salvo na sua conta.</p>
+    <ul class="pts">
+      <li><i>1</i><span>Crie seu acesso com nome, e-mail e senha. Leva 30 segundos.</span></li>
+      <li><i>2</i><span>Use no celular ou no computador: suas respostas acompanham você.</span></li>
+      <li><i>3</i><span>Depois do curso, volte quando quiser para revisar seu plano.</span></li>
+    </ul>
+    <div class="by">Sistema desenvolvido por Gabriel Melo</div>
+  </section>
+
+  <main class="main">
+    <div class="card">
+      <div id="local" hidden>
+        <h2>Modo local</h2>
+        <p class="sub">O banco de dados ainda não foi conectado. Você pode usar o sistema normalmente, e as respostas ficam salvas só neste aparelho.</p>
+        <a class="btn" style="display:block;text-align:center;text-decoration:none" href="inicio.html">Entrar no sistema</a>
+      </div>
+
+      <div id="auth">
+        <div class="tabs" role="tablist">
+          <button role="tab" id="t-in" aria-selected="true" aria-controls="f-in">Entrar</button>
+          <button role="tab" id="t-up" aria-selected="false" aria-controls="f-up">Criar acesso</button>
+        </div>
+
+        <form id="f-in" novalidate>
+          <h2>Bem-vindo de volta</h2>
+          <p class="sub">Entre para continuar de onde parou.</p>
+          <label for="in-email">E-mail</label>
+          <input id="in-email" type="email" autocomplete="email" inputmode="email" required>
+          <label for="in-pass">Senha</label>
+          <div class="in"><input id="in-pass" type="password" autocomplete="current-password" required><button type="button" class="eye" data-eye="in-pass">Mostrar</button></div>
+          <button class="btn" type="submit">Entrar</button>
+          <button class="link" type="button" id="go-reset">Esqueci minha senha</button>
+        </form>
+
+        <form id="f-up" novalidate hidden>
+          <h2>Crie seu acesso</h2>
+          <p class="sub">Só três informações. Use um e-mail que você acessa, para recuperar a senha se precisar.</p>
+          <label for="up-nome">Nome completo</label>
+          <input id="up-nome" type="text" autocomplete="name" required>
+          <label for="up-email">E-mail</label>
+          <input id="up-email" type="email" autocomplete="email" inputmode="email" required>
+          <label for="up-pass">Crie uma senha</label>
+          <div class="in"><input id="up-pass" type="password" autocomplete="new-password" minlength="6" required><button type="button" class="eye" data-eye="up-pass">Mostrar</button></div>
+          <div class="hint">Mínimo de 6 caracteres.</div>
+          <label class="chk"><input type="checkbox" id="up-ok" required><span>Concordo que meus dados (nome, e-mail e respostas) sejam usados só para este curso, conforme a LGPD. Não vou registrar dados pessoais de clientes reais.</span></label>
+          <button class="btn" type="submit">Criar acesso e entrar</button>
+        </form>
+
+        <form id="f-reset" novalidate hidden>
+          <h2>Recuperar senha</h2>
+          <p class="sub">Informe seu e-mail. Enviaremos um link para você criar uma nova senha.</p>
+          <label for="rs-email">E-mail</label>
+          <input id="rs-email" type="email" autocomplete="email" inputmode="email" required>
+          <button class="btn" type="submit">Enviar link</button>
+          <button class="link" type="button" id="back-in">← Voltar para Entrar</button>
+        </form>
+
+        <form id="f-new" novalidate hidden>
+          <h2>Nova senha</h2>
+          <p class="sub">Crie uma nova senha para sua conta.</p>
+          <label for="nw-pass">Nova senha</label>
+          <div class="in"><input id="nw-pass" type="password" autocomplete="new-password" minlength="6" required><button type="button" class="eye" data-eye="nw-pass">Mostrar</button></div>
+          <div class="hint">Mínimo de 6 caracteres.</div>
+          <button class="btn" type="submit">Salvar e entrar</button>
+        </form>
+
+        <div id="msg" class="msg" role="status" aria-live="polite" hidden></div>
+        <p class="priv">Seus dados ficam protegidos: cada participante só vê as próprias respostas.</p>
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="apc-foot" id="foot"></footer>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  $('foot').innerHTML=APC.footerHTML();
+  if(!APC.on){$('auth').hidden=true;$('local').hidden=false;return}
+  const sb=APC.client, next=APC.nextUrl();
+  const forms=['f-in','f-up','f-reset','f-new'];
+  function show(id){forms.forEach(f=>$(f).hidden=f!==id);$('t-in').setAttribute('aria-selected',id==='f-in');$('t-up').setAttribute('aria-selected',id==='f-up');$('t-in').parentNode.hidden=(id==='f-new');msg();const first=$(id).querySelector('input');if(first)setTimeout(()=>first.focus(),30)}
+  function msg(t,kind){const m=$('msg');if(!t){m.hidden=true;return}m.hidden=false;m.className='msg '+(kind||'err');m.textContent=t}
+  function busy(f,on){const b=$(f).querySelector('.btn');b.disabled=on;b.dataset.t=b.dataset.t||b.textContent;b.textContent=on?'Aguarde…':b.dataset.t}
+  function tr(e){const s=(e&&(e.message||e.error_description))||'';
+    if(/invalid login/i.test(s))return'E-mail ou senha incorretos.';
+    if(/already registered|already been registered|exists/i.test(s))return'Este e-mail já tem cadastro. Use a aba Entrar.';
+    if(/at least 6|password.*short|weak/i.test(s))return'A senha precisa ter pelo menos 6 caracteres.';
+    if(/not confirmed/i.test(s))return'Confirme seu e-mail pelo link que enviamos antes de entrar.';
+    if(/rate limit|too many|security purposes/i.test(s))return'Muitas tentativas seguidas. Aguarde um minuto e tente de novo.';
+    if(/invalid.*email|email.*invalid/i.test(s))return'Confira o e-mail digitado.';
+    if(/fetch|network/i.test(s))return'Sem conexão com a internet. Tente de novo.';
+    return'Não foi possível concluir. Tente de novo.'}
+  const okEmail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  document.querySelectorAll('[data-eye]').forEach(b=>b.onclick=()=>{const i=$(b.dataset.eye);const s=i.type==='password';i.type=s?'text':'password';b.textContent=s?'Ocultar':'Mostrar'});
+  $('t-in').onclick=()=>show('f-in');$('t-up').onclick=()=>show('f-up');
+  $('go-reset').onclick=()=>{$('rs-email').value=$('in-email').value;show('f-reset')};$('back-in').onclick=()=>show('f-in');
+
+  $('f-in').onsubmit=async e=>{e.preventDefault();const email=$('in-email').value.trim(),password=$('in-pass').value;
+    if(!okEmail(email))return msg('Digite um e-mail válido.');if(!password)return msg('Digite sua senha.');
+    busy('f-in',true);const {error}=await sb.auth.signInWithPassword({email,password});busy('f-in',false);
+    if(error)return msg(tr(error));location.href=next};
+
+  $('f-up').onsubmit=async e=>{e.preventDefault();const nome=$('up-nome').value.trim().replace(/\s+/g,' '),email=$('up-email').value.trim(),password=$('up-pass').value;
+    if(nome.length<3)return msg('Digite seu nome completo.');if(!okEmail(email))return msg('Digite um e-mail válido.');
+    if(password.length<6)return msg('A senha precisa ter pelo menos 6 caracteres.');if(!$('up-ok').checked)return msg('Para continuar, marque a concordância com o uso dos dados.');
+    busy('f-up',true);const {data,error}=await sb.auth.signUp({email,password,options:{data:{nome},emailRedirectTo:location.href.split('?')[0].split('#')[0]}});busy('f-up',false);
+    if(error)return msg(tr(error));
+    if(data&&data.user&&data.user.identities&&data.user.identities.length===0)return msg('Este e-mail já tem cadastro. Use a aba Entrar.');
+    if(data.session){location.href=next;return}
+    show('f-in');$('in-email').value=email;msg('Cadastro feito! Enviamos um link de confirmação para '+email+'. Abra o e-mail, confirme e depois entre aqui.','ok')};
+
+  $('f-reset').onsubmit=async e=>{e.preventDefault();const email=$('rs-email').value.trim();if(!okEmail(email))return msg('Digite um e-mail válido.');
+    busy('f-reset',true);const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.href.split('?')[0].split('#')[0]});busy('f-reset',false);
+    if(error)return msg(tr(error));msg('Se esse e-mail tiver cadastro, você vai receber o link em alguns minutos. Confira também a caixa de spam.','ok')};
+
+  $('f-new').onsubmit=async e=>{e.preventDefault();const password=$('nw-pass').value;if(password.length<6)return msg('A senha precisa ter pelo menos 6 caracteres.');
+    busy('f-new',true);const {error}=await sb.auth.updateUser({password});busy('f-new',false);if(error)return msg(tr(error));
+    msg('Senha alterada. Entrando…','ok');setTimeout(()=>location.href='inicio.html',700)};
+
+  let recovering=/type=recovery/.test(location.hash);
+  sb.auth.onAuthStateChange(ev=>{if(ev==='PASSWORD_RECOVERY'){recovering=true;show('f-new')}});
+  APC.ready.then(u=>{if(recovering){show('f-new');return}if(u){location.replace(next)}else{const q=new URLSearchParams(location.search);let known=false;try{known=!!localStorage.getItem('apc__known')}catch(_){}show(q.get('modo')==='cadastro'||(!known&&q.get('modo')!=='entrar')?'f-up':'f-in')}});
+})();
+</script>
+</body>
+</html>
