@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Canvas — Meu Mapa de Alta Performance Comercial</title>
-<script src="apc-config.js?v=2"></script>
-<script src="supabase.min.js?v=2"></script>
-<script src="apc-auth.js?v=2"></script>
+<script src="apc-config.js?v=3"></script>
+<script src="supabase.min.js?v=3"></script>
+<script src="apc-auth.js?v=3"></script>
 
 <meta name="description" content="Canvas de três camadas, Copiloto e síntese de 30 dias: preencha na tela ou imprima.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,6 +102,15 @@ table.tb td.rn{width:26px;font-weight:900;color:var(--turq);text-align:center;pa
  .board{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
 body.iel .ielhead,body.iel .ielfoot{display:block}
+@media(max-width:640px){
+ .bar{flex-wrap:wrap;gap:8px;padding:8px 12px}
+ .brand b{font-size:12px}.brand span{font-size:11.5px}
+ .tools{margin-left:auto}
+ #bBlank,.tools a.ib{display:none}
+ .tabs button{min-height:38px;font-size:12.5px}
+ .fd label{font-size:11.5px}.fun .st label{font-size:11px}table.tb th{font-size:11px}
+ textarea,input{font-size:16px!important}
+}
 </style>
 </head>
 <body>
@@ -112,7 +121,7 @@ body.iel .ielhead,body.iel .ielfoot{display:block}
   <div class="tools"><button class="ib dark" id="bPrint">Imprimir</button><button class="ib" id="bBlank">Imprimir em branco</button><a class="ib" href="aula.html">Aula ao vivo »</a></div>
 </div></header>
 <div class="wrap">
-  <p class="hint"><span>Clique em qualquer espaço e escreva. <b>Tudo fica salvo só neste aparelho.</b> No celular, as caixas aparecem uma embaixo da outra.</span><span class="saved" id="saved"></span><button class="ib noprint" id="bClear" style="margin-left:auto">Limpar esta camada</button></p>
+  <p class="hint"><span>Clique em qualquer espaço e escreva. <b>Tudo fica salvo na sua conta.</b> No celular, as caixas aparecem uma embaixo da outra.</span><span class="saved" id="saved"></span><button class="ib noprint" id="bClear" style="margin-left:auto">Limpar esta camada</button></p>
   <div id="board"></div>
 </div>
 <script>
@@ -256,7 +265,7 @@ function render(){
 function updTabs(){$$('#tabs button').forEach(b=>{const [a,n]=canvasFilled(b.dataset.l,CV);b.querySelector('i').textContent=Math.round(a/n*100)+'%'})}
 $('#bPrint').onclick=()=>window.print();
 $('#bBlank').onclick=()=>{blank=true;render();setTimeout(()=>{window.print();blank=false;render()},150)};
-$('#bClear').onclick=()=>{if(!confirm('Apagar tudo o que você escreveu nesta camada, neste aparelho?'))return;canvasKeys(cur).forEach(k=>delete CV[k]);LS.set('canvas',CV);render()};
+$('#bClear').onclick=()=>{if(!confirm('Apagar tudo o que você escreveu nesta camada?'))return;canvasKeys(cur).forEach(k=>delete CV[k]);LS.set('canvas',CV);render()};
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(CANVAS_LAYERS.find(l=>l.id===h)){cur=h;render()}});
 const qp=new URLSearchParams(location.search);if(qp.get('blank'))blank=true;if(IEL)document.body.classList.add('iel');
 render();

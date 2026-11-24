@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#0B1F4D">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="apc-config.js?v=2"></script>
-<script src="supabase.min.js?v=2"></script>
-<script src="apc-auth.js?v=2"></script>
+<script src="apc-config.js?v=3"></script>
+<script src="supabase.min.js?v=3"></script>
+<script src="apc-auth.js?v=3"></script>
 <style>
 :root{--navy:#0E2A5C;--deep:#0B1F4D;--blue:#1565C0;--turq:#12A3A8;--green:#1DBF8A;--ice:#EAF4FB;--mint:#E8F8F3;--grey:#5A6B85;--line:#D6E1EC;--soft:#F6F9FC;--grad:linear-gradient(90deg,#0E2A5C 0%,#12A3A8 60%,#1DBF8A 100%);--r:18px;--sh:0 6px 24px rgba(14,42,92,.07);--f:Montserrat,system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}
@@ -86,6 +86,23 @@ details p{margin:0 0 16px;color:var(--grey);font-size:14.5px}
 .note{display:flex;gap:12px;align-items:flex-start;background:var(--mint);border-radius:14px;padding:14px 16px;font-size:14px;margin-top:18px;max-width:860px}
 footer.apc-foot{margin-top:48px}
 :focus-visible{outline:3px solid var(--turq);outline-offset:2px}
+@media(max-width:560px){
+ section.blk{padding:28px 0 4px}
+ .hero{padding:26px 0 30px}
+ .steps{gap:8px}
+ .step{display:grid;grid-template-columns:34px 1fr;column-gap:12px;padding:12px 14px;box-shadow:none}
+ .step .n{grid-row:span 2;margin:0;width:32px;height:32px;font-size:15px}
+ .step b{font-size:15px;margin:5px 0 2px}.step span{font-size:13.5px;line-height:1.45}
+ .mods{gap:10px}
+ .mod{padding:14px 16px;gap:7px}.mod h3{font-size:17px}.mod p{font-size:13.5px;line-height:1.45}
+ .tools{gap:10px}
+ .tool{display:grid;grid-template-columns:40px 1fr;column-gap:12px;row-gap:7px;padding:14px 16px;align-items:center}
+ .tool .ic{width:40px;height:40px;border-radius:11px}.tool .ic svg{width:20px;height:20px}
+ .tool h3{margin:0;font-size:16px}
+ .tool .what,.tool .when,.tool .meta,.tool .go{grid-column:1/-1}
+ .tool .what{font-size:14px;line-height:1.45}.tool .when{font-size:13px}
+ .tool .go{min-height:36px}
+}
 </style>
 </head>
 <body>
@@ -331,7 +348,7 @@ MODS.push({
     { bloco: "Noite 2 • Laboratório", sl: "51–52", t: 13, tipo: "canvas", titulo: "Construa o seu Mapa de Alta Performance",
       ideia: "Um cliente. Uma oferta. Uma pergunta. Um ritual. Um próximo passo. Não busque perfeição — busque clareza e coerência.",
       w: [{ type: "canvas", layer: "c1" }],
-      nota: "Comece em sala e termine em casa: o Canvas fica salvo neste aparelho." },
+      nota: "Comece em sala e termine em casa: o Canvas fica salvo na sua conta." },
 
     { bloco: "Noite 2 • Laboratório", sl: "53", t: 4, tipo: "pratica", titulo: "Revisão em duplas",
       ideia: "O método faz sentido para um cliente de verdade? Teste a coerência e dê UMA sugestão específica ao colega — sem refazer o trabalho dele.",

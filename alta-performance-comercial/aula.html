@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aula ao vivo — Alta Performance Comercial</title>
-<script src="apc-config.js?v=2"></script>
-<script src="supabase.min.js?v=2"></script>
-<script src="apc-auth.js?v=2"></script>
+<script src="apc-config.js?v=3"></script>
+<script src="supabase.min.js?v=3"></script>
+<script src="apc-auth.js?v=3"></script>
 
 <meta name="description" content="Acompanhe a aula momento a momento: conceitos, perguntas, atividades e ferramentas de cada módulo.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@ header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.97);ba
 .tools{display:flex;gap:6px;flex:none}
 .ib{border:1.5px solid var(--line);background:#fff;color:var(--navy);font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
 .ib:hover{border-color:var(--turq)}.ib.dark{background:var(--navy);color:#fff;border-color:var(--navy)}
-.only-m{display:none}
+.only-m{display:none}.only-s{display:none}@media(max-width:640px){.only-s{display:inline}}
 @media(max-width:980px){.bar{flex-wrap:wrap;padding:10px 16px}.mods{order:3;width:100%;justify-content:space-between;margin:0}.mods button{flex:1;padding:8px 6px;font-size:12px}.tools{margin-left:auto}.only-m{display:inline-block}.hide-m{display:none}}
 .app{display:grid;grid-template-columns:330px 1fr;max-width:1400px;margin:0 auto;min-height:calc(100vh - 70px)}
 aside.rot{border-right:1px solid var(--line);background:var(--soft);position:sticky;top:62px;height:calc(100vh - 62px);overflow:auto;padding:18px 14px 40px}
@@ -190,12 +190,53 @@ body.proj .stepbig{display:block}
 .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(160px);background:var(--navy);color:#fff;font-weight:800;padding:12px 18px;border-radius:12px;box-shadow:var(--sh);transition:.25s;z-index:99}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .empty{color:var(--grey);font-style:italic}
+
+/* ---- mobile polish ---- */
+@media(max-width:640px){
+ .bar{flex-wrap:nowrap;gap:6px;padding:8px 10px}
+ .mods{order:0;width:auto;flex:1;min-width:0;padding:3px}
+ .mods button{padding:8px 2px;font-size:12.5px;min-height:36px}
+ #bRot,#bGl{padding:9px 10px;min-height:40px}
+ #bRot .lb{display:none}
+ aside.rot{top:0}
+ .btn{min-height:44px;padding:10px 14px;font-size:14px}
+ .bub small,.ask small,.grp{font-size:12px}
+ .it .tx em,.chip,.out .t b,.tot span{font-size:12.5px}
+ .ck{grid-template-columns:44px 1fr auto;padding:8px 10px}
+ .ck button{width:44px;height:44px;font-size:15px}
+ .clkt .btn{padding:8px 12px!important}
+ .sc{gap:6px}.sc button{width:44px;height:44px;font-size:16px}
+ table.rb,table.rb tbody,table.rb tr,table.rb td{display:block;width:100%}
+ table.rb tr:first-child{display:none}
+ table.rb tr{border:1px solid var(--line);border-radius:14px;padding:12px;margin:0 0 10px}
+ table.rb td{padding:4px 0;border:0}
+ table.rb td[data-l]:before{content:attr(data-l);display:block;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin:6px 0 6px}
+ .tot div{flex:1;padding:8px 6px}
+ .wk table{min-width:0}.wk th,.wk td{padding:8px 3px;font-size:13px}.wk td:first-child{font-size:13.5px}
+ .wk input{width:24px;height:24px}
+ .tw{border:0;overflow:visible}
+ table.ct{min-width:0;font-size:14px}
+ table.ct,table.ct tbody,table.ct tr{display:block}
+ table.ct tr:first-child{display:none}
+ table.ct tr{display:grid;grid-template-columns:44px 1fr 1fr;gap:4px 10px;border:1px solid var(--line);border-radius:14px;padding:12px;margin:0 0 10px;align-items:start}
+ table.ct tr.sel{background:var(--mint);border-color:var(--turq)}table.ct tr.sel td{background:transparent}
+ table.ct td{border:0;padding:2px 0}
+ table.ct td.cb{grid-row:span 4}
+ table.ct td.cb input{width:28px;height:28px}
+ table.ct td.cn{grid-column:2/-1;font-size:15px}
+ table.ct td.wd{grid-column:2/-1}
+ table.ct td[data-l]:before{content:attr(data-l);display:block;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--grey)}
+ .tabs{flex-wrap:wrap}.tabs button{min-height:44px;flex:1}
+ input[type=text],input[type=number],textarea,select{font-size:16px!important}
+ .mobnav{padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
+ main{padding-bottom:28px}
+}
 </style>
 </head>
 <body>
 <div class="topline"></div>
 <header class="site"><div class="bar">
-  <button class="ib only-m" id="bRot">☰ Roteiro</button>
+  <button class="ib only-m" id="bRot" aria-label="Roteiro">☰<span class="lb"> Roteiro</span></button>
   <a class="brand hide-m" href="index.html"><b>AULA AO VIVO</b><span>Alta Performance Comercial</span></a>
   <nav class="mods" id="mods"></nav>
   <div class="timer" id="timer"><b id="tt">00:00</b><button id="tp" title="Iniciar ou pausar">▶</button><button id="tr" title="Reiniciar">↺</button></div>
@@ -368,7 +409,7 @@ MODS.push({
     { bloco: "Noite 2 • Laboratório", sl: "51–52", t: 13, tipo: "canvas", titulo: "Construa o seu Mapa de Alta Performance",
       ideia: "Um cliente. Uma oferta. Uma pergunta. Um ritual. Um próximo passo. Não busque perfeição — busque clareza e coerência.",
       w: [{ type: "canvas", layer: "c1" }],
-      nota: "Comece em sala e termine em casa: o Canvas fica salvo neste aparelho." },
+      nota: "Comece em sala e termine em casa: o Canvas fica salvo na sua conta." },
 
     { bloco: "Noite 2 • Laboratório", sl: "53", t: 4, tipo: "pratica", titulo: "Revisão em duplas",
       ideia: "O método faz sentido para um cliente de verdade? Teste a coerência e dê UMA sugestão específica ao colega — sem refazer o trabalho dele.",
@@ -808,7 +849,7 @@ R.quiz=(w,el)=>{let v=W(w.id,{});
   const rs=el.querySelector('.rs');if(rs)rs.onclick=()=>{v={};setW(w.id,v);draw()}};draw()};
 R.rubric=(w,el)=>{let v=W(w.id,{pre:{},pos:{}});
  const draw=()=>{const s=k=>w.crit.reduce((a,c,i)=>a+(v[k][i]||0),0),filled=k=>Object.keys(v[k]).length;
-  el.innerHTML=`<h4>Rubrica pré × pós (0 a 3)</h4><div style="overflow-x:auto"><table class="rb"><tr><th>Critério</th><th>1ª tentativa</th><th>2ª tentativa</th></tr>${w.crit.map((c,i)=>`<tr><td><b>${esc(c)}</b></td>${['pre','pos'].map(k=>`<td><div class="sc">${[0,1,2,3].map(n=>`<button class="${v[k][i]===n?'on':''}" data-k="${k}" data-i="${i}" data-n="${n}">${n}</button>`).join('')}</div></td>`).join('')}</tr>`).join('')}</table></div><div class="tot"><div><b>${filled('pre')?s('pre'):'–'}</b><span>Pré /12</span></div><div><b>${filled('pos')?s('pos'):'–'}</b><span>Pós /12</span></div><div><b>${filled('pre')&&filled('pos')?((s('pos')-s('pre'))>0?'+':'')+(s('pos')-s('pre')):'–'}</b><span>Δ evolução</span></div></div><p style="font-size:12.5px;color:var(--grey);margin:10px 0 0">0 ausente • 1 inicial • 2 adequado • 3 consistente. A nota mede aprendizagem na simulação, não aumento de vendas.</p><div class="row"><button class="btn sec rs">Zerar</button></div>`;
+  el.innerHTML=`<h4>Rubrica pré × pós (0 a 3)</h4><div style="overflow-x:auto"><table class="rb"><tr><th>Critério</th><th>1ª tentativa</th><th>2ª tentativa</th></tr>${w.crit.map((c,i)=>`<tr><td><b>${esc(c)}</b></td>${['pre','pos'].map(k=>`<td data-l="${k==='pre'?'1ª tentativa':'2ª tentativa'}"><div class="sc">${[0,1,2,3].map(n=>`<button class="${v[k][i]===n?'on':''}" data-k="${k}" data-i="${i}" data-n="${n}">${n}</button>`).join('')}</div></td>`).join('')}</tr>`).join('')}</table></div><div class="tot"><div><b>${filled('pre')?s('pre'):'–'}</b><span>Pré /12</span></div><div><b>${filled('pos')?s('pos'):'–'}</b><span>Pós /12</span></div><div><b>${filled('pre')&&filled('pos')?((s('pos')-s('pre'))>0?'+':'')+(s('pos')-s('pre')):'–'}</b><span>Δ evolução</span></div></div><p style="font-size:12.5px;color:var(--grey);margin:10px 0 0">0 ausente • 1 inicial • 2 adequado • 3 consistente. A nota mede aprendizagem na simulação, não aumento de vendas.</p><div class="row"><button class="btn sec rs">Zerar</button></div>`;
   el.querySelectorAll('.sc button').forEach(b=>b.onclick=()=>{v[b.dataset.k][b.dataset.i]=+b.dataset.n;setW(w.id,v);draw()});
   el.querySelector('.rs').onclick=()=>{v={pre:{},pos:{}};setW(w.id,v);draw()}};draw()};
 R.calc=(w,el)=>{
@@ -863,7 +904,7 @@ Você me ajuda a pensar. Quem decide e envia sou eu.`;
  el.querySelector('.cp').onclick=()=>copy(comp())};
 R.desafio=(w,el)=>{const d=(CV.c1_desafio||'').trim();if(!(CV.cs_desafio||'').trim()&&d){CV.cs_desafio=d;saveCV()}
  const F=[['cs_desafio','Meu desafio era…','Do Módulo 1'],['cs_acao','Minha primeira ação será…','Com responsável e data'],['cs_ind','Vou verificar a evolução por…','Indicador e fonte'],['cs_farei','Compromisso','Até ___, farei ___. Comprovarei por ___.']];
- el.innerHTML=`<h4>Seu desafio do Módulo 1</h4><div class="rv" style="margin:0 0 12px">${d?esc(d):'Você não registrou o desafio no Módulo 1 neste aparelho. Escreva abaixo como lembra dele.'}</div>${F.map(f=>`<label class="f">${esc(f[1])}</label><textarea rows="2" data-k="${f[0]}" placeholder="${esc(f[2])}">${esc(CV[f[0]]||'')}</textarea>`).join('')}<div class="row"><a class="btn sec" href="canvas.html#cs">Ver a síntese de 1 página »</a></div>`;
+ el.innerHTML=`<h4>Seu desafio do Módulo 1</h4><div class="rv" style="margin:0 0 12px">${d?esc(d):'Você não registrou o desafio no Módulo 1. Escreva abaixo como lembra dele.'}</div>${F.map(f=>`<label class="f">${esc(f[1])}</label><textarea rows="2" data-k="${f[0]}" placeholder="${esc(f[2])}">${esc(CV[f[0]]||'')}</textarea>`).join('')}<div class="row"><a class="btn sec" href="canvas.html#cs">Ver a síntese de 1 página »</a></div>`;
  el.querySelectorAll('textarea').forEach(a=>a.oninput=()=>{CV[a.dataset.k]=a.value;saveCV()})};
 R.tribunal=(w,el)=>{let v=W(w.id,{r:0,a:[{},{}]});const F=[['preco','Preço'],['impl','Implantação'],['trein','Treinamento'],['sup','Suporte'],['pag','Pagamento'],['dec','Decisão / quem aprova']];
  const draw=()=>{const a=v.a[v.r];el.innerHTML=`<h4>Registro do pacote</h4><div class="tabs">${['Acordo 1','Acordo 2'].map((t,i)=>`<button class="${v.r===i?'on':''}" data-r="${i}">${t}</button>`).join('')}</div><div class="grid2">${F.map(f=>`<div><label class="f">${f[1]}</label><input type="text" data-k="${f[0]}" value="${esc(a[f[0]]||'')}"></div>`).join('')}</div>`;
@@ -871,7 +912,7 @@ R.tribunal=(w,el)=>{let v=W(w.id,{r:0,a:[{},{}]});const F=[['preco','Preço'],['
   el.querySelectorAll('input').forEach(i=>i.oninput=()=>{a[i.dataset.k]=i.value;setW(w.id,v)})};draw()};
 R.carteira=(w,el)=>{let v=W(w.id,{r:0,s:[{},{}]});
  const draw=()=>{const s=v.s[v.r],sel=Object.keys(s);
-  el.innerHTML=`<h4>Carteira fictícia • escolha 4 ações</h4><div class="tabs">${['Versão 1','Versão 2 (após feedback)'].map((t,i)=>`<button class="${v.r===i?'on':''}" data-r="${i}">${t}</button>`).join('')}</div><div class="tw"><table class="ct"><tr><th></th><th>Cliente</th><th>Compras</th><th>Receita</th><th>Margem</th><th>Última / ciclo (d)</th><th>Sinal / reclamação</th><th>Potencial</th></tr>${CARTEIRA.map(c=>`<tr class="${s[c[0]]?'sel':''}"><td><input type="checkbox" data-c="${c[0]}" ${s[c[0]]?'checked':''}></td><td><b>${c[0]}</b> ${esc(c[1])}</td><td>${c[2]}</td><td>${c[3]}</td><td>${c[4]}</td><td>${c[5]}</td><td>${esc(c[6])}</td><td>${esc(c[7])}</td></tr>`).join('')}</table></div><p style="font-size:12.5px;color:var(--grey)">Compras, receita e margem: últimos 90 dias. Última compra e ciclo em dias. ${sel.length}/4 selecionados.</p><div class="acts">${sel.map(k=>`<div class="act"><b>${k} ${esc(CARTEIRA.find(c=>c[0]===k)[1])}</b><select data-a="${k}" data-f="tipo" style="width:100%;margin:6px 0;padding:8px;border:1.5px solid var(--line);border-radius:10px;font:inherit">${["Tipo de ação…","Recuperar","Responder demanda","Diagnosticar","Desenvolver","Acompanhar sem pressa","Não contatar"].map((o,j)=>`<option ${j===0?'value=""':''} ${s[k].tipo===o?'selected':''}>${o}</option>`).join('')}</select><div class="grid3"><input type="text" data-a="${k}" data-f="acao" placeholder="Ação e primeira frase" value="${esc(s[k].acao||'')}"><input type="text" data-a="${k}" data-f="dono" placeholder="Responsável" value="${esc(s[k].dono||'')}"><input type="text" data-a="${k}" data-f="ind" placeholder="Indicador" value="${esc(s[k].ind||'')}"></div></div>`).join('')}</div>`;
+  el.innerHTML=`<h4>Carteira fictícia • escolha 4 ações</h4><div class="tabs">${['Versão 1','Versão 2 (após feedback)'].map((t,i)=>`<button class="${v.r===i?'on':''}" data-r="${i}">${t}</button>`).join('')}</div><div class="tw"><table class="ct"><tr><th></th><th>Cliente</th><th>Compras</th><th>Receita</th><th>Margem</th><th>Última / ciclo (d)</th><th>Sinal / reclamação</th><th>Potencial</th></tr>${CARTEIRA.map(c=>`<tr class="${s[c[0]]?'sel':''}"><td class="cb"><input type="checkbox" data-c="${c[0]}" ${s[c[0]]?'checked':''}></td><td class="cn"><b>${c[0]}</b> ${esc(c[1])}</td><td data-l="Compras">${c[2]}</td><td data-l="Receita">${c[3]}</td><td data-l="Margem">${c[4]}</td><td data-l="Última / ciclo (d)">${c[5]}</td><td data-l="Sinal" class="wd">${esc(c[6])}</td><td data-l="Potencial" class="wd">${esc(c[7])}</td></tr>`).join('')}</table></div><p style="font-size:12.5px;color:var(--grey)">Compras, receita e margem: últimos 90 dias. Última compra e ciclo em dias. ${sel.length}/4 selecionados.</p><div class="acts">${sel.map(k=>`<div class="act"><b>${k} ${esc(CARTEIRA.find(c=>c[0]===k)[1])}</b><select data-a="${k}" data-f="tipo" style="width:100%;margin:6px 0;padding:8px;border:1.5px solid var(--line);border-radius:10px;font:inherit">${["Tipo de ação…","Recuperar","Responder demanda","Diagnosticar","Desenvolver","Acompanhar sem pressa","Não contatar"].map((o,j)=>`<option ${j===0?'value=""':''} ${s[k].tipo===o?'selected':''}>${o}</option>`).join('')}</select><div class="grid3"><input type="text" data-a="${k}" data-f="acao" placeholder="Ação e primeira frase" value="${esc(s[k].acao||'')}"><input type="text" data-a="${k}" data-f="dono" placeholder="Responsável" value="${esc(s[k].dono||'')}"><input type="text" data-a="${k}" data-f="ind" placeholder="Indicador" value="${esc(s[k].ind||'')}"></div></div>`).join('')}</div>`;
   el.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{v.r=+b.dataset.r;setW(w.id,v);draw()});
   el.querySelectorAll('input[data-c]').forEach(i=>i.onchange=()=>{const k=i.dataset.c;if(i.checked){if(Object.keys(s).length>=4){i.checked=false;return toast('Escolha só 4 ações')}s[k]={}}else delete s[k];setW(w.id,v);draw()});
   el.querySelectorAll('[data-a]').forEach(i=>i.oninput=i.onchange=()=>{s[i.dataset.a][i.dataset.f]=i.value;setW(w.id,v)})};draw()};
@@ -893,7 +934,7 @@ function renderOverview(){const m=mod;const tot=m.momentos.reduce((a,x)=>a+x.t,0
  ${tot?`<h3 style="font-size:16px">Linha do tempo</h3><div class="tl">${blocos.map((b,i)=>`<i title="${esc(b.n)} • ${b.t} min" data-i="${b.i}" style="flex:${b.t};background:${cols[i%cols.length]}"></i>`).join('')}</div><div class="leg">${blocos.map((b,i)=>`<span><span class="dot" style="background:${cols[i%cols.length]}"></span>${esc(b.n)} • ${b.t} min</span>`).join('')}</div>`:''}
  <h3 style="font-size:16px">Você leva</h3><div class="leva">${m.entregas.map(e=>`<div>${esc(e)}</div>`).join('')}</div>
  <div class="row"><button class="btn pri" id="start" style="padding:13px 18px;font-size:14px">Começar pelo momento 1 »</button><a class="btn sec" href="index.html" style="padding:13px 18px;font-size:14px">Voltar ao kit</a></div>
- <p class="note" style="margin-top:24px"><b>Como usar:</b> acompanhe pelo celular enquanto o instrutor projeta. Tudo o que você preenche fica salvo só neste aparelho e aparece também no Canvas do kit.</p></div>`;
+ <p class="note" style="margin-top:24px"><b>Como usar:</b> acompanhe pelo celular enquanto o instrutor projeta. Tudo o que você preenche fica salvo na sua conta (abre igual no celular e no computador) e aparece também no Canvas do kit.</p></div>`;
  $('#start').onclick=()=>go(m.id,1);$$('.tl i').forEach(t=>t.onclick=()=>go(m.id,+t.dataset.i))}
 function hl(t){const w=t.split(' ');if(w.length<3)return `<span class="hl">${esc(t)}</span>`;const k=Math.max(1,Math.ceil(w.length*0.35));return esc(w.slice(0,w.length-k).join(' '))+' <span class="hl">'+esc(w.slice(-k).join(' '))+'</span>'}
 function renderMomento(){const m=mod,x=m.momentos[idx-1],k=m.id+'/'+idx;for(const key in OUT)delete OUT[key];

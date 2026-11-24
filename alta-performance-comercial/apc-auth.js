@@ -32,13 +32,15 @@
   var CSS = '.apc-strip{background:#0B1F4D;color:#fff;font:600 12.5px/1.2 Montserrat,system-ui,sans-serif;display:flex;align-items:center;gap:14px;padding:7px 16px;position:relative;z-index:90}' +
     '.apc-strip a,.apc-strip button{color:#fff;text-decoration:none;font:inherit;background:none;border:0;cursor:pointer;padding:4px 8px;border-radius:8px}' +
     '.apc-strip a:hover,.apc-strip button:hover{background:rgba(255,255,255,.12)}' +
-    '.apc-strip .who{display:flex;align-items:center;gap:8px;min-width:0}.apc-strip .who b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}' +
+    '.apc-strip .apc-who{display:flex;align-items:center;gap:8px;min-width:0}.apc-strip .apc-who b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}' +
     '.apc-strip .st{display:inline-flex;align-items:center;gap:6px;opacity:.9;white-space:nowrap}.apc-strip .st i{width:8px;height:8px;border-radius:50%;background:#1DBF8A;display:inline-block}' +
     '.apc-strip .st.saving i{background:#F2C14E}.apc-strip .st.off i{background:#E86A6A}.apc-strip .st.local i{background:#9FB3D1}' +
     '.apc-strip .sp{margin-left:auto;display:flex;gap:2px}' +
-    '@media(max-width:600px){.apc-strip{gap:8px;padding:6px 10px}.apc-strip .st span{display:none}.apc-strip .who b{max-width:34vw}}' +
+    '@media(max-width:600px){.apc-strip{gap:8px;padding:6px 10px}.apc-strip .st span{display:none}.apc-strip .apc-who b{max-width:34vw}}' +
     '.apc-foot{font:500 12px/1.55 Montserrat,system-ui,sans-serif;color:#5A6B85;text-align:center;padding:22px 16px 28px;border-top:1px solid #D6E1EC;background:#fff;margin-top:24px}' +
-    '.apc-foot b{color:#0E2A5C}.apc-foot a{color:#1565C0}';
+    '.apc-foot b{color:#0E2A5C}.apc-foot a{color:#1565C0}' +
+    '@media(max-width:600px){.apc-foot{font-size:11.5px;line-height:1.5;padding:18px 18px 22px;margin-top:8px}.apc-foot div+div{margin-top:4px}.apc-foot div:last-child{font-size:11px;color:#6B7C93}}' +
+    '@media(max-width:980px){.mobnav ~ .apc-foot{padding-bottom:calc(92px + env(safe-area-inset-bottom))}}';
   function addCSS() { if (document.getElementById('apc-css')) return; var s = document.createElement('style'); s.id = 'apc-css'; s.textContent = CSS; document.head.appendChild(s) }
 
   APC.footerHTML = function () {
@@ -50,7 +52,7 @@
     if (isLogin || document.querySelector('.apc-strip')) return;
     addCSS();
     var d = document.createElement('div'); d.className = 'apc-strip'; d.setAttribute('role', 'navigation'); d.setAttribute('aria-label', 'Sua conta');
-    d.innerHTML = '<div class="who"><span aria-hidden="true">●</span><b id="apc-nome">' + (ON ? 'Carregando…' : 'Modo local') + '</b></div>' +
+    d.innerHTML = '<div class="apc-who"><span aria-hidden="true">●</span><b id="apc-nome">' + (ON ? 'Carregando…' : 'Modo local') + '</b></div>' +
       '<span class="st local" id="apc-st"><i></i><span id="apc-st-t">' + (ON ? 'Conectando…' : 'Salvo neste aparelho') + '</span></span>' +
       '<div class="sp">' + (page === 'inicio.html' ? '' : '<a href="inicio.html">⌂ Início</a>') + (ON ? '<button type="button" id="apc-sair">Sair</button>' : '') + '</div>';
     document.body.insertBefore(d, document.body.firstChild);

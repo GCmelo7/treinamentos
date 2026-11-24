@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alta Performance Comercial com IA — Kit do Participante</title>
-<script src="apc-config.js?v=2"></script>
-<script src="supabase.min.js?v=2"></script>
-<script src="apc-auth.js?v=2"></script>
+<script src="apc-config.js?v=3"></script>
+<script src="supabase.min.js?v=3"></script>
+<script src="apc-auth.js?v=3"></script>
 
 <meta name="description" content="Biblioteca de prompts, Copiloto Comercial, Método PROMPT, Canvas e ferramentas para vender com método e IA.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -221,7 +221,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
     </div>
     <div class="out"><div class="t"><b>Seu Copiloto</b><span><button class="btn ok sm" onclick="copyEl('cout')">Copiar</button></span></div><pre id="cout"></pre></div>
   </div>
-  <p class="note">Tudo o que você digita fica salvo só neste aparelho (navegador). Nada é enviado para servidor.</p>
+  <p class="note">Tudo o que você digita fica salvo na sua conta, protegido por login. Só você vê as suas respostas.</p>
 </div></section>
 
 <section id="biblioteca"><div class="chev" style="right:24px;top:24px">»</div><div class="wrap">
@@ -236,7 +236,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
 <section class="alt" id="canvas"><div class="wrap">
   <span class="chip">Canvas</span>
   <h2>Meu Mapa de <span class="hl">Alta Performance</span></h2><span class="under"></span>
-  <p class="lead">Um canvas por camada, no formato de quadro: preencha na tela (salva só neste aparelho) ou imprima em A3 para escrever à mão.</p>
+  <p class="lead">Um canvas por camada, no formato de quadro: preencha na tela (salva na sua conta) ou imprima em A3 para escrever à mão.</p>
   <div class="cards c3" id="cvcards" style="margin-top:18px"></div>
 </div></section>
 
@@ -451,7 +451,7 @@ function renderLib(){const q=$('#q').value.toLowerCase();const items=LIB.map((x,
 renderLib();
 /* CANVAS */
 const CV=store.get('canvas',{});
-$('#cvcards').innerHTML=CANVAS_LAYERS.map(l=>{const [a,b]=canvasFilled(l.id,CV),p=Math.round(a/b*100);return `<div class="card"><div class="hd"><div><small>${esc(l.tag)}</small>${esc(l.titulo)}</div></div><div class="bd"><p style="margin:0 0 12px;color:var(--grey);font-size:14px">${esc(l.sub)}.</p><div style="height:8px;background:var(--ice);border-radius:8px;overflow:hidden"><i style="display:block;height:100%;width:${p}%;background:var(--grad)"></i></div><p style="font-size:12px;font-weight:700;color:var(--turq);margin:6px 0 0">${p}% preenchido neste aparelho</p></div><div class="pact"><a class="btn pri sm" href="canvas.html#${l.id}">Abrir e preencher</a><a class="btn sec sm" href="canvas.html?blank=1#${l.id}">Versão em branco</a></div></div>`}).join('');
+$('#cvcards').innerHTML=CANVAS_LAYERS.map(l=>{const [a,b]=canvasFilled(l.id,CV),p=Math.round(a/b*100);return `<div class="card"><div class="hd"><div><small>${esc(l.tag)}</small>${esc(l.titulo)}</div></div><div class="bd"><p style="margin:0 0 12px;color:var(--grey);font-size:14px">${esc(l.sub)}.</p><div style="height:8px;background:var(--ice);border-radius:8px;overflow:hidden"><i style="display:block;height:100%;width:${p}%;background:var(--grad)"></i></div><p style="font-size:12px;font-weight:700;color:var(--turq);margin:6px 0 0">${p}% preenchido</p></div><div class="pact"><a class="btn pri sm" href="canvas.html#${l.id}">Abrir e preencher</a><a class="btn sec sm" href="canvas.html?blank=1#${l.id}">Versão em branco</a></div></div>`}).join('');
 /* META REVERSA */
 function meta(){const g=id=>parseFloat($('#'+id).value)||0;const M=g('m_meta'),t1=g('m_t1')/100,t2=g('m_t2')/100,t3=g('m_t3')/100,t4=g('m_t4')/100,t5=g('m_t5')/100,d=g('m_d');const c=x=>isFinite(x)?Math.ceil(x):'—';
  const prop=c(M/t1),reu=c(prop/t2),ag=c(reu/t5),conv=c(reu/t3),cont=c(conv/t4),dia=c(cont/d);
