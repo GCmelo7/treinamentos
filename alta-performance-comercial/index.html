@@ -52,6 +52,7 @@ h3{font-size:19px;font-weight:800}
 .btn.ok{background:var(--green);color:#fff}
 .btn.sm{padding:8px 12px;font-size:12px;border-radius:10px}
 .heroart{position:relative;background:#fff;border-radius:24px;box-shadow:var(--sh);padding:22px;border:1px solid var(--line)}
+.flow3{display:grid;gap:8px}.flow3 div{display:grid;grid-template-columns:40px 1fr;column-gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}.flow3 b{grid-row:span 2;width:40px;height:40px;border-radius:10px;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:18px;font-weight:900}.flow3 span{font-weight:800;color:var(--navy)}.flow3 small{font-size:12.5px;color:var(--grey);font-weight:600}
 .heroart .letters{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}@media(max-width:560px){.heroart .letters{grid-template-columns:repeat(3,1fr)}}
 .lt{border-radius:12px;overflow:hidden;border:1px solid var(--line);text-align:center;background:#fff}
 .lt b{display:block;color:#fff;font-size:24px;font-weight:900;padding:8px 0;background:var(--grad)}
@@ -130,10 +131,10 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
 <body>
 <div class="topline"></div>
 <header class="site"><div class="wrap bar">
-  <a class="brand" href="#inicio"><b>ALTA PERFORMANCE COMERCIAL</b><span>Kit do participante • vendas com método e IA</span></a>
+  <a class="brand" href="#inicio"><b>ALTA PERFORMANCE COMERCIAL</b><span>Kit do participante • vendas com método</span></a>
   <button class="burger" onclick="document.querySelector('nav.menu').classList.toggle('open')">Menu</button>
   <nav class="menu">
-    <a href="aula.html" style="background:var(--navy);color:#fff">Aula ao vivo</a><a href="#trilha">Trilha</a><a href="#prompt">Monte seu PROMPT</a><a href="#copiloto">Copiloto</a><a href="#biblioteca">Biblioteca</a><a href="#canvas">Canvas</a><a href="#ferramentas">Ferramentas</a><a href="#materiais">Materiais</a>
+    <a href="aula.html" style="background:var(--navy);color:#fff">Aula ao vivo</a><a href="#trilha">Trilha</a><a href="#canvas">Canvas</a><a href="#ferramentas">Ferramentas</a><a href="#materiais">Materiais</a><a href="#prompt">Bônus IA</a>
   </nav>
 </div></header>
 
@@ -141,24 +142,25 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
 <div class="wrap grid">
   <div>
     <span class="chip">Material do participante</span>
-    <h1>A IA acelera quem tem <span class="hl">método.</span></h1>
+    <h1>Alta performance é <span class="hl">método repetido.</span></h1>
     <span class="under"></span>
-    <p class="lead">Quem não tem, só erra mais rápido. Aqui você encontra tudo para vender com método — do primeiro contato à fidelização — e para usar a IA como copiloto, não como piloto.</p>
+    <p class="lead">Aqui está tudo para estruturar um comercial de alta performance, do primeiro contato à fidelização: a trilha dos módulos, o seu Canvas, as cartas das práticas e as ferramentas. A IA entra como bônus, um copiloto para preparar, praticar e revisar. Quem decide é você.</p>
     <div class="btns">
       <a class="btn pri" href="aula.html">Acompanhar a aula ao vivo</a>
-      <a class="btn sec" href="#prompt">Montar um prompt</a>
-      <a class="btn sec" href="#biblioteca">Ver biblioteca de prompts</a>
       <a class="btn sec" href="canvas.html">Preencher meu Canvas</a>
+      <a class="btn sec" href="#trilha">Ver a trilha</a>
+      <a class="btn sec" href="#prompt">Bônus IA</a>
     </div>
   </div>
   <div class="heroart">
-    <span class="chip ghost">Método PROMPT</span>
-    <h3 style="margin:12px 0 14px">Seis letras para pensar antes de pedir</h3>
-    <div class="letters">
-      <div class="lt"><b>P</b><span>Papel</span></div><div class="lt"><b>R</b><span>Requisição</span></div><div class="lt"><b>O</b><span>Objetivo</span></div>
-      <div class="lt"><b>M</b><span>Modelo</span></div><div class="lt"><b>P</b><span>Panorama</span></div><div class="lt"><b>T</b><span>Testar e transformar</span></div>
+    <span class="chip ghost">O método em 3 módulos</span>
+    <h3 style="margin:12px 0 14px">Do primeiro contato à próxima compra</h3>
+    <div class="flow3">
+      <div><b>1</b><span>Do instinto ao método</span><small>Mentalidade, rituais, oferta e funil</small></div>
+      <div><b>2</b><span>Do diagnóstico à decisão</span><small>Abordagem, qualificação, objeções e negociação</small></div>
+      <div><b>3</b><span>Fidelização e plano</span><small>Pós-venda, indicadores, carteira e plano de 30 dias</small></div>
     </div>
-    <div class="quote">A IA rascunha. Você decide — e responde pelo que envia.</div>
+    <div class="quote">Bônus: a IA acelera quem já tem método. Ela rascunha; você decide.</div>
   </div>
 </div></section>
 
@@ -175,14 +177,14 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
     <div class="card mod"><div class="hd"><span class="num">3</span><div><small>MÓDULO 3</small>Fidelização e plano</div></div><div class="bd">
       <ul><li>Satisfação × lealdade × fidelização</li><li>Recuperação de confiança</li><li>NPS, retenção, recompra e ticket</li><li>Carteira priorizada e indicação ética</li><li>Plano de 30 dias com indicador</li></ul>
       <div class="leva">Você leva: Canvas camada 3 e o plano de 30 dias.</div><a class="btn sec sm" style="margin-top:12px" href="aula.html#M3/0">Abrir na Aula ao vivo »</a></div></div>
-    <div class="card mod"><div class="hd"><span class="num">IA</span><div><small>MÓDULO IA</small>Copiloto Comercial</div></div><div class="bd">
+    <div class="card mod"><div class="hd"><span class="num">IA</span><div><small>BÔNUS • IA</small>Copiloto Comercial</div></div><div class="bd">
       <ul><li>Método PROMPT na prática</li><li>Seu Copiloto em 3 camadas</li><li>Funil, Sales Model Canvas e CRM</li><li>SDR, WhatsApp e cadência</li><li>Negociação e pós-venda com IA</li></ul>
       <div class="leva">Você leva: Copiloto configurado, mensagem testada e plano de 7 dias.</div><a class="btn sec sm" style="margin-top:12px" href="aula.html#POS/0">Abrir na Aula ao vivo »</a></div></div>
   </div>
 </div></section>
 
 <section id="prompt"><div class="chev" style="right:24px;top:24px">»</div><div class="wrap">
-  <span class="chip">Ferramenta</span>
+  <span class="chip">Bônus IA • Ferramenta</span>
   <h2>Monte seu <span class="hl">PROMPT</span></h2><span class="under"></span>
   <p class="lead">Preencha as letras. O pedido se monta sozinho ao lado — é só copiar e colar na IA que você usa.</p>
   <div class="panel" style="margin-top:22px">
@@ -205,7 +207,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
 </div></section>
 
 <section class="alt" id="copiloto"><div class="wrap">
-  <span class="chip">Ferramenta</span>
+  <span class="chip">Bônus IA • Copiloto</span>
   <h2>Gerador do <span class="hl">Copiloto</span> Comercial</h2><span class="under"></span>
   <p class="lead">Escreva seu contexto uma vez. Cole nas instruções de um projeto/assistente da sua IA — ou no início de cada conversa, na versão gratuita.</p>
   <div class="panel" style="margin-top:22px">
@@ -225,7 +227,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
 </div></section>
 
 <section id="biblioteca"><div class="chev" style="right:24px;top:24px">»</div><div class="wrap">
-  <span class="chip">Biblioteca</span>
+  <span class="chip">Bônus IA • Biblioteca</span>
   <h2>Prompts prontos por etapa do <span class="hl">funil</span></h2><span class="under"></span>
   <p class="lead">Troque o que está <mark style="background:#C8F3F4;border-radius:4px;padding:0 3px">[entre colchetes]</mark>. Use sempre dados anonimizados e faça o teste antes de usar.</p>
   <input class="search" type="text" id="q" placeholder="Buscar prompt (ex.: objeção, WhatsApp, carteira)…" style="margin-top:14px">
