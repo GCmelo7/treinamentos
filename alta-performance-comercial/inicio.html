@@ -192,7 +192,7 @@ footer.apc-foot{margin-top:48px}
 
 <script>
 const MODS=[];
-// MÓDULO 1 — Do instinto ao método (230 min, duas noites)
+// MÓDULO 1 — Do instinto ao método (230 min)
 const R_M1 = ["Pergunta não indutiva", "Oferta adequada ao problema", "Próximo passo concreto e respeitoso", "Ritual mensurável"];
 MODS.push({
   id: "M1", nome: "Módulo 1", titulo: "Do instinto ao método",
@@ -200,58 +200,58 @@ MODS.push({
   total: 230,
   entregas: ["Canvas camada 1 preenchido", "Um ritual de 5 dias", "Uma hipótese de valor", "Uma boa pergunta de diagnóstico"],
   momentos: [
-    { bloco: "Noite 1 • Abertura", sl: "1–2", t: 6, tipo: "conceito", titulo: "Vender melhor começa antes do primeiro argumento",
+    { bloco: "Abertura", sl: "1–2", t: 6, tipo: "conceito", titulo: "Vender melhor começa antes do primeiro argumento",
       ideia: "A venda começa no preparo. Neste módulo você sai do “vendo no feeling” para um jeito de vender que dá para repetir, revisar e melhorar.",
       cards: [["Mentalidade", "Como você enxerga o seu papel e o seu desenvolvimento."], ["Método", "Um caminho de perguntas e decisões, não um roteiro decorado."], ["Conversas que geram valor", "Entender antes de propor. Conduzir sem pressionar."]],
       pergunta: "O que você espera levar destas aulas para a sua próxima semana de vendas?" },
 
-    { bloco: "Noite 1 • Abertura", sl: "3", t: 4, tipo: "pratica", titulo: "O que está travando suas vendas?",
+    { bloco: "Abertura", sl: "3", t: 4, tipo: "pratica", titulo: "O que está travando suas vendas?",
       ideia: "Escolha um desafio real. Ele fica guardado com você e volta no encerramento do Módulo 3, para ser confrontado com o seu plano de 30 dias.",
       w: [{ type: "choose", id: "m1_trava", q: "Onde está a trava, hoje?", opts: ["Abordagem", "Preço", "Organização", "Confiança", "Outra"] },
           { type: "fields", id: "m1_desafio", fields: [["d", "Complete a frase", "Hoje, o que mais trava minhas vendas é…", 2]],
             tpl: "{d}", canvas: { key: "c1_desafio", label: "Salvar no Canvas (Desafio inicial)" } }],
       nota: "O registro é seu. Não será recolhido nem exposto." },
 
-    { bloco: "Noite 1 • Abertura", sl: "4–5", t: 13, tipo: "pratica", titulo: "Uma compra que você nunca esqueceu",
+    { bloco: "Abertura", sl: "4–5", t: 13, tipo: "pratica", titulo: "Uma compra que você nunca esqueceu",
       ideia: "Em duplas, lembre uma compra excelente ou frustrante. Não conte o que você sentiu: conte o que o vendedor FEZ.",
       w: [{ type: "choose", id: "m1_verbos", multi: true, q: "Toque nos verbos que descrevem o que o vendedor fez:", opts: ["Perguntou", "Escutou", "Explicou", "Comparou", "Recomendou", "Retornou", "Prometeu", "Ignorou", "Pressionou", "Empurrou o catálogo"] }],
       cards: [["Clareza", "O cliente entendeu alternativas e limites."], ["Confiança", "Percebeu preparo e atenção."], ["Condução", "Soube qual seria o próximo passo."]],
       pergunta: "Os verbos da sala cabem em clareza, confiança ou condução?" },
 
-    { bloco: "Noite 1 • Mentalidade", sl: "6", t: 3, tipo: "discussao", titulo: "Você reconhece um bom vendedor",
+    { bloco: "Mentalidade", sl: "6", t: 3, tipo: "discussao", titulo: "Você reconhece um bom vendedor",
       ideia: "Mas consegue repetir esses comportamentos quando é você quem está vendendo? Reconhecer é fácil; repetir exige método.",
       pergunta: "Qual comportamento do “bom vendedor” você mais esquece no dia a dia?" },
 
-    { bloco: "Noite 1 • Mentalidade", sl: "7–9", t: 13, tipo: "pratica", titulo: "Cena A e Cena B: o mesmo cliente, duas conversas", ficticio: true,
+    { bloco: "Mentalidade", sl: "7–9", t: 13, tipo: "pratica", titulo: "Cena A e Cena B: o mesmo cliente, duas conversas", ficticio: true,
       ideia: "Caso fictício: uma loja enfrenta erros na passagem de pedidos entre turnos. Compare as duas conversas.",
       dialog: [["CENA A", ""], ["Cliente", "Temos enfrentado falhas quando muda a equipe."], ["Vendedor", "Entendi. Nosso sistema centraliza pedidos, gera relatórios e automatiza alertas."], ["Cliente", "Parece interessante. Vou avaliar com a equipe."],
                ["CENA B", "Antes da visita, o vendedor conheceu a operação com turnos e pedidos por WhatsApp."], ["Vendedor", "Vi que vocês atendem em turnos e recebem pedidos por WhatsApp. É assim mesmo?"], ["Cliente", "Sim. Temos duas equipes e às vezes a informação não passa."], ["Vendedor", "Em quais situações isso mais prejudica o cliente?"]],
       w: [{ type: "choose", id: "m1_cenaA", q: "Por que o cliente da Cena A não viu motivo para avançar?", opts: ["O produto era ruim", "O vendedor apresentou a solução antes de entender o problema", "O cliente não tinha dinheiro", "Faltou desconto"], reveal: "Leitura esperada: o vendedor apresentou a solução antes de entender impacto, frequência, prioridade e quem decide." }],
       cards: [["Preparo", "Estudou o contexto antes."], ["Curiosidade", "Validou o que sabia."], ["Condução", "Aprofundou antes de propor."]] },
 
-    { bloco: "Noite 1 • Mentalidade", sl: "10–12", t: 13, tipo: "conceito", titulo: "Vendedor não nasce pronto",
+    { bloco: "Mentalidade", sl: "10–12", t: 13, tipo: "conceito", titulo: "Vendedor não nasce pronto",
       ideia: "Talento pode ajudar. Preparo, feedback e treino desenvolvem competência — e alta performance é consistência, não o seu melhor dia.",
       cards: [["Vendedor não nasce pronto", "Competência comercial se desenvolve com preparo, feedback e treino."], ["Identidade comercial", "Você é alguém que só vende, ou alguém que estuda, melhora e responde pela experiência do cliente?"], ["Alta performance", "Qualidade consistente, aprendizagem e resultados sustentáveis."]],
       pergunta: "O que diferencia o seu melhor dia de um dia comum?" },
 
-    { bloco: "Noite 1 • Mentalidade", sl: "13–14", t: 6, tipo: "pratica", titulo: "Quatro competências treináveis",
+    { bloco: "Mentalidade", sl: "13–14", t: 6, tipo: "pratica", titulo: "Quatro competências treináveis",
       ideia: "Escolha a competência que mais precisa evoluir e prove a escolha com um comportamento real — não com uma impressão.",
       cards: [["Preparar", "Domínio da oferta e do contexto."], ["Diagnosticar", "Necessidades e prioridades."], ["Conduzir", "Escolhas e próximos passos."], ["Aprender", "Feedback e ajuste da prática."]],
       w: [{ type: "choose", id: "m1_comp", q: "Qual competência mais precisa evoluir?", opts: ["Preparar", "Diagnosticar", "Conduzir", "Aprender"] },
           { type: "fields", id: "m1_autodiag", fields: [["c", "Que comportamento real comprova essa escolha?", "Ex.: apresento o produto antes de perguntar o que o cliente precisa", 2]],
             tpl: "Competência a desenvolver: {@m1_comp}. Evidência: {c}", canvas: { key: "c1_evoluir", label: "Levar para o Canvas (O que vou evoluir)" } }] },
 
-    { bloco: "Noite 1 • Mentalidade", sl: "15", t: 5, tipo: "pratica", titulo: "A diferença entre agir e controlar",
+    { bloco: "Mentalidade", sl: "15", t: 5, tipo: "pratica", titulo: "A diferença entre agir e controlar",
       ideia: "Você responde pela sua ação. Outros fatores exigem leitura de contexto — e não são desculpa nem culpa sua.",
       w: [{ type: "quiz", id: "m1_controle", opts: ["Minha ação", "Exige contexto"], items: [["Preparar perguntas antes da visita", 0], ["Orçamento do cliente", 1], ["Registrar o que foi combinado", 0], ["Decisão final do cliente", 1], ["Respeitar o tempo do cliente", 0], ["Movimento da concorrência", 1], ["Qualidade do meu follow-up", 0], ["Cenário econômico", 1]]}] },
 
-    { bloco: "Noite 1 • Resiliência", sl: "16–18", t: 11, tipo: "discussao", titulo: "Cinco oportunidades travadas. Qual você investiga primeiro?", ficticio: true,
+    { bloco: "Resiliência", sl: "16–18", t: 11, tipo: "discussao", titulo: "Cinco oportunidades travadas. Qual você investiga primeiro?", ficticio: true,
       ideia: "O “não” é uma resposta, não uma sentença sobre você. Leia os cinco casos, vote em qual investigaria primeiro e defenda a escolha com um fato do card.",
       cards: [["A • Sem orçamento agora", "Precisa da solução, mas o orçamento deste trimestre não comporta."], ["B • Sem verba aprovada", "Gostou da proposta, mas a verba ainda não foi liberada."], ["C • Fora do perfil", "A solução não atende ao que o cliente precisa."], ["D • Sumiu", "Ótima primeira conversa; depois, nenhuma resposta."], ["E • Decisor ausente", "Tem urgência, mas quem conversa com você não pode aprovar."]],
       w: [{ type: "choose", id: "m1_5op", q: "1. Vote: qual você investigaria primeiro?", opts: ["A", "B", "C", "D", "E"], why: "2. Defenda com um FATO do card:",
             reveal: "Uma leitura possível:\nE — Decisor ausente » INVESTIGAR PRIMEIRO: pedir acesso a quem aprova.\nA — Sem orçamento agora » RETOMAR: combinar uma data para voltar a conversar.\nB — Sem verba aprovada » RETOMAR: entender quando a verba é decidida.\nD — Sumiu » UM CONTATO ÚTIL: depois, encerrar com respeito.\nC — Fora do perfil » ENCERRAR: com respeito, indicando outra opção se puder.\nNão existe resposta única. Existe decisão com evidência." }] },
 
-    { bloco: "Noite 1 • Resiliência", sl: "19–20", t: 11, tipo: "pratica", titulo: "Fato → hipótese → verificação",
+    { bloco: "Resiliência", sl: "19–20", t: 11, tipo: "pratica", titulo: "Fato → hipótese → verificação",
       ideia: "Fato é o que aconteceu ou foi dito. Hipótese é o que você supõe. Verificação é a pergunta que confirma. Só decida depois de verificar.",
       dialog: [["EXEMPLO 1", ""], ["Fato", "“Não tenho verba agora.”"], ["Hipótese", "A prioridade pode ter mudado."], ["Verificação", "“Em que momento isso volta a ser prioridade?”"],
                ["EXEMPLO 2", ""], ["Fato", "Não respondeu às duas últimas mensagens."], ["Hipótese", "Pode estar sem tempo ou ter escolhido outro fornecedor."], ["Verificação", "“Faz sentido seguirmos ou prefere que eu encerre por aqui?”"],
@@ -260,54 +260,54 @@ MODS.push({
       w: [{ type: "fields", id: "m1_fhv", fields: [["f", "Agora você: o fato", "O que aconteceu ou foi dito?", 1], ["h", "A hipótese", "O que você supõe?", 1], ["v", "A verificação", "Que pergunta confirma?", 1]],
             tpl: "Fato: {f}\nHipótese: {h}\nVerificação: {v}", canvas: { key: "c1_fato", label: "Levar para o Canvas (Fato × hipótese)" } }] },
 
-    { bloco: "Noite 1 • Resiliência", sl: "21", t: 4, tipo: "discussao", titulo: "E a sua oportunidade travada?",
+    { bloco: "Resiliência", sl: "21", t: 4, tipo: "discussao", titulo: "E a sua oportunidade travada?",
       ideia: "Em duplas, 4 minutos: 1) escolha UMA oportunidade sua que travou; 2) escreva o fato principal; 3) escolha o caminho e conte ao colega. O colega só pergunta: “Qual fato sustenta isso?”",
       cards: [["Aumentar contatos", "Quando faz sentido: houve interesse real e o contato parou sem motivo conhecido."], ["Rever as perguntas", "Quando faz sentido: você ainda não sabe a dor, o decisor ou o prazo."], ["Combinar o momento", "Quando faz sentido: o cliente deu um prazo ou depende de algo (verba, coleção, safra)."], ["Encerrar com respeito", "Quando faz sentido: está fora do perfil ou o cliente disse não com clareza."]],
       w: [{ type: "fields", id: "m1_travada", fields: [["fa", "Travou porque… (o fato)", "Cliente A não responde desde a proposta", 1]], tpl: "Travou porque {fa}." },
           { type: "choose", id: "m1_decisao", q: "Qual caminho você escolhe?", opts: ["Aumentar contatos", "Rever as perguntas", "Combinar o momento", "Encerrar com respeito"], why: "Porque… (qual fato sustenta?)" }],
       nota: "Use “Cliente A”: ninguém precisa expor cliente ou empresa." },
 
-    { bloco: "Noite 1", sl: "22", t: 15, tipo: "pausa", titulo: "Intervalo",
+    { bloco: "Intervalo", sl: "22", t: 15, tipo: "pausa", titulo: "Intervalo",
       ideia: "Pausa para voltar com foco. Na sequência: disciplina, domínio da oferta e proposta de valor." },
 
-    { bloco: "Noite 1 • Disciplina", sl: "23–24", t: 10, tipo: "pratica", titulo: "Cinco rituais de evolução",
+    { bloco: "Disciplina", sl: "23–24", t: 10, tipo: "pratica", titulo: "Cinco rituais de evolução",
       ideia: "Motivação começa o movimento. A rotina permite repetir o que funciona — e corrigir o que não funciona.",
       cards: [["Preparar", "Cliente, oferta, contexto."], ["Priorizar", "Oportunidades relevantes."], ["Conversar", "Diagnóstico e próximo passo."], ["Registrar", "Fatos e compromissos."], ["Treinar", "Revisão com feedback."]],
       w: [{ type: "week", id: "m1_rituais", rows: ["Preparar", "Priorizar", "Conversar", "Registrar", "Treinar"] }],
       nota: "Use o quadro na semana que vem: marque o que você realmente fez em cada dia." },
 
-    { bloco: "Noite 1 • Disciplina", sl: "25", t: 6, tipo: "pratica", titulo: "Movimento não é necessariamente avanço", ficticio: true,
+    { bloco: "Disciplina", sl: "25", t: 6, tipo: "pratica", titulo: "Movimento não é necessariamente avanço", ficticio: true,
       ideia: "Os números mostram etapas; não comprovam qualidade nem vendas. Onde a queda entre etapas pede investigação?",
       w: [{ type: "calc", kind: "funil", id: "m1_painel", stages: [["Contatos iniciados", 70], ["Respostas", 14], ["Conversas relevantes", 6], ["Próximos passos", 3]] }],
       nota: "Exemplo fictício. Troque pelos seus números da última semana." },
 
-    { bloco: "Noite 1 • Disciplina", sl: "26–27", t: 7, tipo: "conceito", titulo: "Volume sem critério não vira venda",
+    { bloco: "Disciplina", sl: "26–27", t: 7, tipo: "conceito", titulo: "Volume sem critério não vira venda",
       ideia: "O funil é o mapa do caminho do cliente, do primeiro contato à fidelização. Cada etapa tem uma função e um indicador.",
       cards: [["Atração", "Contatos com perfil • contatos iniciados"], ["Qualificação", "Separar curiosidade de oportunidade • respostas e aderência"], ["Diagnóstico", "Dor, contexto e prioridade • conversas relevantes"], ["Proposta de valor", "Solução, impacto e próximo passo • propostas qualificadas"], ["Conversão", "Oportunidade vira decisão • vendas ganhas"], ["Fidelização", "Recompra, relação e indicação • retenção"]],
       w: [{ type: "choose", id: "m1_perda", q: "Em qual estágio você mais perde clientes?", opts: ["Atrair", "Engajar", "Converter", "Fidelizar"] }] },
 
-    { bloco: "Noite 1 • Disciplina", sl: "28–29", t: 10, tipo: "conceito", titulo: "60 minutos com intenção",
+    { bloco: "Disciplina", sl: "28–29", t: 10, tipo: "conceito", titulo: "60 minutos com intenção",
       ideia: "Uma ilustração adaptável, não uma receita: 10 min preparar • 30 min conversar • 10 min registrar • 10 min revisar.",
       w: [{ type: "quiz", id: "m1_treino", opts: ["Repetição cega", "Prática deliberada"], items: [["Repete a mesma conversa sem registrar o que aconteceu", 0], ["Revê uma pergunta e testa uma melhoria na próxima oportunidade", 1], ["Pede feedback a um colega depois de uma visita", 1], ["Usa o mesmo argumento para todos os clientes", 0]] }] },
 
-    { bloco: "Noite 1 • Disciplina", sl: "30", t: 2, tipo: "pratica", titulo: "Um ritual real para os próximos cinco dias",
+    { bloco: "Disciplina", sl: "30", t: 2, tipo: "pratica", titulo: "Um ritual real para os próximos cinco dias",
       ideia: "Troque “vou me organizar” por uma ação observável.",
       w: [{ type: "fields", id: "m1_ritual", fields: [["q", "Quando?", "Antes de cada visita importante", 1], ["s", "Em qual situação?", "Clientes novos de atacado", 1], ["c", "Como saberei que fiz?", "Duas perguntas anotadas no CRM", 1]],
             tpl: "Meu ritual: {q}, em {s}. Saberei que fiz porque {c}.", canvas: { key: "c1_habito", label: "Levar para o Canvas (Meu hábito)" } }],
       nota: "Exemplos: comércio — rever os 3 produtos mais procurados antes de abrir; serviço — preparar hipótese e pergunta antes do atendimento; indústria — validar o processo do cliente antes da visita." },
 
-    { bloco: "Noite 1 • Oferta e valor", sl: "31–32", t: 8, tipo: "pratica", titulo: "Segurança vem de conhecer o que você vende",
+    { bloco: "Oferta e valor", sl: "31–32", t: 8, tipo: "pratica", titulo: "Segurança vem de conhecer o que você vende",
       ideia: "Inclusive os limites. Antes de apresentar, responda quatro perguntas sobre a sua oferta.",
       w: [{ type: "fields", id: "m1_oferta", fields: [["p", "Para quem?", "Qual perfil realmente se beneficia?", 1], ["pr", "Que problema?", "Que situação ou desejo atende?", 1], ["d", "Qual diferença?", "O que comprova o benefício?", 1], ["l", "Qual limite?", "Quando não é a melhor opção?", 1]],
             tpl: "Para {p}, que enfrenta {pr}. Diferença: {d}. Limite: {l}.", canvas: { map: { p: "c1_cliente", l: "c1_limite" }, label: "Levar para o Canvas (Cliente e limite)" } }] },
 
-    { bloco: "Noite 1 • Oferta e valor", sl: "33–35", t: 14, tipo: "conceito", titulo: "Tradução de valor",
+    { bloco: "Oferta e valor", sl: "33–35", t: 14, tipo: "conceito", titulo: "Tradução de valor",
       ideia: "Valor não existe isolado do problema do cliente. Suba a escada: atributo → contexto → benefício → evidência.",
       cards: [["Atributo", "O que a oferta faz."], ["Contexto", "Onde isso importa."], ["Benefício", "O que pode melhorar."], ["Evidência", "Como provar ou verificar."]],
       w: [{ type: "quiz", id: "m1_promessa", opts: ["Promessa vazia", "Argumento responsável"], items: [["“Garante mais vendas e resolve todos os problemas.”", 0], ["“Pode ajudar nesta dificuldade; vamos verificar se serve para sua operação.”", 1], ["“Nenhum cliente nosso nunca reclamou.”", 0], ["“Em lojas com pedidos por WhatsApp, isso costuma reduzir retrabalho; podemos medir em 30 dias.”", 1]] }],
       nota: "Mesmo raciocínio em setores diferentes — comércio: caimento do tecido → adequação ao uso; serviços: acompanhamento → continuidade; indústria: monitoramento → sinalizar falhas antes." },
 
-    { bloco: "Noite 1 • Oferta e valor", sl: "36–37", t: 7, tipo: "ia", titulo: "Da característica ao motivo para comprar",
+    { bloco: "Oferta e valor", sl: "36–37", t: 7, tipo: "ia", titulo: "Da característica ao motivo para comprar",
       ideia: "Quatro passos: 1 cliente (para quem?), 2 dor (o que atrapalha hoje?), 3 característica (o que a oferta faz?), 4 benefício verificável (o que melhora e como provar?). Depois, a mesma frase vai para a IA de duas formas: um pedido fraco e um pedido com método.",
       w: [{ type: "fields", id: "m1_valor", fields: [["cl", "Cliente", "lojista de moda praia do Agreste", 1], ["ct", "Contexto", "repõe grades toda semana pelo WhatsApp", 1], ["at", "Atributo", "catálogo com pedido mínimo por grade", 1], ["be", "Benefício", "menos erro de tamanho na reposição", 1], ["ev", "Evidência", "comparar devoluções antes e depois de 30 dias", 1]],
             tpl: "Para {cl} que enfrenta {ct}, {at} pode ajudar em {be}, verificável por {ev}.", canvas: { map: { at: "c1_atributo", ct: "c1_contexto", be: "c1_beneficio", ev: "c1_evidencia" }, label: "Levar para o Canvas (Oferta e valor)" } },
@@ -315,46 +315,46 @@ MODS.push({
             b: ["Pedido com método (PROMPT)", "Aja como um vendedor consultivo. Quero transformar esta frase de valor em uma mensagem curta para o cliente: “{@m1_valor}”. Objetivo: abrir conversa, sem prometer resultado. Até 4 linhas, tom próximo, terminando com uma pergunta. Não invente números."] }],
       nota: "Observe a diferença entre as duas respostas: o que mudou no pedido mudou o resultado." },
 
-    { bloco: "Noite 1 • Fechamento", sl: "38–39", t: 6, tipo: "conceito", titulo: "Mentalidade é o comportamento que você repete",
+    { bloco: "Síntese e compromisso", sl: "38–39", t: 6, tipo: "conceito", titulo: "Mentalidade é o comportamento que você repete",
       ideia: "Quem conhece só o produto explica características. Quem conhece o cliente mostra por que elas importam." },
 
-    { bloco: "Noite 1 • Fechamento", sl: "40", t: 1, tipo: "pratica", titulo: "Bilhete de saída",
+    { bloco: "Síntese e compromisso", sl: "40", t: 1, tipo: "pratica", titulo: "Bilhete de saída",
       ideia: "Uma mudança observável para a próxima venda. Retomamos na próxima aula.",
       w: [{ type: "fields", id: "m1_bilhete", fields: [["dx", "Na próxima venda, vou deixar de…", "", 1], ["cm", "E vou começar a…", "", 1]], tpl: "Vou deixar de {dx} e começar a {cm}.", canvas: { map: { dx: "c1_deixar", cm: "c1_comecar" }, label: "Levar para o Canvas (Compromisso)" } }] },
 
-    { bloco: "Noite 2 • Venda consultiva", sl: "41–42", t: 6, tipo: "conceito", titulo: "O melhor argumento começa com uma boa compreensão",
+    { bloco: "Venda consultiva", sl: "41–42", t: 6, tipo: "conceito", titulo: "O melhor argumento começa com uma boa compreensão",
       ideia: "Ontem olhamos para o vendedor. Agora vamos organizar a conversa: investigar contexto, problema, impacto e objetivo — sem virar interrogatório." },
 
-    { bloco: "Noite 2 • Venda consultiva", sl: "43–45", t: 11, tipo: "pratica", titulo: "SPIN: quatro movimentos de diagnóstico", ficticio: true,
+    { bloco: "Venda consultiva", sl: "43–45", t: 11, tipo: "pratica", titulo: "SPIN: quatro movimentos de diagnóstico", ficticio: true,
       ideia: "Use com naturalidade: as quatro perguntas não são um roteiro obrigatório. As respostas pertencem ao cliente.",
       cards: [["S • Situação", "Compreender o contexto."], ["P • Problema", "Identificar a dificuldade."], ["I • Implicação", "Explorar consequências."], ["N • Necessidade", "Entender o valor da mudança."]],
       dialog: [["Vendedor", "Como os pedidos passam de uma equipe para a outra?"], ["Cliente", "Parte vai para o sistema e parte fica em mensagens."], ["Vendedor", "O que acontece quando um pedido é perdido?"], ["Cliente", "Atrasamos entregas e precisamos refazer o atendimento."], ["Vendedor", "Se o repasse funcionasse bem, o que mudaria na rotina?"], ["Cliente", "Teríamos menos retrabalho e menos reclamações."]],
       w: [{ type: "quiz", id: "m1_spin", opts: ["S", "P", "I", "N"], items: [["Como funciona hoje a reposição da loja?", 0], ["Onde isso costuma dar errado?", 1], ["O que acontece com o cliente quando a grade chega errada?", 2], ["Se isso estivesse resolvido, o que mudaria para você?", 3]] }] },
 
-    { bloco: "Noite 2 • Venda consultiva", sl: "46–47", t: 7, tipo: "pratica", titulo: "BANT e GPCT: viabilidade e projeto do cliente",
+    { bloco: "Venda consultiva", sl: "46–47", t: 7, tipo: "pratica", titulo: "BANT e GPCT: viabilidade e projeto do cliente",
       ideia: "BANT é uma lente de viabilidade, não um filtro para desrespeitar clientes. GPCT ajuda a entender para onde o cliente quer ir.",
       cards: [["B • Orçamento", "Há condição de investir?"], ["A • Decisão", "Quem decide ou influencia?"], ["N • Necessidade", "Existe aderência real?"], ["T • Prazo", "Quando faz sentido agir?"], ["G • Objetivos", "Onde quer chegar?"], ["P • Planos", "O que já pretende fazer?"], ["C • Desafios", "O que está dificultando?"], ["T • Prazo", "Para quando?"]],
       w: [{ type: "fields", id: "m1_perg", fields: [["b", "Uma pergunta de viabilidade (BANT)", "Quem mais participa dessa decisão?", 1], ["g", "Uma pergunta de projeto (GPCT)", "O que vocês querem que esteja funcionando antes do pico?", 1]], tpl: "BANT: {b}\nGPCT: {g}", canvas: { key: "c1_pergunta", label: "Levar para o Canvas (Minha pergunta)" } }] },
 
-    { bloco: "Noite 2 • Venda consultiva", sl: "48", t: 2, tipo: "pratica", titulo: "Método não é decorar três siglas",
+    { bloco: "Venda consultiva", sl: "48", t: 2, tipo: "pratica", titulo: "Método não é decorar três siglas",
       ideia: "Escolha as perguntas que fazem sentido. SPIN para necessidade e consequências; GPCT para direção e planos; BANT para condições de avançar.",
       w: [{ type: "quiz", id: "m1_lente", opts: ["SPIN", "GPCT", "BANT"], items: [["Quero entender as consequências do problema", 0], ["Quero saber se há verba e quem aprova", 2], ["Quero entender onde o cliente quer chegar este ano", 1]] }] },
 
-    { bloco: "Noite 2 • Funil", sl: "49–50", t: 8, tipo: "pratica", titulo: "Acompanhar avanço, não apenas volume", ficticio: true,
+    { bloco: "Funil", sl: "49–50", t: 8, tipo: "pratica", titulo: "Acompanhar avanço, não apenas volume", ficticio: true,
       ideia: "O funil é um mapa de oportunidades, não uma promessa de fechamento. A queda entre etapas indica onde olhar — não prova a causa.",
       cards: [["Entrada", "Quem chegou ou foi abordado."], ["Conversa", "Quem interagiu de fato."], ["Diagnóstico", "Quem tem necessidade compreendida."], ["Próximo passo", "Quem assumiu avanço combinado."]],
       w: [{ type: "calc", kind: "funil", id: "m1_minifunil", stages: [["Contatos", 20], ["Conversas", 9], ["Diagnósticos", 4], ["Próximos passos", 2]] }] },
 
-    { bloco: "Noite 2 • Laboratório", sl: "51–52", t: 13, tipo: "canvas", titulo: "Construa o seu Mapa de Alta Performance",
+    { bloco: "Laboratório", sl: "51–52", t: 13, tipo: "canvas", titulo: "Construa o seu Mapa de Alta Performance",
       ideia: "Um cliente. Uma oferta. Uma pergunta. Um ritual. Um próximo passo. Não busque perfeição — busque clareza e coerência.",
       w: [{ type: "canvas", layer: "c1" }],
       nota: "Comece em sala e termine em casa: o Canvas fica salvo na sua conta." },
 
-    { bloco: "Noite 2 • Laboratório", sl: "53", t: 4, tipo: "pratica", titulo: "Revisão em duplas",
+    { bloco: "Laboratório", sl: "53", t: 4, tipo: "pratica", titulo: "Revisão em duplas",
       ideia: "O método faz sentido para um cliente de verdade? Teste a coerência e dê UMA sugestão específica ao colega — sem refazer o trabalho dele.",
       w: [{ type: "rubric", id: "m1_rev", crit: R_M1 }] },
 
-    { bloco: "Noite 2 • Fechamento", sl: "54", t: 4, tipo: "conceito", titulo: "Alta performance é transformar intenção em comportamento",
+    { bloco: "Fechamento", sl: "54", t: 4, tipo: "conceito", titulo: "Alta performance é transformar intenção em comportamento",
       ideia: "Você sai com uma rotina, uma hipótese de valor, uma boa pergunta e um próximo passo." }
   ]
 });
