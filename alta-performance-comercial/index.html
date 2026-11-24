@@ -27,6 +27,12 @@ header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);ba
 nav.menu{display:flex;gap:4px;flex-wrap:wrap}
 nav.menu a{font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;padding:8px 10px;border-radius:999px}
 nav.menu a:hover,nav.menu a.on{background:var(--ice);color:var(--blue)}
+nav.menu a.trl{background:linear-gradient(120deg,#12A3A8,#1DBF8A);color:#fff;font-weight:800;box-shadow:0 0 0 0 rgba(18,163,168,.55);animation:trlp 2.2s ease-out infinite}
+nav.menu a.trl span{display:inline-block;margin-left:6px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;background:#fff;color:#0E7C80;border-radius:999px;padding:2px 7px;vertical-align:1px}
+nav.menu a.trl:hover,nav.menu a.trl.on{background:linear-gradient(120deg,#0E7C80,#14A98A);color:#fff}
+@keyframes trlp{0%{box-shadow:0 0 0 0 rgba(18,163,168,.55)}70%{box-shadow:0 0 0 10px rgba(18,163,168,0)}100%{box-shadow:0 0 0 0 rgba(18,163,168,0)}}
+.btn.trlb{background:linear-gradient(120deg,#12A3A8,#1DBF8A);color:#fff}.btn.trlb:hover{filter:brightness(.95)}
+.trlhint{display:block;background:#E3F6F0;border:2px solid #9FDCC8;border-radius:14px;padding:10px 14px;margin:6px 0 14px;font-weight:700;color:#0B3A2E;font-size:14px}
 .burger{display:none;border:0;background:var(--ice);color:var(--navy);border-radius:10px;padding:8px 12px;font:700 13px Montserrat,system-ui,sans-serif}
 @media(max-width:900px){nav.menu{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;padding:10px 20px 16px;border-bottom:1px solid var(--line)}nav.menu.open{display:flex}.burger{display:block}}
 .chev{position:absolute;color:#D4DCE6;font-weight:900;font-size:56px;letter-spacing:-8px;user-select:none;pointer-events:none}
@@ -134,7 +140,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
   <a class="brand" href="#inicio"><b>ALTA PERFORMANCE COMERCIAL</b><span>Kit do participante • vendas com método</span></a>
   <button class="burger" onclick="document.querySelector('nav.menu').classList.toggle('open')">Menu</button>
   <nav class="menu">
-    <a href="aula.html" style="background:var(--navy);color:#fff">Aula ao vivo</a><a href="#trilha">Trilha</a><a href="#canvas">Canvas</a><a href="#ferramentas">Ferramentas</a><a href="#materiais">Materiais</a><a href="#prompt">Bônus IA</a>
+    <a href="aula.html" style="background:var(--navy);color:#fff">Aula ao vivo</a><a href="#trilha" class="trl">Trilha <span>comece aqui</span></a><a href="#canvas">Canvas</a><a href="#ferramentas">Ferramentas</a><a href="#materiais">Materiais</a><a href="#prompt">Bônus IA</a>
   </nav>
 </div></header>
 
@@ -148,7 +154,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
     <div class="btns">
       <a class="btn pri" href="aula.html">Acompanhar a aula ao vivo</a>
       <a class="btn sec" href="canvas.html">Preencher meu Canvas</a>
-      <a class="btn sec" href="#trilha">Ver a trilha</a>
+      <a class="btn trlb" href="#trilha">Ver a trilha do curso »</a>
       <a class="btn sec" href="#prompt">Bônus IA</a>
     </div>
   </div>
@@ -167,6 +173,7 @@ footer .fb{height:8px;width:240px;max-width:60%;background:var(--blue);margin:22
 <section class="alt" id="trilha"><div class="wrap">
   <span class="chip">A jornada</span>
   <h2>Do instinto ao método — e do método ao resultado</h2><span class="under"></span>
+  <div class="trlhint"><b>Comece por aqui:</b> cada módulo mostra o que você vai aprender e o que leva para casa. Toque em “Abrir na Aula ao vivo” para acompanhar.</div>
   <div class="cards c4">
     <div class="card mod"><div class="hd"><span class="num">1</span><div><small>MÓDULO 1</small>Do instinto ao método</div></div><div class="bd">
       <ul><li>Mentalidade e competências treináveis</li><li>Rituais de evolução e disciplina</li><li>Domínio da oferta e tradução de valor</li><li>SPIN, GPCT e BANT (siglas traduzidas)</li><li>Funil: avanço, não só volume</li></ul>

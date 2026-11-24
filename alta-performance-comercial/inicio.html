@@ -33,6 +33,8 @@ header.site .wrap{display:flex;align-items:center;gap:16px;padding-top:14px;padd
 .b:hover{transform:translateY(-1px);filter:brightness(1.06)}
 .b.pri{background:#fff;color:var(--deep)}
 .b.pri small{display:block;font-size:11.5px;font-weight:600;color:var(--grey)}
+.b.trl{background:linear-gradient(120deg,#12A3A8,#1DBF8A);color:#fff;animation:trlp 2.2s ease-out infinite}.b.trl small{display:block;font-size:12px;font-weight:600;opacity:.95}
+@keyframes trlp{0%{box-shadow:0 0 0 0 rgba(29,191,138,.6)}70%{box-shadow:0 0 0 12px rgba(29,191,138,0)}100%{box-shadow:0 0 0 0 rgba(29,191,138,0)}}
 .b.ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
 .b svg{flex:none}
 
@@ -118,6 +120,7 @@ footer.apc-foot{margin-top:48px}
   <p>Aqui ficam as aulas, as atividades, o seu Canvas e os materiais. Tudo o que você preencher é salvo sozinho. Comece pelo botão abaixo.</p>
   <div class="cta">
     <a class="b pri" id="cta" href="aula.html#M1/0"><svg aria-hidden="true" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0E2A5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg><span><span id="cta-t">Começar pelo Módulo 1</span><small id="cta-s">Aula ao vivo • visão geral</small></span></a>
+    <a class="b trl" href="index.html#trilha"><svg aria-hidden="true" class="lucide lucide-route" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="6" cy="19" r="3" /> <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" /> <circle cx="18" cy="5" r="3" /> </svg><span>Ver a trilha do curso<small>os 3 módulos e o que você leva</small></span></a>
     <a class="b ghost" href="#como"><svg aria-hidden="true" class="lucide lucide-circle-help" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /> </svg>Como funciona</a>
   </div>
 </div></section>
