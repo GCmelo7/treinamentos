@@ -249,7 +249,7 @@ MODS.push({
       ideia: "O “não” é uma resposta, não uma sentença sobre você. Leia os cinco casos, vote em qual investigaria primeiro e defenda a escolha com um fato do card.",
       cards: [["A • Sem orçamento agora", "Precisa da solução, mas o orçamento deste trimestre não comporta."], ["B • Sem verba aprovada", "Gostou da proposta, mas a verba ainda não foi liberada."], ["C • Fora do perfil", "A solução não atende ao que o cliente precisa."], ["D • Sumiu", "Ótima primeira conversa; depois, nenhuma resposta."], ["E • Decisor ausente", "Tem urgência, mas quem conversa com você não pode aprovar."]],
       w: [{ type: "choose", id: "m1_5op", q: "1. Vote: qual você investigaria primeiro?", opts: ["A", "B", "C", "D", "E"], why: "2. Defenda com um FATO do card:",
-            reveal: "Uma leitura possível (lâmina 18):\nE — Decisor ausente » INVESTIGAR PRIMEIRO: pedir acesso a quem aprova.\nA — Sem orçamento agora » RETOMAR: combinar uma data para voltar a conversar.\nB — Sem verba aprovada » RETOMAR: entender quando a verba é decidida.\nD — Sumiu » UM CONTATO ÚTIL: depois, encerrar com respeito.\nC — Fora do perfil » ENCERRAR: com respeito, indicando outra opção se puder.\nNão existe resposta única. Existe decisão com evidência." }] },
+            reveal: "Uma leitura possível:\nE — Decisor ausente » INVESTIGAR PRIMEIRO: pedir acesso a quem aprova.\nA — Sem orçamento agora » RETOMAR: combinar uma data para voltar a conversar.\nB — Sem verba aprovada » RETOMAR: entender quando a verba é decidida.\nD — Sumiu » UM CONTATO ÚTIL: depois, encerrar com respeito.\nC — Fora do perfil » ENCERRAR: com respeito, indicando outra opção se puder.\nNão existe resposta única. Existe decisão com evidência." }] },
 
     { bloco: "Noite 1 • Resiliência", sl: "19–20", t: 11, tipo: "pratica", titulo: "Fato → hipótese → verificação",
       ideia: "Fato é o que aconteceu ou foi dito. Hipótese é o que você supõe. Verificação é a pergunta que confirma. Só decida depois de verificar.",
@@ -313,7 +313,7 @@ MODS.push({
             tpl: "Para {cl} que enfrenta {ct}, {at} pode ajudar em {be}, verificável por {ev}.", canvas: { map: { at: "c1_atributo", ct: "c1_contexto", be: "c1_beneficio", ev: "c1_evidencia" }, label: "Levar para o Canvas (Oferta e valor)" } },
           { type: "compare", id: "m1_iademo", a: ["Pedido fraco", "Me dá um argumento de venda para o meu produto."],
             b: ["Pedido com método (PROMPT)", "Aja como um vendedor consultivo. Quero transformar esta frase de valor em uma mensagem curta para o cliente: “{@m1_valor}”. Objetivo: abrir conversa, sem prometer resultado. Até 4 linhas, tom próximo, terminando com uma pergunta. Não invente números."] }],
-      nota: "Quem demonstra é o instrutor. A turma só observa a diferença entre as duas respostas." },
+      nota: "Observe a diferença entre as duas respostas: o que mudou no pedido mudou o resultado." },
 
     { bloco: "Noite 1 • Fechamento", sl: "38–39", t: 6, tipo: "conceito", titulo: "Mentalidade é o comportamento que você repete",
       ideia: "Quem conhece só o produto explica características. Quem conhece o cliente mostra por que elas importam." },
@@ -417,7 +417,7 @@ MODS.push({
       cards: [["P • Papel", "Quem a IA deve ser."], ["R • Requisição", "O que você quer agora."], ["O • Objetivo", "Para que serve."], ["M • Modelo", "Formato da resposta."], ["P • Panorama", "Contexto, sem dados pessoais."], ["T • Testar e transformar", "Conferir, ajustar e só então usar."]],
       w: [{ type: "prompt", id: "m2_socio", text: "PAPEL: Aja como dono de uma loja atacadista de confecções, cauteloso, que recebeu uma proposta de R$ 12.000 para organizar pedidos (caso fictício).\nREQUISIÇÃO: Responda às minhas mensagens como esse cliente. Comece dizendo: “Preciso falar com meu sócio.”\nOBJETIVO: Quero treinar perguntas consultivas, não fechar a venda.\nMODELO: Respostas curtas, como no WhatsApp. Só revele o motivo real se eu fizer uma boa pergunta.\nPANORAMA: O motivo real (só revele se eu perguntar bem): o sócio recebeu outra proposta e quer comparar antes de decidir.\nTESTAR: Depois de 4 trocas, saia do papel e avalie minhas perguntas de 0 a 3, com uma sugestão de melhoria." },
           { type: "links", items: [["Abrir o Monte seu PROMPT", "index.html#prompt"]] }],
-      nota: "Caso fictício. Sem internet? O instrutor faz o papel do cliente e a turma dá o feedback." },
+      nota: "Caso fictício." },
 
     { bloco: "Intervalo", sl: "22", t: 15, tipo: "pausa", titulo: "Intervalo", ideia: "Pausa para recuperar o foco. Na volta: laboratório de qualificação." },
 
@@ -469,7 +469,7 @@ MODS.push({
           { type: "tribunal", id: "m2_trib_reg" },
           { type: "rubric", id: "m2_trib_r", crit: ["Preparou BATNA e alternativas concretas", "Respeitou alçada e contribuição", "Explorou interesses e ofereceu opções", "Chegou a acordo viável ou não acordo justificado"] },
           { type: "reveal", label: "Depois do debrief: os caminhos do Tribunal", text: "BATNA do vendedor: R$ 2.800 de contribuição.\nEXCELENTE: R$ 12.000, faseada + 2 treinos presenciais + suporte 90 dias, à vista → R$ 3.030.\nEXCELENTE (variação): R$ 12.200, mesmo pacote em 3 parcelas → R$ 3.020.\nBOM: R$ 11.500, faseada, treino e suporte básicos → R$ 2.920.\nRUIM: R$ 11.500 com implantação acelerada → R$ 2.300 (abaixo da BATNA).\nNÃO ACORDO JUSTIFICADO: R$ 10.200 (15%) com acelerada → R$ 1.000.\n\nPor que o excelente vence: para o vendedor, 12.000 − 8.400 − 180 − 240 − 150 = R$ 3.030. Para o comprador, o concorrente custa R$ 11.000 + R$ 1.650 de risco de perder o pico = R$ 12.650; este pacote resolve o pico e ainda traz treino e suporte. Troque o que custa pouco para você e vale muito para o cliente. Valores fictícios." }],
-      nota: "Os números de cada lado estão nas cartas do celular e só são revelados no debrief. Alternativa lúdica para turmas cansadas: Jogo das Trocas (lâminas ocultas no fim do deck)." },
+      nota: "Os números de cada lado estão nas cartas do celular e só são revelados no debrief." },
 
     { bloco: "Fechamento", sl: "47 e 50", t: 7, tipo: "pratica", titulo: "Fechamento não é pressão. É compromisso claro.",
       ideia: "Resuma necessidade e condições, confirme critérios e decisor, e peça um compromisso concreto e consentido — com dono e prazo.",
@@ -529,7 +529,7 @@ MODS.push({
           { type: "clock", id: "m3_rec", rows: [["Situação e papéis", 300], ["1ª resposta", 120], ["Feedback", 60], ["2ª resposta", 120], ["Notas e troca", 60], ["Ciclo 2 (mesma sequência)", 360], ["Ciclo 3 (mesma sequência)", 360], ["Processar resultados", 180], ["Resposta de referência", 180]] },
           { type: "rubric", id: "m3_rec_r", crit: ["Reconhecer", "Investigar", "Encaminhar", "Comprometer"] },
           { type: "reveal", label: "Resposta de referência (depois do debrief)", text: "DEFENSIVA: “Estamos fazendo o possível, a equipe técnica resolve.”\n\nRESPONSÁVEL: “Você tem razão ao cobrar o que foi combinado para o dia 10. [RECONHECER] Ainda não tenho a confirmação da correção total, então não vou prometer o que não verifiquei. Qual etapa do repasse está afetando mais os pedidos de hoje? [INVESTIGAR] Vou acionar a equipe técnica agora e confirmar um responsável. [ENCAMINHAR] Proponho te dar posição formal até as 17h. Podemos alinhar assim?” [COMPROMETER]" }],
-      nota: "Processar: qual movimento mais subiu? Qual continua baixo e por quê? Que frase da 2ª tentativa você leva para um cliente real? Se a média não subiu, revemos o feedback, não maquiamos a nota." },
+      nota: "Processar: qual movimento mais subiu? Qual continua baixo e por quê? Que frase da 2ª tentativa você leva para um cliente real?" },
 
     { bloco: "Intervalo", sl: "15", t: 15, tipo: "pausa", titulo: "Intervalo", ideia: "Na sequência: indicadores, carteira e plano de 30 dias." },
 
@@ -554,7 +554,7 @@ MODS.push({
           { type: "carteira", id: "m3_carteira" },
           { type: "rubric", id: "m3_cart_r", crit: ["Uso das evidências", "Proteção da relação", "Adequação da ação", "Medição"] },
           { type: "reveal", label: "Gabarito comentado (depois do ranking 2)", text: "PRIMEIRA FAIXA\nC3 Atacado Toritama • RECUPERAR: pedido atrasado e compromisso para amanhã; margem de 12% limita concessões.\nC12 Distribuidor Mix • RECUPERAR: pedido incompleto e correção anterior não cumprida.\nC1 Boutique Centro • RECUPERAR: duas grades erradas e troca pendente; não ofertar coleção antes de reparar.\nC2 Loja Arcoverde • RESPONDER HOJE: pediu reposição hoje, margem de 29%; mesma faixa das recuperações.\nComo fazer tudo: operações cuida de C3, C12 e C1; comercial responde C2 hoje.\n\nDEMAIS\nC4 DIAGNOSTICAR: ciclo triplicado depois de reclamação.\nC5 CUIDADO COM A MARGEM (9%): nada de desconto ou volume sem conta.\nC6 RECOMPRA A INVESTIGAR: um pouco acima do ciclo.\nC7 DESENVOLVER: indicação só depois de confirmar que a coleção anterior funcionou.\nC8 RECOMPRA: confirmar a correção e oferecer reposição.\nC9 NÃO É PERDIDO: 55/30 com sazonalidade incerta; diagnosticar.\nC10 SEM PRESSA: comprou há 6 dias, ciclo de 60.\nC11 NÃO ENVIAR PROMOÇÃO: recusou mensagens; respeitar." }],
-      nota: "O gabarito fica com o instrutor até o debrief (lâminas 29–30). Pode haver empates e responsáveis diferentes." },
+      nota: "O gabarito comentado aparece no debrief. Pode haver empates e responsáveis diferentes." },
 
     { bloco: "Parte B • Relacionamento", sl: "31", t: 4, tipo: "pratica", titulo: "Fidelizar é um sistema, não uma campanha",
       ideia: "Gatilho → ação útil → responsável. Registro → verificação → ajuste.",
@@ -759,7 +759,7 @@ function canvasFilled(layer,CV){const k=canvasKeys(layer);return [k.filter(x=>(C
     let h='';
     MODS.forEach(m=>{const n=m.momentos.length,d=m.momentos.filter((x,i)=>done[m.id+'/'+(i+1)]).length,p=n?Math.round(d/n*100):0;
       const lab=m.id==='POS'?'DEPOIS DO CURSO':m.nome.toUpperCase();
-      h+=`<a class="mod" href="aula.html#${m.id}/0"><div class="top"><span class="tag">${lab}</span>${m.total?`<span class="min">${m.total} min</span>`:''}</div><h3>${m.titulo}</h3><p>${DESC[m.id]||''}</p><div class="bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso ${lab}"><i style="width:${p}%"></i></div><div class="pl"><span>${d} de ${n} passos</span><span>${p}%</span></div><div class="go">${d?'Continuar':'Abrir'} ${AR}</div></a>`});
+      h+=`<a class="mod" href="aula.html#${m.id}/0"><div class="top"><span class="tag">${lab}</span></div><h3>${m.titulo}</h3><p>${DESC[m.id]||''}</p><div class="bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso ${lab}"><i style="width:${p}%"></i></div><div class="pl"><span>${d} de ${n} passos</span><span>${p}%</span></div><div class="go">${d?'Continuar':'Abrir'} ${AR}</div></a>`});
     document.getElementById('mods').innerHTML=h;
     const CV=get('canvas',{});let f=0,t=0;['c1','c2','c3'].forEach(l=>{const r=canvasFilled(l,CV);f+=r[0];t+=r[1]});
     document.getElementById('cv-meta').textContent=f?`${f} de ${t} campos preenchidos nas três camadas`:'Ainda vazio: ele se preenche durante as aulas';

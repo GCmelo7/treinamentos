@@ -310,7 +310,7 @@ MODS.push({
       ideia: "O “não” é uma resposta, não uma sentença sobre você. Leia os cinco casos, vote em qual investigaria primeiro e defenda a escolha com um fato do card.",
       cards: [["A • Sem orçamento agora", "Precisa da solução, mas o orçamento deste trimestre não comporta."], ["B • Sem verba aprovada", "Gostou da proposta, mas a verba ainda não foi liberada."], ["C • Fora do perfil", "A solução não atende ao que o cliente precisa."], ["D • Sumiu", "Ótima primeira conversa; depois, nenhuma resposta."], ["E • Decisor ausente", "Tem urgência, mas quem conversa com você não pode aprovar."]],
       w: [{ type: "choose", id: "m1_5op", q: "1. Vote: qual você investigaria primeiro?", opts: ["A", "B", "C", "D", "E"], why: "2. Defenda com um FATO do card:",
-            reveal: "Uma leitura possível (lâmina 18):\nE — Decisor ausente » INVESTIGAR PRIMEIRO: pedir acesso a quem aprova.\nA — Sem orçamento agora » RETOMAR: combinar uma data para voltar a conversar.\nB — Sem verba aprovada » RETOMAR: entender quando a verba é decidida.\nD — Sumiu » UM CONTATO ÚTIL: depois, encerrar com respeito.\nC — Fora do perfil » ENCERRAR: com respeito, indicando outra opção se puder.\nNão existe resposta única. Existe decisão com evidência." }] },
+            reveal: "Uma leitura possível:\nE — Decisor ausente » INVESTIGAR PRIMEIRO: pedir acesso a quem aprova.\nA — Sem orçamento agora » RETOMAR: combinar uma data para voltar a conversar.\nB — Sem verba aprovada » RETOMAR: entender quando a verba é decidida.\nD — Sumiu » UM CONTATO ÚTIL: depois, encerrar com respeito.\nC — Fora do perfil » ENCERRAR: com respeito, indicando outra opção se puder.\nNão existe resposta única. Existe decisão com evidência." }] },
 
     { bloco: "Noite 1 • Resiliência", sl: "19–20", t: 11, tipo: "pratica", titulo: "Fato → hipótese → verificação",
       ideia: "Fato é o que aconteceu ou foi dito. Hipótese é o que você supõe. Verificação é a pergunta que confirma. Só decida depois de verificar.",
@@ -374,7 +374,7 @@ MODS.push({
             tpl: "Para {cl} que enfrenta {ct}, {at} pode ajudar em {be}, verificável por {ev}.", canvas: { map: { at: "c1_atributo", ct: "c1_contexto", be: "c1_beneficio", ev: "c1_evidencia" }, label: "Levar para o Canvas (Oferta e valor)" } },
           { type: "compare", id: "m1_iademo", a: ["Pedido fraco", "Me dá um argumento de venda para o meu produto."],
             b: ["Pedido com método (PROMPT)", "Aja como um vendedor consultivo. Quero transformar esta frase de valor em uma mensagem curta para o cliente: “{@m1_valor}”. Objetivo: abrir conversa, sem prometer resultado. Até 4 linhas, tom próximo, terminando com uma pergunta. Não invente números."] }],
-      nota: "Quem demonstra é o instrutor. A turma só observa a diferença entre as duas respostas." },
+      nota: "Observe a diferença entre as duas respostas: o que mudou no pedido mudou o resultado." },
 
     { bloco: "Noite 1 • Fechamento", sl: "38–39", t: 6, tipo: "conceito", titulo: "Mentalidade é o comportamento que você repete",
       ideia: "Quem conhece só o produto explica características. Quem conhece o cliente mostra por que elas importam." },
@@ -478,7 +478,7 @@ MODS.push({
       cards: [["P • Papel", "Quem a IA deve ser."], ["R • Requisição", "O que você quer agora."], ["O • Objetivo", "Para que serve."], ["M • Modelo", "Formato da resposta."], ["P • Panorama", "Contexto, sem dados pessoais."], ["T • Testar e transformar", "Conferir, ajustar e só então usar."]],
       w: [{ type: "prompt", id: "m2_socio", text: "PAPEL: Aja como dono de uma loja atacadista de confecções, cauteloso, que recebeu uma proposta de R$ 12.000 para organizar pedidos (caso fictício).\nREQUISIÇÃO: Responda às minhas mensagens como esse cliente. Comece dizendo: “Preciso falar com meu sócio.”\nOBJETIVO: Quero treinar perguntas consultivas, não fechar a venda.\nMODELO: Respostas curtas, como no WhatsApp. Só revele o motivo real se eu fizer uma boa pergunta.\nPANORAMA: O motivo real (só revele se eu perguntar bem): o sócio recebeu outra proposta e quer comparar antes de decidir.\nTESTAR: Depois de 4 trocas, saia do papel e avalie minhas perguntas de 0 a 3, com uma sugestão de melhoria." },
           { type: "links", items: [["Abrir o Monte seu PROMPT", "index.html#prompt"]] }],
-      nota: "Caso fictício. Sem internet? O instrutor faz o papel do cliente e a turma dá o feedback." },
+      nota: "Caso fictício." },
 
     { bloco: "Intervalo", sl: "22", t: 15, tipo: "pausa", titulo: "Intervalo", ideia: "Pausa para recuperar o foco. Na volta: laboratório de qualificação." },
 
@@ -530,7 +530,7 @@ MODS.push({
           { type: "tribunal", id: "m2_trib_reg" },
           { type: "rubric", id: "m2_trib_r", crit: ["Preparou BATNA e alternativas concretas", "Respeitou alçada e contribuição", "Explorou interesses e ofereceu opções", "Chegou a acordo viável ou não acordo justificado"] },
           { type: "reveal", label: "Depois do debrief: os caminhos do Tribunal", text: "BATNA do vendedor: R$ 2.800 de contribuição.\nEXCELENTE: R$ 12.000, faseada + 2 treinos presenciais + suporte 90 dias, à vista → R$ 3.030.\nEXCELENTE (variação): R$ 12.200, mesmo pacote em 3 parcelas → R$ 3.020.\nBOM: R$ 11.500, faseada, treino e suporte básicos → R$ 2.920.\nRUIM: R$ 11.500 com implantação acelerada → R$ 2.300 (abaixo da BATNA).\nNÃO ACORDO JUSTIFICADO: R$ 10.200 (15%) com acelerada → R$ 1.000.\n\nPor que o excelente vence: para o vendedor, 12.000 − 8.400 − 180 − 240 − 150 = R$ 3.030. Para o comprador, o concorrente custa R$ 11.000 + R$ 1.650 de risco de perder o pico = R$ 12.650; este pacote resolve o pico e ainda traz treino e suporte. Troque o que custa pouco para você e vale muito para o cliente. Valores fictícios." }],
-      nota: "Os números de cada lado estão nas cartas do celular e só são revelados no debrief. Alternativa lúdica para turmas cansadas: Jogo das Trocas (lâminas ocultas no fim do deck)." },
+      nota: "Os números de cada lado estão nas cartas do celular e só são revelados no debrief." },
 
     { bloco: "Fechamento", sl: "47 e 50", t: 7, tipo: "pratica", titulo: "Fechamento não é pressão. É compromisso claro.",
       ideia: "Resuma necessidade e condições, confirme critérios e decisor, e peça um compromisso concreto e consentido — com dono e prazo.",
@@ -590,7 +590,7 @@ MODS.push({
           { type: "clock", id: "m3_rec", rows: [["Situação e papéis", 300], ["1ª resposta", 120], ["Feedback", 60], ["2ª resposta", 120], ["Notas e troca", 60], ["Ciclo 2 (mesma sequência)", 360], ["Ciclo 3 (mesma sequência)", 360], ["Processar resultados", 180], ["Resposta de referência", 180]] },
           { type: "rubric", id: "m3_rec_r", crit: ["Reconhecer", "Investigar", "Encaminhar", "Comprometer"] },
           { type: "reveal", label: "Resposta de referência (depois do debrief)", text: "DEFENSIVA: “Estamos fazendo o possível, a equipe técnica resolve.”\n\nRESPONSÁVEL: “Você tem razão ao cobrar o que foi combinado para o dia 10. [RECONHECER] Ainda não tenho a confirmação da correção total, então não vou prometer o que não verifiquei. Qual etapa do repasse está afetando mais os pedidos de hoje? [INVESTIGAR] Vou acionar a equipe técnica agora e confirmar um responsável. [ENCAMINHAR] Proponho te dar posição formal até as 17h. Podemos alinhar assim?” [COMPROMETER]" }],
-      nota: "Processar: qual movimento mais subiu? Qual continua baixo e por quê? Que frase da 2ª tentativa você leva para um cliente real? Se a média não subiu, revemos o feedback, não maquiamos a nota." },
+      nota: "Processar: qual movimento mais subiu? Qual continua baixo e por quê? Que frase da 2ª tentativa você leva para um cliente real?" },
 
     { bloco: "Intervalo", sl: "15", t: 15, tipo: "pausa", titulo: "Intervalo", ideia: "Na sequência: indicadores, carteira e plano de 30 dias." },
 
@@ -615,7 +615,7 @@ MODS.push({
           { type: "carteira", id: "m3_carteira" },
           { type: "rubric", id: "m3_cart_r", crit: ["Uso das evidências", "Proteção da relação", "Adequação da ação", "Medição"] },
           { type: "reveal", label: "Gabarito comentado (depois do ranking 2)", text: "PRIMEIRA FAIXA\nC3 Atacado Toritama • RECUPERAR: pedido atrasado e compromisso para amanhã; margem de 12% limita concessões.\nC12 Distribuidor Mix • RECUPERAR: pedido incompleto e correção anterior não cumprida.\nC1 Boutique Centro • RECUPERAR: duas grades erradas e troca pendente; não ofertar coleção antes de reparar.\nC2 Loja Arcoverde • RESPONDER HOJE: pediu reposição hoje, margem de 29%; mesma faixa das recuperações.\nComo fazer tudo: operações cuida de C3, C12 e C1; comercial responde C2 hoje.\n\nDEMAIS\nC4 DIAGNOSTICAR: ciclo triplicado depois de reclamação.\nC5 CUIDADO COM A MARGEM (9%): nada de desconto ou volume sem conta.\nC6 RECOMPRA A INVESTIGAR: um pouco acima do ciclo.\nC7 DESENVOLVER: indicação só depois de confirmar que a coleção anterior funcionou.\nC8 RECOMPRA: confirmar a correção e oferecer reposição.\nC9 NÃO É PERDIDO: 55/30 com sazonalidade incerta; diagnosticar.\nC10 SEM PRESSA: comprou há 6 dias, ciclo de 60.\nC11 NÃO ENVIAR PROMOÇÃO: recusou mensagens; respeitar." }],
-      nota: "O gabarito fica com o instrutor até o debrief (lâminas 29–30). Pode haver empates e responsáveis diferentes." },
+      nota: "O gabarito comentado aparece no debrief. Pode haver empates e responsáveis diferentes." },
 
     { bloco: "Parte B • Relacionamento", sl: "31", t: 4, tipo: "pratica", titulo: "Fidelizar é um sistema, não uma campanha",
       ideia: "Gatilho → ação útil → responsável. Registro → verificação → ajuste.",
@@ -922,16 +922,16 @@ function refreshDeps(){$$('.w').forEach(e=>e._refresh&&e._refresh());$$('.w[data
 function renderMods(){$('#mods').innerHTML=MODS.map(m=>`<button class="${m===mod?'on':''}" data-m="${m.id}">${m.id==='POS'?'Depois':m.id}</button>`).join('');$$('#mods button').forEach(b=>b.onclick=()=>go(b.dataset.m,0))}
 function doneCount(m){return m.momentos.filter((x,i)=>ST.done[m.id+'/'+(i+1)]).length}
 function renderRot(){const m=mod,d=doneCount(m),n=m.momentos.length;let last='',h='';
- h+=`<div class="rhead"><small>${esc(m.nome)}${m.total?' • '+m.total+' min':''}</small><h3>${esc(m.titulo)}</h3><div class="prog"><i style="width:${n?d/n*100:0}%"></i></div><div class="pl"><span>${d} de ${n} momentos</span><span>${n?Math.round(d/n*100):0}%</span></div></div>`;
+ h+=`<div class="rhead"><small>${esc(m.nome)}</small><h3>${esc(m.titulo)}</h3><div class="prog"><i style="width:${n?d/n*100:0}%"></i></div><div class="pl"><span>${d} de ${n} momentos</span><span>${n?Math.round(d/n*100):0}%</span></div></div>`;
  h+=`<button class="it${idx===0?' on':''}" data-i="0"><span class="n">★</span><span class="tx">Visão geral<em>Objetivo, tempo e entregas</em></span></button>`;
- m.momentos.forEach((x,i)=>{const g=x.bloco;if(g!==last){h+=`<div class="grp">${esc(g)}</div>`;last=g}const k=m.id+'/'+(i+1);h+=`<button class="it${idx===i+1?' on':''}${ST.done[k]?' done':''}" data-i="${i+1}"><span class="n">${ST.done[k]?'✓':i+1}</span><span class="tx">${esc(x.titulo)}<em><span class="dot k-${x.tipo}"></span>${TIPOS[x.tipo]} • ${x.t} min</em></span></button>`});
+ m.momentos.forEach((x,i)=>{const g=x.bloco;if(g!==last){h+=`<div class="grp">${esc(g)}</div>`;last=g}const k=m.id+'/'+(i+1);h+=`<button class="it${idx===i+1?' on':''}${ST.done[k]?' done':''}" data-i="${i+1}"><span class="n">${ST.done[k]?'✓':i+1}</span><span class="tx">${esc(x.titulo)}<em><span class="dot k-${x.tipo}"></span>${TIPOS[x.tipo]}</em></span></button>`});
  $('#rot').innerHTML=h;$$('#rot .it').forEach(b=>b.onclick=()=>{go(mod.id,+b.dataset.i);closeRot()});const on=$('#rot .it.on');if(on&&on.scrollIntoViewIfNeeded)on.scrollIntoViewIfNeeded()}
 function renderOverview(){const m=mod;const tot=m.momentos.reduce((a,x)=>a+x.t,0);const pr=m.momentos.filter(x=>x.tipo==='pratica'||x.tipo==='canvas').length;
  const blocos=[];m.momentos.forEach((x,i)=>{const b=blocos[blocos.length-1];if(b&&b.n===x.bloco)b.t+=x.t;else blocos.push({n:x.bloco,t:x.t,i:i+1})});
  const cols=['#0E2A5C','#1565C0','#12A3A8','#1DBF8A','#2E7DBA','#0F6E8C','#5BB8C9','#178F6E'];
  $('#main').innerHTML=`<div class="ov"><div class="chev">»</div><div class="meta"><span class="chip">${esc(m.nome)}</span>${m.id==='POS'?'<span class="pill">No seu ritmo</span>':''}</div><h1>${hl(m.titulo)}</h1><span class="under"></span><p class="lead">${esc(m.sub)}</p>
- <div class="stats">${tot?`<div><b>${tot}</b><span>minutos</span></div>`:''}<div><b>${m.momentos.length}</b><span>momentos</span></div><div><b>${pr}</b><span>práticas e Canvas</span></div></div>
- ${tot?`<h3 style="font-size:16px">Linha do tempo</h3><div class="tl">${blocos.map((b,i)=>`<i title="${esc(b.n)} • ${b.t} min" data-i="${b.i}" style="flex:${b.t};background:${cols[i%cols.length]}"></i>`).join('')}</div><div class="leg">${blocos.map((b,i)=>`<span><span class="dot" style="background:${cols[i%cols.length]}"></span>${esc(b.n)} • ${b.t} min</span>`).join('')}</div>`:''}
+ <div class="stats"><div><b>${m.momentos.length}</b><span>momentos</span></div><div><b>${pr}</b><span>práticas e Canvas</span></div></div>
+ ${tot?`<h3 style="font-size:16px">Os blocos do módulo</h3><div class="tl">${blocos.map((b,i)=>`<i title="${esc(b.n)}" data-i="${b.i}" style="flex:${b.t};background:${cols[i%cols.length]}"></i>`).join('')}</div><div class="leg">${blocos.map((b,i)=>`<span><span class="dot" style="background:${cols[i%cols.length]}"></span>${esc(b.n)}</span>`).join('')}</div>`:''}
  <h3 style="font-size:16px">Você leva</h3><div class="leva">${m.entregas.map(e=>`<div>${esc(e)}</div>`).join('')}</div>
  <div class="row"><button class="btn pri" id="start" style="padding:13px 18px;font-size:14px">Começar pelo momento 1 »</button><a class="btn sec" href="index.html" style="padding:13px 18px;font-size:14px">Voltar ao kit</a></div>
  <p class="note" style="margin-top:24px"><b>Como usar:</b> acompanhe pelo celular enquanto o instrutor projeta. Tudo o que você preenche fica salvo na sua conta (abre igual no celular e no computador) e aparece também no Canvas do kit.</p></div>`;
@@ -940,7 +940,7 @@ function hl(t){const w=t.split(' ');if(w.length<3)return `<span class="hl">${esc
 function renderMomento(){const m=mod,x=m.momentos[idx-1],k=m.id+'/'+idx;for(const key in OUT)delete OUT[key];
  /* pré-registrar saídas de widgets de outros momentos do módulo para placeholders */
  m.momentos.forEach(mm=>(mm.w||[]).forEach(w=>{if(w.type==='choose'){OUT[w.id]=()=>{const v=W(w.id,{s:[]});return v.s.map(i=>w.opts[i]).join(', ')||'[escolha no momento anterior]'}}if(w.type==='fields'&&w.tpl){OUT[w.id]=()=>resolve(w.tpl,Object.assign(Object.fromEntries(w.fields.map(f=>[f[0],''])),W(w.id,{})))}}));
- let h=`<div class="chev">»</div><div class="meta"><span class="chip">${esc(x.bloco)}</span><span class="pill"><span class="dot k-${x.tipo}"></span>${TIPOS[x.tipo]}</span><span class="pill">⏱ ${x.t} min</span><span class="pill">Lâmina ${esc(x.sl)}</span>${x.ficticio?'<span class="pill fic">Caso fictício</span>':''}</div>`;
+ let h=`<div class="chev">»</div><div class="meta"><span class="chip">${esc(x.bloco)}</span><span class="pill"><span class="dot k-${x.tipo}"></span>${TIPOS[x.tipo]}</span>${x.ficticio?'<span class="pill fic">Caso fictício</span>':''}</div>`;
  h+=`<h2>${hl(x.titulo)}</h2><span class="under"></span>`;
  if(x.ideia)h+=`<p class="lead">${esc(x.ideia)}</p>`;
  if(x.cards)h+=`<div class="cards">${x.cards.map(c=>`<div class="cd"><b>${esc(c[0])}</b><span>${esc(c[1])}</span></div>`).join('')}</div>`;
@@ -948,7 +948,7 @@ function renderMomento(){const m=mod,x=m.momentos[idx-1],k=m.id+'/'+idx;for(cons
  if(x.pergunta)h+=`<div class="ask"><span class="q">?</span><div><small>Pergunta para a turma</small><p>${esc(x.pergunta)}</p></div></div>`;
  h+=`<div id="ws"></div>`;
  if(x.nota)h+=`<p class="note"><b>Atenção:</b> ${esc(x.nota)}</p>`;
- if(x.tipo==='pausa')h+=`<div class="ask" style="background:var(--ice)"><span class="q" style="background:var(--blue)">☕</span><div><small>Pausa</small><p>Voltamos em ${x.t} minutos.</p></div></div>`;
+ if(x.tipo==='pausa')h+=`<div class="ask" style="background:var(--ice)"><span class="q" style="background:var(--blue)">☕</span><div><small>Pausa</small><p>Aproveite o intervalo. Na volta, siga a tela do instrutor.</p></div></div>`;
  h+=`<div class="navf"><button class="btn sec" id="pv">‹ Anterior</button><button class="donebtn${ST.done[k]?' on':''}" id="dn">${ST.done[k]?'✓ Concluído':'Marcar como concluído'}</button><button class="btn pri" id="nx">${idx<m.momentos.length?'Próximo ›':'Fim do módulo ✓'}</button></div>`;
  $('#main').innerHTML=h;
  const ws=$('#ws');(x.w||[]).forEach(w=>{const el=document.createElement('div');el.className='w';el.dataset.type=w.type;ws.appendChild(el);try{R[w.type](w,el);if(w.type==='fields'&&w.tpl)el._comp=OUT[w.id]}catch(e){el.innerHTML='<p class="empty">Não foi possível carregar esta atividade.</p>';console.error(e)}});
