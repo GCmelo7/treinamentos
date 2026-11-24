@@ -930,7 +930,7 @@ function renderOverview(){const m=mod;const tot=m.momentos.reduce((a,x)=>a+x.t,0
  const blocos=[];m.momentos.forEach((x,i)=>{const b=blocos[blocos.length-1];if(b&&b.n===x.bloco)b.t+=x.t;else blocos.push({n:x.bloco,t:x.t,i:i+1})});
  const cols=['#0E2A5C','#1565C0','#12A3A8','#1DBF8A','#2E7DBA','#0F6E8C','#5BB8C9','#178F6E'];
  $('#main').innerHTML=`<div class="ov"><div class="chev">»</div><div class="meta"><span class="chip">${esc(m.nome)}</span>${m.id==='POS'?'<span class="pill">No seu ritmo</span>':''}</div><h1>${hl(m.titulo)}</h1><span class="under"></span><p class="lead">${esc(m.sub)}</p>
- <div class="stats"><div><b>${m.momentos.length}</b><span>momentos</span></div><div><b>${pr}</b><span>práticas e Canvas</span></div></div>
+ 
  ${tot?`<h3 style="font-size:16px">Os blocos do módulo</h3><div class="tl">${blocos.map((b,i)=>`<i title="${esc(b.n)}" data-i="${b.i}" style="flex:${b.t};background:${cols[i%cols.length]}"></i>`).join('')}</div><div class="leg">${blocos.map((b,i)=>`<span><span class="dot" style="background:${cols[i%cols.length]}"></span>${esc(b.n)}</span>`).join('')}</div>`:''}
  <h3 style="font-size:16px">Você leva</h3><div class="leva">${m.entregas.map(e=>`<div>${esc(e)}</div>`).join('')}</div>
  <div class="row"><button class="btn pri" id="start" style="padding:13px 18px;font-size:14px">Começar pelo momento 1 »</button><a class="btn sec" href="index.html" style="padding:13px 18px;font-size:14px">Voltar ao kit</a></div>
