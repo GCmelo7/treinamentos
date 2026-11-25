@@ -84,12 +84,13 @@ table.tb td.rn{width:26px;font-weight:900;color:var(--turq);text-align:center;pa
 .bfoot .lg{height:30px}
 .ielhead,.ielfoot{display:none}
 /* celular: vira lista */
-@media(max-width:900px){.board{padding:18px 14px}.bhead{flex-direction:column;align-items:flex-start}.who{grid-template-columns:auto 1fr;width:100%}.grid{display:flex;flex-direction:column}.box{order:var(--o)}.flow .box.fx:after{display:none}.fun{grid-template-columns:1fr 1fr}.fun2{grid-template-columns:1fr}.box .fl.row{flex-direction:column}.chev{display:none}.tw{overflow-x:auto}}
+@media screen and (max-width:900px){.board{padding:18px 14px}.bhead{flex-direction:column;align-items:flex-start}.who{grid-template-columns:auto 1fr;width:100%}.grid{display:flex;flex-direction:column}.box{order:var(--o)}.flow .box.fx:after{display:none}.fun{grid-template-columns:1fr 1fr}.fun2{grid-template-columns:1fr}.box .fl.row{flex-direction:column}.chev{display:none}.tw{overflow-x:auto}}
 /* impressão: A3 paisagem, uma camada por página */
 @page{size:A3 landscape;margin:7mm}
 @media print{
  body{background:#fff}
- header.site,.hint,.noprint{display:none!important}
+ header.site,.hint,.noprint,.apc-strip,.apc-foot,.apc-who,.mobnav{display:none!important}
+ html,body{margin:0!important;padding:0!important}
  .wrap{padding:0;max-width:none}
  .board{box-shadow:none;border-radius:0;padding:4mm 6mm 3mm;width:406mm;height:283mm;display:flex;flex-direction:column}
  .grid{flex:1;min-height:0}
@@ -99,7 +100,7 @@ table.tb td.rn{width:26px;font-weight:900;color:var(--turq);text-align:center;pa
  .board{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
 body.iel .ielhead,body.iel .ielfoot{display:block}
-@media(max-width:640px){
+@media screen and (max-width:640px){
  .bar{flex-wrap:wrap;gap:8px;padding:8px 12px}
  .brand b{font-size:12px}.brand span{font-size:11.5px}
  .tools{margin-left:auto}
