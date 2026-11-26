@@ -375,6 +375,18 @@ const CANVAS_LAYERS = [
     { a: "des", n: 10, t: "Desejáveis", q: "Aumentam o encaixe, mas não eliminam.", ic: "up", f: [["icp_des", "", 3]] },
     { a: "anti", n: 11, t: "Anti-ICP: quem NÃO prospectar", q: "Perfis que dão muito trabalho, pouca receita ou não têm sucesso com a sua solução.", ic: "stop", f: [["icp_anti", "", 3]] }
    ] },
+ { id: "smc", tag: "FERRAMENTA • PROCESSO", nome: "Sales Model Canvas", titulo: "Sales Model Canvas: o processo que o time segue",
+   sub: "As 4 etapas da venda em 7 blocos: objetivo, validação, ferramentas, tempo, perdas, conversão e meta",
+   grid: ["mx mx mx mx", "meta gar gar acao"],
+   rows: "auto auto",
+   boxes: [
+    { a: "mx", n: "★", t: "Meu processo em 4 etapas", q: "Dê nome às suas 4 etapas (ex.: Prospecção, Diagnóstico, Proposta, Fechamento) e preencha cada bloco. Simplifique: 4 etapas bastam. Monte junto com o time.", ic: "funnel", kind: "matrix", f: [],
+      cols: ["Etapa 1 • ex.: Prospecção", "Etapa 2 • ex.: Diagnóstico", "Etapa 3 • ex.: Proposta", "Etapa 4 • ex.: Fechamento"],
+      rowsL: [["Objetivo", "O que concluir nesta etapa", "flag"], ["Validação", "O que confirmar com o cliente antes de avançar", "check"], ["Ferramentas", "O que usar e onde registrar", "tag"], ["Tempo de estagnação", "Quanto tempo pode ficar parado", "cal"], ["Motivos de perda", "Por que se perde aqui", "stop"], ["Taxa de conversão", "Quantos passam para a próxima", "chart"], ["Meta de avanço", "De trás para a frente: quantos preciso", "up"]] },
+    { a: "meta", n: 1, t: "Meta do mês", q: "O ponto de partida da meta de avanço.", ic: "star", f: [["smc_meta", "Vendas no mês", 1], ["smc_ticket", "Ticket médio (R$)", 1]] },
+    { a: "gar", n: 2, t: "Onde está o gargalo?", q: "Olhe as taxas: falta oportunidade no início ou falta fechamento no fim? Que fato mostra isso?", ic: "search", f: [["smc_gar", "", 2]] },
+    { a: "acao", n: 3, t: "Ação da semana", q: "Uma ação no gargalo, com dono e data.", ic: "hand", tone: "mint", f: [["smc_acao", "", 2]] }
+   ] },
  { id: "ci", tag: "IA • COPILOTO", nome: "Copiloto Comercial", titulo: "Meu Copiloto e minha semana com IA",
    sub: "O contexto que a IA precisa para ajudar — e o plano para virar hábito",
    grid: ["quem ven res reg", "nao pro tom reg", "d12 d35 d6 d7", "msg msg msg msg"],
@@ -425,7 +437,7 @@ const CANVAS_ICONS = {
  heart: '<path d="M12 20s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.5-8 11-8 11z"/>', chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
 };
-function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`)});return k}
+function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`);if(b.kind==='matrix'){for(let c=0;c<b.cols.length;c++)k.push(`${layer}_h${c}`);for(let r=0;r<b.rowsL.length;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_m${r}_${c}`)}});return k}
 function canvasFilled(layer,CV){const k=canvasKeys(layer);return [k.filter(x=>(CV[x]||'').trim()).length,k.length]}
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];

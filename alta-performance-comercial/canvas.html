@@ -57,7 +57,7 @@ header.site{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);ba
 .box .fl.row{flex-direction:row}.box .fl.row>.fd{flex:1}
 .fd{display:flex;flex-direction:column;min-height:0;flex:1}
 .fd label{font-size:9.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--turq);margin:0 0 2px}
-.ed{flex:1;min-height:calc(var(--r,2)*21px);outline:none;font-size:13px;line-height:21px;color:var(--navy);font-weight:500;white-space:pre-wrap;word-break:break-word;overflow:hidden;
+.ed{flex:1 0 auto;min-height:calc(var(--r,2)*21px);outline:none;font-size:13px;line-height:21px;color:var(--navy);font-weight:500;white-space:pre-wrap;word-break:break-word;overflow:hidden;
  background-image:repeating-linear-gradient(transparent 0 20px,#E3EAF2 20px 21px);background-attachment:local;border-radius:4px;padding:0 2px;cursor:text}
 .ed:focus{background-color:#F4FBFB;box-shadow:0 0 0 2px rgba(18,163,168,.25)}
 .ed:empty:before{content:attr(data-ph);color:#A9B6C7;font-weight:500}
@@ -76,6 +76,19 @@ header.site{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.97);ba
 .fun .st:nth-child(2){background:#DDF1F6}.fun .st:nth-child(3){background:#D3F0EC}.fun .st:nth-child(4){background:#D8F5E8}
 .fun2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 /* tabela */
+table.mx{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:6px;margin:-6px 0 0}
+table.mx th{background:linear-gradient(120deg,#0B3A8A,#12A3A8);border-radius:10px;padding:6px 10px;vertical-align:middle}
+table.mx th .ed{color:#fff;font-weight:900;font-size:15px;text-align:center;background:none;min-height:22px;line-height:22px;padding:0}
+table.mx th .ed:empty:before{content:attr(data-ph);color:rgba(255,255,255,.85)!important}
+table.mx th small{display:block;text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.75);text-transform:uppercase}
+table.mx td{background:#F3F8FC;border:1.5px solid #DCEAF5;border-radius:10px;padding:0;vertical-align:top}
+table.mx td .ed{min-height:46px;background-image:none;padding:7px 9px;line-height:17px;font-size:12.5px}
+table.mx td.mxl{background:#E3F6F7;border-color:#BFE8EE;width:20%;padding:7px 10px;vertical-align:middle}
+table.mx td.mxl b{display:block;font-size:13px;font-weight:900;color:var(--navy);line-height:1.15}
+table.mx td.mxl small{display:block;font-size:10.5px;font-weight:600;color:var(--grey);line-height:1.2}
+table.mx .mxi{float:left;width:26px;height:26px;margin:2px 8px 0 0;border-radius:8px;background:#fff;display:grid;place-items:center}
+table.mx .mxi svg{width:16px;height:16px;stroke:var(--turq)}
+th.mxl{background:none!important}
 table.tb{width:100%;border-collapse:collapse;font-size:12px;margin:0 0 4px}
 table.tb th{font-size:9.5px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--navy);text-align:left;padding:5px 7px}
 table.tb th:first-child{border-radius:8px 0 0 0}table.tb th:last-child{border-radius:0 8px 0 0}
@@ -90,13 +103,15 @@ table.tb td.rn{width:26px;font-weight:900;color:var(--turq);text-align:center;pa
 @media screen and (max-width:900px){.board{padding:18px 14px}.bhead{flex-direction:column;align-items:flex-start}.who{grid-template-columns:auto 1fr;width:100%}.grid{display:flex;flex-direction:column}.box{order:var(--o)}.flow .box.fx:after{display:none}.fun{grid-template-columns:1fr 1fr}.fun2{grid-template-columns:1fr}.box .fl.row{flex-direction:column}.chev{display:none}.tw{overflow-x:auto}}
 /* impressão: A3 paisagem, uma camada por página */
 @page{size:A3 landscape;margin:7mm}
+body.pmode .board{width:var(--pw,406mm)!important;min-height:0!important;height:auto!important;padding:4mm 6mm 3mm!important;box-shadow:none}
 @media print{
  body{background:#fff}
  header.site,.hint,.noprint,.apc-strip,.apc-foot,.apc-who,.mobnav{display:none!important}
  html,body{margin:0!important;padding:0!important}
  .wrap{padding:0;max-width:none}
- .board{box-shadow:none;border-radius:0;padding:4mm 6mm 3mm;width:406mm;height:283mm;display:flex;flex-direction:column}
- .grid{flex:1;min-height:0}
+ .board{box-shadow:none;border-radius:0;padding:4mm 6mm 3mm;width:var(--pw,406mm);min-height:283mm;height:auto;display:flex;flex-direction:column;zoom:var(--pz,1)}
+ .grid{flex:1}
+ table.mx td .ed{min-height:74px}
  .box{break-inside:avoid}
  .ed:empty:before{content:""}
  .ed:focus{box-shadow:none}
@@ -195,6 +210,18 @@ const CANVAS_LAYERS = [
     { a: "des", n: 10, t: "Desejáveis", q: "Aumentam o encaixe, mas não eliminam.", ic: "up", f: [["icp_des", "", 3]] },
     { a: "anti", n: 11, t: "Anti-ICP: quem NÃO prospectar", q: "Perfis que dão muito trabalho, pouca receita ou não têm sucesso com a sua solução.", ic: "stop", f: [["icp_anti", "", 3]] }
    ] },
+ { id: "smc", tag: "FERRAMENTA • PROCESSO", nome: "Sales Model Canvas", titulo: "Sales Model Canvas: o processo que o time segue",
+   sub: "As 4 etapas da venda em 7 blocos: objetivo, validação, ferramentas, tempo, perdas, conversão e meta",
+   grid: ["mx mx mx mx", "meta gar gar acao"],
+   rows: "auto auto",
+   boxes: [
+    { a: "mx", n: "★", t: "Meu processo em 4 etapas", q: "Dê nome às suas 4 etapas (ex.: Prospecção, Diagnóstico, Proposta, Fechamento) e preencha cada bloco. Simplifique: 4 etapas bastam. Monte junto com o time.", ic: "funnel", kind: "matrix", f: [],
+      cols: ["Etapa 1 • ex.: Prospecção", "Etapa 2 • ex.: Diagnóstico", "Etapa 3 • ex.: Proposta", "Etapa 4 • ex.: Fechamento"],
+      rowsL: [["Objetivo", "O que concluir nesta etapa", "flag"], ["Validação", "O que confirmar com o cliente antes de avançar", "check"], ["Ferramentas", "O que usar e onde registrar", "tag"], ["Tempo de estagnação", "Quanto tempo pode ficar parado", "cal"], ["Motivos de perda", "Por que se perde aqui", "stop"], ["Taxa de conversão", "Quantos passam para a próxima", "chart"], ["Meta de avanço", "De trás para a frente: quantos preciso", "up"]] },
+    { a: "meta", n: 1, t: "Meta do mês", q: "O ponto de partida da meta de avanço.", ic: "star", f: [["smc_meta", "Vendas no mês", 1], ["smc_ticket", "Ticket médio (R$)", 1]] },
+    { a: "gar", n: 2, t: "Onde está o gargalo?", q: "Olhe as taxas: falta oportunidade no início ou falta fechamento no fim? Que fato mostra isso?", ic: "search", f: [["smc_gar", "", 2]] },
+    { a: "acao", n: 3, t: "Ação da semana", q: "Uma ação no gargalo, com dono e data.", ic: "hand", tone: "mint", f: [["smc_acao", "", 2]] }
+   ] },
  { id: "ci", tag: "IA • COPILOTO", nome: "Copiloto Comercial", titulo: "Meu Copiloto e minha semana com IA",
    sub: "O contexto que a IA precisa para ajudar — e o plano para virar hábito",
    grid: ["quem ven res reg", "nao pro tom reg", "d12 d35 d6 d7", "msg msg msg msg"],
@@ -245,7 +272,7 @@ const CANVAS_ICONS = {
  heart: '<path d="M12 20s-8-4.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6.5-8 11-8 11z"/>', chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
  bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/>'
 };
-function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`)});return k}
+function canvasKeys(layer){const L=CANVAS_LAYERS.find(l=>l.id===layer);const k=[];L.boxes.forEach(b=>{b.f.forEach(f=>k.push(f[0]));if(b.kind==='table')for(let r=0;r<b.rowsN;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_t${r}_${c}`);if(b.kind==='matrix'){for(let c=0;c<b.cols.length;c++)k.push(`${layer}_h${c}`);for(let r=0;r<b.rowsL.length;r++)for(let c=0;c<b.cols.length;c++)k.push(`${layer}_m${r}_${c}`)}});return k}
 function canvasFilled(layer,CV){const k=canvasKeys(layer);return [k.filter(x=>(CV[x]||'').trim()).length,k.length]}
 
 const IEL=null;
@@ -263,6 +290,7 @@ function boxHTML(L,b,i){
  if(b.kind==='funil'){const st=b.f.slice(0,4),rest=b.f.slice(4);
   body=`<div class="fun">${st.map(f=>`<div class="st"><label>${esc(f[1])}</label>${ed(f[0],'',2)}</div>`).join('')}</div><div class="fun2">${rest.map(f=>`<div class="fd"><label>${esc(f[1])}</label>${ed(f[0],'',1)}</div>`).join('')}</div>`}
  else if(b.kind==='table'){body=`<div class="tw"><table class="tb"><tr><th></th>${b.cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${Array.from({length:b.rowsN},(x,r)=>`<tr><td class="rn">${r+1}</td>${b.cols.map((c,ci)=>`<td>${ed(`${L.id}_t${r}_${ci}`,'',1)}</td>`).join('')}</tr>`).join('')}</table></div>`}
+ else if(b.kind==='matrix'){body=`<div class="tw"><table class="mx"><tr><th class="mxl"></th>${b.cols.map((c,ci)=>`<th>${ed(`${L.id}_h${ci}`,c.split(' • ')[0],1)}</th>`).join('')}</tr>${b.rowsL.map((rl,r)=>`<tr><td class="mxl"><span class="mxi">${ico(rl[2])}</span><b>${esc(rl[0])}</b><small>${esc(rl[1])}</small></td>${b.cols.map((c,ci)=>`<td>${ed(`${L.id}_m${r}_${ci}`,'',2)}</td>`).join('')}</tr>`).join('')}</table></div>`}
  else if(b.kind==='rules'){body=`<ol class="rules">${b.rules.map(r=>`<li>${esc(r)}</li>`).join('')}</ol>`}
  else body=b.f.map(f=>`<div class="fd">${f[1]?`<label>${esc(f[1])}</label>`:''}${ed(f[0],b.pull&&!CV[f[0]]&&CV[b.pull]&&!blank?'Toque para trazer da camada anterior':'',f[2])}</div>`).join('');
  const order=typeof b.n==='number'?b.n:(b.n==='★'?0:99);
@@ -270,7 +298,7 @@ function boxHTML(L,b,i){
 function hlTitle(t){const w=t.split(' '),k=Math.max(1,Math.ceil(w.length*.4));return esc(w.slice(0,w.length-k).join(' '))+' <span class="hl">'+esc(w.slice(-k).join(' '))+'</span>'}
 function render(){
  const L=CANVAS_LAYERS.find(l=>l.id===cur);
- $('#tabs').innerHTML=CANVAS_LAYERS.map(l=>{const [a,b]=canvasFilled(l.id,CV);return `<button class="${l.id===cur?'on':''}" data-l="${l.id}">${l.id==='ci'?'IA':l.id==='cs'?'Síntese':l.id==='icp'?'ICP':'<span class="w">Camada </span>'+l.id[1]}<i>${Math.round(a/b*100)}%</i></button>`}).join('');
+ $('#tabs').innerHTML=CANVAS_LAYERS.map(l=>{const [a,b]=canvasFilled(l.id,CV);return `<button class="${l.id===cur?'on':''}" data-l="${l.id}">${l.id==='ci'?'IA':l.id==='cs'?'Síntese':l.id==='icp'?'ICP':l.id==='smc'?'SMC':'<span class="w">Camada </span>'+l.id[1]}<i>${Math.round(a/b*100)}%</i></button>`}).join('');
  $$('#tabs button').forEach(b=>b.onclick=()=>{cur=b.dataset.l;history.replaceState(null,'','#'+cur);render()});
  $('#board').innerHTML=`<div class="board">${IEL?`<img class="ielhead" src="${IEL.head}" alt="" style="width:100%;margin:-4px 0 4px">`:''}<div class="chev">»</div>
   <div class="bhead"><div><span class="chip">${esc(L.tag)}</span><div class="btitle">${hlTitle(L.titulo)}</div><div class="bsub">${esc(L.nome)} • ${esc(L.sub)}</div></div>
@@ -282,8 +310,13 @@ function render(){
   e.addEventListener('paste',ev=>{ev.preventDefault();const tx=(ev.clipboardData||window.clipboardData).getData('text');document.execCommand('insertText',false,tx)});
   e.addEventListener('focus',()=>{const b=L.boxes.find(x=>x.f.some(f=>f[0]===e.dataset.k));if(b&&b.pull&&!e.innerText.trim()&&(CV[b.pull]||'').trim()){e.innerText=CV[b.pull];CV[e.dataset.k]=CV[b.pull];LS.set('canvas',CV)}})})}
 function updTabs(){$$('#tabs button').forEach(b=>{const [a,n]=canvasFilled(b.dataset.l,CV);b.querySelector('i').textContent=Math.round(a/n*100)+'%'})}
-$('#bPrint').onclick=()=>window.print();
-$('#bBlank').onclick=()=>{blank=true;render();setTimeout(()=>{window.print();blank=false;render()},150)};
+function fitPrint(){const r=document.documentElement,B=$('.board');if(!B)return;const mm=96/25.4,maxH=283*mm;let z=1;r.style.setProperty('--pz',1);
+ for(let i=0;i<4;i++){r.style.setProperty('--pw',(406/z).toFixed(1)+'mm');document.body.classList.add('pmode');const h=B.scrollHeight;document.body.classList.remove('pmode');const nz=Math.min(1,maxH*.97/h);if(Math.abs(nz-z)<.01){z=nz;break}z=nz}
+ r.style.setProperty('--pw',(406/z).toFixed(1)+'mm');r.style.setProperty('--pz',z.toFixed(3))}
+function resetPrint(){const r=document.documentElement;r.style.removeProperty('--pw');r.style.removeProperty('--pz')}
+addEventListener('beforeprint',fitPrint);addEventListener('afterprint',resetPrint);
+$('#bPrint').onclick=()=>{fitPrint();window.print()};
+$('#bBlank').onclick=()=>{blank=true;render();setTimeout(()=>{fitPrint();window.print();blank=false;render();resetPrint()},150)};
 $('#bClear').onclick=()=>{if(!confirm('Apagar tudo o que você escreveu nesta camada?'))return;canvasKeys(cur).forEach(k=>delete CV[k]);LS.set('canvas',CV);render()};
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(CANVAS_LAYERS.find(l=>l.id===h)){cur=h;render()}});
 const qp=new URLSearchParams(location.search);if(qp.get('blank'))blank=true;if(IEL)document.body.classList.add('iel');
